@@ -121,4 +121,15 @@ example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i 
     (Copula.gaussian R hR hd).cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by
   simp [half]
 
+-- General Sklar existence includes purely atomic laws.
+example (a : Fin 2 → ℝ) :
+    ∃ C : Copula 2, Copula.IsSklarCopula ⟨Measure.dirac a, inferInstance⟩ C :=
+  Copula.exists_sklarCopula _
+
+example : (Copula.clayton 2 1 (by norm_num)).cdf (fun _ => 1) = 1 := by simp
+
+-- The classical converse is available in dimensions zero and one.
+example (F : (Fin 1 → I) → ℝ) (hF : Copula.IsClassical F) : ∃! C : Copula 1, C.cdf = F :=
+  hF.existsUnique_dim_one
+
 end CopulaTest

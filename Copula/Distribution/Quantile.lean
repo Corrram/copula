@@ -1,7 +1,8 @@
 /-
+Copyright (c) 2025 Gaëtan Serré. All rights reserved.
 Copyright (c) 2026 Marcus Rockel. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Marcus Rockel
+Authors: Gaëtan Serré, Rémy Degenne, Marcus Rockel
 -/
 import Mathlib.Probability.CDF
 import Mathlib.MeasureTheory.Constructions.UnitInterval

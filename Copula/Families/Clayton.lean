@@ -51,7 +51,7 @@ theorem atomless_claytonLaw_marginal (d : ℕ) (θ : ℝ) (hθ : 0 < θ) (i : Fi
   rw [hm, Measure.map_apply hs (measurableSet_singleton a)]
   change P {p | -(p.1 i / p.2) = a} = 0
   rw [Measure.prod_apply_symm (measurableSet_eq_fun hs measurable_const)]
-  apply lintegral_eq_zero_of_ae_zero
+  apply lintegral_eq_zero_of_ae_eq_zero
   filter_upwards [(gammaMeasure θ⁻¹ 1).ae_ne 0] with t ht
   have he : {x : Fin d → ℝ | -(x i / t) = a} = (fun x => x i) ⁻¹' {-a * t} := by
     ext x
