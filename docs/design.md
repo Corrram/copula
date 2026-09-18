@@ -49,11 +49,16 @@ case or upstream feedback calls for it.
   total mass, and uniform-marginal boundary identities.
 - Independence and comonotonic examples, with their classical CDF formulas.
 - Coordinate transformations with identity, composition, and inverse laws.
+- Fréchet–Hoeffding lower and upper bounds, including the empty dimension.
+- The Lipschitz estimate for the sum of coordinate distances; a `d`-Lipschitz
+  theorem for the default maximum metric; continuity and uniform continuity.
+- CDF extensionality: lower orthants form a generating pi-system, so equality
+  of CDFs implies equality of the underlying copula measures.
 
 ## Next mathematical milestones
 
-1. **CDF regularity:** Lipschitz continuity, rectangle increments, the
-   `d`-increasing property, and the full Fréchet–Hoeffding bounds.
+1. **Rectangle probabilities:** alternating CDF sums and the `d`-increasing
+   property, extending the existing bounds and continuity results.
 2. **Further examples:** bivariate countermonotonicity and coordinate reflections;
    uniqueness in dimensions zero and one; relationships between the examples
    and existing independence APIs.
