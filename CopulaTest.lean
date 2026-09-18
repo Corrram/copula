@@ -167,8 +167,9 @@ example (θ : ℕ → ℝ) (hθ : ∀ n, 0 < θ n)
     (ht : Filter.Tendsto θ Filter.atTop (nhds 0)) :
     Filter.Tendsto (fun n => (Copula.clayton 2 (θ n) (hθ n)).cdf (fun _ => half))
       Filter.atTop (nhds (1 / 4)) := by
-  simpa [Copula.cdf_independence, Fin.prod_univ_two, half] using
-    Copula.tendsto_clayton_zero θ hθ ht (fun _ : Fin 2 => half)
+  have he : (Copula.independence 2).cdf (fun _ => half) = 1 / 4 := by
+    norm_num [Copula.cdf_independence, Fin.prod_univ_two, half]
+  simpa only [he] using Copula.tendsto_clayton_zero θ hθ ht (fun _ : Fin 2 => half)
 
 example (θ : ℕ → ℝ) (hθ : ∀ n, 0 < θ n) (ht : Filter.Tendsto θ Filter.atTop Filter.atTop) :
     Filter.Tendsto (fun n => (Copula.clayton 2 (θ n) (hθ n)).cdf (fun _ => half))
