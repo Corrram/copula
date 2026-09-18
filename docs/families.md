@@ -135,6 +135,9 @@ Pickands representations, and further family-specific dependence formulas remain
 The [rank API](rank-coefficients.md) already includes six coefficients and four
 closed-form FGM formulas. The [ordering API](orders.md) proves exact FGM
 parameter ordering and comparison results for mixtures and extremal copulas.
+The [tail-dependence API](nelsen.md) now gives both tail limits for FGM,
+Fréchet and Mardia copulas, together with the independence and Fréchet-bound
+benchmarks. Tail formulas for the other families remain future work.
 The bivariate validity theorem does not establish the new Archimedean families
 in higher dimensions, even for ranges known to be valid mathematically.
 

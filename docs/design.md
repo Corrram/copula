@@ -108,8 +108,9 @@ case or upstream feedback calls for it.
    Bivariate convexity and the outer-power construction are already proved.
    The Clayton constructor covers `θ > 0`; negative parameters need a separate
    construction with dimension-dependent admissibility.
-2. **Further transformation identities:** reflection CDF formulas for arbitrary
-   copulas and interactions with coordinate selection.
+2. **Further transformation identities:** higher-dimensional partial-reflection
+   CDF formulas and interactions with coordinate selection. The bivariate
+   single-reflection and survival formulas and classical rank symmetries are proved.
 3. **Topology of copulas:** connect pointwise CDF convergence to uniform CDF
    convergence and weak convergence of the bundled probability measures.
 
@@ -142,6 +143,11 @@ cube to arbitrary real-vector laws. The continuous-marginal construction remains
 available separately as the direct marginal-CDF transform.
 
 ## Comparison orders
+
+The [Nelsen coverage map](nelsen.md) records the additional diagonal, symmetry,
+rank transformation and tail-limit APIs. In particular, diagonal admissibility
+is currently proved in the necessary direction; arbitrary-diagonal construction
+and general tail-limit existence are not presumed.
 
 `Copula.Order` keeps orthant, concordance, supermodular and directional Schur
 comparisons explicit. The measure representation supplies both lower and upper

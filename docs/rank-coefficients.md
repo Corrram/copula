@@ -97,7 +97,11 @@ For FGM with any parameter `theta ∈ [-1,1]`, `Copula.Rank.FGM` proves:
 | gamma | `4 theta / 15` | `giniGamma_fgm` |
 | beta | `theta / 4` | `blomqvistBeta_fgm` |
 
-Further family-specific formulas, permutation/reflection identities, Kendall's
+`Rank.Symmetry` proves transposition and survival-copula invariance for all five
+classical coefficients. Reflecting either coordinate negates rho, tau, gamma
+and beta. No such sign rule is asserted for footrule; see [the symmetry table](nelsen.md).
+
+Further family-specific formulas, transformation identities for xi, Kendall's
 probabilistic concordance interpretation, and sample estimators remain future
 work. The current integration and conditional-kernel APIs provide the basis
 for those additions.
@@ -111,3 +115,4 @@ for those additions.
 - `Rank.Conditional`: conditional kernel, conditional CDF and marginal identities.
 - `Rank.Chatterjee`, `Rank.ChatterjeeExamples`: xi, bounds, version invariance and examples.
 - `Rank.Mixture`, `Rank.FGM`: affine identities and exact FGM formulas.
+- `Rank.Symmetry`: transpose, reflection and survival-copula identities.

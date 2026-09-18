@@ -500,4 +500,95 @@ example : ¬ (Copula.comonotonic 2).LowerOrthantLE Copula.countermonotonic :=
 example : (Copula.independence 0).ConcordanceLE (Copula.independence 0) :=
   Copula.ConcordanceLE.refl _
 
+example (C : Copula 2) : C.diagonal 0 = 0 ∧ C.diagonal 1 = 1 := by simp
+
+example (C : Copula 2) {s t : I} (h : s ≤ t) :
+    C.diagonal t - C.diagonal s ∈ Set.Icc 0 (2 * ((t : ℝ) - (s : ℝ))) :=
+  C.diagonal_sub_mem_Icc h
+
+example (C : Copula 2) : (∀ t : I, C.diagonal t = (t : ℝ)) ↔ C = Copula.comonotonic 2 :=
+  C.diagonal_eq_id_iff
+
+example (C : Copula 2) (t : I) : C.toMeasure.real {x | max (x 0) (x 1) ≤ t} = C.diagonal t :=
+  C.measureReal_max_le t
+
+example (C : Copula 2) (t : I) :
+    C.toMeasure.real {x | min (x 0) (x 1) ≤ t} = 2 * (t : ℝ) - C.diagonal t :=
+  C.measureReal_min_le t
+
+example (C : Copula 2) (u v : I) :
+    (C.reflect {0}).cdf ![u, v] = (v : ℝ) - C.cdf ![unitInterval.symm u, v] :=
+  C.cdf_reflect_first u v
+
+example (C : Copula 2) (u v : I) :
+    (C.reflect {1}).cdf ![u, v] = (u : ℝ) - C.cdf ![u, unitInterval.symm v] :=
+  C.cdf_reflect_second u v
+
+example (C : Copula 2) : (C.mix C.transpose Copula.unitHalf).IsExchangeable :=
+  C.isExchangeable_symmetrize
+
+example (C : Copula 2) : (C.mix C.survivalCopula Copula.unitHalf).IsRadiallySymmetric :=
+  C.isRadiallySymmetric_symmetrize
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) :
+    (Copula.fgm θ hθ).IsExchangeable ∧ (Copula.fgm θ hθ).IsRadiallySymmetric :=
+  ⟨Copula.isExchangeable_fgm θ hθ, Copula.isRadiallySymmetric_fgm θ hθ⟩
+
+example (C : Copula 2) : C.transpose.kendallTau = C.kendallTau := by simp
+
+example (C : Copula 2) : C.transpose.giniGamma = C.giniGamma := by simp
+
+example (C : Copula 2) : (C.reflect {0}).spearmanRho = -C.spearmanRho :=
+  C.spearmanRho_reflect_first
+
+example (C : Copula 2) : (C.reflect {1}).kendallTau = -C.kendallTau :=
+  C.kendallTau_reflect_second
+
+example (C : Copula 2) : (C.reflect {0}).giniGamma = -C.giniGamma :=
+  C.giniGamma_reflect_first
+
+example (C : Copula 2) : C.survivalCopula.spearmanFootrule = C.spearmanFootrule := by simp
+
+example (C : Copula 2) : C.survivalCopula.kendallTau = C.kendallTau := by simp
+
+example (C : Copula 2) {l : ℝ} (h : C.HasLowerTailDependence l) : l ∈ Set.Icc 0 1 := h.mem_Icc
+
+example (C : Copula 2) {l : ℝ} (h : C.HasUpperTailDependence l) : l ∈ Set.Icc 0 1 := h.mem_Icc
+
+example (C : Copula 2) (l : ℝ) :
+    C.HasUpperTailDependence l ↔ C.survivalCopula.HasLowerTailDependence l :=
+  C.hasUpperTailDependence_iff_survivalCopula l
+
+example (C : Copula 2) (l : ℝ) : C.transpose.HasLowerTailDependence l ↔ C.HasLowerTailDependence l :=
+  C.hasLowerTailDependence_transpose_iff l
+
+example : (Copula.independence 2).HasLowerTailDependence 0 := Copula.hasLowerTailDependence_independence
+
+example : (Copula.comonotonic 2).HasUpperTailDependence 1 := Copula.hasUpperTailDependence_comonotonic
+
+example : Copula.countermonotonic.HasLowerTailDependence 0 := Copula.hasLowerTailDependence_countermonotonic
+
+example : ¬ (Copula.independence 2).HasLowerTailDependence 1 := by
+  intro h
+  have he := h.unique Copula.hasLowerTailDependence_independence
+  norm_num at he
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).HasUpperTailDependence 0 :=
+  Copula.hasUpperTailDependence_fgm θ hθ
+
+example (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1) :
+    (Copula.frechet a b ha hb hab).HasLowerTailDependence a :=
+  Copula.hasLowerTailDependence_frechet a b ha hb hab
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) :
+    (Copula.mardia θ hθ).HasUpperTailDependence (θ ^ 2 * (1 + θ) / 2) :=
+  Copula.hasUpperTailDependence_mardia θ hθ
+
+example (w : I) : ((Copula.comonotonic 2).mix (Copula.independence 2) w).HasLowerTailDependence w := by
+  simpa using Copula.hasLowerTailDependence_comonotonic.mix Copula.hasLowerTailDependence_independence w
+
+example (C D : Copula 2) (h : C.LowerOrthantLE D) {a b : ℝ}
+    (ha : C.HasUpperTailDependence a) (hb : D.HasUpperTailDependence b) : a ≤ b :=
+  h.upperTailDependence_le ha hb
+
 end CopulaTest

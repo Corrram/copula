@@ -73,6 +73,10 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
 | `Copula.Dependence` | PQD, LTD, RTI, SI and total positivity of CDFs, conditional kernels and densities; implication and mixture theorems, rank consequences and FGM classifications |
 | `Copula.Order` | Lower/upper orthant, concordance, supermodular and directional Schur comparisons; rank monotonicity, extremal copulas and FGM parameter ordering |
+| `Copula.Diagonal` | Diagonal regularity, characterization of comonotonicity, and distributions of coordinate extrema |
+| `Copula.Reflection.Bivariate`, `Copula.Symmetry` | Reflection/survival CDF formulas, exchangeability, radial symmetry and symmetrization |
+| `Copula.Rank.Symmetry` | Transpose and survival invariance of five coefficients; single-reflection sign identities |
+| `Copula.TailDependence` | Explicit tail-limit predicates, bounds, uniqueness, order/mixture results and six benchmark/family formulas |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -132,6 +136,11 @@ concordance comparisons coincide and preserve all five concordance coefficients.
 Schur order preserves Chatterjee's xi; independence is its unique least copula,
 while both comonotonicity and countermonotonicity are greatest elements.
 See [the ordering conventions, results and remaining work](docs/orders.md).
+
+Further standard results from Nelsen's second edition are indexed in the
+[book-to-library coverage map](docs/nelsen.md), including diagonal sections,
+symmetries and tail dependence. Tail limits have explicit existence hypotheses;
+the library does not silently assign values when limits are unavailable.
 
 ## Sklar's theorem
 
