@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite this repository and the commit SHA used in your work."
+type: software
+title: "lean-copula: Finite-dimensional copulas in Lean 4"
+authors:
+  - family-names: Rockel
+    given-names: Marcus
+repository-code: "https://github.com/Corrram/lean-copula"
+url: "https://github.com/Corrram/lean-copula"
+license: Apache-2.0
+keywords:
+  - Lean
+  - mathlib
+  - copulas
+  - probability
+  - formal verification

@@ -1,0 +1,20 @@
+name = "copula"
+version = "0.1.0"
+defaultTargets = ["Copula"]
+testDriver = "CopulaTest"
+
+[leanOptions]
+autoImplicit = false
+relaxedAutoImplicit = false
+warningAsError = true
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.34.0"
+
+[[lean_lib]]
+name = "Copula"
+
+[[lean_lib]]
+name = "CopulaTest"
