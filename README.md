@@ -71,6 +71,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
+| `Copula.Dependence` | PQD, LTD, RTI, SI and total positivity of CDFs, conditional kernels and densities; implication and mixture theorems, rank consequences and FGM classifications |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -113,6 +114,14 @@ Gini's gamma, Blomqvist's beta, and Chatterjee's directional xi. All six have
 proved range bounds and values at independence, comonotonicity and
 countermonotonicity. Xi uses conditional distributions and accepts singular
 copulas. See [the definitions, conventions and proved results](docs/rank-coefficients.md).
+
+## Positive dependence
+
+`Copula.Dependence` includes directional LTD, RTI and SI, positive quadrant
+dependence, and separate predicates for CDF-TP2, conditional-kernel TP2 and
+multivariate density MTP2. It proves implication chains, mixture closure,
+rank-coefficient consequences, benchmark examples and exact FGM parameter
+classifications. See [the conventions and proved coverage](docs/positive-dependence.md).
 
 ## Sklar's theorem
 

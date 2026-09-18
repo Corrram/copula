@@ -93,6 +93,13 @@ case or upstream feedback calls for it.
   implication. Spearman's rho has both moment and CDF integral formulas;
   rho, footrule, gamma and beta have mixture identities and exact FGM values.
   See [rank coefficients](rank-coefficients.md) for conventions and remaining work.
+- Positive quadrant, tail and stochastic dependence; CDF, conditional-kernel
+  and density total positivity with distinct predicates. Checked implication
+  chains, mixture closure, transpose identities, rank consequences, and FGM
+  parameter classifications include an actual density identification. The
+  singular comonotonic example separates kernel TP2 from density MTP2.
+  See [positive dependence](positive-dependence.md) for the formalized arrows
+  and the remaining density and association results.
 
 ## Remaining mathematical milestones
 

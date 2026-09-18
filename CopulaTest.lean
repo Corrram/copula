@@ -340,4 +340,96 @@ example (C : Copula 2) :
 example (C : Copula 2) : (C.reindex ![1, 0]).chatterjeeXi ∈ Set.Icc 0 1 :=
   (C.reindex ![1, 0]).chatterjeeXi_mem_Icc
 
+-- Positive dependence is directional for SI and the two tail properties.
+example (C : Copula 2) (h : C.IsSI) : C.IsLTD ∧ C.IsRTI ∧ C.IsPQD :=
+  ⟨h.isLTD, h.isRTI, h.isPQD⟩
+
+example (C : Copula 2) (h : C.IsLTD) : C.IsPQD := h.isPQD
+
+example (C : Copula 2) (h : C.IsRTI) : C.IsPQD := h.isPQD
+
+example (C : Copula 2) (h : C.IsTP2CDF) : C.IsLTD ∧ (C.reindex ![1, 0]).IsLTD :=
+  ⟨h.isLTD, h.isLTD_swap⟩
+
+example (C : Copula 2) (h : C.HasTP2Kernel) : C.IsSI := h.isSI
+
+example (C : Copula 2) (h : C.IsLTD) (v : I) :
+    AntitoneOn (fun u : I => C.cdf ![u, v] / (u : ℝ)) (Set.Ioi 0) :=
+  (Copula.isLTD_iff_ratio_antitone C).mp h v
+
+example (C : Copula 2) (h : C.IsRTI) (v : I) :
+    MonotoneOn (fun u : I => (1 - (u : ℝ) - (v : ℝ) + C.cdf ![u, v]) / (1 - (u : ℝ)))
+      (Set.Iio 1) := (Copula.isRTI_iff_survivalRatio_monotone C).mp h v
+
+example (C D : Copula 2) (hC : C.IsSI) (hD : D.IsSI) (a : I) :
+    (Copula.mix C D a).IsSI := hC.mix hD a
+
+example (C D : Copula 2) (hC : C.IsLTD) (hD : D.IsLTD) (a : I) :
+    (Copula.mix C D a).IsLTD := hC.mix hD a
+
+example (C D : Copula 2) (hC : C.IsRTI) (hD : D.IsRTI) (a : I) :
+    (Copula.mix C D a).IsRTI := hC.mix hD a
+
+example (C D : Copula 2) (hC : C.IsPQD) (hD : D.IsPQD) (a : I) :
+    (Copula.mix C D a).IsPQD := hC.mix hD a
+
+example (C : Copula 2) : (C.reindex ![1, 0]).IsPQD ↔ C.IsPQD :=
+  Copula.isPQD_reindex_swap_iff C
+
+example (C : Copula 2) : (C.reindex ![1, 0]).IsTP2CDF ↔ C.IsTP2CDF :=
+  Copula.isTP2CDF_reindex_swap_iff C
+
+example (C : Copula 2) (h : C.IsPQD) :
+    0 ≤ C.spearmanRho ∧ 0 ≤ C.kendallTau ∧ 0 ≤ C.spearmanFootrule ∧
+      0 ≤ C.giniGamma ∧ 0 ≤ C.blomqvistBeta :=
+  ⟨h.spearmanRho_nonneg, h.kendallTau_nonneg, h.spearmanFootrule_nonneg,
+    h.giniGamma_nonneg, h.blomqvistBeta_nonneg⟩
+
+example (C : Copula 2) (h : C.IsPQD) : C.spearmanRho ≤ 3 * C.kendallTau :=
+  h.spearmanRho_le_three_mul_kendallTau
+
+example : (Copula.independence 0).HasMTP2Density := Copula.hasMTP2Density_independence 0
+
+example : (Copula.independence 4).HasMTP2Density := Copula.hasMTP2Density_independence 4
+
+example : (Copula.comonotonic 2).HasTP2Kernel ∧ ¬ (Copula.comonotonic 2).HasMTP2Density :=
+  ⟨Copula.hasTP2Kernel_comonotonic, Copula.not_hasMTP2Density_comonotonic⟩
+
+example : ¬ Copula.countermonotonic.IsPQD := Copula.not_isPQD_countermonotonic
+
+example : ¬ Copula.countermonotonic.IsSI := Copula.not_isSI_countermonotonic
+
+example : ¬ Copula.countermonotonic.HasTP2Kernel := Copula.not_hasTP2Kernel_countermonotonic
+
+example (C : Copula 2) : C.IsPQD ∧ C.IsNQD ↔ C = Copula.independence 2 :=
+  Copula.isPQD_and_isNQD_iff C
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).IsSI ↔ 0 ≤ θ :=
+  Copula.isSI_fgm_iff θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).IsLTD ↔ 0 ≤ θ :=
+  Copula.isLTD_fgm_iff θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).IsRTI ↔ 0 ≤ θ :=
+  Copula.isRTI_fgm_iff θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).IsTP2CDF ↔ 0 ≤ θ :=
+  Copula.isTP2CDF_fgm_iff θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) (hpos : 0 ≤ θ) : (Copula.fgm θ hθ).HasMTP2Density :=
+  Copula.hasMTP2Density_fgm θ hθ hpos
+
+example : ¬ (Copula.fgm (-1 / 2) (by norm_num)).IsPQD := by
+  rw [Copula.isPQD_fgm_iff]
+  norm_num
+
+example (θ : ℝ) : IsMTP2 (Copula.fgmDensity θ) ↔ 0 ≤ θ :=
+  Copula.isMTP2_fgmDensity_iff θ
+
+example (d : ℕ) (f : Fin d → I → ℝ) : IsMTP2 (fun x : Fin d → I => ∏ i, f i (x i)) :=
+  isMTP2_prod f
+
+example (C : Copula 2) (u v : I) : C.cdf ![u, v] = ∫ t in Set.Iic u, C.conditionalCDF t v :=
+  C.cdf_eq_integral_conditionalCDF u v
+
 end CopulaTest
