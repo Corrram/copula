@@ -17,7 +17,7 @@ maximum metric on the cube, the resulting Lipschitz constant is `d`.
 -/
 
 open MeasureTheory Set
-open scoped unitInterval BigOperators
+open scoped unitInterval BigOperators NNReal
 
 namespace ProbabilityTheory.Copula
 

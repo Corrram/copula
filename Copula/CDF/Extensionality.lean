@@ -30,10 +30,13 @@ theorem ext_cdf {C D : Copula d} (h : ∀ u, C.cdf u = D.cdf u) : C = D := by
   have hgen (i : Fin d) : generateFrom (S i) = (inferInstance : MeasurableSpace I) :=
     (BorelSpace.measurable_eq.trans (borel_eq_generateFrom_Iic I)).symm
   have hspan (i : Fin d) : IsCountablySpanning (S i) := by
-    refine ⟨fun _ : ℕ => univ, fun _ => ?_, by simp⟩
-    refine ⟨1, ?_⟩
-    ext x
-    simp [unitInterval.le_one']
+    refine ⟨fun _ : ℕ => univ, fun _ => ?_, ?_⟩
+    · refine ⟨1, ?_⟩
+      ext x
+      simp [unitInterval.le_one']
+    · apply Subset.antisymm (subset_univ _)
+      intro x _
+      exact mem_iUnion.mpr ⟨0, mem_univ x⟩
   refine ext_of_generate_finite _ (generateFrom_eq_pi hgen hspan).symm
     (IsPiSystem.pi fun _ => isPiSystem_Iic) ?_ (by simp)
   rintro _ ⟨s, hs, rfl⟩
