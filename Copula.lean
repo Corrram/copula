@@ -24,3 +24,12 @@ import Copula.Distribution.GammaLaplace
 import Copula.Families.Gaussian.Identities
 import Copula.Families.Clayton.CDF
 import Copula.Families.Clayton.Limits
+import Copula.Classical.Bivariate
+import Copula.Archimedean.Basic
+import Copula.Archimedean.Exponential
+import Copula.Archimedean.Power
+import Copula.Elliptical.ScaleMixture
+import Copula.ExtremeValue.Basic
+import Copula.Transform.Power
+import Copula.Transform.MaxProduct
+import Copula.Mixture
