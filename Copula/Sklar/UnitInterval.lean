@@ -28,9 +28,10 @@ theorem exists_sklarCopula_unit (μ : ProbabilityMeasure (Fin d → I)) :
   have hq (i : Fin d) : Measurable (q i) := measurable_unitQuantile _
   obtain ⟨C, hC⟩ := exists_lift μ q hq (fun i => map_unitQuantile _)
   refine ⟨C, fun x => ?_⟩
-  have hm : Measurable (fun u i => q i (u i)) :=
+  have hm : Measurable (fun u : Fin d → I => fun i => q i (u i)) :=
     Measurable.of_eval fun i => (hq i).comp (measurable_pi_apply i)
-  have he : (fun u i => q i (u i)) ⁻¹' Iic x = Iic (fun i => unitMarginalCDF μ i (x i)) := by
+  have he : (fun u : Fin d → I => fun i => q i (u i)) ⁻¹' Iic x =
+      Iic (fun i => unitMarginalCDF μ i (x i)) := by
     ext u
     change (∀ i, q i (u i) ≤ x i) ↔ ∀ i, u i ≤ unitMarginalCDF μ i (x i)
     exact forall_congr' fun i => unitQuantile_le_iff _ _ _
