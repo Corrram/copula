@@ -20,3 +20,5 @@ import Copula.Sklar.UnitInterval
 import Copula.Sklar.General
 import Copula.Families.Clayton
 import Copula.Sklar
+import Copula.Distribution.GammaLaplace
+import Copula.Families.Gaussian.Identities
