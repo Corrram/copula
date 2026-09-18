@@ -9,6 +9,7 @@ import Copula.Comonotonic
 import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 import Mathlib.Analysis.Calculus.Deriv.Slope
+import Mathlib.Order.ConditionallyCompleteLattice.Finset
 
 /-! # The independence and comonotonic limits of Clayton copulas
 
@@ -41,10 +42,10 @@ private theorem clayton_formula_tendsto_zero (u : Fin d → I)
       (𝓝 (∑ i, -log (u i : ℝ))) := by
     simpa [hB0] using hl.tendsto_slope_zero_right
   have hp : exp (-(∑ i, -log (u i : ℝ))) = ∏ i, (u i : ℝ) := by
-    rw [← Finset.sum_neg_distrib, neg_neg, Real.exp_sum]
+    rw [Finset.sum_neg_distrib, neg_neg, Real.exp_sum]
     exact Finset.prod_congr rfl (fun i _ => Real.exp_log (hu i))
   rw [← hp]
-  apply (hs.neg.exp).congr'
+  apply (hs.neg.rexp).congr'
   filter_upwards [self_mem_nhdsWithin] with θ hθ
   have hBpos : 0 < B θ := by
     have hn : 0 ≤ ∑ i, ((u i : ℝ) ^ (-θ) - 1) := Finset.sum_nonneg (fun i _ =>
@@ -64,9 +65,9 @@ theorem tendsto_clayton_zero {α : Type*} {l : Filter α} (θ : α → ℝ)
   by_cases hu : ∀ i, 0 < (u i : ℝ)
   · have ht : Tendsto θ l (𝓝[>] 0) :=
       tendsto_nhdsWithin_iff.mpr ⟨hlim, Eventually.of_forall hθ⟩
-    simpa only [cdf_clayton_of_pos _ _ _ hu, cdf_independence] using
+    simpa only [cdf_clayton_of_pos _ _ _ hu, cdf_independence, Function.comp_def] using
       (clayton_formula_tendsto_zero u hu).comp ht
-  · push_neg at hu
+  · push Not at hu
     obtain ⟨i, hi⟩ := hu
     have hz : u i = 0 := Subtype.ext (le_antisymm hi (u i).property.1)
     simpa only [cdf_eq_zero_of_coord_eq_zero _ u i hz] using
@@ -76,7 +77,7 @@ theorem tendsto_clayton_zero {α : Type*} {l : Filter α} (θ : α → ℝ)
 theorem clayton_min_lower_bound [NeZero d] (θ : ℝ) (hθ : 0 < θ)
     (u : Fin d → I) (hu : ∀ i, 0 < (u i : ℝ)) :
     (d : ℝ) ^ (-θ⁻¹) * ((⨅ i, u i : I) : ℝ) ≤ (clayton d θ hθ).cdf u := by
-  obtain ⟨j, hj⟩ := ciInf_mem u
+  obtain ⟨j, hj⟩ := exists_eq_ciInf_of_finite (f := u)
   have hm (i : Fin d) : (u j : ℝ) ≤ (u i : ℝ) := by
     exact_mod_cast (hj.trans_le (iInf_le u i))
   have hd : (1 : ℝ) ≤ d := by exact_mod_cast Nat.one_le_iff_ne_zero.mpr (NeZero.ne d)
@@ -96,7 +97,7 @@ theorem clayton_min_lower_bound [NeZero d] (θ : ℝ) (hθ : 0 < θ)
     simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, mul_one]
     linarith
   have hh := rpow_le_rpow_of_nonpos hB hbound (neg_nonpos.mpr (inv_pos.mpr hθ).le)
-  rw [mul_rpow (by positivity) (by positivity), ← rpow_mul (hu j).le,
+  rw [mul_rpow (zero_le_one.trans hd) (rpow_nonneg (hu j).le _), ← rpow_mul (hu j).le,
     show -θ * -θ⁻¹ = 1 by field_simp, rpow_one] at hh
   rw [cdf_clayton_of_pos θ hθ u hu, ← hj]
   exact hh
@@ -122,10 +123,10 @@ theorem tendsto_clayton_atTop {α : Type*} {l : Filter α} (θ : α → ℝ)
       (by simpa using hp.mul_const (((⨅ i, u i : I) : ℝ))) tendsto_const_nhds
     · exact fun a => clayton_min_lower_bound (θ a) (hθ a) u hu
     · intro a
-      obtain ⟨i, hi⟩ := ciInf_mem u
+      obtain ⟨i, hi⟩ := exists_eq_ciInf_of_finite (f := u)
       rw [← hi]
       exact (clayton d (θ a) (hθ a)).cdf_le_coord u i
-  · push_neg at hu
+  · push Not at hu
     obtain ⟨i, hi⟩ := hu
     have hz : u i = 0 := Subtype.ext (le_antisymm hi (u i).property.1)
     simpa only [cdf_eq_zero_of_coord_eq_zero _ u i hz] using

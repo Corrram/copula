@@ -24,3 +24,4 @@ import Copula.Distribution.GammaLaplace
 import Copula.Families.Gaussian.Identities
 import Copula.Families.Clayton.CDF
 import Copula.Families.Clayton.Limits
+import Copula.Classical.Regularity
