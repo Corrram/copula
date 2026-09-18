@@ -65,6 +65,67 @@ concordance and upper orthant order through the existing equivalences.
 `IsPQD.ordinalSum` proves closure of positive quadrant dependence. No converse
 or closure under SI, LTD, RTI or total positivity is claimed here.
 
+## Probability law and integration
+
+`OrdinalSum.Measure` identifies the underlying measure directly. Write
+`L_a(x)_i = a x_i` and `U_a(x)_i = a+(1−a)x_i`. Then
+
+```text
+μ_(C⊕ₐD) = a (L_a)_* μ_C + (1−a) (U_a)_* μ_D.
+```
+
+`toMeasure_ordinalSum` states this identity using `Measure.map` and
+nonnegative extended-real weights. `integral_ordinalSum` gives the resulting
+change-of-variables formula for every continuous real observable:
+
+```text
+∫ f d(C⊕ₐD) = a ∫ f(L_a(x)) dC(x) + (1−a) ∫ f(U_a(x)) dD(x).
+```
+
+Both formulas include `a=0` and `a=1`; neither needs a density.
+`OrdinalSum.Blocks` proves that the lower square has probability a, the upper
+square has probability 1−a, and the two off-diagonal open rectangles have
+probability zero. The block indicators of the two coordinates agree almost
+surely. Closed block boundaries do not change their probabilities because
+uniform marginals have no atoms.
+
+## Rank coefficients and sharp bounds
+
+For any components C and D and every split a, `OrdinalSum.Rank` proves:
+
+```text
+rho(C⊕ₐD) = 1 − a³(1−rho(C)) − (1−a)³(1−rho(D))
+tau(C⊕ₐD) = 1 − a²(1−tau(C)) − (1−a)²(1−tau(D))
+footrule(C⊕ₐD) = 1 − a²(1−footrule(C)) − (1−a)²(1−footrule(D)).
+```
+
+The more general concordance identity requires a common split for both inputs:
+
+```text
+Q(C⊕ₐD, E⊕ₐF) = 1 − a²(1−Q(C,E)) − (1−a)²(1−Q(D,F)).
+```
+
+Tau follows by pairing the copula with itself; footrule follows by pairing
+with M, which is an ordinal sum of two copies of itself. Rho follows from
+the squared difference of the two uniform coordinates. These proofs include
+singular components and zero-length blocks.
+
+`OrdinalSum.RankExamples` specializes the formulas:
+
+| Components | rho | tau | footrule |
+| --- | --- | --- | --- |
+| Π, Π | `3a(1−a)` | `2a(1−a)` | `2a(1−a)` |
+| W, W | `6a(1−a)−1` | `4a(1−a)−1` | `3a(1−a)−1/2` |
+
+The W/W row gives sharp lower bounds over all component choices at a fixed
+split. In particular, every ordinal sum at `a=1/2` has rho at least 1/2,
+tau at least 0, and footrule at least 1/4. W/W attains all three bounds,
+giving a dependent copula with zero tau and positive rho; it is not PQD.
+
+For Π/Π, the respective maxima are 3/4, 1/2 and 1/2. The library proves that
+each maximum is attained exactly at `a=1/2`. Equal splitting therefore
+maximizes these three coefficients within this particular family.
+
 ## Symmetry and extremal copulas
 
 Transposition acts on both components:
@@ -115,12 +176,17 @@ with the new strict rank criteria to give positive rho and tau.
 This API constructs binary bivariate ordinal sums. Repeated application is
 available, but a general countable-interval constructor, the converse
 decomposition theorem from an interior point with `C(a,a)=a`, and general
-rank-coefficient formulas are not yet formalized.
+ordinal-sum formulas for gamma and xi are not yet formalized. General beta
+formulas beyond the midpoint result are also future work.
 
 | Module | Content |
 | --- | --- |
 | `OrdinalSum.Rescale` | Clipped inverse coordinates, affine embeddings and identities |
 | `OrdinalSum.Basic` | Copula validity, constructor, endpoints and regional CDF formulas |
+| `OrdinalSum.Measure` | Weighted pushforward law and integration over component squares |
+| `OrdinalSum.Blocks` | Block probabilities, almost-sure block agreement and zero cross-block mass |
+| `OrdinalSum.Rank` | General rho, tau, footrule and common-split concordance formulas |
+| `OrdinalSum.RankExamples` | Benchmark formulas, sharp lower bounds and unique optimal independent-component split |
 | `OrdinalSum.Properties` | Recovery, exact ordering, exchangeability, diagonal and extremal results |
 | `OrdinalSum.Dependence` | PQD closure and the independent-component example |
 | `OrdinalSum.TailDependence` | Tail-ratio identities and equivalence of tail limits |

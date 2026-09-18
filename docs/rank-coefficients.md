@@ -253,6 +253,12 @@ Further family-specific formulas, transformation identities for xi, and
 sample estimators remain future work. The current integration and
 conditional-kernel APIs provide the basis for those additions.
 
+Binary ordinal sums have exact formulas for rho, tau, footrule and concordance
+between two sums with the same split. Deficits from one scale cubically for
+rho and quadratically for tau and footrule. See the
+[ordinal-sum rank formulas and sharp bounds](ordinal-sums.md#rank-coefficients-and-sharp-bounds),
+including independent and countermonotonic components and their endpoint cases.
+
 ## Module map
 
 - `Rank.Integration`: uniform moments, coordinate integrals, and benchmark measure integrals.
@@ -276,3 +282,4 @@ conditional-kernel APIs provide the basis for those additions.
 - `Rank.ConcordanceProbability`: independent-pair probabilities, null ties, and the probabilistic tau interpretation.
 - `Rank.KendallMixture`: finite and binary mixture formulas and non-affinity.
 - `Rank.FrechetKendall`: Fréchet and Mardia tau, footrule, gamma, beta and zero-tau parameters.
+- `OrdinalSum.Rank`, `OrdinalSum.RankExamples`: ordinal-sum formulas, sharp fixed-split bounds and optimization for independent components.

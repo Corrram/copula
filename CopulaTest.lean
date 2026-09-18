@@ -1133,4 +1133,135 @@ example (C : Copula 2) (h : C.blomqvistBeta = -1) (t : I) :
     C.diagonal t = max 0 (2 * (t : ℝ) - 1) :=
   C.diagonal_eq_lower_iff_blomqvistBeta_eq_neg_one.mpr h t
 
+/-! Ordinal-sum laws, integrals and exact rank formulas. -/
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).toMeasure =
+      ENNReal.ofReal (a : ℝ) • C.toMeasure.map (fun x i => Copula.OrdinalSum.lowerEmbed a (x i)) +
+      ENNReal.ofReal (1 - (a : ℝ)) • D.toMeasure.map (fun x i => Copula.OrdinalSum.upperEmbed a (x i)) :=
+  Copula.toMeasure_ordinalSum C D a
+
+example (C D : Copula 2) (a : I) (f : (Fin 2 → I) → ℝ) (hf : Continuous f) :
+    (∫ x, f x ∂(C.ordinalSum D a).toMeasure) =
+      (a : ℝ) * (∫ x, f (fun i => Copula.OrdinalSum.lowerEmbed a (x i)) ∂C.toMeasure) +
+      (1 - (a : ℝ)) * ∫ x, f (fun i => Copula.OrdinalSum.upperEmbed a (x i)) ∂D.toMeasure :=
+  Copula.integral_ordinalSum C D a hf
+
+example (C D : Copula 2) (a : I) :
+    ∀ᵐ x ∂(C.ordinalSum D a).toMeasure, x 0 ≤ a ↔ x 1 ≤ a :=
+  Copula.ae_ordinalSum_same_side C D a
+
+example (C D : Copula 2) :
+    (C.ordinalSum D half).toMeasure.real {x | ∀ i, x i ≤ half} = 1 / 2 :=
+  Copula.measureReal_ordinalSum_lower_block C D half
+
+example (C D : Copula 2) :
+    (C.ordinalSum D threeQuarters).toMeasure.real {x | ∀ i, threeQuarters ≤ x i} = 1 / 4 := by
+  rw [Copula.measureReal_ordinalSum_upper_block]
+  norm_num [threeQuarters]
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).toMeasure
+      {x | (x 0 < a ∧ a < x 1) ∨ (x 1 < a ∧ a < x 0)} = 0 :=
+  Copula.measure_ordinalSum_cross_blocks C D a
+
+example (C D E F : Copula 2) (a : I) :
+    (C.ordinalSum D a).concordanceQ (E.ordinalSum F a) =
+      1 - (a : ℝ) ^ 2 * (1 - C.concordanceQ E) -
+        (1 - (a : ℝ)) ^ 2 * (1 - D.concordanceQ F) :=
+  Copula.concordanceQ_ordinalSum C D E F a
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).kendallTau =
+      1 - (a : ℝ) ^ 2 * (1 - C.kendallTau) - (1 - (a : ℝ)) ^ 2 * (1 - D.kendallTau) :=
+  Copula.kendallTau_ordinalSum C D a
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).spearmanRho =
+      1 - (a : ℝ) ^ 3 * (1 - C.spearmanRho) - (1 - (a : ℝ)) ^ 3 * (1 - D.spearmanRho) :=
+  Copula.spearmanRho_ordinalSum C D a
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).spearmanFootrule =
+      1 - (a : ℝ) ^ 2 * (1 - C.spearmanFootrule) - (1 - (a : ℝ)) ^ 2 * (1 - D.spearmanFootrule) :=
+  Copula.spearmanFootrule_ordinalSum C D a
+
+example (C D : Copula 2) : (C.ordinalSum D 0).kendallTau = D.kendallTau := by
+  rw [Copula.kendallTau_ordinalSum]
+  norm_num
+
+example (C D : Copula 2) : (C.ordinalSum D 1).spearmanRho = C.spearmanRho := by
+  rw [Copula.spearmanRho_ordinalSum]
+  norm_num
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).spearmanRho = 3 / 4 := by
+  rw [Copula.spearmanRho_ordinalSum_independence]
+  norm_num [half]
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).kendallTau = 1 / 2 := by
+  rw [Copula.kendallTau_ordinalSum_independence]
+  norm_num [half]
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).spearmanFootrule = 1 / 2 := by
+  rw [Copula.spearmanFootrule_ordinalSum_independence]
+  norm_num [half]
+
+example : (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).spearmanRho = 1 / 2 := by
+  rw [Copula.spearmanRho_ordinalSum_countermonotonic]
+  norm_num [half]
+
+example : (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).kendallTau = 0 := by
+  rw [Copula.kendallTau_ordinalSum_countermonotonic]
+  norm_num [half]
+
+example : (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).spearmanFootrule = 1 / 4 := by
+  rw [Copula.spearmanFootrule_ordinalSum_countermonotonic]
+  norm_num [half]
+
+example (C D : Copula 2) : 0 ≤ (C.ordinalSum D half).kendallTau := by
+  have h := Copula.kendallTau_ordinalSum_lower_bound C D half
+  norm_num [half] at h ⊢
+  exact h
+
+example (C D : Copula 2) : 1 / 2 ≤ (C.ordinalSum D half).spearmanRho := by
+  have h := Copula.spearmanRho_ordinalSum_lower_bound C D half
+  norm_num [half] at h ⊢
+  exact h
+
+example (C D : Copula 2) : 1 / 4 ≤ (C.ordinalSum D half).spearmanFootrule := by
+  have h := Copula.spearmanFootrule_ordinalSum_lower_bound C D half
+  norm_num [half] at h ⊢
+  exact h
+
+example (a : I) : ((Copula.independence 2).ordinalSum (Copula.independence 2) a).spearmanRho ≤ 3 / 4 :=
+  Copula.spearmanRho_ordinalSum_independence_le_three_quarters a
+
+example (a : I) : ((Copula.independence 2).ordinalSum (Copula.independence 2) a).kendallTau = 1 / 2 ↔
+    a = Copula.unitHalf := Copula.kendallTau_ordinalSum_independence_eq_half_iff a
+
+example (a : I) : ((Copula.independence 2).ordinalSum (Copula.independence 2) a).spearmanRho = 3 / 4 ↔
+    a = Copula.unitHalf := Copula.spearmanRho_ordinalSum_independence_eq_three_quarters_iff a
+
+example (a : I) : ((Copula.independence 2).ordinalSum (Copula.independence 2) a).spearmanFootrule = 1 / 2 ↔
+    a = Copula.unitHalf := Copula.spearmanFootrule_ordinalSum_independence_eq_half_iff a
+
+example : ¬ (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).IsPQD := by
+  intro h
+  apply Copula.ordinalSum_ne_independence _ _ half half_pos half_lt_one
+  apply h.kendallTau_eq_zero_iff.mp
+  rw [Copula.kendallTau_ordinalSum_countermonotonic]
+  norm_num [half]
+
+example : let C := (Copula.independence 2).ordinalSum (Copula.independence 2) half
+    (C.toMeasure.prod C.toMeasure).real Copula.concordantPairs = 3 / 4 := by
+  dsimp
+  rw [Copula.measureReal_concordantPairs, Copula.concordanceQ_self,
+    Copula.kendallTau_ordinalSum_independence]
+  norm_num [half]
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) threeQuarters).spearmanRho =
+    9 / 16 := by
+  rw [Copula.spearmanRho_ordinalSum_independence]
+  norm_num [threeQuarters]
+
 end CopulaTest

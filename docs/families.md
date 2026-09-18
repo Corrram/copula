@@ -150,6 +150,9 @@ regional CDF formulas, recovery, exact componentwise ordering, exchangeability
 and PQD closure. Its lower and upper tail limits are inherited from the first
 and last nonempty blocks. These constructions are not additional named rows
 in the Ansari–Rockel family count.
+Their probability law and rho, tau, footrule and common-split concordance
+formulas are also proved, with sharp fixed-split bounds and a unique optimal
+split for independent components.
 
 ## Scope and next extensions
 
