@@ -14,3 +14,5 @@ import Copula.Distribution.ProbabilityIntegralTransform
 import Copula.Sklar.Continuous
 import Copula.Families.Gaussian
 import Copula.Classical
+import Copula.Distribution.Quantile
+import Copula.Distribution.RandomizedInverse
