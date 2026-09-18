@@ -145,6 +145,11 @@ attenuates xi quadratically. Kendall's tau is proved to equal concordance
 probability minus discordance probability for independent observations, and
 has general quadratic mixture formulas. FGM, Fréchet and Mardia have proved
 closed forms for all six coefficients on their full parameter domains.
+Rho, tau and gamma attain ±1 exactly at the corresponding Fréchet copulas.
+Footrule attains 1 exactly at comonotonicity; its minimum and beta's extrema
+have proved nonuniqueness examples. Rho strictly increases between distinct
+copulas comparable in concordance order. Within either PQD or NQD, zero rho
+or zero tau characterizes independence.
 
 ## Positive dependence
 

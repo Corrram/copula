@@ -15,6 +15,8 @@ probability-measure representation.
 | §2.6 | `Copula.Reflection.Bivariate` | Single-coordinate reflection formulas, survival copula, transpose and composition identities |
 | §2.7 | `Copula.Symmetry` | Copula-level exchangeability and radial symmetry, CDF characterizations, mixtures and symmetrization |
 | §5.1, symmetry properties of concordance | `Copula.Rank.Symmetry` | Transpose and survival invariance; single-reflection sign changes |
+| §2.5 and §5.1, extremal dependence and concordance | `Copula.Support`, `Rank.Extrema`, `Rank.MedianExtrema` | Almost-sure characterizations of M/W; coefficient equality cases and nonuniqueness at median/footrule extrema |
+| §5.1 and §5.2, ordering and quadrant dependence | `Copula.Order.StrictSpearman` | Strict rho comparison; zero rho or tau characterizes independence within PQD/NQD |
 | §5.1, concordance function and Kendall's tau | `Copula.Rank.Concordance`, `ConcordanceProbability`, `KendallMixture` | Q, independent-pair probabilities, benchmark links, and quadratic mixture formulas |
 | §5.1, Fréchet and Mardia coefficient examples | `Copula.Rank.FrechetKendall` | Tau, footrule, gamma and beta on the full parameter domains |
 | §5.4, including the CDF formulas of Theorem 5.4.2 | `Copula.TailDependence` | Limits, range, uniqueness, reflection duality, order and mixture results, benchmark/family values |

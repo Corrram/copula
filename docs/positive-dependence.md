@@ -169,6 +169,13 @@ let SI, LTD, RTI and CDF/kernel TP2 hypotheses supply these conclusions. Xi is
 already nonnegative for every copula, so its sign does not characterize positive
 dependence.
 
+Import `Copula.Order.StrictSpearman` (or `Copula`) for the sharpened criteria:
+within PQD, rho and tau are positive exactly when the copula differs from
+independence, and either coefficient being zero forces independence. Within
+NQD the analogous signs are negative, and zero again forces independence.
+The NQD proof also supplies `3 tau ≤ rho ≤ 0`. These equivalences rely on the
+quadrant-dependence hypothesis; they do not hold for arbitrary copulas.
+
 The generic implications from density MTP2 to kernel/CDF TP2, association and
 FKG inequalities, a monotone-kernel converse for SI, and further family
 classifications remain future work. They are not hidden assumptions of any

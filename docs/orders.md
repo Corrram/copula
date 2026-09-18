@@ -83,6 +83,17 @@ It supplies the proof that Kendall's tau is increasing in lower orthant order.
 The order API also exposes monotonicity of Spearman's rho, Spearman's footrule,
 Gini's gamma and Blomqvist's beta.
 
+`Order.StrictSpearman` strengthens rho monotonicity: if `C ≤lo D`, then
+`rho(C) = rho(D)` holds exactly when `C = D`. Consequently `C ≠ D` gives
+`rho(C) < rho(D)`. The same statements hold for concordance order in dimension
+two. The proof uses continuity of the CDFs and full support of uniform volume;
+it also covers singular copulas. Strict monotonicity of the other coefficients
+is not asserted.
+
+Within PQD or NQD, zero rho and zero tau each characterize independence.
+Dependent PQD copulas therefore have positive rho and tau; dependent
+NQD copulas have negative rho and tau.
+
 ## Schur order and predictability
 
 `SchurLE` is a preorder on copulas. The implementation proves:
@@ -113,6 +124,7 @@ Schur comparison. Formal examples show why: `W ≤lo Π`, but `W` is not below
 | `Order.Survival` | Upper orthants, boundary nullity and reflection/CDF formulas |
 | `Order.Orthant` | Three orthant/concordance predicates and order laws |
 | `Order.Rank` | Cross-concordance symmetry, rank monotonicity and extrema |
+| `Order.StrictSpearman` | Strict rho monotonicity and rho/tau independence criteria within PQD/NQD |
 | `Order.FGM` | Exact FGM parameter comparisons |
 | `Order.Frechet` | Monotonicity in the upper-bound weight and antitonicity in the lower-bound weight |
 | `Order.SymmetricSchur` | Two-direction `SchurBothLE`, transposition and reduction for exchangeable/Archimedean copulas |

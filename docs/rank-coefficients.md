@@ -48,6 +48,37 @@ example (C : Copula 2) : C.chatterjeeXi ∈ Set.Icc 0 1 :=
 example : Copula.countermonotonic.chatterjeeXi = 1 := by simp
 ```
 
+## Equality cases and independence detection
+
+`Rank.Extrema` and `Rank.MedianExtrema` prove the equality cases:
+
+| Equality | Equivalent condition |
+| --- | --- |
+| `rho = 1`, `tau = 1`, `gamma = 1`, or `footrule = 1` | `C = M` |
+| `rho = −1`, `tau = −1`, or `gamma = −1` | `C = W` |
+| `beta = 1` | `C(1/2,1/2) = 1/2` |
+| `beta = −1` | `C(1/2,1/2) = 0` |
+| `footrule = −1/2` | `beta = −1`, also `δ(t) = max(0,2t−1)` for every t |
+
+The corresponding strict-bound lemmas are available, for example
+`spearmanRho_lt_one_iff` and `neg_one_lt_kendallTau_iff`.
+`Copula.Support` identifies M with almost-sure equality of the uniform
+coordinates and W with their sum being one almost surely. No density
+assumptions occur in these characterizations.
+
+The beta conditions do not determine the whole copula. Every ordinal sum
+with split `1/2` has beta 1; reflecting its second coordinate gives beta −1
+and footrule −1/2. Choosing independent copulas as both components gives
+explicit witnesses different from M and W. Thus minimal footrule, unlike
+maximal footrule, does not determine a unique copula.
+
+`Order.StrictSpearman` proves that distinct copulas comparable in lower
+orthant or concordance order have strictly different rho. Within either the
+PQD or NQD class, rho vanishes exactly at independence. The same equivalence
+holds for tau, using `rho ≤ 3 tau` for PQD and `3 tau ≤ rho` for NQD. These
+are conditional independence criteria: zero rho or tau alone is insufficient,
+as the equal M/W mixture already demonstrates.
+
 ## Concordance probabilities and Kendall's tau
 
 `C.concordanceQ D = 4 ∫ C dD − 1` is the bivariate concordance function Q.
@@ -228,6 +259,10 @@ conditional-kernel APIs provide the basis for those additions.
 - `Rank.Basic`: the five classical definitions, basic bounds and CDF ordering.
 - `Rank.Spearman`, `Rank.SpearmanCDF`: distance formulas, rho bounds and CDF formula.
 - `Rank.Benchmarks`: classical benchmark values and footrule/gamma bounds.
+- `Rank.Extrema`: equality cases and strict bounds for rho, tau, footrule and gamma.
+- `Rank.MedianExtrema`: beta equality cases, minimal diagonals and footrule, and nonuniqueness witnesses.
+- `Copula.Support`: almost-sure characterizations of M and W.
+- `Order.StrictSpearman`: strict rho comparison and independence criteria within PQD/NQD.
 - `Rank.Conditional`: conditional kernel, conditional CDF and marginal identities.
 - `Rank.Chatterjee`, `Rank.ChatterjeeExamples`: xi, bounds, version invariance and examples.
 - `Rank.Mixture`, `Rank.FGM`: affine identities and exact FGM formulas.

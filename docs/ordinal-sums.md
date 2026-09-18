@@ -99,6 +99,17 @@ The M/Π example is exchangeable but not radially symmetric, as its two tail
 coefficients differ. The public examples check this distinction, the endpoint
 identities, CDF calculations, recovery, order and dependence results.
 
+## Extremal median concordance
+
+`Copula.Rank.MedianExtrema` proves that every ordinal sum with split `1/2`
+has Blomqvist beta 1. Reflecting its second coordinate gives beta −1 and
+Spearman footrule −1/2. With two independent components these constructions
+differ from M and W, respectively, giving explicit nonuniqueness examples.
+See the [rank equality cases](rank-coefficients.md#equality-cases-and-independence-detection).
+
+For independent components and any interior split, the PQD result combines
+with the new strict rank criteria to give positive rho and tau.
+
 ## Scope and module map
 
 This API constructs binary bivariate ordinal sums. Repeated application is

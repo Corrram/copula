@@ -13,3 +13,4 @@ import Copula.Rank.ChatterjeeMixture
 import Copula.Rank.FrechetChatterjee
 import Copula.Rank.ConcordanceProbability
 import Copula.Rank.FrechetKendall
+import Copula.Rank.MedianExtrema

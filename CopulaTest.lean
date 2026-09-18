@@ -1034,4 +1034,103 @@ example : (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).HasL
   ⟨Copula.hasLowerTailDependence_countermonotonic.ordinalSum _ half half_pos,
     Copula.hasUpperTailDependence_countermonotonic.ordinalSum _ half half_lt_one⟩
 
+/-! Extremal rank coefficients, strict ordering, and their exceptions. -/
+
+example (C : Copula 2) : C = Copula.comonotonic 2 ↔
+    ∀ᵐ x ∂C.toMeasure, x 0 = x 1 := C.eq_comonotonic_iff_ae_eval_eq
+
+example (C : Copula 2) : C = Copula.countermonotonic ↔
+    ∀ᵐ x ∂C.toMeasure, (x 0 : ℝ) + x 1 = 1 := C.eq_countermonotonic_iff_ae_add_eq_one
+
+example (C : Copula 2) : C.spearmanRho = 1 ↔ C = Copula.comonotonic 2 :=
+  C.spearmanRho_eq_one_iff
+
+example (C : Copula 2) : C.spearmanRho = -1 ↔ C = Copula.countermonotonic :=
+  C.spearmanRho_eq_neg_one_iff
+
+example (C : Copula 2) : C.kendallTau = 1 ↔ C = Copula.comonotonic 2 :=
+  C.kendallTau_eq_one_iff
+
+example (C : Copula 2) : C.kendallTau = -1 ↔ C = Copula.countermonotonic :=
+  C.kendallTau_eq_neg_one_iff
+
+example (C : Copula 2) : C.giniGamma = 1 ↔ C = Copula.comonotonic 2 :=
+  C.giniGamma_eq_one_iff
+
+example (C : Copula 2) : C.giniGamma = -1 ↔ C = Copula.countermonotonic :=
+  C.giniGamma_eq_neg_one_iff
+
+example (C : Copula 2) : C.spearmanFootrule = 1 ↔ C = Copula.comonotonic 2 :=
+  C.spearmanFootrule_eq_one_iff
+
+example (C : Copula 2) : C.spearmanFootrule = -1 / 2 ↔ C.blomqvistBeta = -1 :=
+  C.spearmanFootrule_eq_neg_half_iff_blomqvistBeta_eq_neg_one
+
+example (C : Copula 2) (h : C.kendallTau = 1) : C.chatterjeeXi = 1 := by
+  rw [C.kendallTau_eq_one_iff.mp h]
+  exact Copula.chatterjeeXi_comonotonic
+
+example (C : Copula 2) (h : C.spearmanRho = -1) : C.chatterjeeXi = 1 := by
+  rw [C.spearmanRho_eq_neg_one_iff.mp h]
+  exact Copula.chatterjeeXi_countermonotonic
+
+example (C : Copula 2) (h : C ≠ Copula.comonotonic 2) : C.giniGamma < 1 :=
+  C.giniGamma_lt_one_iff.mpr h
+
+example (C : Copula 2) (h : C ≠ Copula.countermonotonic) : -1 < C.kendallTau :=
+  C.neg_one_lt_kendallTau_iff.mpr h
+
+example (C D : Copula 2) (h : C.LowerOrthantLE D) (hne : C ≠ D) :
+    C.spearmanRho < D.spearmanRho := h.spearmanRho_lt hne
+
+example (C D : Copula 2) (h : C.ConcordanceLE D)
+    (he : C.spearmanRho = D.spearmanRho) : C = D := h.spearmanRho_eq_iff.mp he
+
+example (C : Copula 2) (h : C.IsPQD) : C.spearmanRho = 0 ↔ C = Copula.independence 2 :=
+  h.spearmanRho_eq_zero_iff
+
+example (C : Copula 2) (h : C.IsNQD) : C.spearmanRho = 0 ↔ C = Copula.independence 2 :=
+  h.spearmanRho_eq_zero_iff
+
+example (C : Copula 2) (h : C.IsPQD) : C.kendallTau = 0 ↔ C = Copula.independence 2 :=
+  h.kendallTau_eq_zero_iff
+
+example (C : Copula 2) (h : C.IsNQD) : C.kendallTau = 0 ↔ C = Copula.independence 2 :=
+  h.kendallTau_eq_zero_iff
+
+example (C : Copula 2) (h : C.IsNQD) : 3 * C.kendallTau ≤ C.spearmanRho :=
+  h.three_mul_kendallTau_le_spearmanRho
+
+example (C : Copula 2) (h : C.IsNQD) (hne : C ≠ Copula.independence 2) : C.kendallTau < 0 :=
+  h.kendallTau_neg_iff.mpr hne
+
+example : 0 < ((Copula.independence 2).ordinalSum (Copula.independence 2) half).spearmanRho :=
+  (Copula.isPQD_ordinalSum_independence half).spearmanRho_pos_iff.mpr
+    (Copula.ordinalSum_ne_independence _ _ half half_pos half_lt_one)
+
+example : 0 < ((Copula.independence 2).ordinalSum (Copula.independence 2) half).kendallTau :=
+  (Copula.isPQD_ordinalSum_independence half).kendallTau_pos_iff.mpr
+    (Copula.ordinalSum_ne_independence _ _ half half_pos half_lt_one)
+
+example (C D : Copula 2) : (C.ordinalSum D Copula.unitHalf).blomqvistBeta = 1 :=
+  Copula.blomqvistBeta_ordinalSum_half C D
+
+example (C D : Copula 2) : ((C.ordinalSum D Copula.unitHalf).reflect {1}).spearmanFootrule = -1 / 2 :=
+  Copula.spearmanFootrule_reflect_ordinalSum_half C D
+
+example : ∃ C : Copula 2, C.blomqvistBeta = 1 ∧ C.spearmanRho < 1 := by
+  obtain ⟨C, h, hne⟩ := Copula.exists_blomqvistBeta_eq_one_ne_comonotonic
+  exact ⟨C, h, C.spearmanRho_lt_one_iff.mpr hne⟩
+
+example : ∃ C : Copula 2, C.blomqvistBeta = -1 ∧ -1 < C.kendallTau := by
+  obtain ⟨C, h, hne⟩ := Copula.exists_blomqvistBeta_eq_neg_one_ne_countermonotonic
+  exact ⟨C, h, C.neg_one_lt_kendallTau_iff.mpr hne⟩
+
+example : ∃ C : Copula 2, C.spearmanFootrule = -1 / 2 ∧ C ≠ Copula.countermonotonic :=
+  Copula.exists_spearmanFootrule_eq_neg_half_ne_countermonotonic
+
+example (C : Copula 2) (h : C.blomqvistBeta = -1) (t : I) :
+    C.diagonal t = max 0 (2 * (t : ℝ) - 1) :=
+  C.diagonal_eq_lower_iff_blomqvistBeta_eq_neg_one.mpr h t
+
 end CopulaTest
