@@ -6,3 +6,6 @@ import Copula.CDF.Extensionality
 import Copula.Independence
 import Copula.Comonotonic
 import Copula.Transform
+import Copula.Reflection
+import Copula.Countermonotonic
+import Copula.Unique
