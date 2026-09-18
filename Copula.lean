@@ -13,3 +13,4 @@ import Copula.Rectangle
 import Copula.Distribution.ProbabilityIntegralTransform
 import Copula.Sklar.Continuous
 import Copula.Families.Gaussian
+import Copula.Classical

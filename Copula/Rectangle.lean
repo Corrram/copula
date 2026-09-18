@@ -8,6 +8,7 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Powerset
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
 import Mathlib.Tactic.Tauto
+import Mathlib.Tactic.FinCases
 
 /-! # Rectangle probabilities and increasing distribution functions
 
@@ -41,6 +42,11 @@ def partialIncrement (F : (Fin d → I) → ℝ) (a b : Fin d → I)
 def rectangleIncrement (F : (Fin d → I) → ℝ) (a b : Fin d → I) : ℝ :=
   partialIncrement F a b Finset.univ
 
+@[simp]
+theorem partialIncrement_empty (F : (Fin d → I) → ℝ) (a b : Fin d → I) :
+    partialIncrement F a b ∅ = F b := by
+  simp [partialIncrement]
+
 theorem partialIncrement_insert (F : (Fin d → I) → ℝ) (a b : Fin d → I)
     (s : Finset (Fin d)) (i : Fin d) (hi : i ∉ s) :
     partialIncrement F a b (insert i s) =
@@ -58,6 +64,26 @@ theorem partialIncrement_insert (F : (Fin d → I) → ℝ) (a b : Fin d → I)
       simp [corner]
     · simp [corner, hji]
   rw [Finset.card_insert_of_notMem hit, pow_succ, hc]
+  ring
+
+theorem partialIncrement_singleton (F : (Fin d → I) → ℝ) (a b : Fin d → I) (i : Fin d) :
+    partialIncrement F a b {i} = F b - F (Function.update b i (a i)) := by
+  rw [Finset.singleton_eq_insert_empty, partialIncrement_insert _ _ _ _ _ (by simp)]
+  simp
+
+/-- The familiar four-term increment in dimension two. -/
+theorem rectangleIncrement_two (F : (Fin 2 → I) → ℝ) (a b : Fin 2 → I) :
+    rectangleIncrement F a b = F b - F ![a 0, b 1] - F ![b 0, a 1] + F a := by
+  have hu : (Finset.univ : Finset (Fin 2)) = insert 0 {1} := by decide
+  rw [rectangleIncrement, hu, partialIncrement_insert _ _ _ _ _ (by decide),
+    partialIncrement_singleton, partialIncrement_singleton]
+  have h0 : Function.update b 0 (a 0) = ![a 0, b 1] := by
+    funext i; fin_cases i <;> simp
+  have h1 : Function.update b 1 (a 1) = ![b 0, a 1] := by
+    funext i; fin_cases i <;> simp
+  have h01 : Function.update (Function.update b 0 (a 0)) 1 (a 1) = a := by
+    funext i; fin_cases i <;> simp
+  rw [h01, h0, h1]
   ring
 
 private def partialRectangle (a b : Fin d → I) (s : Finset (Fin d)) : Set (Fin d → I) :=
@@ -120,5 +146,11 @@ theorem rectangleIncrement_cdf_nonneg (C : Copula d) (a b : Fin d → I) (hab : 
     0 ≤ rectangleIncrement C.cdf a b := by
   rw [C.rectangleIncrement_cdf a b hab]
   exact measureReal_nonneg
+
+/-- Bivariate rectangle probabilities written as four CDF evaluations. -/
+theorem measureReal_rectangle_two (C : Copula 2) (a b : Fin 2 → I) (hab : a ≤ b) :
+    C.toMeasure.real (Set.pi univ (fun i => Ioc (a i) (b i))) =
+      C.cdf b - C.cdf ![a 0, b 1] - C.cdf ![b 0, a 1] + C.cdf a := by
+  rw [← C.rectangleIncrement_cdf a b hab, rectangleIncrement_two]
 
 end ProbabilityTheory.Copula

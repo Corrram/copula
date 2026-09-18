@@ -22,7 +22,7 @@ namespace ProbabilityTheory.Copula
 variable {d : ℕ}
 
 theorem continuous_standardNormalCDF : Continuous (ProbabilityTheory.cdf (gaussianReal 0 1)) := by
-  letI : NullSingletonClass (gaussianReal 0 1) := nullSingletonClass_gaussianReal one_ne_zero
+  let : NullSingletonClass (gaussianReal 0 1) := nullSingletonClass_gaussianReal one_ne_zero
   exact continuous_cdf_of_atomless _
 
 /-- The Gaussian copula associated to a correlation matrix. -/
@@ -34,7 +34,8 @@ noncomputable def gaussian (R : Matrix (Fin d) (Fin d) ℝ)
       intro i
       have hm : (multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (fun x => x i) =
           gaussianReal 0 1 := by
-        simpa [hdiag] using (measurePreserving_eval_multivariateGaussian hR (i := i)).map_eq
+        simpa [hdiag, PiLp.zero_apply] using
+          (measurePreserving_eval_multivariateGaussian hR (i := i)).map_eq
       calc
         _ = ((multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (fun x => x i)).map
             (cdfUnit (gaussianReal 0 1)) :=

@@ -34,6 +34,18 @@ noncomputable def countermonotonic : Copula 2 :=
 theorem toMeasure_countermonotonic : countermonotonic.toMeasure =
     (volume : Measure I).map (fun t => ![t, unitInterval.symm t]) := rfl
 
+/-- Countermonotonicity is obtained by reflecting one coordinate of the diagonal law. -/
+theorem reflect_comonotonic_eq_countermonotonic :
+    (comonotonic 2).reflect {1} = countermonotonic := by
+  apply ext
+  rw [toMeasure_reflect, toMeasure_comonotonic,
+    Measure.map_map (measurable_reflectPoint _) (Measurable.of_eval fun _ => measurable_id)]
+  have h : reflectPoint ({1} : Finset (Fin 2)) ∘ (fun t _ => t) =
+      fun t : I => ![t, unitInterval.symm t] := by
+    funext t i
+    fin_cases i <;> simp [reflectPoint, Function.comp_def]
+  rw [h, toMeasure_countermonotonic]
+
 /-- The lower Fréchet–Hoeffding bound is attained in dimension two. -/
 @[simp]
 theorem cdf_countermonotonic (u : Fin 2 → I) :
@@ -47,6 +59,7 @@ theorem cdf_countermonotonic (u : Fin 2 → I) :
   rw [cdf, toMeasure_countermonotonic, map_measureReal_apply hm measurableSet_Iic, hpre]
   simp only [Measure.real, unitInterval.volume_Icc, unitInterval.coe_symm_eq,
     ENNReal.toReal_ofReal']
+  rw [max_comm]
   congr 1
   ring
 

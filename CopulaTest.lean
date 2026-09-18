@@ -84,4 +84,41 @@ example : Copula.independence 1 = Copula.comonotonic 1 := by
   rw [hu]
   simp
 
+-- Reflections preserve the law after applying the same transformation twice.
+example (C : Copula 3) : (C.reflect {0, 2}).reflect {0, 2} = C := by simp
+
+example : (Copula.comonotonic 2).reflect {1} = Copula.countermonotonic :=
+  Copula.reflect_comonotonic_eq_countermonotonic
+
+example : Copula.countermonotonic.cdf (fun _ => half) = 0 := by
+  norm_num [Copula.cdf_countermonotonic, half]
+
+example : Copula.countermonotonic.cdf (fun _ => threeQuarters) = 1 / 2 := by
+  norm_num [Copula.cdf_countermonotonic, threeQuarters]
+
+example (C : Copula 1) : C = Copula.independence 1 := Subsingleton.elim _ _
+
+example (C : Copula 0) :
+    Copula.rectangleIncrement C.cdf (fun _ => 0) (fun _ => 1) = 1 := by
+  rw [C.rectangleIncrement_cdf _ _ (by intro i; exact Fin.elim0 i)]
+  simp
+
+example (C : Copula 2) (a b : Fin 2 → I) (hab : a ≤ b) :
+    0 ≤ C.cdf b - C.cdf ![a 0, b 1] - C.cdf ![b 0, a 1] + C.cdf a := by
+  rw [← Copula.rectangleIncrement_two]
+  exact C.rectangleIncrement_cdf_nonneg a b hab
+
+example (C : Copula 3) : Copula.IsClassical C.cdf := C.isClassical_cdf
+
+-- The continuous-marginal theorem asserts both existence and full uniqueness.
+example (μ : ProbabilityMeasure (Fin 2 → ℝ))
+    (hc : ∀ i, Continuous (ProbabilityTheory.cdf (Copula.marginal μ i))) :
+    ∃! C : Copula 2, Copula.IsSklarCopula μ C :=
+  Copula.existsUnique_sklarCopula_of_continuous μ hc
+
+-- A correlation matrix yields an actual copula with uniform marginals.
+example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1) :
+    (Copula.gaussian R hR hd).cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by
+  simp [half]
+
 end CopulaTest
