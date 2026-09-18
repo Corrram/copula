@@ -5,3 +5,6 @@ import Copula.Order.FGM
 import Copula.Order.Schur
 import Copula.Order.SchurExamples
 import Copula.Order.Supermodular
+import Copula.Order.Frechet
+import Copula.Order.SymmetricSchur
+import Copula.Order.FGMSchur

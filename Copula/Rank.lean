@@ -4,3 +4,6 @@ import Copula.Rank.Mixture
 import Copula.Rank.FGM
 import Copula.Rank.Symmetry
 import Copula.Rank.ChatterjeeExamples
+import Copula.Rank.FGMKendall
+import Copula.Rank.Frechet
+import Copula.Rank.FGMChatterjee

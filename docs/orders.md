@@ -107,6 +107,9 @@ Schur comparison. Formal examples show why: `W ≤lo Π`, but `W` is not below
 | `Order.Orthant` | Three orthant/concordance predicates and order laws |
 | `Order.Rank` | Cross-concordance symmetry, rank monotonicity and extrema |
 | `Order.FGM` | Exact FGM parameter comparisons |
+| `Order.Frechet` | Monotonicity in the upper-bound weight and antitonicity in the lower-bound weight |
+| `Order.SymmetricSchur` | Two-direction `SchurBothLE`, transposition and reduction for exchangeable/Archimedean copulas |
+| `Order.FGMSchur` | Exact directional and two-direction FGM Schur order: `abs theta ≤ abs eta` |
 | `Order.Schur` | Convex-test preorder, kernel versions, rearrangement invariance and xi |
 | `Order.SchurExamples` | Unique least element and counterexamples to conflating orders |
 | `Order.Supermodular` | Bounded measurable test order and orthant implications |

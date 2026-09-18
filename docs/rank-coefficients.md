@@ -96,6 +96,19 @@ For FGM with any parameter `theta ∈ [-1,1]`, `Copula.Rank.FGM` proves:
 | footrule | `theta / 5` | `spearmanFootrule_fgm` |
 | gamma | `4 theta / 15` | `giniGamma_fgm` |
 | beta | `theta / 4` | `blomqvistBeta_fgm` |
+| tau | `2 theta / 9` | `kendallTau_fgm` in `Rank.FGMKendall` |
+| xi | `theta² / 15` | `chatterjeeXi_fgm` in `Rank.FGMChatterjee` |
+
+Thus all six library coefficients now have proved FGM formulas.
+`conditionalCDF_fgm` identifies the continuous conditional CDF version
+`v + theta (1−2u) v(1−v)` almost everywhere in u for each v.
+The reusable `conditionalCDF_ae_eq_of_integral` identifies such versions from
+their lower-interval integrals without assuming a pointwise derivative theorem.
+
+`Rank.Frechet` proves `spearmanRho_frechet = a−b` and
+`spearmanRho_mardia = theta³`. The full [Ansari–Rockel expression index](ansari-rockel.md)
+records the remaining formula targets and flags source discrepancies; these
+reference expressions are not yet all formalized.
 
 `Rank.Symmetry` proves transposition and survival-copula invariance for all five
 classical coefficients. Reflecting either coordinate negates rho, tau, gamma

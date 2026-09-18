@@ -49,3 +49,7 @@ import Copula.Diagonal
 import Copula.Reflection.Bivariate
 import Copula.Symmetry
 import Copula.TailDependence
+import Copula.Families.Nelsen
+import Copula.Families.Nelsen7
+import Copula.Families.Clayton.Negative
+import Copula.Archimedean.Symmetry

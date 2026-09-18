@@ -22,11 +22,17 @@ not extend a bivariate admissibility proof to higher dimensions.
 | --- | --- | --- | --- | --- |
 | Independence | `independence d` | None | Any finite `d` | Product CDF; exponential generator in dimension two |
 | Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits |
+| Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1 |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `1-(1-(1-(1-u)^θ)(1-(1-v)^θ))^(1/θ)`; independence at 1 |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `-log(1-(1-exp(-θu))(1-exp(-θv))/(1-exp(-θ)))/θ` |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Joe |
+| Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | Truncated outer-power linear generator; lower bound at 1 |
+| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; W and Π endpoints |
+| Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter 1; Clayton at one |
+| Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter `1/θ`; Clayton at one |
+| Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | Outer and inner powers of the truncated linear generator; lower bound at 1 |
 
 The shared transformation `g.outerPower θ hθ` sends `ψ(t)` to
 `ψ(t^(1/θ))`, for `θ ≥ 1`. Concavity of the power map and convexity of the
@@ -34,6 +40,11 @@ decreasing generator prove validity. This supplies Gumbel, BB1, and BB6 without
 repeating their measure constructions. `claytonGenerator_copula` proves that
 the bivariate generator construction agrees with the existing gamma-frailty
 Clayton measure.
+
+The additional transformation `g.innerPower θ hθ` raises ψ to θ and composes
+φ with `u ↦ u^(1/θ)`. It preserves convexity for θ≥1 and accommodates finite
+zeros. All bivariate Archimedean copulas are proved exchangeable by
+`IsArchimedean.isExchangeable`.
 
 Modules: `Copula.Archimedean.Basic`, `Copula.Archimedean.Exponential`,
 `Copula.Archimedean.Power`, `Copula.Archimedean.Clayton`,
@@ -127,19 +138,26 @@ Modules: `Copula.Mixture`, `Copula.Families.FGM`, `Copula.Families.Frechet`.
 
 ## Scope and next extensions
 
-This catalogue contains 22 named families/special cases; overlapping classes
+This catalogue contains 27 named families/special cases; overlapping classes
 are not counted twice. It distinguishes proved analytic CDFs from stochastic
-constructions. General multivariate Archimedean admissibility, negative Clayton
-and Frank parameters, Ali–Mikhail–Haq, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
+constructions. General multivariate Archimedean admissibility, negative Frank
+parameters, Ali–Mikhail–Haq, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
 Pickands representations, and further family-specific dependence formulas remain future work.
 The [rank API](rank-coefficients.md) already includes six coefficients and four
-closed-form FGM formulas. The [ordering API](orders.md) proves exact FGM
-parameter ordering and comparison results for mixtures and extremal copulas.
+affine FGM formulas, plus Kendall's tau `2θ/9`, Chatterjee's xi `θ²/15`
+and Fréchet/Mardia rho.
+The [ordering API](orders.md) proves exact FGM
+parameter ordering, FGM Schur order by absolute parameter, and comparison
+results for mixtures and extremal copulas.
 The [tail-dependence API](nelsen.md) now gives both tail limits for FGM,
 Fréchet and Mardia copulas, together with the independence and Fréchet-bound
 benchmarks. Tail formulas for the other families remain future work.
 The bivariate validity theorem does not establish the new Archimedean families
 in higher dimensions, even for ranges known to be valid mathematically.
+
+The complete [Ansari–Rockel index](ansari-rockel.md) tracks all 38 paper
+families, including those not yet implemented. Its property and formula tables
+are reference targets, not additional proved constructors or theorems.
 
 ## Mathematical references
 

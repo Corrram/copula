@@ -60,7 +60,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.Clayton.CDF` | Joint frailty tails, explicit marginal CDFs, and the classical Clayton CDF formula |
 | `Copula.Families.Clayton.Limits` | Pointwise CDF convergence to independence at zero and comonotonicity at infinity |
 | `Copula.Archimedean.Basic` | Bivariate generator admissibility from convexity, measure construction, and Archimedean classification |
-| `Copula.Archimedean.Power` | Validity of the outer-power transformation |
+| `Copula.Archimedean.Power`, `Truncated`, `Symmetry` | Outer and inner generator powers, non-strict generators, and Archimedean exchangeability |
 | `Copula.Archimedean.Clayton` | Identification of the Clayton generator in every dimension; BB1 construction and CDF |
 | `Copula.Families.Gumbel`, `Joe`, `Frank` | Proved bivariate generators and CDFs; Gumbel and Tawn max-stability; BB6 |
 | `Copula.ExtremeValue.Basic` | Max-stability, independence and comonotonicity, closure under power products |
@@ -70,6 +70,11 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
+| `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
+| `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
+| `Copula.Rank.FGMKendall`, `FGMChatterjee`, `Frechet` | FGM conditional CDF, Kendall tau and Chatterjee xi; Fréchet/Mardia Spearman rho |
+| `Copula.Order.Frechet` | Increasing upper-bound weight and decreasing lower-bound weight increase the copula |
+| `Copula.Order.FGMSchur`, `SymmetricSchur` | Exact FGM Schur order by absolute parameter; two-direction comparison |
 | `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
 | `Copula.Dependence` | PQD, LTD, RTI, SI and total positivity of CDFs, conditional kernels and densities; implication and mixture theorems, rank consequences and FGM classifications |
 | `Copula.Order` | Lower/upper orthant, concordance, supermodular and directional Schur comparisons; rank monotonicity, extremal copulas and FGM parameter ordering |
@@ -101,16 +106,24 @@ Cθ(u) = (∑ i, uᵢ^(-θ) - d + 1)^(-1/θ).
 A zero coordinate makes the CDF zero. `tendsto_clayton_zero` and
 `tendsto_clayton_atTop` give pointwise CDF limits along any filter of positive
 parameters. Bivariate Archimedean admissibility is now proved from generator
-convexity. Negative Clayton parameters and the general higher-dimensional
-generator criterion remain outside the current implementation.
+convexity. `claytonNegative` supplies the bivariate branch `−1 ≤ θ < 0`;
+zero is independence. The general higher-dimensional generator criterion
+remains outside the current implementation.
 
-The [family catalogue](docs/families.md) lists 22 named families and special
+The [family catalogue](docs/families.md) lists 27 named families and special
 cases, with exact parameter ranges, dimensions, CDF results, and stochastic
 constructions. It includes Archimedean, extreme-value, elliptical Gaussian
 scale-mixture, polynomial, and mixture families. New Archimedean constructors
 are bivariate; the Gaussian scale-mixture constructors support every finite
 dimension. The catalogue also records which familiar families remain future work.
 See [the design review and roadmap](docs/design.md).
+
+The [Ansari–Rockel coverage index](docs/ansari-rockel.md) covers all 38 distinct
+families in *Dependence properties of bivariate copula families*: parameter
+domains, CDF/generator/Pickands formulas, dependence and ordering properties,
+tails, and every nonempty association-formula entry. It distinguishes checked
+Lean results from pending proofs, numerical observations and source discrepancies.
+**Full formalization of the paper is not yet complete.**
 
 ## Rank dependence
 

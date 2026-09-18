@@ -591,4 +591,85 @@ example (C D : Copula 2) (h : C.LowerOrthantLE D) {a b : ℝ}
     (ha : C.HasUpperTailDependence a) (hb : D.HasUpperTailDependence b) : a ≤ b :=
   h.upperTailDependence_le ha hb
 
+-- Ansari–Rockel family coverage and convention checks.
+example (C D : Copula 2) (hC : C.IsArchimedean) (hD : D.IsArchimedean) :
+    C.SchurBothLE D ↔ C.SchurLE D := Copula.schurBothLE_iff_of_archimedean hC hD
+
+example (θ : ℝ) (hθ : 1 ≤ θ) : (Copula.nelsen2 θ hθ).IsArchimedean :=
+  Copula.isArchimedean_nelsen2 θ hθ
+
+example (θ : ℝ) (hθ : 1 ≤ θ) : (Copula.genestGhoudi θ hθ).IsExchangeable :=
+  (Copula.isArchimedean_genestGhoudi θ hθ).isExchangeable
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (u : Fin 2 → I) (hu : ∀ i, u i ≠ 0) :
+    (Copula.nelsen12 θ hθ).cdf u =
+      (1 + (((u 0 : ℝ)⁻¹ - 1) ^ θ + ((u 1 : ℝ)⁻¹ - 1) ^ θ) ^ θ⁻¹)⁻¹ :=
+  Copula.cdf_nelsen12 θ hθ u hu
+
+example (θ : ℝ) (hθ : 1 ≤ θ) : (Copula.nelsen14 θ hθ).IsArchimedean :=
+  Copula.isArchimedean_nelsen14 θ hθ
+
+example : Copula.nelsen2 1 le_rfl = Copula.countermonotonic := Copula.nelsen2_one
+example : Copula.genestGhoudi 1 le_rfl = Copula.countermonotonic := Copula.genestGhoudi_one
+example : Copula.nelsen12 1 le_rfl = Copula.clayton 2 1 (by norm_num) := Copula.nelsen12_one
+example : Copula.nelsen14 1 le_rfl = Copula.clayton 2 1 (by norm_num) := Copula.nelsen14_one
+
+example : Copula.claytonNegative (-1) le_rfl (by norm_num) = Copula.countermonotonic :=
+  Copula.claytonNegative_neg_one
+
+example (θ : ℝ) (hθ : -1 ≤ θ) (hn : θ < 0) :
+    (Copula.claytonNegative θ hθ hn).IsArchimedean :=
+  Copula.isArchimedean_claytonNegative θ hθ hn
+
+example (C : Copula 2) (h : C.IsArchimedean) : C.IsCI ↔ C.IsSI := h.isCI_iff
+example (C : Copula 2) : (C.reflect {1}).IsSI ↔ C.IsSD := C.isSI_reflect_second_iff
+example : (Copula.independence 2).IsCI ∧ (Copula.independence 2).IsCD :=
+  ⟨Copula.isCI_independence, Copula.isCD_independence⟩
+
+example : Copula.countermonotonic.IsCD := Copula.isCD_countermonotonic
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).IsCD ↔ θ ≤ 0 :=
+  Copula.isCD_fgm_iff θ hθ
+
+example (θ : I) : (Copula.nelsen7 θ).IsCD := Copula.isCD_nelsen7 θ
+example (θ u v : I) : (Copula.nelsen7 θ).cdf ![u, v] =
+    max 0 ((θ : ℝ) * (u : ℝ) * (v : ℝ) + (1 - (θ : ℝ)) * ((u : ℝ) + (v : ℝ) - 1)) :=
+  Copula.cdf_nelsen7 θ u v
+
+example : Copula.nelsen7 0 = Copula.countermonotonic := Copula.nelsen7_zero
+example : Copula.nelsen7 1 = Copula.independence 2 := Copula.nelsen7_one
+example {θ η : I} (h : θ ≤ η) : (Copula.nelsen7 θ).LowerOrthantLE (Copula.nelsen7 η) :=
+  Copula.lowerOrthantLE_nelsen7 h
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).kendallTau = 2 * θ / 9 :=
+  Copula.kendallTau_fgm θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).chatterjeeXi = θ ^ 2 / 15 :=
+  Copula.chatterjeeXi_fgm θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) (v : I) :
+    (fun u => (Copula.fgm θ hθ).conditionalCDF u v) =ᵐ[MeasureTheory.volume]
+      fun u => Copula.fgmConditionalCDF θ u v := Copula.conditionalCDF_fgm θ hθ v
+
+example {θ η : ℝ} (hθ : |θ| ≤ 1) (hη : |η| ≤ 1) :
+    (Copula.fgm θ hθ).SchurLE (Copula.fgm η hη) ↔ |θ| ≤ |η| := Copula.schurLE_fgm_iff hθ hη
+
+example {θ η : ℝ} (hθ : |θ| ≤ 1) (hη : |η| ≤ 1) :
+    (Copula.fgm θ hθ).SchurBothLE (Copula.fgm η hη) ↔ |θ| ≤ |η| :=
+  Copula.schurBothLE_fgm_iff hθ hη
+
+example (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1) :
+    (Copula.frechet a b ha hb hab).spearmanRho = a - b :=
+  Copula.spearmanRho_frechet a b ha hb hab
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.mardia θ hθ).spearmanRho = θ ^ 3 :=
+  Copula.spearmanRho_mardia θ hθ
+
+example {a b a' b' : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1)
+    (ha' : 0 ≤ a') (hb' : 0 ≤ b') (hab' : a' + b' ≤ 1) (haa : a ≤ a') (hbb : b' ≤ b) :
+    (Copula.frechet a b ha hb hab).LowerOrthantLE (Copula.frechet a' b' ha' hb' hab') :=
+  Copula.lowerOrthantLE_frechet ha hb hab ha' hb' hab' haa hbb
+
+example : ¬ (Copula.independence 2).LowerOrthantLE Copula.countermonotonic :=
+  Copula.not_lowerOrthantLE_independence_countermonotonic
+
 end CopulaTest

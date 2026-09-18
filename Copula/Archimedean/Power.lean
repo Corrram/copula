@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Marcus Rockel
 -/
 import Copula.Archimedean.Basic
+import Copula.Transform.Power
 import Mathlib.Analysis.Convex.SpecificFunctions.Pow
+import Mathlib.Analysis.Convex.SpecificFunctions.Basic
 
 /-! # The outer-power transformation of an Archimedean generator -/
 
@@ -48,5 +50,51 @@ noncomputable def outerPower (g : BivariateGenerator) (θ : ℝ) (hθ : 1 ≤ θ
 @[simp] theorem outerPower_one (g : BivariateGenerator) : g.outerPower 1 le_rfl = g := by
   cases g
   simp [outerPower]
+
+/-- Raising the inverse generator to a power at least one preserves bivariate
+admissibility, including generators with a finite zero. -/
+noncomputable def innerPower (g : BivariateGenerator) (θ : ℝ) (hθ : 1 ≤ θ) :
+    BivariateGenerator where
+  toFun t := g.toFun t ^ θ
+  invFun u := g.invFun (unitPower u θ⁻¹ (_root_.inv_nonneg.mpr (by linarith)))
+  nonneg t ht := Real.rpow_nonneg (g.nonneg t ht) _
+  antitone x hx y hy hxy := Real.rpow_le_rpow (g.nonneg y hy)
+    (g.antitone hx hy hxy) (by linarith)
+  convex := by
+    refine ⟨convex_Ici _, ?_⟩
+    intro x hx y hy a b ha hb hab
+    have hc := g.convex.2 hx hy ha hb hab
+    have hx0 : 0 ≤ x := hx
+    have hy0 : 0 ≤ y := hy
+    simp only [smul_eq_mul] at hc ⊢
+    calc
+      _ ≤ (a * g.toFun x + b * g.toFun y) ^ θ :=
+        Real.rpow_le_rpow (g.nonneg _ (by positivity)) hc (by linarith)
+      _ ≤ _ := (convexOn_rpow hθ).2 (g.nonneg x hx) (g.nonneg y hy) ha hb hab
+  inv_nonneg u hu := by
+    apply g.inv_nonneg
+    intro hz
+    have hp : 0 < (u : ℝ) := lt_of_le_of_ne u.property.1
+      (Ne.symm (fun h => hu (Subtype.ext h)))
+    exact (Real.rpow_pos_of_pos hp θ⁻¹).ne' (congrArg (fun v : I => (v : ℝ)) hz)
+  inv_antitone u v hu huv := by
+    apply g.inv_antitone
+    · intro hz
+      have hp : 0 < (u : ℝ) := lt_of_le_of_ne u.property.1
+        (Ne.symm (fun h => hu (Subtype.ext h)))
+      exact (Real.rpow_pos_of_pos hp θ⁻¹).ne' (congrArg (fun v : I => (v : ℝ)) hz)
+    · exact Real.rpow_le_rpow u.property.1 huv (_root_.inv_nonneg.mpr (by linarith))
+  inv_one := by rw [unitPower_top, g.inv_one]
+  right_inv u hu := by
+    have hp : 0 < (u : ℝ) := lt_of_le_of_ne u.property.1
+      (Ne.symm (fun h => hu (Subtype.ext h)))
+    have hz : unitPower u θ⁻¹ (_root_.inv_nonneg.mpr (by linarith : 0 ≤ θ)) ≠ 0 := by
+      intro h
+      exact (Real.rpow_pos_of_pos hp θ⁻¹).ne' (congrArg (fun v : I => (v : ℝ)) h)
+    rw [g.right_inv _ hz, coe_unitPower, Real.rpow_inv_rpow u.property.1 (by linarith : θ ≠ 0)]
+
+@[simp] theorem innerPower_one (g : BivariateGenerator) : g.innerPower 1 le_rfl = g := by
+  cases g
+  simp [innerPower]
 
 end ProbabilityTheory.Copula.BivariateGenerator

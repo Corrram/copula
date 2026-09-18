@@ -17,6 +17,9 @@ opposite direction. No symmetry is assumed for these three properties.
 | `C.IsLTD` | `u ↦ C(u,v)/u` is nonincreasing for `u > 0` |
 | `C.IsRTI` | `u ↦ (1−u−v+C(u,v))/(1−u)` is nondecreasing for `u < 1` |
 | `C.IsSI` | Each section `u ↦ C(u,v)` is concave |
+| `C.IsSD` | Each section `u ↦ C(u,v)` is convex |
+| `C.IsCI` | SI for both `C` and `C.transpose` |
+| `C.IsCD` | SD for both `C` and `C.transpose` |
 | `C.IsTP2CDF` | `C(a,c) C(b,d) ≥ C(a,d) C(b,c)` for `a ≤ b`, `c ≤ d` |
 | `C.HasTP2Kernel` | Some version of the conditional CDF kernel is TP2 |
 | `C.HasMTP2Density` | Some nonnegative measurable density version satisfies the MTP2 lattice inequality |
@@ -36,6 +39,14 @@ SI uses the chord condition
 This is the CDF-section concavity characterization of stochastic increasingness.
 It handles coincident endpoints without division. The kernel criterion below
 connects this representation to conditional stochastic ordering.
+
+`Dependence.ConditionalMonotonicity` uses the CI/CD convention of Ansari–Rockel.
+It proves SD implies NQD and that reflecting the second coordinate interchanges
+SI and SD. For exchangeable copulas, CI is equivalent to SI and CD to SD.
+All bivariate Archimedean copulas are proved exchangeable. Independence is both
+CI and CD, the upper Fréchet bound is CI, and the lower bound is CD. FGM is CI
+exactly for nonnegative parameters and CD exactly for nonpositive parameters.
+The full Nelsen 7 family is CD.
 
 For background on the distinctions between CDF, kernel and density total
 positivity, see [Fuchs and Tschimpke, Total positivity of copulas from a Markov
