@@ -26,6 +26,7 @@ noncomputable def cdfUnit (μ : Measure ℝ) (x : ℝ) : I :=
 @[simp]
 theorem coe_cdfUnit (μ : Measure ℝ) (x : ℝ) : (cdfUnit μ x : ℝ) = cdf μ x := rfl
 
+@[fun_prop]
 theorem measurable_cdfUnit (μ : Measure ℝ) : Measurable (cdfUnit μ) :=
   (monotone_cdf μ).measurable.subtype_mk
 

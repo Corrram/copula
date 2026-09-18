@@ -48,7 +48,8 @@ private theorem map_select_multivariateGaussian (R : Matrix (Fin d) (Fin d) ℝ)
     (multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (selectCLM ρ) =
       multivariateGaussian 0 (R.submatrix ρ ρ) := by
   apply IsGaussian.ext
-  · rw [ContinuousLinearMap.integral_id_map, integral_id_multivariateGaussian,
+  · simp only [id_eq]
+    rw [ContinuousLinearMap.integral_id_map, integral_id_multivariateGaussian,
       map_zero, integral_id_multivariateGaussian]
     exact IsGaussian.integrable_id
   rw [← ContinuousLinearMap.toBilinForm_inj]
@@ -85,7 +86,7 @@ theorem gaussian_reindex (R : Matrix (Fin d) (Fin d) ℝ) (hR : R.PosSemidef)
 
 /-- Repeating a single coordinate produces the all-ones correlation matrix. -/
 theorem posSemidef_allOnes (d : ℕ) :
-    (fun (_ _ : Fin d) => (1 : ℝ)).PosSemidef := by
+    Matrix.PosSemidef (fun (_ _ : Fin d) => (1 : ℝ)) := by
   simpa using (Matrix.PosSemidef.one (n := Fin 1) (R := ℝ)).submatrix
     (fun _ : Fin d => (0 : Fin 1))
 
