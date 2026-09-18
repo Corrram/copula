@@ -14,6 +14,8 @@ probability-measure representation.
 | §2.6 | `Copula.Reflection.Bivariate` | Single-coordinate reflection formulas, survival copula, transpose and composition identities |
 | §2.7 | `Copula.Symmetry` | Copula-level exchangeability and radial symmetry, CDF characterizations, mixtures and symmetrization |
 | §5.1, symmetry properties of concordance | `Copula.Rank.Symmetry` | Transpose and survival invariance; single-reflection sign changes |
+| §5.1, concordance function and Kendall's tau | `Copula.Rank.Concordance`, `ConcordanceProbability`, `KendallMixture` | Q, independent-pair probabilities, benchmark links, and quadratic mixture formulas |
+| §5.1, Fréchet and Mardia coefficient examples | `Copula.Rank.FrechetKendall` | Tau, footrule, gamma and beta on the full parameter domains |
 | §5.4, including the CDF formulas of Theorem 5.4.2 | `Copula.TailDependence` | Limits, range, uniqueness, reflection duality, order and mixture results, benchmark/family values |
 
 These are the precise formalized portions, not claims that every theorem in
@@ -48,6 +50,20 @@ radial symmetry is also proved for the Fréchet mixture family.
 
 The footrule normalization remains the package's `[-1/2,1]` convention.
 Chatterjee's xi is directional and is not covered by this table.
+
+## Concordance and mixtures
+
+`concordanceQ C D` is proved to equal concordance probability minus
+discordance probability for independent observations with laws `C` and `D`.
+The events use strict signs of `(X₀−Y₀)(X₁−Y₁)`. Ties across independent
+observations have probability zero by the uniform marginals, so singular
+copulas are included. Setting `D=C` gives Kendall's tau.
+
+Q is symmetric and affine in each argument, while tau has the exact quadratic
+mixture formula. Pairing Q with Π, M and W relates it to rho, footrule and
+gamma. The resulting Fréchet and Mardia formulas complete the package's six
+coefficient expressions for both families. See the
+[rank API](rank-coefficients.md) for formulas and theorem names.
 
 ## Tail dependence
 

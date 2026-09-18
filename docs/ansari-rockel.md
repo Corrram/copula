@@ -337,7 +337,14 @@ rho/tau/xi table rather than completing its outstanding entries.
 [Rank/FrechetChatterjee.lean](../Copula/Rank/FrechetChatterjee.lean) now proves
 the Table 6 xi formulas for U01 and U02: `(α−β)²+αβ` and
 `θ⁴(1+3θ²)/4`, including the entire simplex and both signed Mardia endpoints.
-Their rho and xi entries are checked; their tau entries remain pending.
+[Rank/FrechetKendall.lean](../Copula/Rank/FrechetKendall.lean) proves their tau
+formulas `(α−β)(α+β+2)/3` and `θ³(θ²+2)/3`, completing the rho/tau/xi entries
+for both families in Table 6. It also proves footrule, gamma and beta, so all
+six library coefficients now have formulas for U01 and U02. The shared
+[Kendall mixture API](../Copula/Rank/KendallMixture.lean) expresses tau as a
+quadratic form in the weights, with cross terms given by the concordance
+function Q; its [probability interpretation](../Copula/Rank/ConcordanceProbability.lean)
+is proved for arbitrary bivariate copulas, including singular ones.
 The shared [mixture API](../Copula/Rank/ChatterjeeMixture.lean) proves exact
 quadratic identities and strict convexity of xi. The
 [conditional-distance API](../Copula/Rank/ConditionalDistance.lean) proves

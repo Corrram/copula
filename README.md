@@ -73,6 +73,8 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
 | `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
 | `Copula.Rank.FGMKendall`, `FGMChatterjee`, `Frechet` | FGM conditional CDF, Kendall tau and Chatterjee xi; Fréchet/Mardia Spearman rho |
+| `Copula.Rank.Concordance`, `ConcordanceProbability`, `KendallMixture` | Concordance probabilities, the cross function Q, and finite-mixture tau formulas |
+| `Copula.Rank.FrechetKendall`, `FrechetChatterjee` | Complete six-coefficient formulas for Fréchet and Mardia, including singular endpoints |
 | `Copula.Order.Frechet` | Increasing upper-bound weight and decreasing lower-bound weight increase the copula |
 | `Copula.Order.FGMSchur`, `SymmetricSchur` | Exact FGM Schur order by absolute parameter; two-direction comparison |
 | `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
@@ -134,8 +136,10 @@ countermonotonicity. Xi uses conditional distributions and accepts singular
 copulas. See [the definitions, conventions and proved results](docs/rank-coefficients.md).
 Xi is proved to vanish exactly at independence and to be strictly convex
 under nontrivial mixtures of distinct copulas. Mixing with independence
-attenuates xi quadratically. Fréchet and Mardia have closed-form xi formulas
-on their full parameter domains.
+attenuates xi quadratically. Kendall's tau is proved to equal concordance
+probability minus discordance probability for independent observations, and
+has general quadratic mixture formulas. FGM, Fréchet and Mardia have proved
+closed forms for all six coefficients on their full parameter domains.
 
 ## Positive dependence
 

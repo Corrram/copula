@@ -831,4 +831,100 @@ example (C : Copula 2) (a b : I) (hab : a ≤ b) :
     (C.mix (Copula.independence 2) a).SchurLE (C.mix (Copula.independence 2) b) :=
   Copula.schurLE_mix_independence_mono C hab
 
+example (C D : Copula 2) : C.concordanceQ D = D.concordanceQ C := C.concordanceQ_comm D
+
+example (C D : Copula 2) : C.concordanceQ D ∈ Set.Icc (-1) 1 := C.concordanceQ_mem_Icc D
+
+example (C : Copula 2) : C.concordanceQ (Copula.independence 2) = C.spearmanRho / 3 :=
+  C.concordanceQ_independence
+
+example (C : Copula 2) :
+    C.giniGamma = C.concordanceQ (Copula.comonotonic 2) + C.concordanceQ Copula.countermonotonic :=
+  C.giniGamma_eq_concordanceQ
+
+example (C D E : Copula 2) (h : C.LowerOrthantLE D) : E.concordanceQ C ≤ E.concordanceQ D :=
+  h.concordanceQ_le_right E
+
+example (C D : Copula 2) (i : Fin 2) :
+    ∀ᵐ p ∂C.toMeasure.prod D.toMeasure, p.1 i ≠ p.2 i := C.ae_prod_eval_ne D i
+
+example (C D : Copula 2) : C.concordanceQ D =
+    (C.toMeasure.prod D.toMeasure).real Copula.concordantPairs -
+      (C.toMeasure.prod D.toMeasure).real Copula.discordantPairs :=
+  C.concordanceQ_eq_concordant_sub_discordant D
+
+example (C : Copula 2) : C.kendallTau =
+    (C.toMeasure.prod C.toMeasure).real Copula.concordantPairs -
+      (C.toMeasure.prod C.toMeasure).real Copula.discordantPairs :=
+  C.kendallTau_eq_concordant_sub_discordant
+
+example (C : Copula 2) : C.kendallTau = 1 ↔
+    ∀ᵐ p ∂C.toMeasure.prod C.toMeasure, p ∈ Copula.concordantPairs :=
+  C.kendallTau_eq_one_iff_ae_concordant
+
+example (C : Copula 2) : C.kendallTau = -1 ↔
+    ∀ᵐ p ∂C.toMeasure.prod C.toMeasure, p ∈ Copula.discordantPairs :=
+  C.kendallTau_eq_neg_one_iff_ae_discordant
+
+example : ((Copula.independence 2).toMeasure.prod (Copula.independence 2).toMeasure).real
+    Copula.concordantPairs = 1 / 2 := by rw [Copula.measureReal_concordantPairs]; norm_num
+
+example : ((Copula.comonotonic 2).toMeasure.prod (Copula.comonotonic 2).toMeasure).real
+    Copula.concordantPairs = 1 := by rw [Copula.measureReal_concordantPairs]; norm_num
+
+example : (Copula.countermonotonic.toMeasure.prod Copula.countermonotonic.toMeasure).real
+    Copula.discordantPairs = 1 := by rw [Copula.measureReal_discordantPairs]; norm_num
+
+example : ((Copula.comonotonic 2).toMeasure.prod Copula.countermonotonic.toMeasure).real
+    Copula.concordantPairs = 1 / 2 := by rw [Copula.measureReal_concordantPairs]; norm_num
+
+example {n : ℕ} (C : Fin n → Copula 2) (w : Fin n → ℝ)
+    (hw : ∀ i, 0 ≤ w i) (hs : ∑ i, w i = 1) :
+    (Copula.finiteMixture C w hw hs).kendallTau = ∑ i, ∑ j, w i * w j * (C i).concordanceQ (C j) :=
+  Copula.kendallTau_finiteMixture C w hw hs
+
+example (C : Copula 2) (a : I) : (C.mix (Copula.independence 2) a).kendallTau =
+    (a : ℝ) ^ 2 * C.kendallTau + 2 / 3 * (a : ℝ) * (1 - (a : ℝ)) * C.spearmanRho :=
+  Copula.kendallTau_mix_independence C a
+
+example : ((Copula.comonotonic 2).mix (Copula.independence 2) half).kendallTau = 5 / 12 := by
+  rw [Copula.kendallTau_mix_independence]
+  norm_num [half]
+
+example (a : I) : ((Copula.comonotonic 2).mix Copula.countermonotonic a).kendallTau =
+    2 * (a : ℝ) - 1 := Copula.kendallTau_mix_comonotonic_countermonotonic a
+
+example (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1) :
+    (Copula.frechet a b ha hb hab).kendallTau = (a - b) * (a + b + 2) / 3 :=
+  Copula.kendallTau_frechet a b ha hb hab
+
+example : let C := Copula.frechet (1 / 4) (1 / 2) (by norm_num) (by norm_num) (by norm_num)
+    C.spearmanRho = -1 / 4 ∧ C.kendallTau = -11 / 48 ∧ C.spearmanFootrule = 0 ∧
+      C.giniGamma = -1 / 4 ∧ C.blomqvistBeta = -1 / 4 ∧ C.chatterjeeXi = 3 / 16 := by
+  dsimp
+  rw [Copula.spearmanRho_frechet, Copula.kendallTau_frechet, Copula.spearmanFootrule_frechet,
+    Copula.giniGamma_frechet, Copula.blomqvistBeta_frechet, Copula.chatterjeeXi_frechet]
+  norm_num
+
+example : let C := Copula.mardia (-1 / 2) (by norm_num)
+    C.spearmanRho = -1 / 8 ∧ C.kendallTau = -3 / 32 ∧ C.spearmanFootrule = -1 / 32 ∧
+      C.giniGamma = -1 / 8 ∧ C.blomqvistBeta = -1 / 8 ∧ C.chatterjeeXi = 7 / 256 := by
+  dsimp
+  rw [Copula.spearmanRho_mardia, Copula.kendallTau_mardia, Copula.spearmanFootrule_mardia,
+    Copula.giniGamma_mardia, Copula.blomqvistBeta_mardia, Copula.chatterjeeXi_mardia]
+  norm_num
+
+-- Zero Kendall tau does not characterize independence.
+example : let C := Copula.frechet (1 / 2) (1 / 2) (by norm_num) (by norm_num) (by norm_num)
+    C.kendallTau = 0 ∧ C ≠ Copula.independence 2 := by
+  dsimp
+  constructor
+  · rw [Copula.kendallTau_frechet]
+    norm_num
+  · rw [← Copula.chatterjeeXi_eq_zero_iff, Copula.chatterjeeXi_frechet]
+    norm_num
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.mardia θ hθ).kendallTau = 0 ↔ θ = 0 :=
+  Copula.kendallTau_mardia_eq_zero_iff θ hθ
+
 end CopulaTest

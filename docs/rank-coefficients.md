@@ -48,6 +48,39 @@ example (C : Copula 2) : C.chatterjeeXi ∈ Set.Icc 0 1 :=
 example : Copula.countermonotonic.chatterjeeXi = 1 := by simp
 ```
 
+## Concordance probabilities and Kendall's tau
+
+`C.concordanceQ D = 4 ∫ C dD − 1` is the bivariate concordance function Q.
+It is symmetric, belongs to `[-1,1]`, increases under lower orthant order in
+either argument, and equals Kendall's tau when both arguments are `C`.
+
+For independent observations `X ~ C` and `Y ~ D`, `concordantPairs` is the
+event `(X₀−Y₀)(X₁−Y₁)>0`; `discordantPairs` uses `<0`. In Lean their joint law
+is `C.toMeasure.prod D.toMeasure`. `Rank.ConcordanceProbability` proves
+
+```text
+P(concordance) = (1+Q(C,D))/2
+P(discordance) = (1−Q(C,D))/2
+Q(C,D) = P(concordance) − P(discordance).
+```
+
+The probabilities sum to one. Uniform marginals imply that each coordinate
+has probability zero of a tie across these independent observations; no
+density is needed. Taking `D=C` gives Kendall's interpretation. Tau is `1`
+exactly when almost every pair is concordant, `−1` exactly when almost every
+pair is discordant, and zero exactly when those probabilities are equal.
+Zero tau does not in general imply independence.
+
+Pairing Q with the benchmarks links the classical coefficients:
+
+```text
+Q(C,Π) = rho(C)/3
+Q(C,M) = (2 footrule(C)+1)/3
+Q(C,W) = gamma(C) − (2 footrule(C)+1)/3.
+```
+
+In particular `gamma(C)=Q(C,M)+Q(C,W)` and `Q(M,W)=0`.
+
 ## Chatterjee's direction and conditional distributions
 
 `C.chatterjeeXi` measures dependence of **coordinate 1 given coordinate 0**.
@@ -94,7 +127,22 @@ Rho, footrule, gamma and beta are proved monotone under pointwise CDF ordering.
 integral. `Copula.Order.Schur` proves monotonicity of xi in directional Schur
 order. See [comparison orders](orders.md) for the precise conventions.
 The `*_mix` theorems for rho, footrule, gamma and beta prove affine behavior under `Copula.mix C D a`, where
-`a` is the weight on `C`. No affine identity is asserted for tau or xi.
+`a` is the weight on `C`. Tau and xi have quadratic mixture identities.
+
+`Rank.KendallMixture` proves
+
+```text
+tau(a C + (1−a) D)
+  = a² tau(C) + (1−a)² tau(D) + 2a(1−a) Q(C,D)
+tau(∑ᵢ wᵢ Cᵢ) = ∑ᵢ ∑ⱼ wᵢ wⱼ Q(Cᵢ,Cⱼ).
+```
+
+The finite weights are nonnegative and sum to one. Q is affine in each
+argument separately. Mixing with independence gives
+`tau(a C+(1−a)Π)=a² tau(C)+(2/3)a(1−a)rho(C)`; mixing with M or W gives
+formulas involving footrule and gamma. In particular the equal mixture of
+M and Π has tau `5/12`, and `kendallTau_not_affine` formally rules out a
+general affine identity. The M/W segment has tau `2a−1`.
 
 `conditionalCDF_finiteMixture` and `conditionalCDF_mix` give almost-everywhere
 conditional CDF identities for finite and binary mixtures. The weights remain
@@ -132,12 +180,21 @@ Thus all six library coefficients now have proved FGM formulas.
 The reusable `conditionalCDF_ae_eq_of_integral` identifies such versions from
 their lower-interval integrals without assuming a pointwise derivative theorem.
 
-`Rank.Frechet` proves `spearmanRho_frechet = a−b` and
-`spearmanRho_mardia = theta³`. `Rank.FrechetChatterjee` adds
-`chatterjeeXi_frechet = (a−b)²+ab` and
-`chatterjeeXi_mardia = theta⁴(1+3theta²)/4` on the full parameter domains,
-including singular boundaries. It identifies their zero-xi parameters as
-`a=b=0` and `theta=0`, respectively. The equal mixture of M and W has xi=1/4.
+`Rank.Frechet`, `Rank.FrechetKendall`, and `Rank.FrechetChatterjee` prove all
+six Fréchet and Mardia formulas, including singular boundaries:
+
+| Coefficient | Fréchet, `a,b≥0`, `a+b≤1` | Mardia, `abs theta≤1` |
+| --- | --- | --- |
+| rho | `a−b` | `theta³` |
+| tau | `(a−b)(a+b+2)/3` | `theta³(theta²+2)/3` |
+| footrule | `a−b/2` | `theta²(1+3theta)/4` |
+| gamma | `a−b` | `theta³` |
+| beta | `a−b` | `theta³` |
+| xi | `(a−b)²+ab` | `theta⁴(1+3theta²)/4` |
+
+Zero xi is equivalent to `a=b=0` or `theta=0`, respectively. Zero tau is
+equivalent to `a=b` or `theta=0`. The equal mixture of M and W has tau zero
+but xi `1/4`, giving a checked dependent copula with zero tau.
 The full [Ansari–Rockel expression index](ansari-rockel.md)
 records the remaining formula targets and flags source discrepancies; these
 reference expressions are not yet all formalized.
@@ -161,10 +218,9 @@ depend only on the diagonal; no analogous claim is made for rho, tau or xi.
 classical coefficients. Reflecting either coordinate negates rho, tau, gamma
 and beta. No such sign rule is asserted for footrule; see [the symmetry table](nelsen.md).
 
-Further family-specific formulas, transformation identities for xi, Kendall's
-probabilistic concordance interpretation, and sample estimators remain future
-work. The current integration and conditional-kernel APIs provide the basis
-for those additions.
+Further family-specific formulas, transformation identities for xi, and
+sample estimators remain future work. The current integration and
+conditional-kernel APIs provide the basis for those additions.
 
 ## Module map
 
@@ -181,3 +237,7 @@ for those additions.
 - `Rank.ConditionalDistance`: squared distance, separation, and xi=0 iff independence.
 - `Rank.ChatterjeeCross`, `Rank.ChatterjeeMixture`: polarization, exact mixture identities and strict convexity.
 - `Rank.FrechetChatterjee`: Fréchet and Mardia xi formulas, including endpoints.
+- `Rank.Concordance`: Q, symmetry, range, ordering, affine identities, and links to rho/footrule/gamma.
+- `Rank.ConcordanceProbability`: independent-pair probabilities, null ties, and the probabilistic tau interpretation.
+- `Rank.KendallMixture`: finite and binary mixture formulas and non-affinity.
+- `Rank.FrechetKendall`: Fréchet and Mardia tau, footrule, gamma, beta and zero-tau parameters.
