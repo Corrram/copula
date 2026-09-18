@@ -154,6 +154,10 @@ Further standard results from Nelsen's second edition are indexed in the
 [book-to-library coverage map](docs/nelsen.md), including diagonal sections,
 symmetries and tail dependence. Tail limits have explicit existence hypotheses;
 the library does not silently assign values when limits are unavailable.
+For every bivariate extreme-value copula, both limits are proved to exist via
+its power diagonal and extremal coefficient. Gumbel, Marshall–Olkin,
+Cuadras–Augé and Tawn have explicit tail, footrule and beta formulas,
+including singular and independence endpoints.
 
 ## Sklar's theorem
 

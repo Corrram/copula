@@ -324,6 +324,16 @@ In particular FGM has exact parameter classification, LO order, density,
 rho/footrule/gamma/beta formulas and both zero tails. Fréchet and Mardia have
 both tail formulas. These facts do not establish the remaining table cells.
 
+[ExtremeValue/Diagonal.lean](../Copula/ExtremeValue/Diagonal.lean) proves
+the power diagonal and extremal coefficient for every bivariate max-stable
+copula. [TailDependence/ExtremeValue.lean](../Copula/TailDependence/ExtremeValue.lean)
+now checks both tail formulas for A04 (Gumbel), E02 (Cuadras–Augé), E06
+(Marshall–Olkin) and E07 (Tawn). Lower tails at the `M` endpoints are one;
+the other parameters have lower tail zero. These include all admitted zero
+weights and `θ=1` cases. [Rank/PowerDiagonal.lean](../Copula/Rank/PowerDiagonal.lean)
+also proves their footrule and beta formulas, which supplement the paper's
+rho/tau/xi table rather than completing its outstanding entries.
+
 Outstanding proof work includes the other named constructors, full signed
 Frank, generator criteria for CI/CD and density TP2, Pickands representation
 and admissibility, the CI/CD equivalences between LO and Schur order,

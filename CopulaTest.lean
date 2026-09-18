@@ -672,4 +672,92 @@ example {a b a' b' : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1)
 example : ¬ (Copula.independence 2).LowerOrthantLE Copula.countermonotonic :=
   Copula.not_lowerOrthantLE_independence_countermonotonic
 
+example (C : Copula 2) (f : ℝ → ℝ) (l : ℝ)
+    (hf : ∀ t : I, f t = C.diagonal t) (hd : HasDerivWithinAt f l (Set.Icc 0 1) 0) :
+    C.HasLowerTailDependence l := Copula.hasLowerTailDependence_of_hasDerivWithinAt hf hd
+
+example (C : Copula 2) (f : ℝ → ℝ) (l : ℝ)
+    (hf : ∀ t : I, f t = C.diagonal t) (hd : HasDerivWithinAt f l (Set.Icc 0 1) 1) :
+    C.HasUpperTailDependence (2 - l) := Copula.hasUpperTailDependence_of_hasDerivWithinAt hf hd
+
+example (C : Copula 2) (κ : ℝ) (h : C.HasPowerDiagonal κ) : κ ∈ Set.Icc 1 2 := h.mem_Icc
+
+example (C : Copula 2) (h : C.IsExtremeValue) (t : I) :
+    C.diagonal t = (t : ℝ) ^ C.extremalCoefficient := h.hasPowerDiagonal t
+
+example (C : Copula 2) (h : C.IsExtremeValue) : C.extremalCoefficient ∈ Set.Icc 1 2 :=
+  h.extremalCoefficient_mem_Icc
+
+example (C : Copula 2) (h : C.IsExtremeValue) :
+    C.HasUpperTailDependence (2 - C.extremalCoefficient) := h.hasUpperTailDependence
+
+example (C : Copula 2) (h : C.IsExtremeValue) (hne : C ≠ Copula.comonotonic 2) :
+    C.HasLowerTailDependence 0 := h.hasLowerTailDependence_zero hne
+
+example (C : Copula 2) (h : C.IsExtremeValue) :
+    C.HasUpperTailDependence 1 ↔ C = Copula.comonotonic 2 := h.hasUpperTailDependence_one_iff
+
+example (C D : Copula 2) (h : C.LowerOrthantLE D) (hC : C.IsExtremeValue) (hD : D.IsExtremeValue) :
+    D.extremalCoefficient ≤ C.extremalCoefficient := h.extremalCoefficient_antitone hC hD
+
+example (α β : I) : (Copula.marshallOlkin α β).HasUpperTailDependence (min (α : ℝ) (β : ℝ)) :=
+  Copula.hasUpperTailDependence_marshallOlkin α β
+
+example (α β : I) :
+    (Copula.marshallOlkin α β).HasLowerTailDependence (if α = 1 ∧ β = 1 then 1 else 0) :=
+  Copula.hasLowerTailDependence_marshallOlkin α β
+
+example : (Copula.marshallOlkin 1 1).HasLowerTailDependence 1 := by
+  simpa using Copula.hasLowerTailDependence_marshallOlkin 1 1
+
+example (β : I) : (Copula.marshallOlkin 0 β).HasUpperTailDependence 0 := by
+  simpa only [show ((0 : I) : ℝ) = 0 from rfl, min_eq_left β.property.1] using
+    Copula.hasUpperTailDependence_marshallOlkin 0 β
+
+example (α : I) : (Copula.cuadrasAuge α).HasUpperTailDependence (α : ℝ) :=
+  Copula.hasUpperTailDependence_cuadrasAuge α
+
+example : (Copula.cuadrasAuge 1).HasLowerTailDependence 1 := by
+  simpa using Copula.hasLowerTailDependence_cuadrasAuge 1
+
+example (θ : ℝ) (hθ : 1 ≤ θ) : (Copula.gumbel θ hθ).HasLowerTailDependence 0 :=
+  Copula.hasLowerTailDependence_gumbel θ hθ
+
+example (θ : ℝ) (hθ : 1 ≤ θ) :
+    (Copula.gumbel θ hθ).HasUpperTailDependence (2 - (2 : ℝ) ^ θ⁻¹) :=
+  Copula.hasUpperTailDependence_gumbel θ hθ
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (α β : I) :
+    (Copula.tawn θ hθ α β).HasUpperTailDependence
+      ((α : ℝ) + (β : ℝ) - ((α : ℝ) ^ θ + (β : ℝ) ^ θ) ^ θ⁻¹) :=
+  Copula.hasUpperTailDependence_tawn θ hθ α β
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (α β : I) : (Copula.tawn θ hθ α β).HasLowerTailDependence 0 :=
+  Copula.hasLowerTailDependence_tawn θ hθ α β
+
+example (α β : I) : (Copula.tawn 1 le_rfl α β).HasUpperTailDependence 0 := by
+  simpa using Copula.hasUpperTailDependence_tawn 1 le_rfl α β
+
+example (C : Copula 2) (h : C.IsExtremeValue) :
+    C.spearmanFootrule = 6 / (C.extremalCoefficient + 1) - 2 := h.spearmanFootrule
+
+example (C : Copula 2) (h : C.IsExtremeValue) :
+    C.blomqvistBeta = (2 : ℝ) ^ (2 - C.extremalCoefficient) - 1 := h.blomqvistBeta
+
+example (α β : I) :
+    (Copula.marshallOlkin α β).spearmanFootrule = 6 / (3 - min (α : ℝ) (β : ℝ)) - 2 :=
+  Copula.spearmanFootrule_marshallOlkin α β
+
+example (α : I) : (Copula.cuadrasAuge α).blomqvistBeta = (2 : ℝ) ^ (α : ℝ) - 1 :=
+  Copula.blomqvistBeta_cuadrasAuge α
+
+example (θ : ℝ) (hθ : 1 ≤ θ) :
+    (Copula.gumbel θ hθ).spearmanFootrule = 6 / ((2 : ℝ) ^ θ⁻¹ + 1) - 2 :=
+  Copula.spearmanFootrule_gumbel θ hθ
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (α β : I) :
+    (Copula.tawn θ hθ α β).blomqvistBeta =
+      (2 : ℝ) ^ ((α : ℝ) + (β : ℝ) - ((α : ℝ) ^ θ + (β : ℝ) ^ θ) ^ θ⁻¹) - 1 :=
+  Copula.blomqvistBeta_tawn θ hθ α β
+
 end CopulaTest

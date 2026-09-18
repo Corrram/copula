@@ -110,6 +110,21 @@ their lower-interval integrals without assuming a pointwise derivative theorem.
 records the remaining formula targets and flags source discrepancies; these
 reference expressions are not yet all formalized.
 
+`Rank.PowerDiagonal` proves, for any copula with diagonal `t^κ`,
+`footrule = 6/(κ+1)−2` and `beta = 2^(2−κ)−1`. Every bivariate extreme-value
+copula has such a diagonal, with κ its extremal coefficient in `[1,2]`.
+The family theorems specialize these expressions using:
+
+| Family | κ |
+| --- | --- |
+| Gumbel–Hougaard | `2^(1/θ)` |
+| Marshall–Olkin | `2−min(α,β)` |
+| Cuadras–Augé | `2−α` |
+| Tawn | `2−α−β+(α^θ+β^θ)^(1/θ)` |
+
+All admissible parameter endpoints are included. These two coefficients
+depend only on the diagonal; no analogous claim is made for rho, tau or xi.
+
 `Rank.Symmetry` proves transposition and survival-copula invariance for all five
 classical coefficients. Reflecting either coordinate negates rho, tau, gamma
 and beta. No such sign rule is asserted for footrule; see [the symmetry table](nelsen.md).
@@ -129,3 +144,4 @@ for those additions.
 - `Rank.Chatterjee`, `Rank.ChatterjeeExamples`: xi, bounds, version invariance and examples.
 - `Rank.Mixture`, `Rank.FGM`: affine identities and exact FGM formulas.
 - `Rank.Symmetry`: transpose, reflection and survival-copula identities.
+- `Rank.PowerDiagonal`: footrule and beta for power diagonals and four extreme-value families.

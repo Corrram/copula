@@ -74,8 +74,26 @@ order, and affine behavior under two-component mixtures.
 | FGM, all admissible parameters | 0 | 0 |
 | Fréchet mixture with weight `a` on `M` | `a` | `a` |
 | Mardia parameter `θ` | `θ²(1+θ)/2` | `θ²(1+θ)/2` |
+| Gumbel–Hougaard, finite `θ ≥ 1` | 0 | `2−2^(1/θ)` |
+| Marshall–Olkin | 1 if `α=β=1`, otherwise 0 | `min(α,β)` |
+| Cuadras–Augé | 1 if `α=1`, otherwise 0 | `α` |
+| Tawn, finite `θ ≥ 1` | 0 | `α+β−(α^θ+β^θ)^(1/θ)` |
+
+`TailDependence.Derivative` proves the endpoint derivative rules: the right
+derivative of the diagonal at zero gives the lower tail, and two minus its
+left derivative at one gives the upper tail. The hypotheses are derivatives
+within `[0,1]` of a real function agreeing with the diagonal on that interval.
+
+`Diagonal.Power` covers every copula with diagonal `t^κ`: it proves `1≤κ≤2`,
+upper tail `2−κ`, lower tail zero for `κ>1`, and `κ=1` exactly for `M`.
+`ExtremeValue.Diagonal` derives this power form from max-stability and defines
+the extremal coefficient `κ`. Thus every bivariate extreme-value copula has
+both tail limits; only `M` has nonzero lower-tail dependence. Its extremal
+coefficient decreases under concordance order. These proofs require neither
+a density nor a Pickands representation. See also
+[Gudendorf and Segers, §4](https://arxiv.org/abs/0911.1015).
 
 Further book topics include prescribed-diagonal constructions, ordinal sums,
-shuffles, derivative characterizations, generator formulas for tail dependence,
+shuffles, generator formulas for tail dependence,
 and tail coefficients for the remaining analytic and elliptical families.
 Those results are not asserted here.

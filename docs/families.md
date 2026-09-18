@@ -78,6 +78,14 @@ It preserves extreme-value stability when both inputs have it. Tawn uses
 Gumbel and independence as its two inputs; `cdf_maxProduct` gives its CDF.
 The construction is also useful with inputs that are not extreme-value copulas.
 
+`ExtremeValue.Diagonal` derives the power diagonal `t^κ`, with `1≤κ≤2`,
+directly from bivariate max-stability. `TailDependence.ExtremeValue` computes κ
+and both tail coefficients for Gumbel, Marshall–Olkin, Cuadras–Augé and Tawn,
+including all admitted endpoints. `Rank.PowerDiagonal` gives closed forms
+for their Spearman footrule and Blomqvist beta. These results also have generic
+versions for arbitrary power-diagonal copulas; see [tail dependence](nelsen.md)
+and [rank coefficients](rank-coefficients.md).
+
 Modules: `Copula.Transform.Power`, `Copula.Transform.MaxProduct`,
 `Copula.ExtremeValue.Basic`, `Copula.Families.MarshallOlkin`,
 `Copula.Families.Gumbel`.
@@ -149,9 +157,10 @@ and Fréchet/Mardia rho.
 The [ordering API](orders.md) proves exact FGM
 parameter ordering, FGM Schur order by absolute parameter, and comparison
 results for mixtures and extremal copulas.
-The [tail-dependence API](nelsen.md) now gives both tail limits for FGM,
-Fréchet and Mardia copulas, together with the independence and Fréchet-bound
-benchmarks. Tail formulas for the other families remain future work.
+The [tail-dependence API](nelsen.md) gives both tail limits for FGM, Fréchet,
+Mardia, Gumbel, Marshall–Olkin, Cuadras–Augé and Tawn, together with the
+independence and Fréchet-bound benchmarks. Tail formulas for the other
+analytic and elliptical families remain future work.
 The bivariate validity theorem does not establish the new Archimedean families
 in higher dimensions, even for ranges known to be valid mathematically.
 

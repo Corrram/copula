@@ -7,3 +7,4 @@ import Copula.Rank.ChatterjeeExamples
 import Copula.Rank.FGMKendall
 import Copula.Rank.Frechet
 import Copula.Rank.FGMChatterjee
+import Copula.Rank.PowerDiagonal
