@@ -132,8 +132,48 @@ example (a : Fin 2 → ℝ) :
 
 example : (Copula.clayton 2 1 (by norm_num)).cdf (fun _ => 1) = 1 := by simp
 
--- The classical converse is available in dimensions zero and one.
+-- The low-dimensional entry point remains available.
 example (F : (Fin 1 → I) → ℝ) (hF : Copula.IsClassical F) : ∃! C : Copula 1, C.cdf = F :=
   hF.existsUnique_dim_one
+
+-- Classical functions can now be turned into bundled copulas in every dimension.
+example (F : (Fin 3 → I) → ℝ) (hF : Copula.IsClassical F) :
+    (Copula.ofClassical F hF).cdf = F := by simp
+
+example (C : Copula 0) : Copula.ofClassical C.cdf C.isClassical_cdf = C := by simp
+
+example (C : Copula 2) : Copula.ofClassical C.cdf C.isClassical_cdf = C := by simp
+
+-- Identity and singular all-ones correlation matrices recover the expected laws.
+example : Copula.gaussian (1 : Matrix (Fin 2) (Fin 2) ℝ) Matrix.PosSemidef.one (by simp) =
+    Copula.independence 2 := by simp
+
+example : (Copula.gaussian (Matrix.of (fun (_ _ : Fin 2) => (1 : ℝ)))
+    (Copula.posSemidef_allOnes 2) (fun _ => rfl)).cdf (fun _ => half) = 1 / 2 := by
+  simp [half]
+
+-- The gamma-frailty construction agrees with a concrete textbook Clayton value.
+example : (Copula.clayton 2 1 (by norm_num)).cdf (fun _ => half) = 1 / 3 := by
+  rw [Copula.cdf_clayton 1 (by norm_num) _ (by intro i; norm_num [half])]
+  norm_num [Fin.sum_univ_two, half, Real.rpow_neg_one]
+
+example (θ : ℝ) (hθ : 0 < θ) : (Copula.clayton 0 θ hθ).cdf (fun _ => 0) = 1 := by simp
+
+example (θ : ℝ) (hθ : 0 < θ) : (Copula.clayton 2 θ hθ).cdf ![0, half] = 0 :=
+  Copula.cdf_clayton_of_zero θ hθ _ 0 rfl
+
+-- Parameter-limit statements apply directly to arbitrary positive sequences.
+example (θ : ℕ → ℝ) (hθ : ∀ n, 0 < θ n)
+    (ht : Filter.Tendsto θ Filter.atTop (nhds 0)) :
+    Filter.Tendsto (fun n => (Copula.clayton 2 (θ n) (hθ n)).cdf (fun _ => half))
+      Filter.atTop (nhds (1 / 4)) := by
+  simpa [Copula.cdf_independence, Fin.prod_univ_two, half] using
+    Copula.tendsto_clayton_zero θ hθ ht (fun _ : Fin 2 => half)
+
+example (θ : ℕ → ℝ) (hθ : ∀ n, 0 < θ n) (ht : Filter.Tendsto θ Filter.atTop Filter.atTop) :
+    Filter.Tendsto (fun n => (Copula.clayton 2 (θ n) (hθ n)).cdf (fun _ => half))
+      Filter.atTop (nhds (1 / 2)) := by
+  simpa [Copula.cdf_comonotonic, half] using
+    Copula.tendsto_clayton_atTop θ hθ ht (fun _ : Fin 2 => half)
 
 end CopulaTest
