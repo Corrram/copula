@@ -76,11 +76,23 @@ case or upstream feedback calls for it.
   transform, joint and marginal distribution formulas, and the explicit copula
   CDF. The CDF converges pointwise to independence as the parameter approaches
   zero from above, and to comonotonicity as it tends to infinity.
+- Bivariate Archimedean admissibility from analytic generator conditions, the
+  outer-power transformation, and checked Gumbel, Joe, positive Frank, BB1, and
+  BB6 families. The generator construction agrees with the existing Clayton
+  measure, whose generator is identified in every finite dimension.
+- Max-stability and its preservation under coordinatewise power products;
+  Marshall–Olkin, Cuadras–Augé, common-shock, and asymmetric logistic copulas.
+- Gaussian scale mixtures with proved atomless marginals and Sklar
+  factorization: Student-t, Cauchy, variance-gamma, Laplace, slash, and
+  normal–lognormal constructions, including singular dispersion matrices.
+- Finite mixtures, FGM with both parameter signs, Fréchet mixtures, and Mardia.
+  See [the family catalogue](families.md) for precise coverage and parameter ranges.
 
 ## Remaining mathematical milestones
 
 1. **Further analytic family results:** Gaussian formulas using normal quantiles
-   and a dimension-sensitive admissibility theorem for Archimedean generators.
+   and a higher-dimensional admissibility theorem for Archimedean generators.
+   Bivariate convexity and the outer-power construction are already proved.
    The Clayton constructor covers `θ > 0`; negative parameters need a separate
    construction with dimension-dependent admissibility.
 2. **Further transformation identities:** reflection CDF formulas for arbitrary
