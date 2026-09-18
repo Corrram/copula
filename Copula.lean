@@ -42,3 +42,4 @@ import Copula.Families.Frank
 import Copula.Families.MarshallOlkin
 import Copula.Families.FGM
 import Copula.Families.Frechet
+import Copula.Rank

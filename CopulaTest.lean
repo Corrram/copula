@@ -261,4 +261,83 @@ example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i 
     (Copula.normalLognormal R hR hd 0).cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by
   simp [half]
 
+-- All six population coefficients have proved sharp range bounds.
+example (C : Copula 2) : C.spearmanRho ∈ Set.Icc (-1) 1 := C.spearmanRho_mem_Icc
+
+example (C : Copula 2) : C.kendallTau ∈ Set.Icc (-1) 1 := C.kendallTau_mem_Icc
+
+example (C : Copula 2) : C.spearmanFootrule ∈ Set.Icc (-1 / 2) 1 := C.spearmanFootrule_mem_Icc
+
+example (C : Copula 2) : C.giniGamma ∈ Set.Icc (-1) 1 := C.giniGamma_mem_Icc
+
+example (C : Copula 2) : C.blomqvistBeta ∈ Set.Icc (-1) 1 := C.blomqvistBeta_mem_Icc
+
+example (C : Copula 2) : C.chatterjeeXi ∈ Set.Icc 0 1 := C.chatterjeeXi_mem_Icc
+
+-- Each triple is (independence, comonotonicity, countermonotonicity).
+example : ((Copula.independence 2).spearmanRho, (Copula.comonotonic 2).spearmanRho,
+    Copula.countermonotonic.spearmanRho) = (0, 1, -1) := by simp
+
+example : ((Copula.independence 2).kendallTau, (Copula.comonotonic 2).kendallTau,
+    Copula.countermonotonic.kendallTau) = (0, 1, -1) := by simp
+
+example : ((Copula.independence 2).spearmanFootrule, (Copula.comonotonic 2).spearmanFootrule,
+    Copula.countermonotonic.spearmanFootrule) = (0, 1, -1 / 2) := by simp
+
+example : ((Copula.independence 2).giniGamma, (Copula.comonotonic 2).giniGamma,
+    Copula.countermonotonic.giniGamma) = (0, 1, -1) := by simp
+
+example : ((Copula.independence 2).blomqvistBeta, (Copula.comonotonic 2).blomqvistBeta,
+    Copula.countermonotonic.blomqvistBeta) = (0, 1, -1) := by simp
+
+example : ((Copula.independence 2).chatterjeeXi, (Copula.comonotonic 2).chatterjeeXi,
+    Copula.countermonotonic.chatterjeeXi) = (0, 1, 1) := by simp
+
+example (C : Copula 2) :
+    C.spearmanRho = 12 * (∫ x, C.cdf x ∂(Copula.independence 2).toMeasure) - 3 :=
+  C.spearmanRho_eq_integral_cdf
+
+example (C D : Copula 2) (h : ∀ u, C.cdf u ≤ D.cdf u) : C.spearmanRho ≤ D.spearmanRho :=
+  Copula.spearmanRho_mono h
+
+example (C D : Copula 2) (a : I) : (Copula.mix C D a).spearmanRho =
+    (a : ℝ) * C.spearmanRho + (1 - (a : ℝ)) * D.spearmanRho := Copula.spearmanRho_mix C D a
+
+example (C D : Copula 2) (a : I) : (Copula.mix C D a).spearmanFootrule =
+    (a : ℝ) * C.spearmanFootrule + (1 - (a : ℝ)) * D.spearmanFootrule :=
+  Copula.spearmanFootrule_mix C D a
+
+example (C D : Copula 2) (a : I) : (Copula.mix C D a).giniGamma =
+    (a : ℝ) * C.giniGamma + (1 - (a : ℝ)) * D.giniGamma := Copula.giniGamma_mix C D a
+
+example (C D : Copula 2) (a : I) : (Copula.mix C D a).blomqvistBeta =
+    (a : ℝ) * C.blomqvistBeta + (1 - (a : ℝ)) * D.blomqvistBeta := Copula.blomqvistBeta_mix C D a
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).spearmanRho = θ / 3 :=
+  Copula.spearmanRho_fgm θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).spearmanFootrule = θ / 5 :=
+  Copula.spearmanFootrule_fgm θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).giniGamma = 4 * θ / 15 :=
+  Copula.giniGamma_fgm θ hθ
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.fgm θ hθ).blomqvistBeta = θ / 4 :=
+  Copula.blomqvistBeta_fgm θ hθ
+
+-- The direction is the second coordinate given the first; densities are unnecessary.
+example (C : Copula 2) {f : I → I} (hf : Measurable f)
+    (h : ∀ᵐ x ∂C.toMeasure, x 1 = f (x 0)) : C.chatterjeeXi = 1 :=
+  C.chatterjeeXi_eq_one_of_function hf h
+
+example (C : Copula 2) (t : I) : (∫ u : I, C.conditionalCDF u t) = (t : ℝ) :=
+  C.integral_conditionalCDF t
+
+example (C : Copula 2) :
+    C.chatterjeeXi = 6 * (∫ t : I, ∫ u : I, (C.conditionalCDF u t - (t : ℝ)) ^ 2) :=
+  C.chatterjeeXi_eq_integral_centered_sq
+
+example (C : Copula 2) : (C.reindex ![1, 0]).chatterjeeXi ∈ Set.Icc 0 1 :=
+  (C.reindex ![1, 0]).chatterjeeXi_mem_Icc
+
 end CopulaTest
