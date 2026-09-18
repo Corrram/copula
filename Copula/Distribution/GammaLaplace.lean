@@ -38,10 +38,10 @@ theorem gammaPDF_mul_exp_neg {a t : ℝ} (ha : 0 < a) (ht : 0 ≤ t) (x : ℝ) :
 theorem lintegral_exp_neg_gammaMeasure {a t : ℝ} (ha : 0 < a) (ht : 0 ≤ t) :
     ∫⁻ x, ENNReal.ofReal (exp (-(t * x))) ∂gammaMeasure a 1 =
       ENNReal.ofReal ((1 + t) ^ (-a)) := by
-  rw [gammaMeasure, lintegral_withDensity_eq_lintegral_mul _
-    ((measurable_gammaPDFReal a 1).ennreal_ofReal) (by fun_prop)]
+  have hm (r : ℝ) : Measurable (gammaPDF a r) := (measurable_gammaPDFReal a r).ennreal_ofReal
+  rw [gammaMeasure, lintegral_withDensity_eq_lintegral_mul _ (hm 1) (by fun_prop)]
   simp only [Pi.mul_apply, gammaPDF_mul_exp_neg ha ht]
-  rw [lintegral_const_mul _ ((measurable_gammaPDFReal a (1 + t)).ennreal_ofReal),
+  rw [lintegral_const_mul _ (hm (1 + t)),
     lintegral_gammaPDF_eq_one ha (by positivity),
     mul_one]
 

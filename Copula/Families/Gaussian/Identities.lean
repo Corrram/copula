@@ -86,14 +86,15 @@ theorem gaussian_reindex (R : Matrix (Fin d) (Fin d) ℝ) (hR : R.PosSemidef)
 
 /-- Repeating a single coordinate produces the all-ones correlation matrix. -/
 theorem posSemidef_allOnes (d : ℕ) :
-    Matrix.PosSemidef (fun (_ _ : Fin d) => (1 : ℝ)) := by
-  simpa using (Matrix.PosSemidef.one (n := Fin 1) (R := ℝ)).submatrix
+    Matrix.PosSemidef (Matrix.of (fun (_ _ : Fin d) => (1 : ℝ))) := by
+  simpa only [Matrix.submatrix, Matrix.one_apply_eq] using
+    (Matrix.PosSemidef.one (n := Fin 1) (R := ℝ)).submatrix
     (fun _ : Fin d => (0 : Fin 1))
 
 /-- Perfect positive correlation gives the comonotonic copula, including dimension zero. -/
 @[simp]
 theorem gaussian_allOnes (d : ℕ) :
-    gaussian (fun (_ _ : Fin d) => (1 : ℝ)) (posSemidef_allOnes d) (fun _ => rfl) =
+    gaussian (Matrix.of (fun (_ _ : Fin d) => (1 : ℝ))) (posSemidef_allOnes d) (fun _ => rfl) =
       comonotonic d := by
   have h := gaussian_reindex (1 : Matrix (Fin 1) (Fin 1) ℝ) Matrix.PosSemidef.one
     (by simp) (fun _ : Fin d => (0 : Fin 1))
