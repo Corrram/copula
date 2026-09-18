@@ -6,6 +6,7 @@ Authors: Marcus Rockel
 import Copula.Sklar.Continuous
 import Mathlib.Probability.Distributions.Exponential
 import Mathlib.MeasureTheory.Constructions.Pi
+import Copula.Distribution.GammaLaplace
 
 /-! # The positive-parameter Clayton construction
 
@@ -13,14 +14,16 @@ Take independent rate-one exponentials `E i` and an independent gamma variable
 `G` with shape `1/θ` and rate one. The joint law of `-E i / G` has atomless
 marginals; its unique Sklar copula is the gamma-frailty construction of Clayton.
 This module supplies the stochastic construction and its Sklar factorization.
-The closed-form Archimedean CDF is not yet proved here.
+`Copula.Families.Clayton.CDF` identifies the closed-form Archimedean CDF, and
+`Copula.Families.Clayton.Limits` proves its two endpoint limits.
 -/
 
 open MeasureTheory Set Filter
 
 namespace ProbabilityTheory.Copula
 
-private noncomputable def frailtySource (d : ℕ) (θ : ℝ) (hθ : 0 < θ) :
+/-- Independent exponential numerators and their common gamma frailty. -/
+noncomputable def claytonFrailtySource (d : ℕ) (θ : ℝ) (hθ : 0 < θ) :
     ProbabilityMeasure ((Fin d → ℝ) × ℝ) := by
   let : IsProbabilityMeasure (expMeasure 1) := isProbabilityMeasure_expMeasure zero_lt_one
   let : IsProbabilityMeasure (gammaMeasure θ⁻¹ 1) :=
@@ -29,7 +32,7 @@ private noncomputable def frailtySource (d : ℕ) (θ : ℝ) (hθ : 0 < θ) :
 
 /-- The joint negative exponential/gamma ratios used in the Clayton construction. -/
 noncomputable def claytonLaw (d : ℕ) (θ : ℝ) (hθ : 0 < θ) : ProbabilityMeasure (Fin d → ℝ) :=
-  (frailtySource d θ hθ).map (fun p i => -(p.1 i / p.2))
+  (claytonFrailtySource d θ hθ).map (fun p i => -(p.1 i / p.2))
 
 theorem atomless_claytonLaw_marginal (d : ℕ) (θ : ℝ) (hθ : 0 < θ) (i : Fin d) :
     NullSingletonClass (marginal (claytonLaw d θ hθ) i) := by
