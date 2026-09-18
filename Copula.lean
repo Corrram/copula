@@ -17,3 +17,4 @@ import Copula.Classical
 import Copula.Distribution.Quantile
 import Copula.Distribution.RandomizedInverse
 import Copula.Sklar.UnitInterval
+import Copula.Sklar.General

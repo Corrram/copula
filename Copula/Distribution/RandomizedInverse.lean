@@ -38,9 +38,10 @@ theorem exists_randomized_inverse {B : Type*} [MeasurableSpace B] [StandardBorel
   have hdis : (volume.map q) ⊗ₘ κ = volume.map (fun t : I => (q t, t)) := by
     exact compProd_map_condDistrib hq.aemeasurable measurable_id.aemeasurable
   have hunif : ((volume.map q).prod volume).map (uncurry g) = volume := by
+    have hp : Measurable (fun t : I => (q t, t)) := hq.prodMk measurable_id
     have h := congrArg (fun m : Measure (B × I) => m.map Prod.snd) (hgraph.trans hdis)
     rw [Measure.map_map measurable_snd hH,
-      Measure.map_map measurable_snd (hq.prodMk measurable_id)] at h
+      Measure.map_map measurable_snd hp] at h
     simpa only [comp_def, H, uncurry_def, Measure.map_id'] using h
   refine ⟨g, hg, hunif, ?_⟩
   have hae : ∀ᵐ p ∂(volume.map (fun t : I => (q t, t))), q p.2 = p.1 := by

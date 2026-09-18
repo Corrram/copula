@@ -24,7 +24,7 @@ noncomputable def unitQuantile (μ : Measure I) (t : I) : I :=
 
 theorem monotone_unitQuantile (μ : Measure I) : Monotone (unitQuantile μ) := by
   intro t u htu
-  exact sSup_le_sSup (fun _ hx => lt_of_lt_of_le hx htu)
+  exact sSup_le_sSup (fun _ hx => lt_of_lt_of_le hx (show (t : ℝ) ≤ (u : ℝ) from htu))
 
 theorem measurable_unitQuantile (μ : Measure I) : Measurable (unitQuantile μ) :=
   (monotone_unitQuantile μ).measurable
