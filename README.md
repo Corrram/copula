@@ -69,6 +69,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Elliptical.ScaleMixture` | Positive Gaussian scale mixtures with atomless marginals and Sklar factorization |
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
+| `Copula.OrdinalSum` | Binary ordinal sums, endpoint-safe CDFs, component recovery, exact ordering, PQD and tail inheritance |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
 | `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
@@ -88,6 +89,10 @@ is one, and groundedness is only asserted when a coordinate exists.
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
 itself is `ProbabilityTheory.Copula`.
+
+[Ordinal sums](docs/ordinal-sums.md) combine different copulas on ordered
+intervals. Their lower and upper tails come from the first and last nonempty
+blocks, respectively, allowing constructions with asymmetric tail dependence.
 
 The CDF is 1-Lipschitz for the sum of coordinate distances. Lean's default
 metric on `Fin d → unitInterval` is the maximum metric; the theorem

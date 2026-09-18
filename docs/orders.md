@@ -66,6 +66,9 @@ not been formalized in this repository.
   copula greatest for concordance order.
 * Lower orthant order is preserved by mixtures with a common weight.
   Increasing the weight of the larger component increases the mixture.
+* Binary ordinal sums preserve lower orthant order componentwise. At a fixed
+  interior split, comparison of the sums is equivalent to comparison of both
+  components; see the [ordinal-sum API](ordinal-sums.md).
 * PQD is equivalent to being above independence in lower orthant order.
 * FGM copulas are ordered exactly by their parameter on the full `[-1,1]`
   interval: `C_θ ≤lo C_η ↔ θ ≤ η`.

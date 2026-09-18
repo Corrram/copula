@@ -53,3 +53,4 @@ import Copula.Families.Nelsen
 import Copula.Families.Nelsen7
 import Copula.Families.Clayton.Negative
 import Copula.Archimedean.Symmetry
+import Copula.OrdinalSum

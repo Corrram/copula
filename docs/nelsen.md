@@ -10,6 +10,7 @@ probability-measure representation.
 | Topic in Nelsen | Formal module | Added results |
 | --- | --- | --- |
 | Exercise 2.8; §3.2.6, conditions (3.2.21) | `Copula.Diagonal` | Diagonal bounds, monotonicity, 2-Lipschitz regularity, endpoint values, and `δ = id ↔ C = M` |
+| §3.2.2, binary ordinal-sum construction | `Copula.OrdinalSum` | Full split-parameter range, CDF formulas, recovery, order, exchangeability, PQD and tail inheritance |
 | §3.2.6, order-statistic interpretation | `Copula.Diagonal` | Distribution functions of the coordinate maximum and minimum |
 | §2.6 | `Copula.Reflection.Bivariate` | Single-coordinate reflection formulas, survival copula, transpose and composition identities |
 | §2.7 | `Copula.Symmetry` | Copula-level exchangeability and radial symmetry, CDF characterizations, mixtures and symmetrization |
@@ -109,7 +110,14 @@ coefficient decreases under concordance order. These proofs require neither
 a density nor a Pickands representation. See also
 [Gudendorf and Segers, §4](https://arxiv.org/abs/0911.1015).
 
-Further book topics include prescribed-diagonal constructions, ordinal sums,
+The [ordinal-sum API](ordinal-sums.md) constructs binary bivariate sums with
+both endpoint cases. It proves component recovery and exact lower orthant
+comparison at a fixed interior split, exchangeability, PQD closure and
+inheritance of lower and upper tail limits from their respective end blocks.
+The converse decomposition theorem from an interior diagonal fixed point
+and the countable-interval construction remain open.
+
+Further book topics include prescribed-diagonal constructions,
 shuffles, generator formulas for tail dependence,
 and tail coefficients for the remaining analytic and elliptical families.
 Those results are not asserted here.

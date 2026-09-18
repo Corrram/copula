@@ -144,6 +144,13 @@ These mixture constructors work in every finite dimension. The existing
 
 Modules: `Copula.Mixture`, `Copula.Families.FGM`, `Copula.Families.Frechet`.
 
+The additional [ordinal-sum construction](ordinal-sums.md) places two
+bivariate copulas on successive intervals. It includes split endpoints,
+regional CDF formulas, recovery, exact componentwise ordering, exchangeability
+and PQD closure. Its lower and upper tail limits are inherited from the first
+and last nonempty blocks. These constructions are not additional named rows
+in the Ansari–Rockel family count.
+
 ## Scope and next extensions
 
 This catalogue contains 27 named families/special cases; overlapping classes

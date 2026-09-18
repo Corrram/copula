@@ -70,6 +70,11 @@ SI, LTD, RTI and PQD are each preserved by `Copula.mix`. Total positivity is
 not included in this mixture closure result. PQD and NQD together characterize
 independence.
 
+Binary [ordinal sums](ordinal-sums.md) also preserve PQD. Every ordinal sum
+with an interior split has `C(a,a)=a`, so it fails NQD and differs from
+independence, even when both input copulas are independent. The ordinal-sum
+module does not yet establish closure of SI, LTD, RTI or total positivity.
+
 ```lean
 import Copula.Dependence
 

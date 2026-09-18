@@ -12,6 +12,10 @@ namespace CopulaTest
 
 def half : I := ⟨1 / 2, by norm_num, by norm_num⟩
 
+private theorem half_pos : 0 < half := by change (0 : ℝ) < 1 / 2; norm_num
+
+private theorem half_lt_one : half < 1 := by change (1 / 2 : ℝ) < 1; norm_num
+
 def threeQuarters : I := ⟨3 / 4, by norm_num, by norm_num⟩
 
 -- The empty product is one, so groundedness must not be stated in dimension zero.
@@ -926,5 +930,108 @@ example : let C := Copula.frechet (1 / 2) (1 / 2) (by norm_num) (by norm_num) (b
 
 example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.mardia θ hθ).kendallTau = 0 ↔ θ = 0 :=
   Copula.kendallTau_mardia_eq_zero_iff θ hθ
+
+example (C D : Copula 2) : C.ordinalSum D 0 = D := by simp
+
+example (C D : Copula 2) : C.ordinalSum D 1 = C := by simp
+
+example (C D : Copula 2) (a : I) : (C.ordinalSum D a).cdf ![a, a] = a :=
+  Copula.cdf_ordinalSum_split C D a
+
+example (C D : Copula 2) (a u v : I) (ha : 0 < a) :
+    (C.ordinalSum D a).cdf ![Copula.OrdinalSum.lowerEmbed a u, Copula.OrdinalSum.lowerEmbed a v] =
+      (a : ℝ) * C.cdf ![u, v] := Copula.cdf_ordinalSum_lowerEmbed C D a u v ha
+
+example (C D : Copula 2) (a u v : I) (ha : a < 1) :
+    (C.ordinalSum D a).cdf ![Copula.OrdinalSum.upperEmbed a u, Copula.OrdinalSum.upperEmbed a v] =
+      (a : ℝ) + (1 - (a : ℝ)) * D.cdf ![u, v] := Copula.cdf_ordinalSum_upperEmbed C D a u v ha
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).cdf
+    ![Copula.OrdinalSum.lowerEmbed half half, Copula.OrdinalSum.lowerEmbed half half] = 1 / 8 := by
+  rw [Copula.cdf_ordinalSum_lowerEmbed _ _ _ _ _ half_pos]
+  norm_num [half, Fin.prod_univ_two]
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).cdf
+    ![Copula.OrdinalSum.upperEmbed half half, Copula.OrdinalSum.upperEmbed half half] = 5 / 8 := by
+  rw [Copula.cdf_ordinalSum_upperEmbed _ _ _ _ _ half_lt_one]
+  norm_num [half, Fin.prod_univ_two]
+
+example (C D : Copula 2) : (C.ordinalSum D half).cdf
+    ![Copula.OrdinalSum.lowerEmbed half half, threeQuarters] = 1 / 4 := by
+  rw [Copula.cdf_ordinalSum_lower_upper C D half _ _
+    (Copula.OrdinalSum.lowerEmbed_le _ _) (by norm_num [half, threeQuarters])]
+  norm_num [Copula.OrdinalSum.lowerEmbed, half]
+
+example (C D : Copula 2) : (C.ordinalSum D half).cdf
+    ![threeQuarters, Copula.OrdinalSum.lowerEmbed half half] = 1 / 4 := by
+  rw [Copula.cdf_ordinalSum_upper_lower C D half _ _
+    (by norm_num [half, threeQuarters]) (Copula.OrdinalSum.lowerEmbed_le _ _)]
+  norm_num [Copula.OrdinalSum.lowerEmbed, half]
+
+example (C D E F : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    (C.ordinalSum D a).LowerOrthantLE (E.ordinalSum F a) ↔ C.LowerOrthantLE E ∧ D.LowerOrthantLE F :=
+  Copula.lowerOrthantLE_ordinalSum_iff C D E F a ha0 ha1
+
+example (C D E F : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    C.ordinalSum D a = E.ordinalSum F a ↔ C = E ∧ D = F :=
+  Copula.ordinalSum_eq_iff C D E F a ha0 ha1
+
+example (C D : Copula 2) (a : I) :
+    (C.ordinalSum D a).transpose = C.transpose.ordinalSum D.transpose a :=
+  Copula.transpose_ordinalSum C D a
+
+example (C D : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    (C.ordinalSum D a).IsExchangeable ↔ C.IsExchangeable ∧ D.IsExchangeable :=
+  Copula.isExchangeable_ordinalSum_iff C D a ha0 ha1
+
+example (a : I) : (Copula.comonotonic 2).ordinalSum (Copula.comonotonic 2) a =
+    Copula.comonotonic 2 := by simp
+
+example (C D : Copula 2) (a : I) (hC : C.IsPQD) (hD : D.IsPQD) :
+    (C.ordinalSum D a).IsPQD := hC.ordinalSum hD a
+
+example : ((Copula.independence 2).ordinalSum (Copula.independence 2) half).IsPQD :=
+  Copula.isPQD_ordinalSum_independence half
+
+example (C D : Copula 2) : ¬ (C.ordinalSum D half).IsNQD :=
+  Copula.not_isNQD_ordinalSum C D half half_pos half_lt_one
+
+example (C D : Copula 2) : 0 < (C.ordinalSum D half).chatterjeeXi :=
+  (Copula.chatterjeeXi_pos_iff _).2
+    (Copula.ordinalSum_ne_independence C D half half_pos half_lt_one)
+
+example (C D : Copula 2) (a : I) (ha : 0 < a) (l : ℝ) :
+    (C.ordinalSum D a).HasLowerTailDependence l ↔ C.HasLowerTailDependence l :=
+  Copula.hasLowerTailDependence_ordinalSum_iff C D a ha l
+
+example (C D : Copula 2) (a : I) (ha : a < 1) (l : ℝ) :
+    (C.ordinalSum D a).HasUpperTailDependence l ↔ D.HasUpperTailDependence l :=
+  Copula.hasUpperTailDependence_ordinalSum_iff C D a ha l
+
+example : ((Copula.comonotonic 2).ordinalSum (Copula.independence 2) half).HasLowerTailDependence 1 :=
+  Copula.hasLowerTailDependence_comonotonic.ordinalSum _ half half_pos
+
+example : ((Copula.comonotonic 2).ordinalSum (Copula.independence 2) half).HasUpperTailDependence 0 :=
+  Copula.hasUpperTailDependence_independence.ordinalSum _ half half_lt_one
+
+example : ((Copula.independence 2).ordinalSum (Copula.comonotonic 2) half).HasLowerTailDependence 0 :=
+  Copula.hasLowerTailDependence_independence.ordinalSum _ half half_pos
+
+example : ((Copula.independence 2).ordinalSum (Copula.comonotonic 2) half).HasUpperTailDependence 1 :=
+  Copula.hasUpperTailDependence_comonotonic.ordinalSum _ half half_lt_one
+
+example : ¬ ((Copula.comonotonic 2).ordinalSum (Copula.independence 2) half).IsRadiallySymmetric := by
+  intro h
+  have hl := Copula.hasLowerTailDependence_comonotonic.ordinalSum (Copula.independence 2) half
+    half_pos
+  have hu := Copula.hasUpperTailDependence_independence.ordinalSum (Copula.comonotonic 2) half
+    half_lt_one
+  have he := hl.unique ((h.hasUpperTailDependence_iff 0).1 hu)
+  norm_num at he
+
+example : (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).HasLowerTailDependence 0 ∧
+    (Copula.countermonotonic.ordinalSum Copula.countermonotonic half).HasUpperTailDependence 0 :=
+  ⟨Copula.hasLowerTailDependence_countermonotonic.ordinalSum _ half half_pos,
+    Copula.hasUpperTailDependence_countermonotonic.ordinalSum _ half half_lt_one⟩
 
 end CopulaTest
