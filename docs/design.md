@@ -54,29 +54,51 @@ case or upstream feedback calls for it.
   theorem for the default maximum metric; continuity and uniform continuity.
 - CDF extensionality: lower orthants form a generating pi-system, so equality
   of CDFs implies equality of the underlying copula measures.
+- Selected-coordinate reflections and the bivariate countermonotonic copula,
+  with CDF `max 0 (u + v - 1)` and its relationship to the diagonal copula.
+- Rectangle probabilities as alternating CDF sums, the `d`-increasing property,
+  and the explicit four-term formula in dimension two.
+- The classical boundary and rectangle predicate, its validity for every
+  copula CDF, uniqueness of a representing measure, and the converse in
+  dimensions zero and one. The general converse is not yet established.
+- The continuous probability integral transform, a compact-interval quantile
+  with its adjunction, and inverse-transform sampling for laws with atoms.
+- General Sklar existence using randomized inverses from disintegration and
+  a strictly increasing embedding of real coordinates into the unit interval.
+  Uniqueness is proved on marginal CDF ranges in general, and on the entire
+  cube for continuous marginals.
+- Gaussian copulas for positive semidefinite correlation matrices, and the
+  positive-parameter Clayton gamma-frailty construction with atomless marginals.
 
-## Next mathematical milestones
+## Remaining mathematical milestones
 
-1. **Rectangle probabilities:** alternating CDF sums and the `d`-increasing
-   property, extending the existing bounds and continuity results.
-2. **Further examples:** bivariate countermonotonicity and coordinate reflections;
-   uniqueness in dimensions zero and one; relationships between the examples
-   and existing independence APIs.
-3. **Classical characterization:** define a function-level predicate with the
-   exact boundary and rectangle conditions, construct the associated measure,
-   and prove equivalence with `Copula d`. Do not silently assume continuity or
-   countable additivity in the converse direction.
-4. **Sklar infrastructure:** laws on `Fin d → ℝ`, marginal CDFs and quantiles,
-   and the probability integral transform. Reuse generic mathlib results where
-   possible and upstream missing distribution lemmas separately.
-5. **Sklar's theorem:** distinguish existence for arbitrary marginals from
-   uniqueness for continuous marginals. In the discontinuous case, uniqueness
-   is only on the product of marginal CDF ranges. A naive deterministic CDF
-   transform does not give uniform marginals when atoms are present; the proof
-   needs an appropriate extension or randomized distributional transform.
-6. **Parametric families:** Gaussian and Archimedean constructions after the
-   foundational results are stable. Keep statistical and research-specific
-   APIs separate from the initial upstream contribution.
+1. **Classical characterization in arbitrary dimension:** construct the measure
+   from `IsClassical F`, using a rectangle content and a measure-extension proof,
+   or finite-grid approximations and weak compactness. The former requires
+   proving finite additivity and sigma-subadditivity; the latter requires
+   constructing normalized nonnegative grid weights and identifying a weak limit.
+   Neither continuity nor countable additivity should be silently assumed.
+   `IsClassical.ofMeasure` completes the marginal-identification step once a
+   representing probability measure is available.
+2. **Analytic family formulas:** prove the closed-form Clayton CDF from the
+   gamma-frailty construction, Gaussian formulas using normal quantiles, and
+   a dimension-sensitive admissibility theorem for Archimedean generators.
+   The Clayton constructor currently covers `θ > 0`; neither negative parameters
+   nor the independence limit are asserted.
+3. **Further transformation identities:** reflection CDF formulas for arbitrary
+   copulas, interactions with coordinate selection, and family parameter limits.
+
+## General Sklar construction
+
+The general existence proof does not require the classical function-to-measure
+converse. It starts from an existing joint probability law. Its one-dimensional
+quantile maps sample the coordinate laws from uniform variables. Conditional
+distributions and mathlib's kernel representation theorem supply randomized
+inverses of those maps. Lifting the joint law through these inverses produces a
+copula, and the quantile adjunction proves the CDF factorization. A strictly
+increasing sigmoid embedding transfers the construction from the compact unit
+cube to arbitrary real-vector laws. The continuous-marginal construction remains
+available separately as the direct marginal-CDF transform.
 
 ## Upstreaming and discussion
 

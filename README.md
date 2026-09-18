@@ -42,6 +42,17 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Independence` | Product copula and the product formula for its CDF |
 | `Copula.Comonotonic` | Diagonal copula and the minimum-coordinate formula for its CDF |
 | `Copula.Transform` | Coordinate selection, repetition, and permutation, with composition and inverse laws |
+| `Copula.Reflection` | Selected-coordinate reflections, involution, and injectivity |
+| `Copula.Countermonotonic` | The bivariate reflected diagonal law and its lower-bound CDF |
+| `Copula.Unique` | Uniqueness of copulas in dimensions zero and one |
+| `Copula.Rectangle` | Alternating CDF sums, rectangle probabilities, and the increasing property |
+| `Copula.Classical` | Classical conditions, the forward implication, representation uniqueness, and the converse in dimensions zero and one |
+| `Copula.Distribution.ProbabilityIntegralTransform` | Uniformity of continuous CDF transforms and continuity for atomless laws |
+| `Copula.Distribution.Quantile` | Quantile adjunction and inverse-transform sampling, including atoms |
+| `Copula.Distribution.RandomizedInverse` | Randomized inverses obtained by disintegration |
+| `Copula.Sklar` | General Sklar existence, uniqueness on marginal ranges, and full uniqueness for continuous marginals |
+| `Copula.Families.Gaussian` | Gaussian copulas from positive semidefinite correlation matrices, including singular matrices |
+| `Copula.Families.Clayton` | Positive-parameter gamma-frailty construction with atomless marginals and Sklar factorization |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -51,8 +62,26 @@ The CDF is 1-Lipschitz for the sum of coordinate distances. Lean's default
 metric on `Fin d → unitInterval` is the maximum metric; the theorem
 `Copula.lipschitzWith_cdf` uses constant `d` for that metric.
 
-Sklar's theorem, the converse construction from a classical copula function,
-and parametric families are planned work. See [the design review and roadmap](docs/design.md).
+The general classical converse—constructing a probability measure from just
+the boundary and rectangle conditions in dimensions two and above—remains open
+in this package. `IsClassical.ofMeasure` identifies the marginals of an already
+constructed probability measure; it does not supply that missing extension.
+The Clayton module gives the stochastic construction; its closed-form
+Archimedean CDF and a general generator admissibility theorem remain future work.
+See [the design review and roadmap](docs/design.md).
+
+## Sklar's theorem
+
+For a real-vector probability law `μ`, `Copula.exists_sklarCopula μ` gives a
+copula whose CDF composed with the marginal CDFs equals the joint CDF.
+This includes atomic and singular laws. The construction uses quantile maps
+and randomized inverses, so atoms are handled without assuming the ordinary
+CDF transform is uniform.
+
+`Copula.existsUnique_sklarCopula_of_continuous μ hc` gives full uniqueness
+when all marginal CDFs are continuous. Strict monotonicity is not required.
+Without continuity, `Copula.IsSklarCopula.cdf_eq_on_ranges` asserts equality
+on the product of marginal CDF ranges.
 
 ## Build
 
