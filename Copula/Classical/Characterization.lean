@@ -46,7 +46,7 @@ private theorem IsClassical.identify_weak_limit (hF : IsClassical F)
     let O : Set (Fin d → I) := {x | ∀ i, (x i : ℝ) < (u i : ℝ) + δ}
     have hO : IsOpen O := by
       dsimp only [O]
-      rw [setOf_forall]
+      rw [ofPred_forall]
       exact isOpen_iInter_of_finite (fun i => isOpen_lt (by fun_prop) continuous_const)
     have huO : Iic u ⊆ O := by
       intro x hx i

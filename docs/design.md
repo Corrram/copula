@@ -58,35 +58,51 @@ case or upstream feedback calls for it.
   with CDF `max 0 (u + v - 1)` and its relationship to the diagonal copula.
 - Rectangle probabilities as alternating CDF sums, the `d`-increasing property,
   and the explicit four-term formula in dimension two.
-- The classical boundary and rectangle predicate, its validity for every
-  copula CDF, uniqueness of a representing measure, and the converse in
-  dimensions zero and one. The general converse is not yet established.
+- The classical boundary and rectangle predicate and its equivalence to
+  measure-based copulas in every finite dimension. Rectangle splitting gives
+  monotonicity and the sharp Lipschitz estimate without assuming continuity.
+  Finite atomic approximations have CDF error at most `d / 2^n`; weak compactness
+  and the portmanteau inequalities identify the representing probability measure.
 - The continuous probability integral transform, a compact-interval quantile
   with its adjunction, and inverse-transform sampling for laws with atoms.
 - General Sklar existence using randomized inverses from disintegration and
   a strictly increasing embedding of real coordinates into the unit interval.
   Uniqueness is proved on marginal CDF ranges in general, and on the entire
   cube for continuous marginals.
-- Gaussian copulas for positive semidefinite correlation matrices, and the
-  positive-parameter Clayton gamma-frailty construction with atomless marginals.
+- Gaussian copulas for positive semidefinite correlation matrices. Identity
+  correlation gives independence, all-ones correlation gives comonotonicity,
+  and arbitrary coordinate selection gives the corresponding covariance submatrix.
+- Positive-parameter Clayton copulas from gamma frailty, with the gamma Laplace
+  transform, joint and marginal distribution formulas, and the explicit copula
+  CDF. The CDF converges pointwise to independence as the parameter approaches
+  zero from above, and to comonotonicity as it tends to infinity.
 
 ## Remaining mathematical milestones
 
-1. **Classical characterization in arbitrary dimension:** construct the measure
-   from `IsClassical F`, using a rectangle content and a measure-extension proof,
-   or finite-grid approximations and weak compactness. The former requires
-   proving finite additivity and sigma-subadditivity; the latter requires
-   constructing normalized nonnegative grid weights and identifying a weak limit.
-   Neither continuity nor countable additivity should be silently assumed.
-   `IsClassical.ofMeasure` completes the marginal-identification step once a
-   representing probability measure is available.
-2. **Analytic family formulas:** prove the closed-form Clayton CDF from the
-   gamma-frailty construction, Gaussian formulas using normal quantiles, and
-   a dimension-sensitive admissibility theorem for Archimedean generators.
-   The Clayton constructor currently covers `θ > 0`; neither negative parameters
-   nor the independence limit are asserted.
-3. **Further transformation identities:** reflection CDF formulas for arbitrary
-   copulas, interactions with coordinate selection, and family parameter limits.
+1. **Further analytic family results:** Gaussian formulas using normal quantiles
+   and a dimension-sensitive admissibility theorem for Archimedean generators.
+   The Clayton constructor covers `θ > 0`; negative parameters need a separate
+   construction with dimension-dependent admissibility.
+2. **Further transformation identities:** reflection CDF formulas for arbitrary
+   copulas and interactions with coordinate selection.
+3. **Topology of copulas:** connect pointwise CDF convergence to uniform CDF
+   convergence and weak convergence of the bundled probability measures.
+
+## Classical measure construction
+
+The converse proof uses finite atomic approximations rather than a new general
+multivariate measure-extension API. Repeated binary cuts split rectangle
+increments additively. Their nonnegative weights sum to one, so placing each
+weight at the rectangle's upper corner gives a probability measure. Clipping
+rectangles against a lower orthant bounds its CDF between the classical
+function at the requested point and at a point shifted down by the mesh width.
+The derived Lipschitz estimate gives a uniform error bound of `d / 2^n`.
+
+Probability measures on the compact cube have a weakly convergent subsequence.
+The closed-set portmanteau inequality supplies one CDF bound. Slightly enlarged
+open orthants supply the other, including on the upper boundary. This identifies
+the limit's CDF with the original function. `IsClassical.ofMeasure` then identifies
+its uniform marginals, and CDF extensionality gives uniqueness.
 
 ## General Sklar construction
 

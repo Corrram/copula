@@ -14,7 +14,8 @@ Take independent rate-one exponentials `E i` and an independent gamma variable
 `G` with shape `1/θ` and rate one. The joint law of `-E i / G` has atomless
 marginals; its unique Sklar copula is the gamma-frailty construction of Clayton.
 This module supplies the stochastic construction and its Sklar factorization.
-The closed-form Archimedean CDF is not yet proved here.
+`Copula.Families.Clayton.CDF` identifies the closed-form Archimedean CDF, and
+`Copula.Families.Clayton.Limits` proves its two endpoint limits.
 -/
 
 open MeasureTheory Set Filter
