@@ -71,9 +71,17 @@ This includes both increasing and decreasing deterministic dependence.
 The conditional-distribution definition follows the population coefficient
 introduced in [Chatterjee, A new coefficient of correlation](https://arxiv.org/abs/1909.10140).
 Using a kernel avoids assuming a density or choosing pointwise derivatives of
-a singular copula. Equivalence to a partial-derivative formula, the converse
-functional-dependence characterization, and the zero-if-and-only-if-independence
-characterization are not yet formalized.
+a singular copula. `chatterjeeXi_eq_zero_iff` now proves that xi is zero exactly
+at independence, and `chatterjeeXi_pos_iff` gives strict positivity for every
+other copula. Equivalence to a partial-derivative formula and the converse
+functional-dependence characterization at xi=1 are not yet formalized.
+
+The proof uses `conditionalCDFDistanceSq C D = ∫∫ (K_C−K_D)²`. This quantity
+is symmetric, nonnegative, and zero exactly when `C=D`; xi equals six times
+the squared distance to independence. `ext_conditionalCDF_ae` identifies
+copulas from nested almost-everywhere equality of their conditional CDFs.
+Continuity of the copula CDF handles exceptional threshold sets without
+assuming a jointly continuous conditional kernel.
 
 ## Algebra and family formulas
 
@@ -87,6 +95,25 @@ integral. `Copula.Order.Schur` proves monotonicity of xi in directional Schur
 order. See [comparison orders](orders.md) for the precise conventions.
 The `*_mix` theorems for rho, footrule, gamma and beta prove affine behavior under `Copula.mix C D a`, where
 `a` is the weight on `C`. No affine identity is asserted for tau or xi.
+
+`conditionalCDF_finiteMixture` and `conditionalCDF_mix` give almost-everywhere
+conditional CDF identities for finite and binary mixtures. The weights remain
+constant because the conditioning marginals are uniform.
+
+`Rank.ChatterjeeMixture` proves the exact quadratic identity
+
+```text
+xi(a C + (1−a) D)
+  = a xi(C) + (1−a) xi(D) − 6a(1−a) conditionalCDFDistanceSq(C,D).
+```
+
+Consequently xi is convex, and the inequality is strict when `C≠D` and
+`0<a<1`. Equality for an interior weight characterizes `C=D`. Mixing with
+independence gives `xi(a C + (1−a) Π) = a² xi(C)`, including both endpoints.
+The equivalent polarized formula uses `chatterjeeCross C D = 6∫∫ K_C K_D−2`.
+This cross functional is symmetric, equals xi on the diagonal, vanishes when
+one input is Π, and can be negative. Pairing with M gives Spearman's footrule,
+which supplies an explicit formula for mixing an arbitrary copula with M.
 
 For FGM with any parameter `theta ∈ [-1,1]`, `Copula.Rank.FGM` proves:
 
@@ -106,7 +133,12 @@ The reusable `conditionalCDF_ae_eq_of_integral` identifies such versions from
 their lower-interval integrals without assuming a pointwise derivative theorem.
 
 `Rank.Frechet` proves `spearmanRho_frechet = a−b` and
-`spearmanRho_mardia = theta³`. The full [Ansari–Rockel expression index](ansari-rockel.md)
+`spearmanRho_mardia = theta³`. `Rank.FrechetChatterjee` adds
+`chatterjeeXi_frechet = (a−b)²+ab` and
+`chatterjeeXi_mardia = theta⁴(1+3theta²)/4` on the full parameter domains,
+including singular boundaries. It identifies their zero-xi parameters as
+`a=b=0` and `theta=0`, respectively. The equal mixture of M and W has xi=1/4.
+The full [Ansari–Rockel expression index](ansari-rockel.md)
 records the remaining formula targets and flags source discrepancies; these
 reference expressions are not yet all formalized.
 
@@ -145,3 +177,7 @@ for those additions.
 - `Rank.Mixture`, `Rank.FGM`: affine identities and exact FGM formulas.
 - `Rank.Symmetry`: transpose, reflection and survival-copula identities.
 - `Rank.PowerDiagonal`: footrule and beta for power diagonals and four extreme-value families.
+- `Rank.ConditionalMixture`: finite and binary mixture conditional CDFs.
+- `Rank.ConditionalDistance`: squared distance, separation, and xi=0 iff independence.
+- `Rank.ChatterjeeCross`, `Rank.ChatterjeeMixture`: polarization, exact mixture identities and strict convexity.
+- `Rank.FrechetChatterjee`: Fréchet and Mardia xi formulas, including endpoints.

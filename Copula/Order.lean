@@ -8,3 +8,4 @@ import Copula.Order.Supermodular
 import Copula.Order.Frechet
 import Copula.Order.SymmetricSchur
 import Copula.Order.FGMSchur
+import Copula.Order.SchurMixture

@@ -93,6 +93,10 @@ Gini's gamma and Blomqvist's beta.
   it relates the conditional CDFs almost everywhere at each threshold, preserves
   both Schur comparisons.
 * Chatterjee's directional xi is increasing in Schur order.
+* Mixtures preserve a common Schur upper bound: if both `C` and `D` are below
+  `E`, then so is every convex mixture of `C` and `D`.
+* Adding independence reduces predictability: `a C + (1−a) Π ≤Schur C`.
+  These diluted copulas are increasing in Schur order as `a` increases.
 * Schur order is not antisymmetric on copulas.
 
 There is no general implication in either direction between concordance and
@@ -112,6 +116,7 @@ Schur comparison. Formal examples show why: `W ≤lo Π`, but `W` is not below
 | `Order.FGMSchur` | Exact directional and two-direction FGM Schur order: `abs theta ≤ abs eta` |
 | `Order.Schur` | Convex-test preorder, kernel versions, rearrangement invariance and xi |
 | `Order.SchurExamples` | Unique least element and counterexamples to conflating orders |
+| `Order.SchurMixture` | Convex upper-bound sets, attenuation by independence, and monotonicity in retained weight |
 | `Order.Supermodular` | Bounded measurable test order and orthant implications |
 
 ## Further results to formalize

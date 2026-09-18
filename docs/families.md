@@ -153,7 +153,8 @@ parameters, Ali–Mikhail–Haq, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
 Pickands representations, and further family-specific dependence formulas remain future work.
 The [rank API](rank-coefficients.md) already includes six coefficients and four
 affine FGM formulas, plus Kendall's tau `2θ/9`, Chatterjee's xi `θ²/15`
-and Fréchet/Mardia rho.
+and Fréchet/Mardia rho and xi. Their xi formulas are `(a−b)²+ab` and
+`θ⁴(1+3θ²)/4`, with all singular boundaries included.
 The [ordering API](orders.md) proves exact FGM
 parameter ordering, FGM Schur order by absolute parameter, and comparison
 results for mixtures and extremal copulas.

@@ -760,4 +760,75 @@ example (θ : ℝ) (hθ : 1 ≤ θ) (α β : I) :
       (2 : ℝ) ^ ((α : ℝ) + (β : ℝ) - ((α : ℝ) ^ θ + (β : ℝ) ^ θ) ^ θ⁻¹) - 1 :=
   Copula.blomqvistBeta_tawn θ hθ α β
 
+example (C : Copula 2) : C.chatterjeeXi = 0 ↔ C = Copula.independence 2 :=
+  C.chatterjeeXi_eq_zero_iff
+
+example (C : Copula 2) : 0 < C.chatterjeeXi ↔ C ≠ Copula.independence 2 := C.chatterjeeXi_pos_iff
+
+example (C D : Copula 2) : C.conditionalCDFDistanceSq D = 0 ↔ C = D :=
+  C.conditionalCDFDistanceSq_eq_zero_iff D
+
+example (C D : Copula 2)
+    (h : ∀ᵐ v : I, (fun u => C.conditionalCDF u v) =ᵐ[MeasureTheory.volume]
+      fun u => D.conditionalCDF u v) : C = D := Copula.ext_conditionalCDF_ae h
+
+example (C D : Copula 2) (a v : I) :
+    (fun u => (C.mix D a).conditionalCDF u v) =ᵐ[MeasureTheory.volume]
+      fun u => (a : ℝ) * C.conditionalCDF u v + (1 - (a : ℝ)) * D.conditionalCDF u v :=
+  Copula.conditionalCDF_mix C D a v
+
+example {n : ℕ} (C : Fin n → Copula 2) (w : Fin n → ℝ)
+    (hw : ∀ j, 0 ≤ w j) (hsum : ∑ j, w j = 1) (v : I) :
+    (fun u => (Copula.finiteMixture C w hw hsum).conditionalCDF u v) =ᵐ[MeasureTheory.volume]
+      fun u => ∑ j, w j * (C j).conditionalCDF u v :=
+  Copula.conditionalCDF_finiteMixture C w hw hsum v
+
+example (C D : Copula 2) (a : I) :
+    (C.mix D a).chatterjeeXi ≤ (a : ℝ) * C.chatterjeeXi + (1 - (a : ℝ)) * D.chatterjeeXi :=
+  Copula.chatterjeeXi_mix_le C D a
+
+example (C D : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    (C.mix D a).chatterjeeXi = (a : ℝ) * C.chatterjeeXi + (1 - (a : ℝ)) * D.chatterjeeXi ↔
+      C = D := Copula.chatterjeeXi_mix_eq_iff C D a ha0 ha1
+
+example (C : Copula 2) (a : I) :
+    (C.mix (Copula.independence 2) a).chatterjeeXi = (a : ℝ) ^ 2 * C.chatterjeeXi :=
+  Copula.chatterjeeXi_mix_independence C a
+
+example (C : Copula 2) : C.chatterjeeCross (Copula.comonotonic 2) = C.spearmanFootrule :=
+  C.chatterjeeCross_comonotonic
+
+example : ((Copula.comonotonic 2).mix Copula.countermonotonic Copula.unitHalf).chatterjeeXi =
+    1 / 4 := by
+  rw [Copula.chatterjeeXi_mix_comonotonic_countermonotonic]
+  norm_num [Copula.unitHalf]
+
+example (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hab : a + b ≤ 1) :
+    (Copula.frechet a b ha hb hab).chatterjeeXi = (a - b) ^ 2 + a * b :=
+  Copula.chatterjeeXi_frechet a b ha hb hab
+
+example : (Copula.frechet (1 / 4) (1 / 2) (by norm_num) (by norm_num) (by norm_num)).chatterjeeXi =
+    3 / 16 := by rw [Copula.chatterjeeXi_frechet]; norm_num
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) :
+    (Copula.mardia θ hθ).chatterjeeXi = θ ^ 4 * (1 + 3 * θ ^ 2) / 4 :=
+  Copula.chatterjeeXi_mardia θ hθ
+
+example : (Copula.mardia (1 / 2) (by norm_num)).chatterjeeXi = 7 / 256 := by
+  rw [Copula.chatterjeeXi_mardia]
+  norm_num
+
+example (θ : ℝ) (hθ : |θ| ≤ 1) : (Copula.mardia θ hθ).chatterjeeXi = 0 ↔ θ = 0 :=
+  Copula.chatterjeeXi_mardia_eq_zero_iff θ hθ
+
+example (C D E : Copula 2) (hC : C.SchurLE E) (hD : D.SchurLE E) (a : I) :
+    (C.mix D a).SchurLE E := hC.mix hD a
+
+example (C : Copula 2) (a : I) : (C.mix (Copula.independence 2) a).SchurLE C :=
+  Copula.schurLE_mix_independence C a
+
+example (C : Copula 2) (a b : I) (hab : a ≤ b) :
+    (C.mix (Copula.independence 2) a).SchurLE (C.mix (Copula.independence 2) b) :=
+  Copula.schurLE_mix_independence_mono C hab
+
 end CopulaTest

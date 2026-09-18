@@ -334,6 +334,15 @@ weights and `θ=1` cases. [Rank/PowerDiagonal.lean](../Copula/Rank/PowerDiagonal
 also proves their footrule and beta formulas, which supplement the paper's
 rho/tau/xi table rather than completing its outstanding entries.
 
+[Rank/FrechetChatterjee.lean](../Copula/Rank/FrechetChatterjee.lean) now proves
+the Table 6 xi formulas for U01 and U02: `(α−β)²+αβ` and
+`θ⁴(1+3θ²)/4`, including the entire simplex and both signed Mardia endpoints.
+Their rho and xi entries are checked; their tau entries remain pending.
+The shared [mixture API](../Copula/Rank/ChatterjeeMixture.lean) proves exact
+quadratic identities and strict convexity of xi. The
+[conditional-distance API](../Copula/Rank/ConditionalDistance.lean) proves
+xi=0 iff independence for every bivariate copula, including singular laws.
+
 Outstanding proof work includes the other named constructors, full signed
 Frank, generator criteria for CI/CD and density TP2, Pickands representation
 and admissibility, the CI/CD equivalences between LO and Schur order,

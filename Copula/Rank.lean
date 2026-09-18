@@ -8,3 +8,6 @@ import Copula.Rank.FGMKendall
 import Copula.Rank.Frechet
 import Copula.Rank.FGMChatterjee
 import Copula.Rank.PowerDiagonal
+import Copula.Rank.ConditionalDistance
+import Copula.Rank.ChatterjeeMixture
+import Copula.Rank.FrechetChatterjee

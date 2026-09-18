@@ -132,6 +132,10 @@ Gini's gamma, Blomqvist's beta, and Chatterjee's directional xi. All six have
 proved range bounds and values at independence, comonotonicity and
 countermonotonicity. Xi uses conditional distributions and accepts singular
 copulas. See [the definitions, conventions and proved results](docs/rank-coefficients.md).
+Xi is proved to vanish exactly at independence and to be strictly convex
+under nontrivial mixtures of distinct copulas. Mixing with independence
+attenuates xi quadratically. Fréchet and Mardia have closed-form xi formulas
+on their full parameter domains.
 
 ## Positive dependence
 
