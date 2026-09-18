@@ -27,7 +27,7 @@ noncomputable def marginal (μ : ProbabilityMeasure (Fin d → ℝ)) (i : Fin d)
   μ.toMeasure.map (fun x => x i)
 
 instance (μ : ProbabilityMeasure (Fin d → ℝ)) (i : Fin d) : IsProbabilityMeasure (marginal μ i) :=
-  Measure.isProbabilityMeasure_map (measurable_pi_apply i).aemeasurable
+  inferInstanceAs (IsProbabilityMeasure (μ.toMeasure.map (fun x => x i)))
 
 /-- Apply each marginal CDF to its own coordinate. -/
 noncomputable def marginalTransform (μ : ProbabilityMeasure (Fin d → ℝ)) (x : Fin d → ℝ)
@@ -67,7 +67,7 @@ theorem isSklarCopula_ofContinuousMarginals (μ : ProbabilityMeasure (Fin d → 
       {z | marginalTransform μ z i ≤ marginalTransform μ x i} := by
     apply ae_eq_of_subset_of_measure_ge
     · intro z hz
-      exact monotone_cdf (marginal μ i) hz
+      exact ProbabilityTheory.monotone_cdf (marginal μ i) hz
     · have hleft : μ.toMeasure {z | z i ≤ x i} =
           ENNReal.ofReal (ProbabilityTheory.cdf (marginal μ i) (x i)) := by
         rw [ProbabilityTheory.ofReal_cdf]
@@ -76,6 +76,8 @@ theorem isSklarCopula_ofContinuousMarginals (μ : ProbabilityMeasure (Fin d → 
           ENNReal.ofReal (ProbabilityTheory.cdf (marginal μ i) (x i)) := by
         have hm : Measurable (fun z => marginalTransform μ z i) :=
           (measurable_pi_apply i).comp (measurable_marginalTransform μ)
+        change μ.toMeasure ((fun z => marginalTransform μ z i) ⁻¹'
+          Iic (marginalTransform μ x i)) = _
         rw [← Measure.map_apply hm measurableSet_Iic, map_marginalTransform_eval μ hc,
           unitInterval.volume_Iic]
         rfl

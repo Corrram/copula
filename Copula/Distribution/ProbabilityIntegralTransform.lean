@@ -35,6 +35,18 @@ theorem exists_cdf_eq_of_continuous (μ : Measure ℝ) (hc : Continuous (cdf μ)
     ((tendsto_cdf_atBot μ).eventually_le_const ht0).exists
     ((tendsto_cdf_atTop μ).eventually_const_le ht1).exists
 
+/-- An atomless real probability measure has a continuous CDF. -/
+theorem continuous_cdf_of_atomless (μ : Measure ℝ) [IsProbabilityMeasure μ]
+    [NullSingletonClass μ] : Continuous (cdf μ) := by
+  apply continuous_iff_continuousAt.mpr
+  intro x
+  apply (monotone_cdf μ).continuousAt_iff_leftLim_eq_rightLim.mpr
+  rw [(cdf μ).rightLim_eq]
+  apply le_antisymm ((monotone_cdf μ).leftLim_le le_rfl)
+  have h := (cdf μ).measure_singleton x
+  rw [measure_cdf, measure_singleton] at h
+  exact sub_nonpos.mp (ENNReal.ofReal_eq_zero.mp h.symm)
+
 /-- Applying a continuous CDF to a variable with that law gives a uniform variable. -/
 theorem map_cdfUnit (μ : Measure ℝ) [IsProbabilityMeasure μ]
     (hc : Continuous (cdf μ)) : μ.map (cdfUnit μ) = volume := by

@@ -100,7 +100,7 @@ private theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I)
       tauto
     rw [partialIncrement_insert _ _ _ _ _ hi, ih b hab, ih _ hab']
     have h := measureReal_inter_add_sdiff (μ := C.toMeasure)
-      (s := partialRectangle a b s)
+      (s := partialRectangle a b s) (t := {x | x i ≤ a i})
       (measurableSet_le (measurable_pi_apply i) measurable_const)
     rw [hinter, hdiff] at h
     linarith

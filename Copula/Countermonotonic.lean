@@ -30,6 +30,10 @@ noncomputable def countermonotonic : Copula 2 :=
       · exact Measure.map_id
       · exact unitInterval.measurePreserving_symm.map_eq)
 
+@[simp]
+theorem toMeasure_countermonotonic : countermonotonic.toMeasure =
+    (volume : Measure I).map (fun t => ![t, unitInterval.symm t]) := rfl
+
 /-- The lower Fréchet–Hoeffding bound is attained in dimension two. -/
 @[simp]
 theorem cdf_countermonotonic (u : Fin 2 → I) :
@@ -40,7 +44,7 @@ theorem cdf_countermonotonic (u : Fin 2 → I) :
       Icc (unitInterval.symm (u 1)) (u 0) := by
     ext t
     simp [mem_Iic, Pi.le_def, Fin.forall_fin_two, unitInterval.symm_le_comm, and_comm]
-  rw [cdf, countermonotonic, toMeasure_ofMap, map_measureReal_apply hm measurableSet_Iic, hpre]
+  rw [cdf, toMeasure_countermonotonic, map_measureReal_apply hm measurableSet_Iic, hpre]
   simp only [Measure.real, unitInterval.volume_Icc, unitInterval.coe_symm_eq,
     ENNReal.toReal_ofReal']
   congr 1
