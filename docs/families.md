@@ -131,7 +131,10 @@ This catalogue contains 22 named families/special cases; overlapping classes
 are not counted twice. It distinguishes proved analytic CDFs from stochastic
 constructions. General multivariate Archimedean admissibility, negative Clayton
 and Frank parameters, Ali–Mikhail–Haq, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
-Pickands representations, and dependence coefficients remain future work.
+Pickands representations, and further family-specific dependence formulas remain future work.
+The [rank API](rank-coefficients.md) already includes six coefficients and four
+closed-form FGM formulas. The [ordering API](orders.md) proves exact FGM
+parameter ordering and comparison results for mixtures and extremal copulas.
 The bivariate validity theorem does not establish the new Archimedean families
 in higher dimensions, even for ranges known to be valid mathematically.
 

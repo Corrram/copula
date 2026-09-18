@@ -82,7 +82,10 @@ identities `rho = 1 − 6 E[(U−V)²] = −1 + 6 E[(U+V−1)²]`.
 `spearmanRho_eq_integral_cdf` connects the moment and CDF definitions via Fubini.
 
 Rho, footrule, gamma and beta are proved monotone under pointwise CDF ordering.
-Their `*_mix` theorems prove affine behavior under `Copula.mix C D a`, where
+`Copula.Order.Rank` adds Kendall's tau using symmetry of the cross-concordance
+integral. `Copula.Order.Schur` proves monotonicity of xi in directional Schur
+order. See [comparison orders](orders.md) for the precise conventions.
+The `*_mix` theorems for rho, footrule, gamma and beta prove affine behavior under `Copula.mix C D a`, where
 `a` is the weight on `C`. No affine identity is asserted for tau or xi.
 
 For FGM with any parameter `theta ∈ [-1,1]`, `Copula.Rank.FGM` proves:

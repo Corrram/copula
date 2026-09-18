@@ -72,6 +72,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
 | `Copula.Dependence` | PQD, LTD, RTI, SI and total positivity of CDFs, conditional kernels and densities; implication and mixture theorems, rank consequences and FGM classifications |
+| `Copula.Order` | Lower/upper orthant, concordance, supermodular and directional Schur comparisons; rank monotonicity, extremal copulas and FGM parameter ordering |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -122,6 +123,15 @@ dependence, and separate predicates for CDF-TP2, conditional-kernel TP2 and
 multivariate density MTP2. It proves implication chains, mixture closure,
 rank-coefficient consequences, benchmark examples and exact FGM parameter
 classifications. See [the conventions and proved coverage](docs/positive-dependence.md).
+
+## Comparing copulas
+
+`Copula.Order` supplies `LowerOrthantLE`, `UpperOrthantLE`, `ConcordanceLE`,
+`SupermodularLE` and directional `SchurLE`. In dimension two, the orthant and
+concordance comparisons coincide and preserve all five concordance coefficients.
+Schur order preserves Chatterjee's xi; independence is its unique least copula,
+while both comonotonicity and countermonotonicity are greatest elements.
+See [the ordering conventions, results and remaining work](docs/orders.md).
 
 ## Sklar's theorem
 

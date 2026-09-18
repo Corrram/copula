@@ -432,4 +432,72 @@ example (d : ℕ) (f : Fin d → I → ℝ) : IsMTP2 (fun x : Fin d → I => ∏
 example (C : Copula 2) (u v : I) : C.cdf ![u, v] = ∫ t in Set.Iic u, C.conditionalCDF t v :=
   C.cdf_eq_integral_conditionalCDF u v
 
+example {d : ℕ} (C D : Copula d) (h : C.SupermodularLE D) : C.ConcordanceLE D :=
+  h.concordanceLE
+
+example (C D : Copula 2) : C.UpperOrthantLE D ↔ C.LowerOrthantLE D :=
+  Copula.upperOrthantLE_iff_lowerOrthantLE C D
+
+example (C D : Copula 2) : C.ConcordanceLE D ↔ C.LowerOrthantLE D :=
+  Copula.concordanceLE_iff_lowerOrthantLE C D
+
+example {d : ℕ} (C D : Copula d) (h : C.LowerOrthantLE D) (k : D.LowerOrthantLE C) :
+    C = D := h.antisymm k
+
+example {d : ℕ} (C D : Copula d) (h : C.UpperOrthantLE D) (k : D.UpperOrthantLE C) :
+    C = D := h.antisymm k
+
+example (C D : Copula 2) (h : C.LowerOrthantLE D) : C.kendallTau ≤ D.kendallTau :=
+  h.kendallTau_le
+
+example (C D : Copula 2) (h : C.LowerOrthantLE D) : C.spearmanRho ≤ D.spearmanRho :=
+  h.spearmanRho_le
+
+example (C : Copula 2) : Copula.countermonotonic.ConcordanceLE C :=
+  Copula.concordanceLE_countermonotonic C
+
+example (C : Copula 2) : C.ConcordanceLE (Copula.comonotonic 2) :=
+  Copula.concordanceLE_comonotonic C
+
+example (C : Copula 2) : C.IsPQD ↔ (Copula.independence 2).LowerOrthantLE C :=
+  Copula.isPQD_iff_lowerOrthantLE C
+
+example (C : Copula 2) (u : Fin 2 → I) :
+    C.survival u = 1 - (u 0 : ℝ) - (u 1 : ℝ) + C.cdf u := C.survival_two u
+
+example {d : ℕ} (C D : Copula d) :
+    C.UpperOrthantLE D ↔
+      (C.reflect Finset.univ).LowerOrthantLE (D.reflect Finset.univ) :=
+  Copula.upperOrthantLE_iff_reflect C D
+
+example {d : ℕ} (C D : Copula d) (h : C.LowerOrthantLE D) {a b : I} (hab : a ≤ b) :
+    (D.mix C a).LowerOrthantLE (D.mix C b) := h.mix_weight hab
+
+example {θ η : ℝ} (hθ : |θ| ≤ 1) (hη : |η| ≤ 1) :
+    (Copula.fgm θ hθ).ConcordanceLE (Copula.fgm η hη) ↔ θ ≤ η :=
+  Copula.concordanceLE_fgm_iff hθ hη
+
+example (C D : Copula 2) (h : C.SchurLE D) : C.chatterjeeXi ≤ D.chatterjeeXi :=
+  h.chatterjeeXi_le
+
+example (C : Copula 2) : (Copula.independence 2).SchurLE C := Copula.schurLE_independence C
+
+example (C : Copula 2) : C.SchurLE (Copula.independence 2) ↔ C = Copula.independence 2 :=
+  Copula.schurLE_independence_iff C
+
+example : (Copula.comonotonic 2).SchurLE Copula.countermonotonic :=
+  Copula.schurLE_countermonotonic _
+
+example : Copula.countermonotonic.SchurLE (Copula.comonotonic 2) :=
+  Copula.schurLE_comonotonic _
+
+example : ¬ Copula.countermonotonic.SchurLE (Copula.independence 2) :=
+  Copula.not_schurLE_countermonotonic_independence
+
+example : ¬ (Copula.comonotonic 2).LowerOrthantLE Copula.countermonotonic :=
+  Copula.not_lowerOrthantLE_comonotonic_countermonotonic
+
+example : (Copula.independence 0).ConcordanceLE (Copula.independence 0) :=
+  Copula.ConcordanceLE.refl _
+
 end CopulaTest

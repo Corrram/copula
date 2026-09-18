@@ -141,6 +141,16 @@ increasing sigmoid embedding transfers the construction from the compact unit
 cube to arbitrary real-vector laws. The continuous-marginal construction remains
 available separately as the direct marginal-CDF transform.
 
+## Comparison orders
+
+`Copula.Order` keeps orthant, concordance, supermodular and directional Schur
+comparisons explicit. The measure representation supplies both lower and upper
+orthants, while conditional kernels support Schur comparisons for singular laws.
+Bivariate orthant equivalence and cross-concordance symmetry connect the first
+group to five concordance coefficients; convex conditional tests connect Schur
+order to Chatterjee's xi. See [orders](orders.md) for exact proved coverage and
+the remaining rearrangement, SI, generator and family-parameter comparisons.
+
 ## Upstreaming and discussion
 
 Propose small contributions: generic missing lemmas (if encountered), then
