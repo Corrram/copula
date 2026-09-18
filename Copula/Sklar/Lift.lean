@@ -27,6 +27,7 @@ theorem exists_lift {d : ℕ} {B : Type*} [MeasurableSpace B] [StandardBorelSpac
   have hproj_map (i : Fin d) :
       P.toMeasure.map (fun p => (p.1 i, p.2)) = (volume.map (q i)).prod volume := by
     rw [hqm]
+    change (μ.toMeasure.prod volume).map (Prod.map (fun x => x i) id) = _
     have h := Measure.map_prod_map μ.toMeasure (volume : Measure I)
       (measurable_pi_apply i) measurable_id
     simpa only [Measure.map_id] using h.symm
@@ -49,7 +50,10 @@ theorem exists_lift {d : ℕ} {B : Type*} [MeasurableSpace B] [StandardBorelSpac
     filter_upwards [ae_all_iff.mpr hrecover] with p hp
     exact funext hp
   change (P.toMeasure.map U).map (fun u i => q i (u i)) = _
-  rw [Measure.map_map (Measurable.of_eval fun i => (hq i).comp (measurable_pi_apply i)) hU]
+  have hQ : Measurable (fun u : Fin d → I => fun i => q i (u i)) :=
+    Measurable.of_eval fun i => (hq i).comp (measurable_pi_apply i)
+  rw [Measure.map_map hQ hU]
+  change P.toMeasure.map (fun p i => q i (U p i)) = _
   rw [Measure.map_congr hall]
   change (μ.toMeasure.prod volume).map Prod.fst = _
   simp
