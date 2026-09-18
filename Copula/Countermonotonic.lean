@@ -46,7 +46,7 @@ theorem reflect_comonotonic_eq_countermonotonic :
   have h : reflectPoint ({1} : Finset (Fin 2)) ∘ (fun t _ => t) =
       fun t : I => ![t, unitInterval.symm t] := by
     funext t i
-    fin_cases i <;> simp [reflectPoint, Function.comp_def]
+    fin_cases i <;> simp [reflectPoint]
   rw [h, toMeasure_countermonotonic]
 
 /-- The lower Fréchet–Hoeffding bound is attained in dimension two. -/
