@@ -27,6 +27,11 @@ variable {d : ℕ}
 def corner (a b : Fin d → I) (s : Finset (Fin d)) (i : Fin d) : I :=
   if i ∈ s then a i else b i
 
+@[simp]
+theorem corner_empty (a b : Fin d → I) : corner a b ∅ = b := by
+  funext i
+  simp [corner]
+
 /-- Apply finite differences in the coordinates of `s`. -/
 def partialIncrement (F : (Fin d → I) → ℝ) (a b : Fin d → I)
     (s : Finset (Fin d)) : ℝ :=
@@ -51,24 +56,18 @@ theorem partialIncrement_insert (F : (Fin d → I) → ℝ) (a b : Fin d → I)
     by_cases hji : j = i
     · subst j
       simp [corner]
-    · simp [corner, hji, Function.update_of_ne hji]
+    · simp [corner, hji]
   rw [Finset.card_insert_of_notMem hit, pow_succ, hc]
   ring
 
 private def partialRectangle (a b : Fin d → I) (s : Finset (Fin d)) : Set (Fin d → I) :=
   {x | x ≤ b ∧ ∀ i ∈ s, a i < x i}
 
-private theorem measurableSet_partialRectangle (a b : Fin d → I) (s : Finset (Fin d)) :
-    MeasurableSet (partialRectangle a b s) :=
-  measurableSet_Iic.inter (by
-    change MeasurableSet (⋂ i ∈ s, {x : Fin d → I | a i < x i})
-    exact s.measurableSet_biInter fun i _ => measurableSet_lt measurable_const (measurable_pi_apply i))
-
 private theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I)
     (s : Finset (Fin d)) (hab : a ≤ b) :
     partialIncrement C.cdf a b s = C.toMeasure.real (partialRectangle a b s) := by
   induction s using Finset.induction_on generalizing b with
-  | empty => simp [partialIncrement, partialRectangle, corner, cdf, Iic]
+  | empty => simp [partialIncrement, partialRectangle, cdf, Iic]
   | @insert i s hi ih =>
     have hab' : a ≤ Function.update b i (a i) := by
       intro j
@@ -96,7 +95,7 @@ private theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I)
     have hdiff : partialRectangle a b s \ {x | x i ≤ a i} =
         partialRectangle a b (insert i s) := by
       ext x
-      simp only [partialRectangle, mem_setOf_eq, mem_sdiff, Finset.mem_insert,
+      simp only [partialRectangle, mem_ofPred_eq, mem_sdiff, Finset.mem_insert,
         forall_eq_or_imp, not_le]
       tauto
     rw [partialIncrement_insert _ _ _ _ _ hi, ih b hab, ih _ hab']
@@ -112,7 +111,7 @@ theorem rectangleIncrement_cdf (C : Copula d) (a b : Fin d → I) (hab : a ≤ b
   rw [rectangleIncrement, partialIncrement_cdf C a b _ hab]
   congr 1
   ext x
-  simp only [partialRectangle, mem_setOf_eq, Finset.mem_univ, forall_const,
+  simp only [partialRectangle, mem_ofPred_eq, Finset.mem_univ, forall_const,
     mem_univ_pi, mem_Ioc, Pi.le_def]
   exact ⟨fun h i => ⟨h.2 i, h.1 i⟩, fun h => ⟨fun i => (h i).2, fun i => (h i).1⟩⟩
 

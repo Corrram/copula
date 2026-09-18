@@ -11,3 +11,4 @@ import Copula.Countermonotonic
 import Copula.Unique
 import Copula.Rectangle
 import Copula.Distribution.ProbabilityIntegralTransform
+import Copula.Sklar.Continuous

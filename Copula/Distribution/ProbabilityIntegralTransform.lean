@@ -55,6 +55,7 @@ theorem map_cdfUnit (μ : Measure ℝ) [IsProbabilityMeasure μ]
     obtain ⟨y, hy⟩ := exists_cdf_eq_of_continuous μ hc hr0 hr1
     have hsub : {x | cdf μ x ≤ (u : ℝ)} ⊆ Iic y := by
       intro x hx
+      change x ≤ y
       by_contra! hxy
       have hm := monotone_cdf μ hxy.le
       change cdf μ x ≤ (u : ℝ) at hx

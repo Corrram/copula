@@ -42,7 +42,9 @@ noncomputable def reflect (C : Copula d) (s : Finset (Fin d)) : Copula d :=
         _ = (C.toMeasure.map (fun x => x i)).map unitInterval.symm :=
           (Measure.map_map unitInterval.measurable_symm (measurable_pi_apply i)).symm
         _ = volume := by rw [C.map_eval]; exact unitInterval.measurePreserving_symm.map_eq
-    · simpa only [reflectPoint, hi, ↓reduceIte] using C.map_eval i)
+    · simp only [reflectPoint, hi, ↓reduceIte]
+      change C.toMeasure.map (fun x => x i) = volume
+      exact C.map_eval i)
 
 @[simp]
 theorem toMeasure_reflect (C : Copula d) (s : Finset (Fin d)) :
