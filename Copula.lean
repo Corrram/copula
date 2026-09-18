@@ -28,8 +28,17 @@ import Copula.Classical.Bivariate
 import Copula.Archimedean.Basic
 import Copula.Archimedean.Exponential
 import Copula.Archimedean.Power
+import Copula.Archimedean.Clayton
 import Copula.Elliptical.ScaleMixture
 import Copula.ExtremeValue.Basic
 import Copula.Transform.Power
 import Copula.Transform.MaxProduct
 import Copula.Mixture
+import Copula.Families.StudentT
+import Copula.Families.ScaleMixtures
+import Copula.Families.Gumbel
+import Copula.Families.Joe
+import Copula.Families.Frank
+import Copula.Families.MarshallOlkin
+import Copula.Families.FGM
+import Copula.Families.Frechet

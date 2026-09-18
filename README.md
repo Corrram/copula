@@ -59,6 +59,17 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.Clayton` | Positive-parameter gamma-frailty construction with atomless marginals and Sklar factorization |
 | `Copula.Families.Clayton.CDF` | Joint frailty tails, explicit marginal CDFs, and the classical Clayton CDF formula |
 | `Copula.Families.Clayton.Limits` | Pointwise CDF convergence to independence at zero and comonotonicity at infinity |
+| `Copula.Archimedean.Basic` | Bivariate generator admissibility from convexity, measure construction, and Archimedean classification |
+| `Copula.Archimedean.Power` | Validity of the outer-power transformation |
+| `Copula.Archimedean.Clayton` | Identification of the Clayton generator in every dimension; BB1 construction and CDF |
+| `Copula.Families.Gumbel`, `Joe`, `Frank` | Proved bivariate generators and CDFs; Gumbel and Tawn max-stability; BB6 |
+| `Copula.ExtremeValue.Basic` | Max-stability, independence and comonotonicity, closure under power products |
+| `Copula.Transform.MaxProduct` | Independent maxima with coordinatewise power weights, including zero weights; exact CDF |
+| `Copula.Families.MarshallOlkin` | Marshall–Olkin, Cuadras–Augé and finite-dimensional common-shock copulas |
+| `Copula.Elliptical.ScaleMixture` | Positive Gaussian scale mixtures with atomless marginals and Sklar factorization |
+| `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
+| `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
+| `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -82,8 +93,16 @@ Cθ(u) = (∑ i, uᵢ^(-θ) - d + 1)^(-1/θ).
 
 A zero coordinate makes the CDF zero. `tendsto_clayton_zero` and
 `tendsto_clayton_atTop` give pointwise CDF limits along any filter of positive
-parameters. The package does not yet cover negative Clayton parameters or
-general Archimedean generator admissibility.
+parameters. Bivariate Archimedean admissibility is now proved from generator
+convexity. Negative Clayton parameters and the general higher-dimensional
+generator criterion remain outside the current implementation.
+
+The [family catalogue](docs/families.md) lists 22 named families and special
+cases, with exact parameter ranges, dimensions, CDF results, and stochastic
+constructions. It includes Archimedean, extreme-value, elliptical Gaussian
+scale-mixture, polynomial, and mixture families. New Archimedean constructors
+are bivariate; the Gaussian scale-mixture constructors support every finite
+dimension. The catalogue also records which familiar families remain future work.
 See [the design review and roadmap](docs/design.md).
 
 ## Sklar's theorem

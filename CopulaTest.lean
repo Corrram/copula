@@ -177,4 +177,88 @@ example (θ : ℕ → ℝ) (hθ : ∀ n, 0 < θ n) (ht : Filter.Tendsto θ Filte
   simpa [Copula.cdf_comonotonic, half] using
     Copula.tendsto_clayton_atTop θ hθ ht (fun _ : Fin 2 => half)
 
+-- Generator-based families are actual probability measures with uniform marginals.
+example (θ : ℝ) (hθ : 1 ≤ θ) : Copula.IsArchimedean (Copula.gumbel θ hθ) :=
+  Copula.isArchimedean_gumbel θ hθ
+
+example (θ : ℝ) (hθ : 0 < θ) : Copula.IsArchimedean (Copula.clayton 5 θ hθ) :=
+  Copula.isArchimedean_clayton 5 θ hθ
+
+example : Copula.gumbel 1 le_rfl = Copula.independence 2 := by simp
+
+example : Copula.joe 1 le_rfl = Copula.independence 2 := by simp
+
+example (θ : ℝ) (hθ : 0 < θ) : Copula.bb1 θ hθ 1 le_rfl = Copula.clayton 2 θ hθ := by simp
+
+example (θ : ℝ) (hθ : 1 ≤ θ) : Copula.bb6 θ hθ 1 le_rfl = Copula.joe θ hθ := by simp
+
+example (θ : ℝ) (hθ : 0 < θ) : (Copula.frank θ hθ).cdf ![0, half] = 0 :=
+  Copula.cdf_eq_zero_of_coord_eq_zero _ _ 0 rfl
+
+example (θ : ℝ) (hθ : 0 < θ) :
+    (Copula.frank θ hθ).cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by simp [half]
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (u : Fin 2 → I) (t : ℝ) (ht : 0 < t) :
+    (Copula.gumbel θ hθ).cdf (fun i => Copula.unitPower (u i) t ht.le) =
+      ((Copula.gumbel θ hθ).cdf u) ^ t := Copula.isExtremeValue_gumbel θ hθ u t ht
+
+example (θ : ℝ) (hθ : 1 ≤ θ) (a b : I) : Copula.IsExtremeValue (Copula.tawn θ hθ a b) :=
+  Copula.isExtremeValue_tawn θ hθ a b
+
+example (a : Fin 4 → I) : Copula.IsExtremeValue (Copula.commonShock 4 a) :=
+  Copula.isExtremeValue_commonShock 4 a
+
+example : (Copula.commonShock 0 (fun i => Fin.elim0 i)).cdf (fun i => Fin.elim0 i) = 1 := by simp
+
+example : Copula.marshallOlkin 0 0 = Copula.independence 2 := by simp
+
+example : Copula.marshallOlkin 1 1 = Copula.comonotonic 2 := by simp
+
+example : (Copula.marshallOlkin 1 0).cdf (fun _ => half) = 1 / 4 := by
+  norm_num [Copula.cdf_marshallOlkin, half]
+
+example (C D : Copula 3) : Copula.maxProduct C D (fun _ => 0) = D := by simp
+
+example (C D : Copula 3) : Copula.maxProduct C D (fun _ => 1) = C := by simp
+
+-- Both signs of the FGM parameter are supported.
+example : (Copula.fgm 1 (by norm_num)).cdf (fun _ => half) = 5 / 16 := by
+  norm_num [Copula.cdf_fgm, Copula.fgmCDF, half]
+
+example : (Copula.fgm (-1) (by norm_num)).cdf (fun _ => half) = 3 / 16 := by
+  norm_num [Copula.cdf_fgm, Copula.fgmCDF, half]
+
+example : Copula.mardia (-1) (by norm_num) = Copula.countermonotonic := by simp
+
+example : Copula.mardia 0 (by norm_num) = Copula.independence 2 := by simp
+
+example : Copula.mardia 1 (by norm_num) = Copula.comonotonic 2 := by simp
+
+example (C D : Copula 2) (a : I) (u : Fin 2 → I) :
+    (Copula.mix C D a).cdf u = (a : ℝ) * C.cdf u + (1 - (a : ℝ)) * D.cdf u := by simp
+
+-- Student degrees of freedom need not be integral, or large enough for moments.
+example (R : Matrix (Fin 3) (Fin 3) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1) :
+    (Copula.studentT R hR hd (1 / 2) (by norm_num)).cdf
+      (Function.update (fun _ => 1) 0 half) = 1 / 2 := by simp [half]
+
+example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1) :
+    Copula.studentT R hR hd 1 zero_lt_one = Copula.cauchy R hR hd := by simp
+
+example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1) :
+    Copula.varianceGamma R hR hd 1 zero_lt_one = Copula.laplace R hR hd := by simp
+
+example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1)
+    (ν : ℝ) (hν : 0 < ν) :
+    Copula.IsSklarCopula (Copula.studentTLaw R ν hν) (Copula.studentT R hR hd ν hν) :=
+  Copula.isSklarCopula_studentT R hR hd ν hν
+
+-- Singular dispersion matrices are accepted by the elliptical mixture construction.
+example : (Copula.slash (Matrix.of (fun (_ _ : Fin 2) => (1 : ℝ)))
+    (Copula.posSemidef_allOnes 2) (fun _ => rfl) 1 zero_lt_one).cdf (fun _ => 1) = 1 := by simp
+
+example (R : Matrix (Fin 2) (Fin 2) ℝ) (hR : R.PosSemidef) (hd : ∀ i, R i i = 1) :
+    (Copula.normalLognormal R hR hd 0).cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by
+  simp [half]
+
 end CopulaTest
