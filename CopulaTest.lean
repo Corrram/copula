@@ -53,7 +53,8 @@ example {d : ℕ} (C : Copula d) (u : Fin d → I) : C.cdf u ≤ (Copula.comonot
   simpa only [Copula.cdf_comonotonic] using C.cdf_le_frechet_upper u
 
 example (C : Copula 0) : 1 ≤ C.cdf (fun _ => 0) := by
-  convert C.frechet_lower_le_cdf (fun _ => 0) using 1 <;> norm_num
+  convert C.frechet_lower_le_cdf (fun _ => 0) using 1
+  norm_num
 
 example (C : Copula 2) :
     |C.cdf (fun _ => threeQuarters) - C.cdf (fun _ => half)| ≤ 1 / 2 := by
@@ -64,7 +65,8 @@ example (C : Copula 2) :
 -- The default Pi metric is the maximum metric, so its Lipschitz constant is d.
 example (C : Copula 2) : LipschitzWith 2 C.cdf := C.lipschitzWith_cdf
 
-example (C : Copula 0) : LipschitzWith 0 C.cdf := C.lipschitzWith_cdf
+example (C : Copula 0) : LipschitzWith 0 C.cdf := by
+  simpa only [Nat.cast_zero] using C.lipschitzWith_cdf
 
 example (C : Copula 2) (ρ : Fin 3 → Fin 2) : Continuous (C.reindex ρ).cdf :=
   (C.reindex ρ).continuous_cdf
