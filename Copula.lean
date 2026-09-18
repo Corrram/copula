@@ -10,3 +10,4 @@ import Copula.Reflection
 import Copula.Countermonotonic
 import Copula.Unique
 import Copula.Rectangle
+import Copula.Distribution.ProbabilityIntegralTransform
