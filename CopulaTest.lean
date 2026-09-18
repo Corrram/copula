@@ -101,7 +101,11 @@ example (C : Copula 1) : C = Copula.independence 1 := Subsingleton.elim _ _
 example (C : Copula 0) :
     Copula.rectangleIncrement C.cdf (fun _ => 0) (fun _ => 1) = 1 := by
   rw [C.rectangleIncrement_cdf _ _ (by intro i; exact Fin.elim0 i)]
-  simp
+  have he : Set.pi Set.univ (fun _ : Fin 0 => Set.Ioc (0 : I) 1) = Set.univ := by
+    apply Set.eq_univ_of_forall
+    intro x i _
+    exact Fin.elim0 i
+  rw [he, probReal_univ]
 
 example (C : Copula 2) (a b : Fin 2 → I) (hab : a ≤ b) :
     0 ≤ C.cdf b - C.cdf ![a 0, b 1] - C.cdf ![b 0, a 1] + C.cdf a := by
