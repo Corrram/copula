@@ -38,8 +38,11 @@ theorem toMeasure_countermonotonic : countermonotonic.toMeasure =
 theorem reflect_comonotonic_eq_countermonotonic :
     (comonotonic 2).reflect {1} = countermonotonic := by
   apply ext
-  rw [toMeasure_reflect, toMeasure_comonotonic,
-    Measure.map_map (measurable_reflectPoint _) (Measurable.of_eval fun _ => measurable_id)]
+  rw [toMeasure_reflect, toMeasure_comonotonic]
+  have hm : ((volume : Measure I).map (fun t : I => fun _ : Fin 2 => t)).map (reflectPoint {1}) =
+      volume.map (reflectPoint {1} ∘ (fun t : I => fun _ : Fin 2 => t)) :=
+    Measure.map_map (measurable_reflectPoint _) (Measurable.of_eval fun _ => measurable_id)
+  rw [hm]
   have h : reflectPoint ({1} : Finset (Fin 2)) ∘ (fun t _ => t) =
       fun t : I => ![t, unitInterval.symm t] := by
     funext t i

@@ -16,3 +16,4 @@ import Copula.Families.Gaussian
 import Copula.Classical
 import Copula.Distribution.Quantile
 import Copula.Distribution.RandomizedInverse
+import Copula.Sklar.UnitInterval

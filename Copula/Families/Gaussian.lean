@@ -34,8 +34,11 @@ noncomputable def gaussian (R : Matrix (Fin d) (Fin d) ℝ)
       intro i
       have hm : (multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (fun x => x i) =
           gaussianReal 0 1 := by
-        simpa [hdiag, PiLp.zero_apply] using
-          (measurePreserving_eval_multivariateGaussian hR (i := i)).map_eq
+        have h := (measurePreserving_eval_multivariateGaussian
+          (μ := (0 : EuclideanSpace ℝ (Fin d))) hR (i := i)).map_eq
+        have hz : (0 : EuclideanSpace ℝ (Fin d)) i = (0 : ℝ) := rfl
+        rw [hz, hdiag, Real.toNNReal_one] at h
+        exact h
       calc
         _ = ((multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (fun x => x i)).map
             (cdfUnit (gaussianReal 0 1)) :=

@@ -68,7 +68,8 @@ theorem partialIncrement_insert (F : (Fin d → I) → ℝ) (a b : Fin d → I)
 
 theorem partialIncrement_singleton (F : (Fin d → I) → ℝ) (a b : Fin d → I) (i : Fin d) :
     partialIncrement F a b {i} = F b - F (Function.update b i (a i)) := by
-  rw [Finset.singleton_eq_insert_empty, partialIncrement_insert _ _ _ _ _ (by simp)]
+  change partialIncrement F a b (insert i ∅) = _
+  rw [partialIncrement_insert _ _ _ _ _ (by simp)]
   simp
 
 /-- The familiar four-term increment in dimension two. -/
