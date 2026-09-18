@@ -23,7 +23,9 @@ theorem cdf_dim_one (C : Copula 1) (u : Fin 1 → I) : C.cdf u = (u 0 : ℝ) := 
     funext i
     fin_cases i
     simp
-  rw [hu, C.cdf_update_one]
+  calc
+    C.cdf u = C.cdf (Function.update (fun _ => 1) 0 (u 0)) := congrArg C.cdf hu
+    _ = (u 0 : ℝ) := C.cdf_update_one 0 (u 0)
 
 instance : Subsingleton (Copula 1) where
   allEq C D := ext_cdf (by intro u; simp)

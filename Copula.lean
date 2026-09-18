@@ -9,3 +9,4 @@ import Copula.Transform
 import Copula.Reflection
 import Copula.Countermonotonic
 import Copula.Unique
+import Copula.Rectangle

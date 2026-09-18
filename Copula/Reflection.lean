@@ -22,7 +22,8 @@ theorem measurable_reflectPoint (s : Finset (Fin d)) : Measurable (reflectPoint 
   apply Measurable.of_eval
   intro i
   by_cases hi : i ∈ s
-  · simpa [reflectPoint, hi] using unitInterval.measurable_symm.comp (measurable_pi_apply i)
+  · simpa [reflectPoint, hi, Function.comp_def] using
+      unitInterval.measurable_symm.comp (measurable_pi_apply i : Measurable (fun x : Fin d → I => x i))
   · simpa [reflectPoint, hi] using (measurable_pi_apply i : Measurable (fun x : Fin d → I => x i))
 
 @[simp]
@@ -37,8 +38,10 @@ noncomputable def reflect (C : Copula d) (s : Finset (Fin d)) : Copula d :=
     intro i
     by_cases hi : i ∈ s
     · simp only [reflectPoint, hi, ↓reduceIte]
-      rw [← Measure.map_map unitInterval.measurable_symm (measurable_pi_apply i), C.map_eval]
-      exact unitInterval.measurePreserving_symm.map_eq
+      calc
+        _ = (C.toMeasure.map (fun x => x i)).map unitInterval.symm :=
+          (Measure.map_map unitInterval.measurable_symm (measurable_pi_apply i)).symm
+        _ = volume := by rw [C.map_eval]; exact unitInterval.measurePreserving_symm.map_eq
     · simpa only [reflectPoint, hi, ↓reduceIte] using C.map_eval i)
 
 @[simp]
@@ -48,7 +51,10 @@ theorem toMeasure_reflect (C : Copula d) (s : Finset (Fin d)) :
 @[simp]
 theorem reflect_empty (C : Copula d) : C.reflect ∅ = C := by
   apply ext
-  simp [reflectPoint]
+  have h : reflectPoint (∅ : Finset (Fin d)) = id := by
+    funext x i
+    simp [reflectPoint]
+  rw [toMeasure_reflect, h, Measure.map_id]
 
 /-- Reflection is an involution, including for the empty cube. -/
 @[simp]
@@ -57,9 +63,12 @@ theorem reflect_reflect (C : Copula d) (s : Finset (Fin d)) :
   apply ext
   rw [toMeasure_reflect, toMeasure_reflect,
     Measure.map_map (measurable_reflectPoint s) (measurable_reflectPoint s)]
-  simpa only [Function.comp_def, reflectPoint_reflectPoint] using Measure.map_id
+  have h : reflectPoint s ∘ reflectPoint s = id := funext (reflectPoint_reflectPoint s)
+  rw [h, Measure.map_id]
 
-theorem reflect_injective (s : Finset (Fin d)) : Function.Injective (fun C : Copula d => C.reflect s) :=
-  Function.LeftInverse.injective (fun C => C.reflect_reflect s)
+theorem reflect_injective (s : Finset (Fin d)) : Function.Injective (fun C : Copula d => C.reflect s) := by
+  intro C D h
+  have h' := congrArg (fun E : Copula d => E.reflect s) h
+  simpa using h'
 
 end ProbabilityTheory.Copula
