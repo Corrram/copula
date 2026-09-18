@@ -3,6 +3,8 @@ import Mathlib.Tactic.NormNum
 
 /-! Public API examples, including the empty dimension and dependent coordinates. -/
 
+noncomputable section
+
 open ProbabilityTheory MeasureTheory
 open scoped unitInterval
 
@@ -24,7 +26,7 @@ example : (Copula.comonotonic 2).cdf (fun _ => half) = 1 / 2 := by
 
 -- The uniform marginal is available for every copula.
 example (C : Copula 2) : C.cdf (Function.update (fun _ => 1) 0 half) = 1 / 2 := by
-  simpa [half] using C.cdf_update_one 0 half
+  simp [half]
 
 example (C : Copula 2) : C.cdf ![0, half] = 0 :=
   C.cdf_eq_zero_of_coord_eq_zero _ 0 rfl
