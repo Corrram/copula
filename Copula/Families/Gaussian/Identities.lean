@@ -1,7 +1,8 @@
 /-
+Copyright (c) 2026 Rémy Degenne. All rights reserved.
 Copyright (c) 2026 Marcus Rockel. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Marcus Rockel
+Authors: Rémy Degenne, Etienne Marion, Marcus Rockel
 -/
 import Copula.Families.Gaussian
 import Copula.Independence
@@ -43,6 +44,8 @@ private noncomputable def selectCLM (ρ : Fin e → Fin d) :
   (EuclideanSpace.equiv (Fin e) ℝ).symm.toContinuousLinearMap.comp
     (ContinuousLinearMap.pi fun i => EuclideanSpace.proj (ρ i))
 
+-- Generalizes mathlib's `measurePreserving_restrict₂_multivariateGaussian`:
+-- the same mean/covariance comparison also permits repeated coordinates.
 private theorem map_select_multivariateGaussian (R : Matrix (Fin d) (Fin d) ℝ)
     (hR : R.PosSemidef) (ρ : Fin e → Fin d) :
     (multivariateGaussian (0 : EuclideanSpace ℝ (Fin d)) R).map (selectCLM ρ) =
