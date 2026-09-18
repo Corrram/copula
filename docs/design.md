@@ -87,6 +87,12 @@ case or upstream feedback calls for it.
   normal–lognormal constructions, including singular dispersion matrices.
 - Finite mixtures, FGM with both parameter signs, Fréchet mixtures, and Mardia.
   See [the family catalogue](families.md) for precise coverage and parameter ranges.
+- Six population rank dependence coefficients with sharp ranges and benchmark
+  values. The xi definition uses conditional kernels, supports singular laws,
+  and has a proved conditional-variance formula and functional-dependence
+  implication. Spearman's rho has both moment and CDF integral formulas;
+  rho, footrule, gamma and beta have mixture identities and exact FGM values.
+  See [rank coefficients](rank-coefficients.md) for conventions and remaining work.
 
 ## Remaining mathematical milestones
 

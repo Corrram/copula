@@ -70,6 +70,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
+| `Copula.Rank` | Six population dependence coefficients, sharp ranges and benchmark values; Spearman CDF and distance formulas; mixture identities and FGM formulas |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
@@ -104,6 +105,14 @@ scale-mixture, polynomial, and mixture families. New Archimedean constructors
 are bivariate; the Gaussian scale-mixture constructors support every finite
 dimension. The catalogue also records which familiar families remain future work.
 See [the design review and roadmap](docs/design.md).
+
+## Rank dependence
+
+The bivariate API includes Spearman's rho, Kendall's tau, Spearman's footrule,
+Gini's gamma, Blomqvist's beta, and Chatterjee's directional xi. All six have
+proved range bounds and values at independence, comonotonicity and
+countermonotonicity. Xi uses conditional distributions and accepts singular
+copulas. See [the definitions, conventions and proved results](docs/rank-coefficients.md).
 
 ## Sklar's theorem
 
