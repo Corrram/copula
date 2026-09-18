@@ -25,7 +25,7 @@ private theorem expMeasure_Ici {t : ℝ} (ht : 0 ≤ t) :
   let : NullSingletonClass (expMeasure 1) := by unfold expMeasure gammaMeasure; infer_instance
   rw [← measure_congr Ioi_ae_eq_Ici, ← compl_Iic,
     prob_compl_eq_one_sub measurableSet_Iic, ← ofReal_cdf,
-    cdf_expMeasure_eq zero_lt_one, if_pos ht, one_mul,
+    cdf_expMeasure_eq zero_lt_one, ite_eq_left ht, one_mul,
     ← ENNReal.ofReal_one, ← ENNReal.ofReal_sub _ (by
       have : exp (-t) ≤ 1 := exp_le_one_iff.mpr (neg_nonpos.mpr ht)
       linarith)]
@@ -51,7 +51,7 @@ theorem claytonLaw_lowerTail (θ : ℝ) (hθ : 0 < θ) (s : Finset (Fin d))
   have he : {x : Fin d → ℝ | ∀ i ∈ s, -(x i / g) ≤ -t i} =
       Set.pi univ (fun i => if i ∈ s then Ici (t i * g) else univ) := by
     ext x
-    simp only [mem_ofPred_eq, neg_le_neg_iff, le_div_iff₀ hg, mem_pi, mem_univ,
+    simp only [mem_ofPred_eq, neg_le_neg_iff, le_div_iff₀ hg, Set.mem_pi, mem_univ,
       forall_const]
     constructor
     · intro hx i
@@ -70,7 +70,7 @@ theorem claytonLaw_lowerTail (θ : ℝ) (hθ : 0 < θ) (s : Finset (Fin d))
     · exact measure_univ
   simp_rw [hp]
   rw [Finset.prod_ite_mem_eq, ← ENNReal.ofReal_prod_of_nonneg (fun i _ => (exp_pos _).le),
-    ← Real.exp_sum, ← Finset.sum_neg_distrib, ← Finset.sum_mul]
+    ← Real.exp_sum, Finset.sum_neg_distrib, ← Finset.sum_mul]
 
 /-- The marginal CDF of the negative ratio at a nonpositive argument. -/
 theorem cdf_claytonLaw_marginal (θ : ℝ) (hθ : 0 < θ) (i : Fin d)
@@ -92,7 +92,9 @@ theorem claytonLaw_real_Iic (θ : ℝ) (hθ : 0 < θ) (t : Fin d → ℝ)
   have he : Iic (fun i => -t i) = {x : Fin d → ℝ | ∀ i ∈ Finset.univ, x i ≤ -t i} := by
     ext x; simp [Pi.le_def]
   rw [Measure.real, he, claytonLaw_lowerTail θ hθ Finset.univ t (fun i _ => ht i),
-    ENNReal.toReal_ofReal (by positivity)]
+    ENNReal.toReal_ofReal (Real.rpow_nonneg (by
+      have := Finset.sum_nonneg (s := Finset.univ) (fun i _ => ht i)
+      linarith) _)]
 
 /-- The explicit Clayton CDF when every coordinate is positive. -/
 theorem cdf_clayton_of_pos (θ : ℝ) (hθ : 0 < θ) (u : Fin d → I)
