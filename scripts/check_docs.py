@@ -61,6 +61,11 @@ def validate(full):
         return cache[path]
 
     if full:
+        landing = read(site / "api/Copula.html")
+        assert "copula-api" in landing.ids, "Missing Copula API topic index"
+        for href in landing.links:
+            if href.startswith("Copula/"):
+                assert (site / "api" / href).is_file(), f"Missing API topic: {href}"
         for item in THEOREMS.values():
             path = site / "api" / (item["module"].replace(".", "/") + ".html")
             assert item["declaration"] in read(path).ids, f"Missing formal declaration: {item['declaration']}"
