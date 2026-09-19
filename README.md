@@ -1,6 +1,6 @@
-# lean-copula
+# copula
 
-[![Lean](https://github.com/Corrram/lean-copula/actions/workflows/lean.yml/badge.svg)](https://github.com/Corrram/lean-copula/actions/workflows/lean.yml)
+[![Lean](https://github.com/Corrram/copula/actions/workflows/lean.yml/badge.svg)](https://github.com/Corrram/copula/actions/workflows/lean.yml)
 
 Finite-dimensional copulas in Lean 4, built on mathlib. This is an independent,
 early-stage project intended for research use and eventual upstream contributions.
@@ -202,8 +202,8 @@ Install [Lean and elan](https://leanprover-community.github.io/get_started.html)
 then run:
 
 ```sh
-git clone https://github.com/Corrram/lean-copula.git
-cd lean-copula
+git clone https://github.com/Corrram/copula.git
+cd copula
 lake exe cache get
 lake build
 lake test
@@ -220,7 +220,7 @@ Use Lean **v4.34.0** and add the tagged development release to your `lakefile.to
 ```toml
 [[require]]
 name = "copula"
-git = "https://github.com/Corrram/lean-copula.git"
+git = "https://github.com/Corrram/copula.git"
 rev = "v0.1.0"
 ```
 
@@ -229,7 +229,7 @@ dependency manifest to record the exact revisions. Use `rev = "main"` for
 ongoing development, or a full commit SHA for a specific snapshot. If you
 also declare mathlib directly, use the same mathlib revision as this package.
 
-The GitHub repository is `lean-copula`, the Lake package is `copula`, and the
+The GitHub repository is `copula`, the Lake package is `copula`, and the
 Lean module root is `Copula`.
 
 ### Reservoir
@@ -253,7 +253,7 @@ rev = "v0.1.0"
 ## Feedback and citation
 
 Design questions, API suggestions, and small contributions are welcome through
-[GitHub issues](https://github.com/Corrram/lean-copula/issues) and pull requests.
+[GitHub issues](https://github.com/Corrram/copula/issues) and pull requests.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the upstreaming workflow. When linking
 from Zulip or a GitHub discussion, prefer a permalink to the relevant commit and
 definition. For research citations, use [CITATION.cff](CITATION.cff) and include
