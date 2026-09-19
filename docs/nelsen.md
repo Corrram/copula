@@ -11,6 +11,7 @@ probability-measure representation.
 | --- | --- | --- |
 | Exercise 2.8; §3.2.6, conditions (3.2.21) | `Copula.Diagonal` | Diagonal bounds, monotonicity, 2-Lipschitz regularity, endpoint values, and `δ = id ↔ C = M` |
 | §3.2.2, binary ordinal-sum construction | `Copula.OrdinalSum` | Full split-parameter range, CDF and measure formulas, block probabilities, recovery, order, exchangeability, PQD and tail inheritance |
+| Theorem 3.2.1 and the subsequent probability criteria | `Copula.OrdinalSum.Cut`, `Components`, `Decomposition` | Explicit component extraction, reconstruction and uniqueness at an interior cut; equivalent threshold and max/min events |
 | §3.2.2 and §5.1, ordinal-sum rank calculations | `Copula.OrdinalSum.Rank`, `RankExamples` | Exact rho, tau, footrule and common-split Q formulas; sharp bounds and benchmark specializations |
 | §3.2.6, order-statistic interpretation | `Copula.Diagonal` | Distribution functions of the coordinate maximum and minimum |
 | §2.6 | `Copula.Reflection.Bivariate` | Single-coordinate reflection formulas, survival copula, transpose and composition identities |

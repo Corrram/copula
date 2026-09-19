@@ -176,6 +176,11 @@ NQD the analogous signs are negative, and zero again forces independence.
 The NQD proof also supplies `3 tau ≤ rho ≤ 0`. These equivalences rely on the
 quadrant-dependence hypothesis; they do not hold for arbitrary copulas.
 
+The ordinal-sum API also proves that NQD copulas have `C(a,a)<a` at every
+interior threshold, so they admit no nontrivial binary ordinal-sum
+decomposition. This includes independence and countermonotonicity; import
+`Copula.OrdinalSum` or `Copula` for the decomposition theorem.
+
 The generic implications from density MTP2 to kernel/CDF TP2, association and
 FKG inequalities, a monotone-kernel converse for SI, and further family
 classifications remain future work. They are not hidden assumptions of any

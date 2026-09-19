@@ -69,7 +69,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Elliptical.ScaleMixture` | Positive Gaussian scale mixtures with atomless marginals and Sklar factorization |
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
-| `Copula.OrdinalSum` | Binary ordinal sums, CDFs and probability laws, rank formulas, sharp bounds, recovery, ordering, PQD and tails |
+| `Copula.OrdinalSum` | Binary ordinal sums and converse decomposition, CDFs and probability laws, rank formulas, sharp bounds, ordering, PQD and tails |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
 | `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
@@ -96,6 +96,9 @@ blocks, respectively, allowing constructions with asymmetric tail dependence.
 Their probability laws, integration formulas, and exact rho, tau, footrule
 and common-split concordance formulas are proved, with sharp bounds and
 explicit independent-component and countermonotonic-component examples.
+The converse is proved as well: an interior point with `C(a,a)=a` gives
+explicit component copulas, uniquely determined at that split. Equivalent
+probability criteria identify these cuts without assuming a density.
 
 The CDF is 1-Lipschitz for the sum of coordinate distances. Lean's default
 metric on `Fin d → unitInterval` is the maximum metric; the theorem

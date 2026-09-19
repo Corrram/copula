@@ -72,6 +72,13 @@ and footrule −1/2. Choosing independent copulas as both components gives
 explicit witnesses different from M and W. Thus minimal footrule, unlike
 maximal footrule, does not determine a unique copula.
 
+`OrdinalSum.CutConsequences` supplies the converses: beta 1 characterizes
+ordinal sums with split `1/2`, with a unique component pair at that split;
+beta −1 characterizes their second-coordinate reflections. It follows that
+beta 1 forces `rho≥1/2`, `tau≥0`, and `footrule≥1/4`, whereas beta −1 forces
+`rho≤−1/2` and `tau≤0`. The equal-split W/W copula and its reflection attain
+these bounds. See the [decomposition API](ordinal-sums.md#converse-decomposition-and-unique-components).
+
 `Order.StrictSpearman` proves that distinct copulas comparable in lower
 orthant or concordance order have strictly different rho. Within either the
 PQD or NQD class, rho vanishes exactly at independence. The same equivalence

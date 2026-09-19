@@ -89,6 +89,51 @@ probability zero. The block indicators of the two coordinates agree almost
 surely. Closed block boundaries do not change their probabilities because
 uniform marginals have no atoms.
 
+## Converse decomposition and unique components
+
+`OrdinalSum.Decomposition` proves the binary converse in Nelsen's Theorem
+3.2.1. For each prescribed interior split `0<a<1`, the following are equivalent:
+
+* `C(a,a)=a`.
+* `C = D⊕ₐE` for some copulas D and E.
+* There is exactly one pair `(D,E)` with `C = D⊕ₐE`.
+
+The split point itself need not be unique: M admits every interior split.
+Uniqueness here is only for the two components at a fixed split.
+
+The constructors `C.lowerOrdinalComponent a ha0 ha` and
+`C.upperOrdinalComponent a ha1 ha` use a proof `ha : C.diagonal a = a` and
+the corresponding positive block-length proof. Their CDFs are:
+
+```text
+D(u,v) = C(au,av)/a
+E(u,v) = [C(a+(1−a)u,a+(1−a)v)−a]/(1−a).
+```
+
+`ordinalSum_components` proves reconstruction; the two
+`...OrdinalComponent_ordinalSum` lemmas recover the original inputs of any
+ordinal sum. Each component can be constructed whenever its own block length
+is positive, so the lower component at `a=1` and the upper component at `a=0`
+are both C. Zero-length components are not defined by these constructors.
+
+`OrdinalSum.Cut` also proves the probabilistic criterion
+
+```text
+P(1{U≤a} ≠ 1{V≤a}) = 2(a−C(a,a)).
+```
+
+Thus a diagonal fixed point is exactly a threshold whose two indicators
+agree almost surely. Equivalently, the probabilities of `max(U,V)≤a` and
+`min(U,V)≤a` agree. These probability identities include the endpoint
+thresholds. The set of fixed points is closed. NQD copulas have
+`C(a,a)<a` at every interior point, ruling out nontrivial ordinal sums for
+independence and countermonotonicity as well.
+
+`OrdinalSum.CutConsequences` identifies cuts within each extracted component
+with the corresponding affine images in the original copula. It also
+transfers all three fixed-split rank lower bounds to any copula satisfying
+`C(a,a)=a`, without requiring a preexisting ordinal-sum representation.
+
 ## Rank coefficients and sharp bounds
 
 For any components C and D and every split a, `OrdinalSum.Rank` proves:
@@ -171,13 +216,19 @@ See the [rank equality cases](rank-coefficients.md#equality-cases-and-independen
 For independent components and any interior split, the PQD result combines
 with the new strict rank criteria to give positive rho and tau.
 
+The converse is now formalized too: beta 1 is equivalent to a unique
+component pair at split `1/2`. Beta −1 is equivalent to a second-coordinate
+reflection of such an ordinal sum. As consequences, beta 1 implies
+`rho≥1/2`, `tau≥0`, and `footrule≥1/4`; beta −1 implies `rho≤−1/2` and
+`tau≤0`. These bounds are sharp, as shown by the W/W example and its reflection.
+
 ## Scope and module map
 
-This API constructs binary bivariate ordinal sums. Repeated application is
-available, but a general countable-interval constructor, the converse
-decomposition theorem from an interior point with `C(a,a)=a`, and general
-ordinal-sum formulas for gamma and xi are not yet formalized. General beta
-formulas beyond the midpoint result are also future work.
+This API constructs and characterizes binary bivariate ordinal sums.
+Repeated application is available, but a general countable-interval
+constructor and canonical decomposition into indecomposable components are
+not yet formalized. General ordinal-sum formulas for gamma, xi, and beta
+beyond the midpoint results are also future work.
 
 | Module | Content |
 | --- | --- |
@@ -188,5 +239,9 @@ formulas beyond the midpoint result are also future work.
 | `OrdinalSum.Rank` | General rho, tau, footrule and common-split concordance formulas |
 | `OrdinalSum.RankExamples` | Benchmark formulas, sharp lower bounds and unique optimal independent-component split |
 | `OrdinalSum.Properties` | Recovery, exact ordering, exchangeability, diagonal and extremal results |
+| `OrdinalSum.Cut` | CDF sections, threshold disagreement, probability criteria and diagonal fixed points |
+| `OrdinalSum.Components` | Explicit copulas obtained by rescaling lower and upper restrictions |
+| `OrdinalSum.Decomposition` | Reconstruction, fixed-split uniqueness, converse theorem and NQD obstruction |
+| `OrdinalSum.CutConsequences` | Component cuts, beta ±1 structural characterizations and rank bounds |
 | `OrdinalSum.Dependence` | PQD closure and the independent-component example |
 | `OrdinalSum.TailDependence` | Tail-ratio identities and equivalence of tail limits |

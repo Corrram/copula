@@ -1264,4 +1264,119 @@ example : ((Copula.independence 2).ordinalSum (Copula.independence 2) threeQuart
   rw [Copula.spearmanRho_ordinalSum_independence]
   norm_num [threeQuarters]
 
+/-! Diagonal cuts and the converse ordinal-sum theorem. -/
+
+example (C : Copula 2) (a u : I) (h : C.diagonal a = a) :
+    C.cdf ![u, a] = min (u : ℝ) a := C.cdf_right_cut a u h
+
+example (C : Copula 2) (a v : I) (h : C.diagonal a = a) :
+    C.cdf ![a, v] = min (a : ℝ) v := C.cdf_left_cut a v h
+
+example (C : Copula 2) (a u v : I) (h : C.diagonal a = a) (hu : u ≤ a) (hv : a ≤ v) :
+    C.cdf ![u, v] = u := C.cdf_cross_cut_lower_upper a u v h hu hv
+
+example (C : Copula 2) (a : I) :
+    C.toMeasure.real {x | ¬ (x 0 ≤ a ↔ x 1 ≤ a)} = 2 * ((a : ℝ) - C.diagonal a) :=
+  C.measureReal_threshold_disagreement a
+
+example : (Copula.independence 2).toMeasure.real {x | ¬ (x 0 ≤ half ↔ x 1 ≤ half)} = 1 / 2 := by
+  rw [Copula.measureReal_threshold_disagreement, Copula.diagonal_independence]
+  norm_num [half]
+
+example : Copula.countermonotonic.toMeasure.real {x | ¬ (x 0 ≤ half ↔ x 1 ≤ half)} = 1 := by
+  rw [Copula.measureReal_threshold_disagreement, Copula.diagonal_countermonotonic]
+  norm_num [half]
+
+example (a : I) : (Copula.comonotonic 2).toMeasure.real {x | ¬ (x 0 ≤ a ↔ x 1 ≤ a)} = 0 := by
+  rw [Copula.measureReal_threshold_disagreement, Copula.diagonal_comonotonic]
+  ring
+
+example (C : Copula 2) (a : I) :
+    C.diagonal a = a ↔ ∀ᵐ x ∂C.toMeasure, x 0 ≤ a ↔ x 1 ≤ a := C.diagonal_eq_iff_ae_same_side a
+
+example (C : Copula 2) (a : I) : C.diagonal a = a ↔
+    C.toMeasure.real {x | max (x 0) (x 1) ≤ a} = C.toMeasure.real {x | min (x 0) (x 1) ≤ a} :=
+  C.diagonal_eq_iff_measureReal_max_eq_min a
+
+example (C : Copula 2) : IsClosed {a : I | C.diagonal a = (a : ℝ)} := C.isClosed_diagonal_fixedPoints
+
+example (C : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) (h : C.diagonal a = a) :
+    (C.lowerOrdinalComponent a ha0 h).ordinalSum (C.upperOrdinalComponent a ha1 h) a = C :=
+  C.ordinalSum_components a ha0 ha1 h
+
+example (C : Copula 2) (a : I) (ha0 : 0 < a) (h : C.diagonal a = a) (u v : I) :
+    (C.lowerOrdinalComponent a ha0 h).cdf ![u, v] =
+      C.cdf ![Copula.OrdinalSum.lowerEmbed a u, Copula.OrdinalSum.lowerEmbed a v] / a :=
+  C.cdf_lowerOrdinalComponent a ha0 h ![u, v]
+
+example (C : Copula 2) (a : I) (ha1 : a < 1) (h : C.diagonal a = a) (u v : I) :
+    (C.upperOrdinalComponent a ha1 h).cdf ![u, v] =
+      (C.cdf ![Copula.OrdinalSum.upperEmbed a u, Copula.OrdinalSum.upperEmbed a v] - a) / (1 - a) :=
+  C.cdf_upperOrdinalComponent a ha1 h ![u, v]
+
+example (C D : Copula 2) :
+    (C.ordinalSum D half).lowerOrdinalComponent half half_pos (Copula.diagonal_ordinalSum_split C D half) = C := by
+  simp
+
+example (C D : Copula 2) :
+    (C.ordinalSum D half).upperOrdinalComponent half half_lt_one (Copula.diagonal_ordinalSum_split C D half) = D := by
+  simp
+
+example (C : Copula 2) : C.lowerOrdinalComponent 1 zero_lt_one C.diagonal_one = C := by simp
+
+example (C : Copula 2) : C.upperOrdinalComponent 0 zero_lt_one C.diagonal_zero = C := by simp
+
+example (C : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    C.diagonal a = a ↔ ∃ D E : Copula 2, D.ordinalSum E a = C :=
+  C.diagonal_eq_iff_exists_ordinalSum a ha0 ha1
+
+example (C : Copula 2) (a : I) (ha0 : 0 < a) (ha1 : a < 1)
+    (h : ∀ᵐ x ∂C.toMeasure, x 0 ≤ a ↔ x 1 ≤ a) :
+    ∃! p : Copula 2 × Copula 2, p.1.ordinalSum p.2 a = C :=
+  (C.diagonal_eq_iff_existsUnique_ordinalSum a ha0 ha1).mp ((C.diagonal_eq_iff_ae_same_side a).mpr h)
+
+example (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    ∃! p : Copula 2 × Copula 2, p.1.ordinalSum p.2 a = Copula.comonotonic 2 :=
+  ((Copula.comonotonic 2).diagonal_eq_iff_existsUnique_ordinalSum a ha0 ha1).mp
+    (Copula.diagonal_comonotonic a)
+
+example : ¬ ∃ (a : I) (D E : Copula 2), 0 < a ∧ a < 1 ∧ D.ordinalSum E a = Copula.independence 2 :=
+  Copula.isNQD_independence.not_exists_ordinalSum
+
+example (C : Copula 2) (h : C.IsNQD) (a : I) (ha0 : 0 < a) (ha1 : a < 1) :
+    C.diagonal a < (a : ℝ) := h.diagonal_lt a ha0 ha1
+
+example (C : Copula 2) (a : I) (ha0 : 0 < a) (h : C.diagonal a = a) (t : I) :
+    (C.lowerOrdinalComponent a ha0 h).diagonal t = t ↔
+      C.diagonal (Copula.OrdinalSum.lowerEmbed a t) = (Copula.OrdinalSum.lowerEmbed a t : ℝ) :=
+  C.diagonal_lowerOrdinalComponent_eq_iff a ha0 h t
+
+example (C : Copula 2) (a : I) (ha1 : a < 1) (h : C.diagonal a = a) (t : I) :
+    (C.upperOrdinalComponent a ha1 h).diagonal t = t ↔
+      C.diagonal (Copula.OrdinalSum.upperEmbed a t) = (Copula.OrdinalSum.upperEmbed a t : ℝ) :=
+  C.diagonal_upperOrdinalComponent_eq_iff a ha1 h t
+
+example (C : Copula 2) : C.blomqvistBeta = 1 ↔
+    ∃! p : Copula 2 × Copula 2, p.1.ordinalSum p.2 Copula.unitHalf = C :=
+  C.blomqvistBeta_eq_one_iff_existsUnique_ordinalSum
+
+example (C : Copula 2) : C.blomqvistBeta = -1 ↔
+    ∃ D E : Copula 2, (D.ordinalSum E Copula.unitHalf).reflect {1} = C :=
+  C.blomqvistBeta_eq_neg_one_iff_exists_reflected_ordinalSum
+
+example (C : Copula 2) (h : C.blomqvistBeta = 1) : 0 ≤ C.kendallTau :=
+  C.kendallTau_nonneg_of_blomqvistBeta_eq_one h
+
+example (C : Copula 2) (h : C.blomqvistBeta = 1) : 1 / 2 ≤ C.spearmanRho :=
+  C.half_le_spearmanRho_of_blomqvistBeta_eq_one h
+
+example (C : Copula 2) (h : C.blomqvistBeta = 1) : 1 / 4 ≤ C.spearmanFootrule :=
+  C.quarter_le_spearmanFootrule_of_blomqvistBeta_eq_one h
+
+example (C : Copula 2) (h : C.blomqvistBeta = -1) : C.spearmanRho ≤ -1 / 2 :=
+  C.spearmanRho_le_neg_half_of_blomqvistBeta_eq_neg_one h
+
+example (C : Copula 2) (h : C.blomqvistBeta = -1) : C.kendallTau ≤ 0 :=
+  C.kendallTau_nonpos_of_blomqvistBeta_eq_neg_one h
+
 end CopulaTest

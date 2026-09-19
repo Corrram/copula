@@ -153,6 +153,9 @@ in the Ansari–Rockel family count.
 Their probability law and rho, tau, footrule and common-split concordance
 formulas are also proved, with sharp fixed-split bounds and a unique optimal
 split for independent components.
+The converse is constructive: every interior diagonal fixed point yields
+two rescaled component copulas, with proved reconstruction and uniqueness
+at that split. This includes singular laws and does not require density formulas.
 
 ## Scope and next extensions
 
