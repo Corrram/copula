@@ -1,5 +1,9 @@
 name = "copula"
 version = "0.1.0"
+description = "Finite-dimensional copulas, dependence orders, and rank correlations in Lean 4"
+keywords = ["math", "probability", "copulas", "dependence", "mathlib"]
+license = "Apache-2.0"
+reservoir = true
 defaultTargets = ["Copula"]
 testDriver = "CopulaTest"
 

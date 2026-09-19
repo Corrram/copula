@@ -215,22 +215,40 @@ both the library and public API examples, with warnings treated as errors.
 
 ## Use in another Lean project
 
-Use the same Lean toolchain and add this to your `lakefile.toml`:
+Use Lean **v4.34.0** and add the tagged development release to your `lakefile.toml`:
 
 ```toml
 [[require]]
 name = "copula"
 git = "https://github.com/Corrram/lean-copula.git"
-rev = "main"
+rev = "v0.1.0"
 ```
 
-Run `lake update`, then `import Copula.Basic` or `import Copula`. For
-reproducible research, replace `main` with the full commit SHA you used and
-commit your dependency manifest. If you also declare mathlib directly, use
-the same mathlib revision as this package.
+Run `lake update`, then `import Copula.Basic` or `import Copula`. Commit your
+dependency manifest to record the exact revisions. Use `rev = "main"` for
+ongoing development, or a full commit SHA for a specific snapshot. If you
+also declare mathlib directly, use the same mathlib revision as this package.
 
 The GitHub repository is `lean-copula`, the Lake package is `copula`, and the
 Lean module root is `Copula`.
+
+### Reservoir
+
+The package enables Reservoir indexing and includes its description, keywords,
+version, and Apache-2.0 license in `lakefile.toml`.
+[Reservoir indexes eligible GitHub repositories automatically](https://reservoir.lean-lang.org/inclusion-criteria),
+approximately daily. Its inclusion criteria require a public, non-fork repository,
+a root `lake-manifest.json`, a recognized OSI-approved license, and at least two
+GitHub stars. Until indexing completes, use the Git dependency above.
+
+Once the package is indexed, the equivalent Reservoir dependency is:
+
+```toml
+[[require]]
+name = "copula"
+scope = "Corrram"
+rev = "v0.1.0"
+```
 
 ## Feedback and citation
 
