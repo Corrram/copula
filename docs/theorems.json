@@ -1,0 +1,237 @@
+{
+  "copula": {
+    "title": "A copula as a probability measure",
+    "module": "Copula.Basic",
+    "declaration": "ProbabilityTheory.Copula"
+  },
+  "cdf": {
+    "title": "The copula distribution function",
+    "module": "Copula.CDF",
+    "declaration": "ProbabilityTheory.Copula.cdf"
+  },
+  "lower-bound": {
+    "title": "Fréchet–Hoeffding lower bound",
+    "module": "Copula.CDF.Bounds",
+    "declaration": "ProbabilityTheory.Copula.frechet_lower_le_cdf"
+  },
+  "upper-bound": {
+    "title": "Fréchet–Hoeffding upper bound",
+    "module": "Copula.CDF.Bounds",
+    "declaration": "ProbabilityTheory.Copula.cdf_le_frechet_upper"
+  },
+  "lipschitz": {
+    "title": "Lipschitz regularity",
+    "module": "Copula.CDF.Continuity",
+    "declaration": "ProbabilityTheory.Copula.abs_cdf_sub_le_sum_abs"
+  },
+  "classical": {
+    "title": "Recovering a classical copula CDF",
+    "module": "Copula.Classical.Characterization",
+    "declaration": "ProbabilityTheory.Copula.cdf_ofClassical"
+  },
+  "sklar": {
+    "title": "Sklar existence with arbitrary marginals",
+    "module": "Copula.Sklar.General",
+    "declaration": "ProbabilityTheory.Copula.exists_sklarCopula"
+  },
+  "sklar-ranges": {
+    "title": "Uniqueness on marginal CDF ranges",
+    "module": "Copula.Sklar.Continuous",
+    "declaration": "ProbabilityTheory.Copula.IsSklarCopula.cdf_eq_on_ranges"
+  },
+  "sklar-unique": {
+    "title": "Sklar uniqueness with continuous marginals",
+    "module": "Copula.Sklar.Continuous",
+    "declaration": "ProbabilityTheory.Copula.existsUnique_sklarCopula_of_continuous"
+  },
+  "independence": {
+    "title": "The independence copula",
+    "module": "Copula.Independence",
+    "declaration": "ProbabilityTheory.Copula.cdf_independence"
+  },
+  "comonotonic": {
+    "title": "The comonotonic copula",
+    "module": "Copula.Comonotonic",
+    "declaration": "ProbabilityTheory.Copula.cdf_comonotonic"
+  },
+  "countermonotonic": {
+    "title": "The countermonotonic copula",
+    "module": "Copula.Countermonotonic",
+    "declaration": "ProbabilityTheory.Copula.cdf_countermonotonic"
+  },
+  "fgm": {
+    "title": "The Farlie–Gumbel–Morgenstern family",
+    "module": "Copula.Families.FGM",
+    "declaration": "ProbabilityTheory.Copula.cdf_fgm"
+  },
+  "fgm-rho": {
+    "title": "Spearman's rho of FGM",
+    "module": "Copula.Rank.FGM",
+    "declaration": "ProbabilityTheory.Copula.spearmanRho_fgm"
+  },
+  "fgm-tau": {
+    "title": "Kendall's tau of FGM",
+    "module": "Copula.Rank.FGMKendall",
+    "declaration": "ProbabilityTheory.Copula.kendallTau_fgm"
+  },
+  "fgm-si": {
+    "title": "Stochastic increasingness of FGM",
+    "module": "Copula.Dependence.FGM",
+    "declaration": "ProbabilityTheory.Copula.isSI_fgm_iff"
+  },
+  "clayton": {
+    "title": "The positive-parameter Clayton CDF",
+    "module": "Copula.Families.Clayton.CDF",
+    "declaration": "ProbabilityTheory.Copula.cdf_clayton"
+  },
+  "gumbel": {
+    "title": "The Gumbel–Hougaard CDF",
+    "module": "Copula.Families.Gumbel",
+    "declaration": "ProbabilityTheory.Copula.cdf_gumbel"
+  },
+  "gumbel-ev": {
+    "title": "Gumbel is an extreme-value copula",
+    "module": "Copula.Families.Gumbel",
+    "declaration": "ProbabilityTheory.Copula.isExtremeValue_gumbel"
+  },
+  "rho": {
+    "title": "Spearman's rho",
+    "module": "Copula.Rank.Basic",
+    "declaration": "ProbabilityTheory.Copula.spearmanRho"
+  },
+  "tau": {
+    "title": "Kendall's tau",
+    "module": "Copula.Rank.Basic",
+    "declaration": "ProbabilityTheory.Copula.kendallTau"
+  },
+  "footrule": {
+    "title": "Spearman's footrule",
+    "module": "Copula.Rank.Basic",
+    "declaration": "ProbabilityTheory.Copula.spearmanFootrule"
+  },
+  "gamma": {
+    "title": "Gini's gamma",
+    "module": "Copula.Rank.Basic",
+    "declaration": "ProbabilityTheory.Copula.giniGamma"
+  },
+  "beta": {
+    "title": "Blomqvist's beta",
+    "module": "Copula.Rank.Basic",
+    "declaration": "ProbabilityTheory.Copula.blomqvistBeta"
+  },
+  "xi-zero": {
+    "title": "Chatterjee's xi detects independence",
+    "module": "Copula.Rank.ConditionalDistance",
+    "declaration": "ProbabilityTheory.Copula.chatterjeeXi_eq_zero_iff"
+  },
+  "rho-max": {
+    "title": "Maximal rho characterizes comonotonicity",
+    "module": "Copula.Rank.Extrema",
+    "declaration": "ProbabilityTheory.Copula.spearmanRho_eq_one_iff"
+  },
+  "rho-min": {
+    "title": "Minimal rho characterizes countermonotonicity",
+    "module": "Copula.Rank.Extrema",
+    "declaration": "ProbabilityTheory.Copula.spearmanRho_eq_neg_one_iff"
+  },
+  "tau-max": {
+    "title": "Maximal tau characterizes comonotonicity",
+    "module": "Copula.Rank.Extrema",
+    "declaration": "ProbabilityTheory.Copula.kendallTau_eq_one_iff"
+  },
+  "order-strict": {
+    "title": "Strict rho monotonicity among comparable copulas",
+    "module": "Copula.Order.StrictSpearman",
+    "declaration": "ProbabilityTheory.Copula.LowerOrthantLE.spearmanRho_lt"
+  },
+  "pqd-zero": {
+    "title": "Zero rho within the PQD class",
+    "module": "Copula.Order.StrictSpearman",
+    "declaration": "ProbabilityTheory.Copula.IsPQD.spearmanRho_eq_zero_iff"
+  },
+  "concordance": {
+    "title": "Bivariate concordance and lower orthant order",
+    "module": "Copula.Order.Orthant",
+    "declaration": "ProbabilityTheory.Copula.concordanceLE_iff_lowerOrthantLE"
+  },
+  "schur-least": {
+    "title": "Independence is least in Schur order",
+    "module": "Copula.Order.Schur",
+    "declaration": "ProbabilityTheory.Copula.schurLE_independence"
+  },
+  "schur-xi": {
+    "title": "Schur order preserves Chatterjee's xi",
+    "module": "Copula.Order.Schur",
+    "declaration": "ProbabilityTheory.Copula.SchurLE.chatterjeeXi_le"
+  },
+  "si-ltd": {
+    "title": "SI implies LTD",
+    "module": "Copula.Dependence.Basic",
+    "declaration": "ProbabilityTheory.Copula.IsSI.isLTD"
+  },
+  "si-rti": {
+    "title": "SI implies RTI",
+    "module": "Copula.Dependence.Basic",
+    "declaration": "ProbabilityTheory.Copula.IsSI.isRTI"
+  },
+  "ltd-pqd": {
+    "title": "LTD implies PQD",
+    "module": "Copula.Dependence.Basic",
+    "declaration": "ProbabilityTheory.Copula.IsLTD.isPQD"
+  },
+  "rti-pqd": {
+    "title": "RTI implies PQD",
+    "module": "Copula.Dependence.Basic",
+    "declaration": "ProbabilityTheory.Copula.IsRTI.isPQD"
+  },
+  "ordinal-unique": {
+    "title": "Unique components at a fixed ordinal-sum split",
+    "module": "Copula.OrdinalSum.Decomposition",
+    "declaration": "ProbabilityTheory.Copula.diagonal_eq_iff_existsUnique_ordinalSum"
+  },
+  "ordinal-reconstruct": {
+    "title": "Reconstruction from the two components",
+    "module": "Copula.OrdinalSum.Decomposition",
+    "declaration": "ProbabilityTheory.Copula.ordinalSum_components"
+  },
+  "ordinal-disagreement": {
+    "title": "Threshold disagreement and the diagonal deficit",
+    "module": "Copula.OrdinalSum.Cut",
+    "declaration": "ProbabilityTheory.Copula.measureReal_threshold_disagreement"
+  },
+  "ordinal-tau": {
+    "title": "Kendall's tau of an ordinal sum",
+    "module": "Copula.OrdinalSum.Rank",
+    "declaration": "ProbabilityTheory.Copula.kendallTau_ordinalSum"
+  },
+  "ordinal-rho": {
+    "title": "Spearman's rho of an ordinal sum",
+    "module": "Copula.OrdinalSum.Rank",
+    "declaration": "ProbabilityTheory.Copula.spearmanRho_ordinalSum"
+  },
+  "ordinal-footrule": {
+    "title": "Footrule of an ordinal sum",
+    "module": "Copula.OrdinalSum.Rank",
+    "declaration": "ProbabilityTheory.Copula.spearmanFootrule_ordinalSum"
+  },
+  "ordinal-beta": {
+    "title": "Maximal beta as an equal-split ordinal sum",
+    "module": "Copula.OrdinalSum.CutConsequences",
+    "declaration": "ProbabilityTheory.Copula.blomqvistBeta_eq_one_iff_existsUnique_ordinalSum"
+  },
+  "beta-rho-bound": {
+    "title": "Maximal beta forces rho at least one half",
+    "module": "Copula.OrdinalSum.CutConsequences",
+    "declaration": "ProbabilityTheory.Copula.half_le_spearmanRho_of_blomqvistBeta_eq_one"
+  },
+  "beta-tau-bound": {
+    "title": "Maximal beta forces nonnegative tau",
+    "module": "Copula.OrdinalSum.CutConsequences",
+    "declaration": "ProbabilityTheory.Copula.kendallTau_nonneg_of_blomqvistBeta_eq_one"
+  },
+  "ordinal-nqd": {
+    "title": "NQD excludes a nontrivial ordinal sum",
+    "module": "Copula.OrdinalSum.Decomposition",
+    "declaration": "ProbabilityTheory.Copula.IsNQD.not_exists_ordinalSum"
+  }
+}

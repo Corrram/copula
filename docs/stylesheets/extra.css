@@ -1,0 +1,18 @@
+:root { --md-text-font: system-ui, sans-serif; --md-code-font: ui-monospace, monospace; }
+.md-typeset { font-size: .83rem; line-height: 1.7; }
+.md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); }
+.md-typeset h2 { font-weight: 600; }
+.md-typeset .admonition.theorem { border-color: #148a80; font-size: .8rem; }
+.md-typeset .theorem > .admonition-title { background-color: #148a8018; }
+.md-typeset .theorem > .admonition-title::before { background-color: #148a80; }
+.lean-reference { margin: 1rem 0 1.6rem; padding: .7rem 1rem; border-left: 3px solid #148a80; background: var(--md-code-bg-color); }
+.lean-reference a { display: inline-block; margin-right: 1rem; font-weight: 600; }
+.lean-reference code { display: block; margin-top: .35rem; overflow-wrap: anywhere; white-space: normal; font-size: .68rem; }
+.md-typeset .arithmatex { overflow-x: auto; overflow-y: hidden; }
+.md-typeset .admonition .arithmatex { padding-bottom: .15rem; }
+.md-typeset .grid.cards > ul > li { border-radius: .5rem; }
+@media print {
+  .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top { display: none; }
+  .md-content { margin: 0; }
+  .md-typeset .admonition { break-inside: avoid; }
+}

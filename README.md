@@ -6,6 +6,16 @@ Finite-dimensional copulas in Lean 4, built on mathlib. This is an independent,
 early-stage project intended for research use and eventual upstream contributions.
 The API is still open to feedback.
 
+## Read the mathematics
+
+The [Copula documentation site](https://Corrram.github.io/copula/) combines
+a typeset mathematical handbook with searchable, generated Lean API pages.
+Featured results link to their exact formal statements and proofs. Start
+with [the handbook](https://Corrram.github.io/copula/handbook/foundations/)
+or [browse the API](https://Corrram.github.io/copula/api/Copula.html).
+See [the documentation guide](docs/documentation.md) for local builds and
+the publication workflow.
+
 ## Design
 
 A `ProbabilityTheory.Copula d` is a probability measure on

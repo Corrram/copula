@@ -1,0 +1,13 @@
+name = "copula-docs"
+version = "0.1.0"
+reservoir = false
+packagesDir = "../.lake/packages"
+
+[[require]]
+name = "copula"
+path = "../"
+
+[[require]]
+name = "doc-gen4"
+scope = "leanprover"
+rev = "v4.34.0"

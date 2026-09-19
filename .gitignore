@@ -1,4 +1,8 @@
 /.lake/
+/**/.lake/
+/site/
+/docs/.cache/
+__pycache__/
 /lake-packages/
 *.olean
 *.ilean

@@ -1,0 +1,82 @@
+site_name: Copula
+site_description: A mathematical handbook and Lean reference for copula theory
+site_url: https://Corrram.github.io/copula/
+repo_url: https://github.com/Corrram/copula
+repo_name: Corrram/copula
+edit_uri: edit/main/docs/
+docs_dir: docs
+site_dir: site
+strict: true
+exclude_docs: |
+  requirements.in
+  requirements.txt
+  theorems.json
+theme:
+  name: material
+  font: false
+  palette:
+    - scheme: default
+      primary: teal
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+nav:
+  - Start here: index.md
+  - Handbook:
+      - Foundations: handbook/foundations.md
+      - Sklar's theorem: handbook/sklar.md
+      - Families: handbook/families.md
+      - Rank dependence: handbook/rank.md
+      - Orders and positive dependence: handbook/dependence.md
+      - Ordinal sums: handbook/ordinal-sums.md
+      - Theorem index: theorem-index.md
+  - Guides and coverage:
+      - Design: design.md
+      - Families: families.md
+      - Rank coefficients: rank-coefficients.md
+      - Dependence orders: orders.md
+      - Positive dependence: positive-dependence.md
+      - Ordinal sums: ordinal-sums.md
+      - Nelsen coverage: nelsen.md
+      - Ansari–Rockel coverage: ansari-rockel.md
+  - Lean API: api-guide.md
+  - Contributing to the docs: documentation.md
+plugins:
+  - search
+hooks:
+  - scripts/docs_hook.py
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.arithmatex:
+      generic: true
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+extra:
+  generator: false
+copyright: Copyright © 2026 Marcus Rockel · Apache-2.0

@@ -1,0 +1,75 @@
+name: Documentation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: "1"
+      LEAN_NUM_THREADS: "4"
+      DOCS_REVISION: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: docs/requirements.txt
+      - run: python -m pip install -r docs/requirements.txt
+      - name: Build Lean library and examples
+        uses: leanprover/lean-action@v1
+        with:
+          test: "true"
+          use-mathlib-cache: "true"
+      - name: Cache documentation build
+        uses: actions/cache@v6.1.0
+        with:
+          path: |
+            docbuild/.lake/build
+            .lake/packages/doc-gen4/.lake/build
+            .lake/packages/MD4Lean/.lake/build
+            .lake/packages/BibtexQuery/.lake/build
+            .lake/packages/UnicodeBasic/.lake/build
+            .lake/packages/leansqlite/.lake/build
+          key: docs-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'docbuild/lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: |
+            docs-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'docbuild/lake-manifest.json') }}-
+      - name: Generate Lean API
+        working-directory: docbuild
+        run: lake build Copula:docs
+      - name: Build and verify mathematical handbook
+        run: |
+          python -m mkdocs build --strict
+          python scripts/assemble_docs.py
+          python scripts/check_docs.py
+      - uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: site
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v6.0.0
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1
