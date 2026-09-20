@@ -48,7 +48,10 @@ jobs:
             docs-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'docbuild/lake-manifest.json') }}-
       - name: Generate Lean API
         working-directory: docbuild
-        run: lake build Copula:docs
+        run: |
+          python ../scripts/test_prepare_docs.py
+          python ../scripts/prepare_docs.py
+          lake build Copula:docs
       - name: Build and verify mathematical handbook
         run: |
           python -m mkdocs build --strict
