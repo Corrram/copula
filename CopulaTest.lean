@@ -1379,4 +1379,20 @@ example (C : Copula 2) (h : C.blomqvistBeta = -1) : C.spearmanRho ≤ -1 / 2 :=
 example (C : Copula 2) (h : C.blomqvistBeta = -1) : C.kendallTau ≤ 0 :=
   C.kendallTau_nonpos_of_blomqvistBeta_eq_neg_one h
 
+-- The derivative convention also applies to singular copulas (no density argument).
+example (v : I) :
+    (fun u : I => (Copula.comonotonic 2).conditionalCDF u v) =ᵐ[volume]
+      fun u : I => deriv ((Copula.comonotonic 2).cdfSection v) (u : ℝ) :=
+  (Copula.comonotonic 2).conditionalCDF_eq_deriv v
+
+-- Affinity and the deterministic endpoint identify a useful mixed cross term.
+example (C : Copula 2) (a : I) :
+    C.chatterjeeCross ((Copula.comonotonic 2).mix (Copula.independence 2) a) =
+      (a : ℝ) * C.spearmanFootrule := by
+  simp [Copula.chatterjeeCross_mix_right]
+
+#print axioms ProbabilityTheory.Copula.conditionalCDF_eq_deriv
+#print axioms ProbabilityTheory.Copula.chatterjeeXi_eq_integral_deriv
+#print axioms ProbabilityTheory.Copula.chatterjeeCross_mix_right
+
 end CopulaTest
