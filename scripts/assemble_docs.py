@@ -23,6 +23,7 @@ topics = [
     ("Copula/Dependence/Basic.html", "Positive dependence"),
     ("Copula/Order/Orthant.html", "Dependence orders"),
     ("Copula/OrdinalSum/Decomposition.html", "Ordinal sums and decomposition"),
+    ("Copula/Vine/Regular.html", "C-, D-, and regular-vine copulas"),
 ]
 overview = (
     '<section id="copula-api"><h1>Copula API</h1>'

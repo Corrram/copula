@@ -79,6 +79,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Elliptical.ScaleMixture` | Positive Gaussian scale mixtures with atomless marginals and Sklar factorization |
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
+| `Copula.Vine` | C-, D-, and regular vines with measurable conditional pair families, including non-simplified and singular inputs; proved proximity, conditional gluing and marginal preservation; direct simplified C-vine CDFs |
 | `Copula.OrdinalSum` | Binary ordinal sums and converse decomposition, CDFs and probability laws, rank formulas, sharp bounds, ordering, PQD and tails |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
@@ -140,6 +141,14 @@ scale-mixture, polynomial, and mixture families. New Archimedean constructors
 are bivariate; the Gaussian scale-mixture constructors support every finite
 dimension. The catalogue also records which familiar families remain future work.
 See [the design review and roadmap](docs/design.md).
+
+[Vine copulas](docs/vines.md) combine bivariate inputs into C-, D-, and regular
+vines in arbitrary dimensions, including singular inputs. `RVineStructure`
+specifies variable order and attachment paths, with proved proximity conditions.
+`Copula.cVine`, `Copula.dVine`, and `RVineStructure.toCopula` accept measurable
+pair families that may depend on the conditioning values. Conditional gluing
+preserves both parent marginals at every edge. The direct simplified C-vine
+API (`CVine.ofPairs`, `CVine.triple`) also has recursive CDF and independence formulas.
 
 The [Ansari–Rockel coverage index](docs/ansari-rockel.md) covers all 38 distinct
 families in *Dependence properties of bivariate copula families*: parameter
