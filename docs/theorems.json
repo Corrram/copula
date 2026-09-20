@@ -233,5 +233,50 @@
     "title": "NQD excludes a nontrivial ordinal sum",
     "module": "Copula.OrdinalSum.Decomposition",
     "declaration": "ProbabilityTheory.Copula.IsNQD.not_exists_ordinalSum"
+  },
+  "vine-pairs": {
+    "title": "C-vine root-pair marginals",
+    "module": "Copula.Vine.Basic",
+    "declaration": "ProbabilityTheory.Copula.reindex_vineStep_root_pair"
+  },
+  "vine-cdf": {
+    "title": "Recursive C-vine distribution function",
+    "module": "Copula.Vine.CDF",
+    "declaration": "ProbabilityTheory.Copula.cdf_vineStep"
+  },
+  "vine-independence": {
+    "title": "Independent pair copulas give an independent vine",
+    "module": "Copula.Vine.CDF",
+    "declaration": "ProbabilityTheory.Copula.CVine.toCopula_independent"
+  },
+  "rvine-valid": {
+    "title": "Regular-vine path attachment satisfies proximity",
+    "module": "Copula.Vine.Structure",
+    "declaration": "ProbabilityTheory.Copula.RVineStructure.valid"
+  },
+  "rvine-glue-left": {
+    "title": "Conditional gluing preserves the left marginal",
+    "module": "Copula.Vine.Gluing",
+    "declaration": "ProbabilityTheory.Copula.Vine.map_glue_project_left"
+  },
+  "rvine-pair": {
+    "title": "Unconditional gluing recovers its pair copula",
+    "module": "Copula.Vine.Gluing",
+    "declaration": "ProbabilityTheory.Copula.Vine.map_glueProbability_empty_pair"
+  },
+  "rvine-glue-right": {
+    "title": "Conditional gluing preserves the right marginal",
+    "module": "Copula.Vine.Gluing",
+    "declaration": "ProbabilityTheory.Copula.Vine.map_glue_project_right"
+  },
+  "rvine-probability": {
+    "title": "Conditioning-dependent vine event probabilities",
+    "module": "Copula.Vine.Gluing",
+    "declaration": "ProbabilityTheory.Copula.Vine.glueProbability_apply"
+  },
+  "rvine-extension": {
+    "title": "Vine extension preserves the previous joint law",
+    "module": "Copula.Vine.Regular",
+    "declaration": "ProbabilityTheory.Copula.Vine.modelOfList_cons_marginal"
   }
 }

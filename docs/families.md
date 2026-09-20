@@ -157,6 +157,16 @@ The converse is constructive: every interior diagonal fixed point yields
 two rescaled component copulas, with proved reconstruction and uniqueness
 at that split. This includes singular laws and does not require density formulas.
 
+## Vine constructions
+
+`Copula.Vine` combines bivariate families into C-, D-, and regular vines in
+every finite dimension. `RVineStructure` supplies variable orders and regular
+attachment paths. Pair copulas can be fixed or vary measurably with conditioning
+values, including singular laws. Proximity and marginal preservation are proved.
+The direct simplified C-vine API additionally has its explicit CDF recursion
+and all-independence identity. See the [vine guide](vines.md) for the constructors,
+conventions, and exact proved coverage.
+
 ## Scope and next extensions
 
 This catalogue contains 27 named families/special cases; overlapping classes

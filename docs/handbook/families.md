@@ -89,6 +89,11 @@ extreme-value examples, and singular mixtures. Properties are proved
 family by family; a constructor's presence does not imply that every known
 rank formula or ordering theorem has been formalized.
 
+C-, D-, and regular vines combine these bivariate building blocks in arbitrary
+dimensions. Their pair copulas may depend measurably on conditioning values;
+the construction preserves the parent marginals at each join. See the
+[vine guide](../vines.md) for the construction and its proved coverage.
+
 The [family guide](../families.md) lists the implemented APIs. The
 [Ansari–Rockel coverage table](../ansari-rockel.md) records parameter domains,
 closed-form expressions, proved properties, and remaining gaps against the

@@ -1395,4 +1395,141 @@ example (C : Copula 2) (a : I) :
 #print axioms ProbabilityTheory.Copula.chatterjeeXi_eq_integral_deriv
 #print axioms ProbabilityTheory.Copula.chatterjeeCross_mix_right
 
+/-! Simplified C-vines: empty dimensions, prescribed pairs, and higher trees. -/
+
+example : Copula.CVine.nil.toCopula.cdf (fun _ => 0) = 1 := by simp
+
+example : Copula.CVine.singleton.toCopula = Copula.independence 1 := by simp
+
+-- Pair inputs may be singular; the construction recovers them exactly.
+example : (Copula.CVine.pair Copula.countermonotonic).toCopula = Copula.countermonotonic := by
+  simp
+
+example (A B D : Copula 2) :
+    (Copula.CVine.triple A B D).toCopula.reindex ![0, 1] = A := by
+  simpa using Copula.reindex_vineStep_root_pair ![A, B] D (0 : Fin 2)
+
+example (A B D : Copula 2) :
+    (Copula.CVine.triple A B D).toCopula.reindex ![0, 2] = B := by
+  simpa using Copula.reindex_vineStep_root_pair ![A, B] D (1 : Fin 2)
+
+example (d : ℕ) : (Copula.CVine.independent d).toCopula = Copula.independence d := by simp
+
+-- The strict upper triangle describes all six pair copulas of a four-dimensional vine.
+example (pairs : (i j : Fin 4) → i < j → Copula 2) :
+    (Copula.CVine.ofPairs 4 pairs).toCopula.reindex ![0, 3] = pairs 0 3 (by decide) := by
+  simpa using Copula.CVine.reindex_ofPairs_root_pair pairs (2 : Fin 3)
+
+example (A B D : Copula 2) (u v w : I) :
+    (Copula.CVine.triple A B D).toCopula.cdf ![u, v, w] =
+      ∫ r in Set.Iic u, D.cdf ![A.conditionalCDFUnit r v, B.conditionalCDFUnit r w] :=
+  Copula.CVine.cdf_triple A B D u v w
+
+-- Nontrivial dependence in the second tree survives independent first-tree pairs.
+example : (Copula.CVine.triple (Copula.independence 2) (Copula.independence 2)
+    (Copula.comonotonic 2)).toCopula.cdf ![half, half, half] = 1 / 4 := by
+  rw [Copula.CVine.toCopula_triple]
+  have hp : (![Copula.independence 2, Copula.independence 2] : Fin 2 → Copula 2) =
+      (fun _ => Copula.independence 2) := by funext i; fin_cases i <;> rfl
+  rw [hp, Copula.cdf_vineStep_independence, Copula.cdf_comonotonic_two]
+  norm_num [half]
+
+example : (Copula.CVine.independent 3).toCopula.cdf ![half, half, half] = 1 / 8 := by
+  norm_num [Copula.cdf_independence, Fin.prod_univ_succ, half]
+
+-- Generalized quantiles include both boundary thresholds and atomic conditional laws.
+example (C : Copula 2) (r t v : I) :
+    C.conditionalQuantile r t ≤ v ↔ t ≤ C.conditionalCDFUnit r v :=
+  C.conditionalQuantile_le_iff r t v
+
+example (C : Copula 2) (r : I) : volume.map (C.conditionalQuantile r) = C.conditionalKernel r :=
+  C.map_conditionalQuantile r
+
+/-! C-, D-, and regular vines with conditioning-dependent pair families. -/
+
+private def cStructure4 : Copula.RVineStructure 4 :=
+  Copula.RVineStructure.cVine (Equiv.refl _)
+
+private def dStructure4 : Copula.RVineStructure 4 :=
+  Copula.RVineStructure.dVine (Equiv.refl _)
+
+example : cStructure4.firstTree = {(0, 1), (0, 2), (0, 3)} := by decide
+
+example : dStructure4.firstTree = {(0, 1), (1, 2), (2, 3)} := by decide
+
+-- All six edges, including the different higher-tree conditioning sets.
+example : cStructure4.edges =
+    {(0, 1, ∅), (0, 2, ∅), (0, 3, ∅), (1, 2, {0}), (1, 3, {0}), (2, 3, {0, 1})} := by
+  decide
+
+example : dStructure4.edges =
+    {(0, 1, ∅), (1, 2, ∅), (2, 3, ∅), (0, 2, {1}), (1, 3, {2}), (0, 3, {1, 2})} := by
+  decide
+
+private def branchedStructure5 : Copula.RVineStructure 5 :=
+  Copula.RVineStructure.ofOrder (Equiv.refl _) (fun i =>
+    if i = 4 then [false, true, false] else List.replicate 5 true)
+
+-- Degrees 3, 2, 1, 1, 1: this is neither a star nor a path, under any relabeling.
+example : branchedStructure5.firstTree = {(0, 1), (1, 2), (2, 3), (1, 4)} := by decide
+
+example : branchedStructure5.edges.card = 10 := by decide
+
+example : branchedStructure5.toTree.Valid := branchedStructure5.valid
+
+example (F : Copula.Vine.PairFamilies 5) (i : Fin 5) :
+    (branchedStructure5.toCopula F).toMeasure.map (fun x => x i) = volume := by simp
+
+example (F : Copula.Vine.PairFamilies 0) :
+    Copula.cVine (Equiv.refl _) F = Copula.independence 0 := Subsingleton.elim _ _
+
+example (F : Copula.Vine.PairFamilies 1) :
+    Copula.dVine (Equiv.refl _) F = Copula.independence 1 := Subsingleton.elim _ _
+
+-- The complete bivariate construction recovers its arbitrary input copula.
+example (paths : Fin 2 → List Bool) (F : Copula.Vine.PairFamilies 2) :
+    (Copula.RVineStructure.ofOrder (Equiv.refl _) paths).toCopula F =
+      (F 0 1 ∅).copula (fun _ => 0) := by
+  apply Copula.ext
+  change (Copula.Vine.glueProbability (Copula.Vine.Marginal.singleton 0)
+    (Copula.Vine.Marginal.singleton 1) Copula.Vine.Marginal.empty 0 1 (F 0 1 ∅)).toMeasure = _
+  rw [Copula.Vine.glueProbability_empty _ _ _ _ (by simp) (by simp)]
+  have he : (fun (z : Fin 2 → I) i =>
+      if i = 0 then z 0 else if i = 1 then z 1 else 0) = id := by
+    funext z i
+    fin_cases i <;> rfl
+  rw [he, Measure.map_id]
+
+private def switchingFamily : Copula.Family (Fin 3 → I) 2 :=
+  Copula.Family.piecewise {x | x 0 ≤ half}
+    (measurableSet_le (measurable_pi_apply 0) measurable_const)
+    (Copula.Family.const (Copula.comonotonic 2))
+    (Copula.Family.const Copula.countermonotonic)
+
+example : switchingFamily.copula (fun _ => 0) = Copula.comonotonic 2 := by
+  simp [switchingFamily, half]
+
+example : switchingFamily.copula (fun _ => 1) = Copula.countermonotonic := by
+  unfold switchingFamily
+  rw [Copula.Family.copula_piecewise_of_notMem _ _ _ _ _ (by
+    change ¬ (1 : I) ≤ half
+    exact not_le.mpr half_lt_one)]
+  simp
+
+-- The second-tree copula varies with the observed root coordinate.
+private def nonSimplifiedPairs : Copula.Vine.PairFamilies 3 := fun a b s =>
+  if a = 1 ∧ b = 2 ∧ s = {0} then switchingFamily
+  else Copula.Family.const (Copula.independence 2)
+
+example (i : Fin 3) :
+    (Copula.cVine (Equiv.refl _) nonSimplifiedPairs).toMeasure.map (fun x => x i) = volume := by
+  simp
+
+example (paths : Fin 4 → List Bool) (F : Copula.Vine.PairFamilies 4)
+    (a : Fin 4) (xs : List (Fin 4)) (h : (a :: xs).Nodup) :
+    (Copula.Vine.modelOfList paths F (a :: xs) h).law.toMeasure.map
+        (Copula.Vine.project (Copula.Vine.Tree.ofList paths xs).vars) =
+      (Copula.Vine.modelOfList paths F xs h.of_cons).law.toMeasure :=
+  Copula.Vine.modelOfList_cons_marginal paths F a xs h
+
 end CopulaTest

@@ -87,6 +87,11 @@ case or upstream feedback calls for it.
   normal–lognormal constructions, including singular dispersion matrices.
 - Finite mixtures, FGM with both parameter signs, Fréchet mixtures, and Mardia.
   See [the family catalogue](families.md) for precise coverage and parameter ranges.
+- C-, D-, and regular vines in every finite dimension using conditional
+  quantile gluing, including singular and conditioning-dependent pair copulas.
+  Path-attachment proximity and preservation of both parent marginals are
+  proved. The direct simplified C-vine API also has a recursive CDF and
+  all-independence identity. See [vine copulas](vines.md).
 - Six population rank dependence coefficients with sharp ranges and benchmark
   values. The xi definition uses conditional kernels, supports singular laws,
   and has a proved conditional-variance formula and functional-dependence
@@ -113,6 +118,11 @@ case or upstream feedback calls for it.
    single-reflection and survival formulas and classical rank symmetries are proved.
 3. **Topology of copulas:** connect pointwise CDF convergence to uniform CDF
    convergence and weak convergence of the bundled probability measures.
+4. **Further vine results:** general density factorization and independence
+   formulas, equivalence of the direct and general C-vine constructors, and
+   formal equivalence between path attachments and conventional R-vine matrices.
+   C-, D-, and regular-vine probability laws with conditioning-dependent pairs
+   are constructed and their marginal consistency is proved.
 
 ## Classical measure construction
 
