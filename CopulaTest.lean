@@ -1515,5 +1515,20 @@ example (paths : Fin 4 → List Bool) (F : Copula.Vine.PairFamilies 4)
         (Copula.Vine.project (Copula.Vine.Tree.ofList paths xs).vars) =
       (Copula.Vine.modelOfList paths F xs h.of_cons).law.toMeasure :=
   Copula.Vine.modelOfList_cons_marginal paths F a xs h
+-- The derivative convention also applies to singular copulas (no density argument).
+example (v : I) :
+    (fun u : I => (Copula.comonotonic 2).conditionalCDF u v) =ᵐ[volume]
+      fun u : I => deriv ((Copula.comonotonic 2).cdfSection v) (u : ℝ) :=
+  (Copula.comonotonic 2).conditionalCDF_eq_deriv v
+
+-- Affinity and the deterministic endpoint identify a useful mixed cross term.
+example (C : Copula 2) (a : I) :
+    C.chatterjeeCross ((Copula.comonotonic 2).mix (Copula.independence 2) a) =
+      (a : ℝ) * C.spearmanFootrule := by
+  simp [Copula.chatterjeeCross_mix_right]
+
+#print axioms ProbabilityTheory.Copula.conditionalCDF_eq_deriv
+#print axioms ProbabilityTheory.Copula.chatterjeeXi_eq_integral_deriv
+#print axioms ProbabilityTheory.Copula.chatterjeeCross_mix_right
 
 end CopulaTest

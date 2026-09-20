@@ -24,6 +24,23 @@ The footrule normalization is the population copula convention in
 It is distinct from the unnormalized sum of absolute differences of sample
 ranks. In particular, its countermonotonic value is `−1/2`.
 
+## Conditional CDFs and classical derivatives
+
+`Rank.ConditionalDerivative` proves that the conditional CDF equals the first
+partial derivative of the copula CDF almost everywhere in the conditioning
+coordinate, for every fixed threshold. `cdfSection C v` extends the section
+constantly outside the unit interval; its derivative agrees with the ordinary
+partial derivative in the interior, and endpoints have zero measure.
+`chatterjeeXi_eq_integral_deriv` therefore identifies the conditional-distribution
+definition of xi with the classical double integral of the squared derivative.
+The proof uses disintegration and the almost-everywhere fundamental theorem
+of calculus. It applies to singular copulas and requires no density assumption.
+
+`Rank.ChatterjeeCrossMixture` proves `chatterjeeCross_mix_right`, the affine
+mixture identity for the polarized xi functional. Together with the existing
+squared-distance and comonotonic cross-term identities, this supports sharp
+coefficient bounds by comparison with mixtures of independence and M.
+
 ## Checked benchmark values
 
 All entries in this table are proved and registered as simplification lemmas.
