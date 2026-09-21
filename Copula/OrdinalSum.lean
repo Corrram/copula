@@ -5,3 +5,5 @@ import Copula.OrdinalSum.TailDependence
 import Copula.OrdinalSum.Blocks
 import Copula.OrdinalSum.RankExamples
 import Copula.OrdinalSum.CutConsequences
+import Copula.OrdinalSum.Finite
+import Copula.OrdinalSum.Countable

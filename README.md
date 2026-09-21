@@ -80,7 +80,10 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Vine` | C-, D-, and regular vines with measurable conditional pair families, including non-simplified and singular inputs; proved proximity, conditional gluing and marginal preservation; direct simplified C-vine CDFs |
-| `Copula.OrdinalSum` | Binary ordinal sums and converse decomposition, CDFs and probability laws, rank formulas, sharp bounds, ordering, PQD and tails |
+| `Copula.OrdinalSum` | Binary, finite and increasing countable ordinal sums; binary converse decomposition, probability laws, rank formulas, ordering, PQD and tails |
+| `Copula.Checkerboard` | Rectangular nonuniform checkerboard, check-min and check-W constructions; exact cell recovery, grid interpolation and uniform error bounds |
+| `Copula.Shuffle` | Finite shuffles of min with unequal strip widths and per-segment reflections |
+| `Copula.Bernstein` | Positive-degree tensor Bernstein copulas, copula validity, benchmark identities, quantitative error bounds and uniform convergence |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
 | `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
@@ -101,9 +104,12 @@ Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure
 itself is `ProbabilityTheory.Copula`.
 
+[Grid approximations, shuffles and Bernstein copulas](docs/approximations.md)
+have constructors with proved validity, and quantitative approximation guarantees.
+
 [Ordinal sums](docs/ordinal-sums.md) combine different copulas on ordered
-intervals. Their lower and upper tails come from the first and last nonempty
-blocks, respectively, allowing constructions with asymmetric tail dependence.
+intervals. The binary API proves that lower and upper tails come from
+the respective component blocks, allowing asymmetric tail dependence.
 Their probability laws, integration formulas, and exact rho, tau, footrule
 and common-split concordance formulas are proved, with sharp bounds and
 explicit independent-component and countermonotonic-component examples.

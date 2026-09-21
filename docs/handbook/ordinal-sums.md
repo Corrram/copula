@@ -108,5 +108,7 @@ $$\beta(C)=1\Longrightarrow\rho(C)\geq\tfrac12\quad\text{and}\quad\tau(C)\geq0.$
 
 The complete [ordinal-sum guide](../ordinal-sums.md) includes sharpness
 examples, footrule bounds, beta $-1$, component recovery, and tail behavior.
-Countable ordinal sums and canonical decomposition into indecomposable
-components remain future work.
+Finite sums and countably many adjacent blocks with endpoints tending to
+one now have proved constructors; see the guide for their hypotheses.
+Arbitrary disjoint intervals with a residual comonotonic part and canonical
+decomposition into indecomposable components remain future work.

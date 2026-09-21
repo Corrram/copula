@@ -119,9 +119,14 @@ both endpoint cases. It proves component recovery and exact lower orthant
 comparison at a fixed interior split, exchangeability, PQD closure and
 inheritance of lower and upper tail limits from their respective end blocks.
 The converse decomposition theorem from an interior diagonal fixed point
-and the countable-interval construction remain open.
+is formalized in `Copula.OrdinalSum.Decomposition`. Arbitrary disjoint
+interval sums with a residual comonotonic part remain open.
 
 Further book topics include prescribed-diagonal constructions,
-shuffles, generator formulas for tail dependence,
+shuffle density, general residual-interval ordinal sums, generator formulas for tail dependence,
 and tail coefficients for the remaining analytic and elliptical families.
 Those results are not asserted here.
+
+Finite signed shuffles now have a proved constructor in `Copula.Shuffle`.
+Finite and increasing countable ordinal sums extend the binary constructor;
+see [grid construction coverage](approximations.md) for the precise scope.

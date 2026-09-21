@@ -318,5 +318,30 @@
     "title": "Unique Frechet minimizer of xi plus footrule",
     "module": "Copula.Rank.FrechetOptimization",
     "declaration": "ProbabilityTheory.Copula.frechet_xi_add_footrule_eq_iff"
+  },
+  "grid-interpolation": {
+    "title": "Any local filling interpolates the source copula at grid vertices",
+    "module": "Copula.Patchwork.Approximation",
+    "declaration": "ProbabilityTheory.Copula.cdf_cellMass_patchwork_point"
+  },
+  "grid-error": {
+    "title": "Uniform error bound for sampled grid copulas",
+    "module": "Copula.Patchwork.Approximation",
+    "declaration": "ProbabilityTheory.Copula.abs_cdf_cellMass_patchwork_sub_le_mesh"
+  },
+  "bernstein-valid": {
+    "title": "Positive-degree Bernstein polynomials satisfy the copula axioms",
+    "module": "Copula.Bernstein.Basic",
+    "declaration": "ProbabilityTheory.Copula.isClassical_bernsteinCDF"
+  },
+  "bernstein-convergence": {
+    "title": "Bernstein copulas converge uniformly",
+    "module": "Copula.Bernstein.Approximation",
+    "declaration": "ProbabilityTheory.Copula.tendstoUniformly_bernstein"
+  },
+  "countable-ordinal-cdf": {
+    "title": "Countable ordinal sums have summable weighted CDF series",
+    "module": "Copula.OrdinalSum.Countable",
+    "declaration": "ProbabilityTheory.Copula.cdf_countableOrdinalSum"
   }
 }

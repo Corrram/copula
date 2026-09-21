@@ -222,12 +222,36 @@ reflection of such an ordinal sum. As consequences, beta 1 implies
 `rho≥1/2`, `tau≥0`, and `footrule≥1/4`; beta −1 implies `rho≤−1/2` and
 `tau≤0`. These bounds are sharp, as shown by the W/W example and its reflection.
 
+## Finite and increasing countable sums
+
+`finiteOrdinalSum P C` accepts an arbitrary `IntervalPartition n` and
+`n` component copulas. Its CDF is `sum_i width_i C_i(coord_i(u),coord_i(v))`.
+`ordinalSumPi P` specializes every component to independence.
+`finiteOrdinalSum_comonotonic` proves that copies of M give M.
+`IntervalPartition.binary` and `finiteOrdinalSum_binary` identify the
+interior two-block case with the existing binary constructor above.
+
+`countableOrdinalSum P C` allows countably many adjacent positive-length
+blocks. `CountableIntervalPartition` requires a strictly increasing
+endpoint sequence starting at zero and tending to one. The weighted CDF
+series is summable (`summable_cdf`); the uniform marginal identities and
+all copula axioms are proved. `countableOrdinalSumPi` gives independent
+blocks. `CountableIntervalPartition.dyadic` is a concrete partition with
+endpoints `1-(1/2)^k`, and countably many copies of M still give M.
+
+{{ lean:countable-ordinal-cdf }}
+
+See [grid constructions](approximations.md) for the common finite
+patchwork machinery, checkerboard and check-min copulas, shuffles and
+Bernstein copulas.
+
 ## Scope and module map
 
-This API constructs and characterizes binary bivariate ordinal sums.
-Repeated application is available, but a general countable-interval
-constructor and canonical decomposition into indecomposable components are
-not yet formalized. General ordinal-sum formulas for gamma, xi, and beta
+The full decomposition, rank and dependence API concerns binary bivariate
+sums. Finite sums and increasing countable partitions have proved
+constructors and CDF formulas. Arbitrary disjoint interval families with a
+residual comonotonic part, and canonical decomposition into indecomposable
+components, are not yet formalized. General ordinal-sum formulas for gamma, xi, and beta
 beyond the midpoint results are also future work.
 
 | Module | Content |
@@ -245,3 +269,5 @@ beyond the midpoint results are also future work.
 | `OrdinalSum.CutConsequences` | Component cuts, beta ±1 structural characterizations and rank bounds |
 | `OrdinalSum.Dependence` | PQD closure and the independent-component example |
 | `OrdinalSum.TailDependence` | Tail-ratio identities and equivalence of tail limits |
+| `OrdinalSum.Finite` | Arbitrary finite partitions, independent components and binary compatibility |
+| `OrdinalSum.Countable` | Increasing countable partitions, summability, uniform margins and CDF series |

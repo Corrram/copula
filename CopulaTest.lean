@@ -1,3 +1,4 @@
+import CopulaTest.Approximation
 import CopulaTest.FamilyCoverage
 import Copula
 import Mathlib.Tactic.NormNum

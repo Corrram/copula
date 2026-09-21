@@ -51,6 +51,7 @@ nav:
       - Dependence orders: orders.md
       - Positive dependence: positive-dependence.md
       - Ordinal sums: ordinal-sums.md
+      - Grid approximations and shuffles: approximations.md
       - Vine copulas: vines.md
       - Nelsen coverage: nelsen.md
       - Ansari–Rockel coverage: ansari-rockel.md

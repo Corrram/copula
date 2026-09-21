@@ -55,3 +55,6 @@ import Copula.Families.Clayton.Negative
 import Copula.Archimedean.Symmetry
 import Copula.OrdinalSum
 import Copula.Vine
+import Copula.Checkerboard
+import Copula.Shuffle
+import Copula.Bernstein
