@@ -350,6 +350,21 @@ quadratic identities and strict convexity of xi. The
 [conditional-distance API](../Copula/Rank/ConditionalDistance.lean) proves
 xi=0 iff independence for every bivariate copula, including singular laws.
 
+[Dependence/Frechet.lean](../Copula/Dependence/Frechet.lean) now proves exact
+CI/CD classifications and absolute continuity/density TP2 for U01 and U02,
+including independence and singular endpoints. Frechet is CI iff b=0 and CD
+iff a=0; Mardia is CI at theta=0,1 and CD at theta=-1,0. Both families have a
+Lebesgue density exactly at independence, which is also their exact density-TP2
+region. These correct the printed singular-endpoint TP2 and omitted independence
+claims; they do not classify alternative total-positivity notions.
+
+[Rank/Nelsen7.lean](../Copula/Rank/Nelsen7.lean) identifies the conditional CDF
+and proves A07's Table 6 formula xi=1-theta on the entire closed interval.
+[Order/Nelsen7.lean](../Copula/Order/Nelsen7.lean) proves the exact Schur order
+in both directions: C_theta precedes C_eta iff eta<=theta. The family is
+CI exactly at independence (theta=1), while CD holds throughout.
+Nelsen 7's rho, tau and density-TP2 entries remain separate obligations.
+
 Outstanding proof work includes the other named constructors, full signed
 Frank, generator criteria for CI/CD and density TP2, Pickands representation
 and admissibility, the CI/CD equivalences between LO and Schur order,

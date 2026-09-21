@@ -144,4 +144,26 @@ theorem lowerOrthantLE_nelsen7 {θ η : I} (h : θ ≤ η) :
     (sub_nonneg.mpr (u 0).property.2)) (sub_nonneg.mpr (u 1).property.2)
   nlinarith
 
+/-- The sole conditionally increasing member is independence. -/
+theorem isSI_nelsen7_iff (θ : I) : (nelsen7 θ).IsSI ↔ θ = 1 := by
+  constructor
+  · intro h
+    have hm : (nelsen7 θ).cdf ![unitHalf, unitHalf] = (θ : ℝ) / 4 := by
+      rw [cdf_nelsen7]
+      change max 0 ((θ : ℝ) * (1 / 2) * (1 / 2) + (1 - θ) * (1 / 2 + 1 / 2 - 1)) = _
+      have he : (θ : ℝ) * (1 / 2) * (1 / 2) + (1 - θ) * (1 / 2 + 1 / 2 - 1) = θ / 4 := by ring
+      rw [he, max_eq_right (div_nonneg θ.property.1 (by norm_num))]
+    have ht := h 0 unitHalf 1 unitHalf (by norm_num [unitHalf])
+      (by change (1 / 2 : ℝ) ≤ 1; norm_num)
+    rw [cdf_two_one_left, cdf_two_zero_left, hm] at ht
+    norm_num [unitHalf] at ht
+    apply Subtype.ext
+    change (θ : ℝ) = 1
+    linarith [θ.property.2]
+  · rintro rfl
+    simpa using isSI_independence
+
+theorem isCI_nelsen7_iff (θ : I) : (nelsen7 θ).IsCI ↔ θ = 1 := by
+  rw [(isArchimedean_nelsen7 θ).isCI_iff, isSI_nelsen7_iff]
+
 end ProbabilityTheory.Copula

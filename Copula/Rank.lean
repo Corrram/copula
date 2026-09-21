@@ -16,3 +16,5 @@ import Copula.Rank.FrechetKendall
 import Copula.Rank.MedianExtrema
 import Copula.Rank.ChatterjeeCrossMixture
 import Copula.Rank.ConditionalDerivative
+import Copula.Rank.Nelsen7
+import Copula.Rank.FrechetOptimization

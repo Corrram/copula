@@ -278,5 +278,45 @@
     "title": "Vine extension preserves the previous joint law",
     "module": "Copula.Vine.Regular",
     "declaration": "ProbabilityTheory.Copula.Vine.modelOfList_cons_marginal"
+  },
+  "nelsen7-xi": {
+    "title": "Nelsen 7 xi on the full parameter interval",
+    "module": "Copula.Rank.Nelsen7",
+    "declaration": "ProbabilityTheory.Copula.chatterjeeXi_nelsen7"
+  },
+  "nelsen7-schur": {
+    "title": "Exact Nelsen 7 Schur order in both directions",
+    "module": "Copula.Order.Nelsen7",
+    "declaration": "ProbabilityTheory.Copula.schurBothLE_nelsen7_iff"
+  },
+  "frechet-ci": {
+    "title": "Exact Frechet CI classification",
+    "module": "Copula.Dependence.Frechet",
+    "declaration": "ProbabilityTheory.Copula.frechet_ci_iff"
+  },
+  "frechet-density-tp2": {
+    "title": "Exact Frechet density TP2 classification",
+    "module": "Copula.Dependence.Frechet",
+    "declaration": "ProbabilityTheory.Copula.frechet_density_tp2_iff"
+  },
+  "mardia-ci": {
+    "title": "Exact Mardia CI classification",
+    "module": "Copula.Dependence.Frechet",
+    "declaration": "ProbabilityTheory.Copula.mardia_ci_iff"
+  },
+  "mardia-density-tp2": {
+    "title": "Exact Mardia density TP2 classification",
+    "module": "Copula.Dependence.Frechet",
+    "declaration": "ProbabilityTheory.Copula.mardia_density_tp2_iff"
+  },
+  "frechet-objective-minimum": {
+    "title": "Minimum of xi plus footrule over Frechet copulas",
+    "module": "Copula.Rank.FrechetOptimization",
+    "declaration": "ProbabilityTheory.Copula.frechet_xi_add_footrule_lower"
+  },
+  "frechet-objective-equality": {
+    "title": "Unique Frechet minimizer of xi plus footrule",
+    "module": "Copula.Rank.FrechetOptimization",
+    "declaration": "ProbabilityTheory.Copula.frechet_xi_add_footrule_eq_iff"
   }
 }

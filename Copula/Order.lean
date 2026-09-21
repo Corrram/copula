@@ -10,3 +10,4 @@ import Copula.Order.SymmetricSchur
 import Copula.Order.FGMSchur
 import Copula.Order.SchurMixture
 import Copula.Order.StrictSpearman
+import Copula.Order.Nelsen7
