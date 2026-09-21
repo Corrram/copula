@@ -167,6 +167,19 @@ The direct simplified C-vine API additionally has its explicit CDF recursion
 and all-independence identity. See the [vine guide](vines.md) for the constructors,
 conventions, and exact proved coverage.
 
+## Additional checked family properties
+
+Fréchet and Mardia have exact CI/CD and Lebesgue-density classifications,
+including singular endpoints. Both have a TP2 Lebesgue density exactly at
+independence. See [positive dependence](positive-dependence.md).
+
+Nelsen 7 has xi=1-theta for all theta in [0,1], a checked conditional CDF,
+and exact Schur comparison in both directions, with parameter order reversed.
+Its only CI member is independence; every member is CD.
+
+{{ lean:nelsen7-xi }}
+{{ lean:nelsen7-schur }}
+
 ## Scope and next extensions
 
 This catalogue contains 27 named families/special cases; overlapping classes

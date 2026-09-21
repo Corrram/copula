@@ -283,6 +283,22 @@ rho and quadratically for tau and footrule. See the
 [ordinal-sum rank formulas and sharp bounds](ordinal-sums.md#rank-coefficients-and-sharp-bounds),
 including independent and countermonotonic components and their endpoint cases.
 
+## Nelsen 7 and Frechet optimization
+
+Nelsen 7 has xi=1-theta on the full closed interval, including W at zero
+and independence at one. Its step conditional CDF is identified by recovering
+the actual copula CDF from lower-interval integrals; no density is assumed.
+
+{{ lean:nelsen7-xi }}
+
+Over the full Frechet weight simplex, xi plus footrule is at least -1/16,
+with equality exactly at a=0, b=1/4. Thus the unique minimizer is
+three quarters independence plus one quarter W. This is a family-restricted
+optimization result, not a bound for arbitrary copulas.
+
+{{ lean:frechet-objective-minimum }}
+{{ lean:frechet-objective-equality }}
+
 ## Module map
 
 - `Rank.Integration`: uniform moments, coordinate integrals, and benchmark measure integrals.
@@ -307,3 +323,6 @@ including independent and countermonotonic components and their endpoint cases.
 - `Rank.KendallMixture`: finite and binary mixture formulas and non-affinity.
 - `Rank.FrechetKendall`: Fréchet and Mardia tau, footrule, gamma, beta and zero-tau parameters.
 - `OrdinalSum.Rank`, `OrdinalSum.RankExamples`: ordinal-sum formulas, sharp fixed-split bounds and optimization for independent components.
+
+- `Rank.Nelsen7`: conditional CDF and exact xi on the full parameter interval.
+- `Rank.FrechetOptimization`: exact xi-plus-footrule minimum and unique parameters.

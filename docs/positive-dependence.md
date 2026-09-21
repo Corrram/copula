@@ -186,6 +186,21 @@ FKG inequalities, a monotone-kernel converse for SI, and further family
 classifications remain future work. They are not hidden assumptions of any
 current theorem.
 
+## Exact Frechet and Mardia classifications
+
+On the full valid Frechet simplex, CI holds iff b=0 and CD iff a=0.
+For Mardia, CI holds exactly at theta=0,1 and CD exactly at theta=-1,0.
+Both families are absolutely continuous with respect to square Lebesgue
+measure exactly at independence, and that is their exact density-TP2 region.
+Positive M or W weights put positive measure on a Lebesgue-null diagonal.
+These statements concern density TP2, not total positivity of a singular
+measure or its CDF.
+
+{{ lean:frechet-ci }}
+{{ lean:frechet-density-tp2 }}
+{{ lean:mardia-ci }}
+{{ lean:mardia-density-tp2 }}
+
 ## Module map
 
 - `Dependence.Basic`: quadrant, tail and SI predicates, ratio equivalences and mixture closure.
@@ -195,3 +210,5 @@ current theorem.
 - `Dependence.Rank`: signs of rank coefficients and the `rho ≤ 3 tau` bound.
 - `Dependence.Examples`, `Singular`: benchmark memberships, failures and the singular-density distinction.
 - `Dependence.Density`, `FGM`, `FGMDensity`: density identification and exact FGM results.
+
+- `Dependence.Frechet`: full CI/CD and density classifications, measure identity and Mardia incomparability.

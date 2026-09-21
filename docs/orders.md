@@ -153,3 +153,12 @@ already available; these comparison theorems are not asserted by this module.
   for directional Schur comparison and its distinction from lower orthant order.
 * Ansari and Rüschendorf, [Upper risk bounds in internal factor models with constrained specification sets](https://link.springer.com/article/10.1186/s41546-020-00045-y),
   for orthant and supermodular comparison conventions.
+
+## Nelsen 7
+
+The Schur parameter order is reversed: C_theta is below C_eta iff eta<=theta,
+in either conditioning direction and in the combined order. This is proved
+using continuous convex tests, the identified two-valued conditional CDFs,
+and the exact xi formula for necessity. Both parameter endpoints are included.
+
+{{ lean:nelsen7-schur }}
