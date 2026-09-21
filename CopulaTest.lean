@@ -1,3 +1,4 @@
+import CopulaTest.RankRegion
 import CopulaTest.Approximation
 import CopulaTest.FamilyCoverage
 import Copula

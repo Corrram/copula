@@ -170,6 +170,10 @@ Gini's gamma, Blomqvist's beta, and Chatterjee's directional xi. All six have
 proved range bounds and values at independence, comonotonicity and
 countermonotonicity. Xi uses conditional distributions and accepts singular
 copulas. See [the definitions, conventions and proved results](docs/rank-coefficients.md).
+`Copula.Rank.Region` proves all ten pairwise exact regions among
+rho, tau, beta, footrule, and gamma, including boundary witnesses and interior
+attainment. See the [exact formulas and proof guide](docs/rank-regions.md).
+
 Xi is proved to vanish exactly at independence and to be strictly convex
 under nontrivial mixtures of distinct copulas. Mixing with independence
 attenuates xi quadratically. Kendall's tau is proved to equal concordance

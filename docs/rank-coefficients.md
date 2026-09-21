@@ -1,5 +1,8 @@
 # Population rank dependence coefficients
 
+For jointly attainable values, see the [pairwise rank regions](rank-regions.md)
+guide: all ten exact regions, including sharp boundaries and interior attainment.
+
 Import `Copula.Rank` (or `Copula`) for the six bivariate coefficients. These
 are population functionals of a copula, not finite-sample rank statistics or
 numerical integration routines. Every definition applies to any `Copula 2`,
@@ -303,6 +306,7 @@ optimization result, not a bound for arbitrary copulas.
 
 - `Rank.Integration`: uniform moments, coordinate integrals, and benchmark measure integrals.
 - `Rank.Basic`: the five classical definitions, basic bounds and CDF ordering.
+- `Rank.Region`: all ten pairwise exact regions, boundary witnesses, and interior attainment.
 - `Rank.Spearman`, `Rank.SpearmanCDF`: distance formulas, rho bounds and CDF formula.
 - `Rank.Benchmarks`: classical benchmark values and footrule/gamma bounds.
 - `Rank.Extrema`: equality cases and strict bounds for rho, tau, footrule and gamma.
