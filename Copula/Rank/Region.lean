@@ -12,11 +12,12 @@ import Copula.Rank.Region.RhoGamma.SignAttainment
 import Copula.Rank.Region.RhoGamma.HalfShift
 import Copula.Rank.Region.RhoGamma.Exact
 import Copula.Rank.Region.XiBeta.Region
+import Copula.Rank.Region.XiRho.Paper.ExactRegion
 
 /-! # Pairwise attainable regions of five rank coefficients
 
-All ten pairs among the five classical coefficients, and the xi–beta pair, have
-exact membership theorems, including boundary attainment and every point
+All ten pairs among the five classical coefficients, plus the xi–beta and
+xi–rho pairs, have exact membership theorems, including boundary attainment and every point
 in between. The coverage and mathematical references are in
 `docs/rank-regions.md`.
 -/
@@ -105,5 +106,11 @@ theorem attainable_xi_beta_iff (x b : ℝ) :
     (∃ C : Copula 2, C.chatterjeeXi = x ∧ C.blomqvistBeta = b) ↔
       x ∈ Set.Icc 0 1 ∧ b ∈ Set.Icc (-1) 1 ∧ |b| ^ 3 ≤ 2 * x :=
   XiBeta.exact_xi_beta_region x b
+
+/-- Exact xi–rho region with its trigonometric/radical upper boundary. -/
+theorem attainable_xi_rho_iff (x r : ℝ) :
+    (∃ C : Copula 2, C.chatterjeeXi = x ∧ C.spearmanRho = r) ↔
+      x ∈ Set.Icc (0 : ℝ) 1 ∧ |r| ≤ XiRho.upperRhoAtXi x :=
+  XiRho.exact_region x r
 
 end ProbabilityTheory.Copula.RankRegion
