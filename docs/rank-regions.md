@@ -3,7 +3,7 @@
 Import `Copula.Rank.Region`, `Copula.Rank`, or `Copula`. The namespace
 `ProbabilityTheory.Copula.RankRegion` provides a common API for all ten
 pairs among Spearman's rho, Kendall's tau, Blomqvist's beta, Spearman's
-footrule, and Gini's gamma.
+footrule, and Gini's gamma. It also exposes the exact xi–beta region.
 
 **All ten pairs have complete exact-region theorems.** An exact-region theorem proves both that every copula
 satisfies the bounds and that every point satisfying them is attained by
@@ -23,6 +23,13 @@ an actual `Copula 2`. All statements include singular copulas.
 | Rho–tau | Exact | `attainable_rho_tau_iff` |
 | Rho–footrule | Exact | `attainable_footrule_rho_iff` |
 | Rho–gamma | Exact | `attainable_gamma_rho_iff` |
+| Xi–beta | Exact | `attainable_xi_beta_iff` |
+
+For Chatterjee's directional coefficient \(x=\xi\) and Blomqvist's \(b=\beta\),
+`attainable_xi_beta_iff` proves the complete region
+\(0\le x\le1,\ -1\le b\le1,\ |b|^3\le2x\).
+The proof includes the sharp lower boundary, the upper fibre endpoint, and
+every point between them. Xi is directional: it is coordinate 1 given coordinate 0.
 
 The exact statements are collected in
 [`Copula.Rank.Region`](../Copula/Rank/Region.lean).
