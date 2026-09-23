@@ -144,6 +144,7 @@ Convergence](https://www.cambridge.org/core/journals/journal-of-applied-probabil
 | Independence | PQD, NQD, LTD, RTI, SI, CDF-TP2, kernel-TP2; MTP2 density in every dimension |
 | Comonotonicity | PQD, LTD, RTI, SI, CDF-TP2, kernel-TP2; no Lebesgue MTP2 density |
 | Countermonotonicity | NQD; fails PQD, LTD, RTI, SI, CDF-TP2 and kernel-TP2 |
+| Nelsen 7, `theta ∈ [0,1]` | CD throughout; CDF-TP2 and an MTP2 density hold exactly at `theta = 1` |
 | FGM, `theta ∈ [-1,1]` | PQD, LTD, RTI, SI and CDF-TP2 each hold exactly when `theta ≥ 0` |
 
 For FGM the density is proved to be
