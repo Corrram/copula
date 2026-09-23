@@ -25,7 +25,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2 and of MTP2 density for all negative parameters; tail pair `(0,0)` |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1 |
-| Frank | `frank θ hθ` | `θ > 0` | 2 | `-log(1-(1-exp(-θu))(1-exp(-θv))/(1-exp(-θ)))/θ` |
+| Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Joe |
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | `nelsen2_cdf_full` on the closed square; lower bound at 1 |
