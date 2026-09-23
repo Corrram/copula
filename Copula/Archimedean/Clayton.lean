@@ -102,4 +102,23 @@ theorem cdf_bb1 (θ : ℝ) (hθ : 0 < θ) (δ : ℝ) (hδ : 1 ≤ δ) (u : Fin 2
     ite_eq_right (not_or.mpr ⟨hu 0, hu 1⟩)]
   rfl
 
+/-- The BB1 CDF on the closed square for positive Clayton parameter and outer power at least one.
+The analytic formula is asserted only when both coordinates are positive. -/
+theorem bb1_cdf_full (θ : ℝ) (hθ : 0 < θ) (δ : ℝ) (hδ : 1 ≤ δ) (u v : I) :
+    (bb1 θ hθ δ hδ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        (1 + (((u : ℝ) ^ (-θ) - 1) ^ δ + ((v : ℝ) ^ (-θ) - 1) ^ δ) ^ δ⁻¹) ^ (-θ⁻¹) := by
+  by_cases hu : u = 0
+  · subst u
+    simpa using (bb1 θ hθ δ hδ).cdf_eq_zero_of_coord_eq_zero ![0, v] 0 rfl
+  by_cases hv : v = 0
+  · subst v
+    simpa [hu] using (bb1 θ hθ δ hδ).cdf_eq_zero_of_coord_eq_zero ![u, 0] 1 rfl
+  have hp : ∀ i : Fin 2, (![u, v] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using hu
+    · simpa using hv
+  simpa [hu, hv] using cdf_bb1 θ hθ δ hδ ![u, v] hp
+
 end ProbabilityTheory.Copula
