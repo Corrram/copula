@@ -30,6 +30,14 @@ example (α β : I) : (Copula.marshallOlkin α β).spearmanRho =
 example (α : I) : (Copula.marshallOlkin α 0).spearmanRho = 0 := by
   rw [Copula.marshallOlkin_spearmanRho]
   norm_num
+example (α β : I) : (Copula.marshallOlkin α β).chatterjeeXi =
+    2 * (α : ℝ) ^ 2 * (β : ℝ) /
+      (3 * (α : ℝ) + (β : ℝ) - 2 * (α : ℝ) * (β : ℝ)) :=
+  Copula.marshallOlkin_chatterjeeXi α β
+example (β : I) : (Copula.marshallOlkin 0 β).chatterjeeXi = 0 := by
+  rw [Copula.marshallOlkin_chatterjeeXi]
+  norm_num
+#print axioms ProbabilityTheory.Copula.marshallOlkin_chatterjeeXi
 #print axioms ProbabilityTheory.Copula.marshallOlkin_spearmanRho
 #print axioms ProbabilityTheory.Copula.frechet_density_tp2_iff
 #print axioms ProbabilityTheory.Copula.mardia_ci_iff

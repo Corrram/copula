@@ -253,6 +253,9 @@ six Fréchet and Mardia formulas, including singular boundaries:
 Zero xi is equivalent to `a=b=0` or `theta=0`, respectively. Zero tau is
 equivalent to `a=b` or `theta=0`. The equal mixture of M and W has tau zero
 but xi `1/4`, giving a checked dependent copula with zero tau.
+
+`Rank.MarshallOlkin` and `Rank.MarshallOlkinXi` prove the full two-parameter Marshall–Olkin rho and directional xi formulas. `Rank.MarshallOlkinConditional` identifies the explicit conditional CDF almost everywhere, including the singular positive-weight family. The xi proof integrates its square across the moving power curve and covers both independence axes.
+
 The full [Ansari–Rockel expression index](ansari-rockel.md)
 records the remaining formula targets and flags source discrepancies; these
 reference expressions are not yet all formalized.
