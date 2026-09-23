@@ -5,3 +5,4 @@ import Copula.TailDependence.ExtremeValue
 import Copula.TailDependence.Quadrant
 import Copula.TailDependence.Clayton
 import Copula.TailDependence.Nelsen2
+import Copula.TailDependence.Joe

@@ -46,7 +46,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
-| A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full` |
+| A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full`; both tail limits |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
 | A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | Pending |
 | A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | Pending |
@@ -301,6 +301,7 @@ linear generator; [Power.lean](../Copula/Archimedean/Power.lean) proves both
 generator power transformations. These are genuine validity proofs in dimension
 two, including singular distributions, without density assumptions.
 
+[TailDependence/Joe.lean](../Copula/TailDependence/Joe.lean) proves A06's exact tail pair `(0,2−2^(1/θ))` for every θ≥1.
 [TailDependence/Nelsen2.lean](../Copula/TailDependence/Nelsen2.lean) proves A02's exact tail pair `(0,2−2^(1/θ))` for every θ≥1, including θ=1.
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
 entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The

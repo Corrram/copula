@@ -84,6 +84,16 @@
     "module": "Copula.Families.Clayton.CDF",
     "declaration": "ProbabilityTheory.Copula.cdf_clayton"
   },
+  "joe-lower-tail": {
+    "title": "Joe lower-tail coefficient for every parameter",
+    "module": "Copula.TailDependence.Joe",
+    "declaration": "ProbabilityTheory.Copula.hasLowerTailDependence_joe"
+  },
+  "joe-upper-tail": {
+    "title": "Joe upper-tail coefficient for every parameter",
+    "module": "Copula.TailDependence.Joe",
+    "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_joe"
+  },
   "nelsen2-full": {
     "title": "The Nelsen 2 CDF on the closed square",
     "module": "Copula.Families.Nelsen",
