@@ -17,7 +17,7 @@ open Filter
 open scoped unitInterval Topology
 
 namespace ProbabilityTheory.Copula
-private theorem twoTermPowerNorm_le (p a b : ℝ) (hp : 0 < p)
+theorem twoTermPowerNorm_le (p a b : ℝ) (hp : 0 < p)
     (ha : 0 ≤ a) (hb : 0 ≤ b) :
     (a ^ p + b ^ p) ^ p⁻¹ ≤ (2 : ℝ) ^ p⁻¹ * max a b := by
   have hm : 0 ≤ max a b := ha.trans (le_max_left a b)
