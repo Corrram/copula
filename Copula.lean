@@ -59,6 +59,7 @@ import Copula.Families.Nelsen7
 import Copula.Families.Nelsen8
 import Copula.Families.Nelsen8Limits
 import Copula.Families.Nelsen12Limits
+import Copula.Families.PowerFamilyLimits
 import Copula.Families.GumbelLimits
 import Copula.Families.JoeLimits
 import Copula.Dependence.Nelsen12
