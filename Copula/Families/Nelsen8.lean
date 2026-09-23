@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Marcus Rockel
 -/
 import Copula.Archimedean.Truncated
+import Copula.Order.Orthant
 
 /-! # The Nelsen 8 bivariate copula
 
@@ -200,4 +201,49 @@ theorem nelsen8_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (u v : I) :
   rw [hz, nelsen8_cdf_full, cdf_countermonotonic]
   norm_num
   congr 1; ring
+
+/-- Nelsen 8 increases in lower-orthant order with its parameter. -/
+theorem lowerOrthantLE_nelsen8 {θ η : ℝ} (hθ : 1 ≤ θ) (hη : 1 ≤ η)
+    (hθη : θ ≤ η) : (nelsen8 θ hθ).LowerOrthantLE (nelsen8 η hη) := by
+  intro z
+  have hz : z = ![z 0, z 1] := by funext i; fin_cases i <;> rfl
+  rw [hz, nelsen8_cdf_full, nelsen8_cdf_full]
+  apply max_le_max le_rfl
+  let u : ℝ := z 0
+  let v : ℝ := z 1
+  let p : ℝ := u * v
+  let a : ℝ := (1-u)*(1-v)
+  have hu : 0 ≤ u := (z 0).property.1
+  have hu1 : u ≤ 1 := (z 0).property.2
+  have hv : 0 ≤ v := (z 1).property.1
+  have hv1 : v ≤ 1 := (z 1).property.2
+  have hp : 0 ≤ p := mul_nonneg hu hv
+  have ha : 0 ≤ a := mul_nonneg (by linarith) (by linarith)
+  have ha1 : a ≤ 1 := by
+    have h := mul_nonneg hu (by linarith : 0 ≤ 1-v)
+    dsimp [a]
+    nlinarith
+  have hDθ : 0 < θ^2-(θ-1)^2*a := by
+    simpa only [a, mul_assoc] using n8_source_den_pos θ u v hθ hu hu1 hv hv1
+  have hDη : 0 < η^2-(η-1)^2*a := by
+    simpa only [a, mul_assoc] using n8_source_den_pos η u v hη hu hu1 hv hv1
+  simp only [mul_assoc]
+  change (θ^2*p-a)/(θ^2-(θ-1)^2*a) ≤
+    (η^2*p-a)/(η^2-(η-1)^2*a)
+  apply (div_le_div_iff₀ hDθ hDη).mpr
+  have hA : 0 ≤ 2*θ*η-θ-η := by
+    have h1 := mul_nonneg (by linarith : 0 ≤ θ) (by linarith : 0 ≤ η-1)
+    have h2 := mul_nonneg (by linarith : 0 ≤ η) (by linarith : 0 ≤ θ-1)
+    nlinarith
+  have hB : 0 ≤ θ+η-a*(θ+η-2) := by
+    have h := mul_nonneg (sub_nonneg.mpr ha1)
+      (by linarith : 0 ≤ θ+η-2)
+    nlinarith
+  have hbr : 0 ≤ p*(2*θ*η-θ-η) + θ+η-a*(θ+η-2) := by
+    nlinarith [mul_nonneg hp hA, hB]
+  have hfact : (η^2*p-a)*(θ^2-(θ-1)^2*a) -
+      (θ^2*p-a)*(η^2-(η-1)^2*a) =
+      a*(η-θ)*(p*(2*θ*η-θ-η) + θ+η-a*(θ+η-2)) := by ring
+  nlinarith [mul_nonneg (mul_nonneg ha (sub_nonneg.mpr hθη)) hbr]
+
 end ProbabilityTheory.Copula
