@@ -22,6 +22,15 @@ example : (Copula.frechet 0 (1/4) (by norm_num) (by norm_num) (by norm_num)).cha
     (Copula.frechet 0 (1/4) (by norm_num) (by norm_num) (by norm_num)).spearmanFootrule = -(1/16 : ℝ) := by
   rw [Copula.frechet_xi_add_footrule_eq_iff]; exact ⟨rfl, rfl⟩
 
+
+example (α β : I) : (Copula.marshallOlkin α β).spearmanRho =
+    3 * (α : ℝ) * (β : ℝ) /
+      (2 * (α : ℝ) + 2 * (β : ℝ) - (α : ℝ) * (β : ℝ)) :=
+  Copula.marshallOlkin_spearmanRho α β
+example (α : I) : (Copula.marshallOlkin α 0).spearmanRho = 0 := by
+  rw [Copula.marshallOlkin_spearmanRho]
+  norm_num
+#print axioms ProbabilityTheory.Copula.marshallOlkin_spearmanRho
 #print axioms ProbabilityTheory.Copula.frechet_density_tp2_iff
 #print axioms ProbabilityTheory.Copula.mardia_ci_iff
 #print axioms ProbabilityTheory.Copula.chatterjeeXi_nelsen7

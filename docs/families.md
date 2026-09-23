@@ -69,7 +69,7 @@ The identity is proved for every family in this table.
 `cdf_marshallOlkin` gives
 `min(u^α,v^β) u^(1-α) v^(1-β)`, including all coordinate and parameter
 boundaries. Cuadras–Augé is the equal-weight subfamily. The all-zero and all-one
-Marshall–Olkin parameters give independence and comonotonicity respectively.
+Marshall–Olkin parameters give independence and comonotonicity respectively. `Rank.MarshallOlkin` proves the full-parameter Spearman rho formula `3αβ/(2α+2β−αβ)`, including both independence axes and the singular positive-weight laws.
 
 The reusable `maxProduct C D a` construction has CDF
 `C(uᵢ^aᵢ) D(uᵢ^(1-aᵢ))`. It uses independent samples, transformed power
