@@ -99,6 +99,16 @@
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_cdf_full"
   },
+  "nelsen8-lower-tail": {
+    "title": "Nelsen 8 lower-tail coefficient for every parameter",
+    "module": "Copula.TailDependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.hasLowerTailDependence_nelsen8"
+  },
+  "nelsen8-upper-tail": {
+    "title": "Nelsen 8 upper-tail coefficient for every parameter",
+    "module": "Copula.TailDependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen8"
+  },
   "nelsen8-endpoint": {
     "title": "Nelsen 8 lower-Fréchet endpoint",
     "module": "Copula.Families.Nelsen8",
