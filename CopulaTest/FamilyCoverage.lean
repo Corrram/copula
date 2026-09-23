@@ -10,6 +10,16 @@ example : (Copula.nelsen7 0).chatterjeeXi = 1 := by
   rw [Copula.chatterjeeXi_nelsen7]; norm_num
 example : (Copula.nelsen7 1).chatterjeeXi = 0 := by
   rw [Copula.chatterjeeXi_nelsen7]; norm_num
+example (θ : I) : (Copula.nelsen7 θ).spearmanRho =
+    if θ = 0 then -1 else if θ = 1 then 0 else
+      12 * ((3 * (θ : ℝ) ^ 2 - 2 * θ -
+        2 * ((θ : ℝ) - 1) ^ 2 * Real.log (1 - (θ : ℝ))) /
+        (4 * (θ : ℝ) ^ 3)) - 3 := Copula.nelsen7_rho θ
+example (θ : I) : (Copula.nelsen7 θ).kendallTau =
+    if θ = 0 then -1 else if θ = 1 then 0 else
+      2 - 2 / (θ : ℝ) -
+        2 * ((θ : ℝ) - 1) ^ 2 * Real.log (1 - (θ : ℝ)) / (θ : ℝ) ^ 2 :=
+  Copula.nelsen7_tau θ
 example (θ : I) : (Copula.nelsen7 θ).IsTP2CDF ↔ θ = 1 :=
   Copula.nelsen7_cdf_tp2_iff θ
 example (θ η : I) : (Copula.nelsen7 θ).SchurBothLE (Copula.nelsen7 η) ↔ η ≤ θ :=
@@ -51,6 +61,8 @@ example (β : I) : (Copula.marshallOlkin 0 β).chatterjeeXi = 0 := by
 #print axioms ProbabilityTheory.Copula.marshallOlkin_spearmanRho
 #print axioms ProbabilityTheory.Copula.frechet_density_tp2_iff
 #print axioms ProbabilityTheory.Copula.mardia_ci_iff
+#print axioms ProbabilityTheory.Copula.nelsen7_rho
+#print axioms ProbabilityTheory.Copula.nelsen7_tau
 #print axioms ProbabilityTheory.Copula.nelsen7_cdf_tp2_iff
 #print axioms ProbabilityTheory.Copula.chatterjeeXi_nelsen7
 #print axioms ProbabilityTheory.Copula.schurBothLE_nelsen7_iff

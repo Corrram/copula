@@ -29,7 +29,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Joe |
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | Truncated outer-power linear generator; lower bound at 1 |
-| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
+| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; exact xi, rho and tau; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
 | Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter 1; Clayton at one |
 | Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter `1/θ`; Clayton at one |
 | Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | Outer and inner powers of the truncated linear generator; lower bound at 1 |
@@ -181,11 +181,13 @@ Fréchet and Mardia have exact CI/CD and Lebesgue-density classifications,
 including singular endpoints. Both have a TP2 Lebesgue density exactly at
 independence. See [positive dependence](positive-dependence.md).
 
-Nelsen 7 has xi=1-theta for all theta in [0,1], a checked conditional CDF,
+Nelsen 7 has xi=1-theta and exact logarithmic rho and tau for all theta in [0,1], a checked conditional CDF,
 and exact Schur comparison in both directions, with parameter order reversed.
 Its only CI member is independence; every member is CD.
 
 {{ lean:nelsen7-xi }}
+{{ lean:nelsen7-rho }}
+{{ lean:nelsen7-tau }}
 {{ lean:nelsen7-schur }}
 
 ## Scope and next extensions
