@@ -24,7 +24,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI, CDF TP2 and actual MTP2 density; tail pair `(2^(−1/θ),0)` |
 | Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2 and of MTP2 density for all negative parameters; tail pair `(0,0)` |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; pointwise comonotonicity as θ→∞; max-stability |
-| Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1; exact tail pair `(0,2−2^(1/θ))` |
+| Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1; pointwise comonotonicity as θ→∞; exact tail pair `(0,2−2^(1/θ))` |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
 | Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives the reflected CDF and `frankNegative_cdf_source` proves the printed logarithmic CDF on the closed square |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | `bb1_cdf_full` on the closed square; `δ = 1` recovers Clayton |
