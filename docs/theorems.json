@@ -247,7 +247,11 @@
     "module": "Copula.Families.Joe",
     "declaration": "ProbabilityTheory.Copula.bb6_cdf_full"
   },
-  "joe-full": {
+  "joe-infinite-endpoint": {
+    "title": "Joe tends pointwise to comonotonicity",
+    "module": "Copula.Families.JoeLimits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_joe_atTop"
+  },  "joe-full": {
     "title": "The Joe CDF on the closed square",
     "module": "Copula.Families.Joe",
     "declaration": "ProbabilityTheory.Copula.joe_cdf_full"

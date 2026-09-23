@@ -57,6 +57,7 @@ import Copula.Families.Nelsen8
 import Copula.Families.Nelsen8Limits
 import Copula.Families.Nelsen12Limits
 import Copula.Families.GumbelLimits
+import Copula.Families.JoeLimits
 import Copula.Families.Clayton.Negative
 import Copula.Archimedean.Symmetry
 import Copula.OrdinalSum
