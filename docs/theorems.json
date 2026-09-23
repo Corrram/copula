@@ -284,6 +284,16 @@
     "module": "Copula.Rank.Nelsen7",
     "declaration": "ProbabilityTheory.Copula.chatterjeeXi_nelsen7"
   },
+  "nelsen7-rho": {
+    "title": "Nelsen 7 Spearman rho, including endpoints",
+    "module": "Copula.Rank.Nelsen7Rho",
+    "declaration": "ProbabilityTheory.Copula.nelsen7_rho"
+  },
+  "nelsen7-tau": {
+    "title": "Nelsen 7 Kendall tau, including endpoints",
+    "module": "Copula.Rank.Nelsen7Tau",
+    "declaration": "ProbabilityTheory.Copula.nelsen7_tau"
+  },
   "nelsen7-schur": {
     "title": "Exact Nelsen 7 Schur order in both directions",
     "module": "Copula.Order.Nelsen7",
