@@ -21,8 +21,8 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Family | Constructor | Parameters | Dimension | Proved formula or identity |
 | --- | --- | --- | --- | --- |
 | Independence | `independence d` | None | Any finite `d` | Product CDF; exponential generator in dimension two |
-| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD and CI |
-| Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD and CD |
+| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD and CI; tail pair `(2^(−1/θ),0)` |
+| Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD and CD; tail pair `(0,0)` |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `1-(1-(1-(1-u)^θ)(1-(1-v)^θ))^(1/θ)`; independence at 1 |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `-log(1-(1-exp(-θu))(1-exp(-θv))/(1-exp(-θ)))/θ` |

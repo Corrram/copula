@@ -37,6 +37,10 @@ example (α β : I) : (Copula.marshallOlkin α β).chatterjeeXi =
 example (β : I) : (Copula.marshallOlkin 0 β).chatterjeeXi = 0 := by
   rw [Copula.marshallOlkin_chatterjeeXi]
   norm_num
+#print axioms ProbabilityTheory.Copula.hasLowerTailDependence_clayton_positive
+#print axioms ProbabilityTheory.Copula.hasUpperTailDependence_clayton_positive
+#print axioms ProbabilityTheory.Copula.hasLowerTailDependence_clayton_negative
+#print axioms ProbabilityTheory.Copula.hasUpperTailDependence_clayton_negative
 #print axioms ProbabilityTheory.Copula.not_isCI_clayton_negative
 #print axioms ProbabilityTheory.Copula.not_isCD_clayton_positive
 #print axioms ProbabilityTheory.Copula.isCD_clayton_negative
