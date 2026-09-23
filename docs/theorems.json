@@ -265,7 +265,11 @@
     "module": "Copula.Families.Gumbel",
     "declaration": "ProbabilityTheory.Copula.cdf_gumbel"
   },
-  "gumbel-infinite-endpoint": {
+  "gumbel-orthant-order": {
+    "title": "Gumbel–Hougaard increases in lower-orthant order",
+    "module": "Copula.Dependence.Gumbel",
+    "declaration": "ProbabilityTheory.Copula.lowerOrthantLE_gumbel"
+  },  "gumbel-infinite-endpoint": {
     "title": "Gumbel–Hougaard tends pointwise to comonotonicity",
     "module": "Copula.Families.GumbelLimits",
     "declaration": "ProbabilityTheory.Copula.tendsto_gumbel_atTop"
