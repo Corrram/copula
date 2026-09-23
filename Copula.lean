@@ -40,6 +40,7 @@ import Copula.Families.Gumbel
 import Copula.Families.Joe
 import Copula.Families.Frank
 import Copula.Families.FrankNegative
+import Copula.Families.AMH
 import Copula.Families.MarshallOlkin
 import Copula.Families.FGM
 import Copula.Families.Frechet
