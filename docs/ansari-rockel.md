@@ -42,7 +42,7 @@ observations and unresolved source discrepancies must not become axioms.
 | ID | Family | Parameters | Interior CDF | Lean |
 | --- | --- | --- | --- | --- |
 | A01 | Clayton | θ ≥ −1 | `(u^(−θ)+v^(−θ)−1)₊^(−1/θ)` for θ ≠ 0; Π at 0 | `clayton` for θ > 0; `claytonNegative` for −1≤θ<0; `independence 2` at 0 |
-| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full` |
+| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full`; both tail limits |
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
@@ -301,6 +301,7 @@ linear generator; [Power.lean](../Copula/Archimedean/Power.lean) proves both
 generator power transformations. These are genuine validity proofs in dimension
 two, including singular distributions, without density assumptions.
 
+[TailDependence/Nelsen2.lean](../Copula/TailDependence/Nelsen2.lean) proves A02's exact tail pair `(0,2−2^(1/θ))` for every θ≥1, including θ=1.
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
 entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
@@ -370,7 +371,7 @@ and proves A07's Table 6 formula xi=1-theta on the entire closed interval.
 [Order/Nelsen7.lean](../Copula/Order/Nelsen7.lean) proves the exact Schur order
 in both directions: C_theta precedes C_eta iff eta<=theta. The family is
 CI exactly at independence (theta=1), while CD holds throughout.
-The full Nelsen 7 rho and tau expressions are proved in [Rank/Nelsen7Rho.lean](../Copula/Rank/Nelsen7Rho.lean) and [Rank/Nelsen7Tau.lean](../Copula/Rank/Nelsen7Tau.lean), including both endpoint values. The density-TP2 entry remains a separate obligation.
+The full Nelsen 7 rho and tau expressions are proved in [Rank/Nelsen7Rho.lean](../Copula/Rank/Nelsen7Rho.lean) and [Rank/Nelsen7Tau.lean](../Copula/Rank/Nelsen7Tau.lean), including both endpoint values. The density-TP2 entry is settled by the exact classification above.
 
 Outstanding proof work includes the other named constructors, generator criteria for CI/CD and density TP2, Pickands representation
 and admissibility, the CI/CD equivalences between LO and Schur order,
