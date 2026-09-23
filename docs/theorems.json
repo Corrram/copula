@@ -84,6 +84,31 @@
     "module": "Copula.Families.Clayton.CDF",
     "declaration": "ProbabilityTheory.Copula.cdf_clayton"
   },
+  "nelsen2-full": {
+    "title": "The Nelsen 2 CDF on the closed square",
+    "module": "Copula.Families.Nelsen",
+    "declaration": "ProbabilityTheory.Copula.nelsen2_cdf_full"
+  },
+  "nelsen12-full": {
+    "title": "The Nelsen 12 CDF on the closed square",
+    "module": "Copula.Families.Nelsen",
+    "declaration": "ProbabilityTheory.Copula.nelsen12_cdf_full"
+  },
+  "nelsen14-full": {
+    "title": "The Nelsen 14 CDF on the closed square",
+    "module": "Copula.Families.Nelsen",
+    "declaration": "ProbabilityTheory.Copula.nelsen14_cdf_full"
+  },
+  "genest-ghoudi-full": {
+    "title": "The Genest–Ghoudi CDF on the closed square",
+    "module": "Copula.Families.Nelsen",
+    "declaration": "ProbabilityTheory.Copula.genestGhoudi_cdf_full"
+  },
+  "joe-full": {
+    "title": "The Joe CDF on the closed square",
+    "module": "Copula.Families.Joe",
+    "declaration": "ProbabilityTheory.Copula.joe_cdf_full"
+  },
   "gumbel": {
     "title": "The Gumbel–Hougaard CDF",
     "module": "Copula.Families.Gumbel",

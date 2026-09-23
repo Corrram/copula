@@ -79,4 +79,76 @@ theorem cdf_nelsen14 (θ : ℝ) (hθ : 1 ≤ θ) (u : Fin 2 → I) (hu : ∀ i, 
 @[simp] theorem nelsen14_one : nelsen14 1 le_rfl = clayton 2 1 (by norm_num) := by
   simp [nelsen14]
 
+/-- Promote an analytic positive-coordinate CDF formula to the closed square. -/
+private theorem closedSquareCDF_of_positive (C : Copula 2) (F : I → I → ℝ)
+    (h : ∀ u v : I, u ≠ 0 → v ≠ 0 → C.cdf ![u, v] = F u v)
+    (u v : I) :
+    C.cdf ![u, v] = if u = 0 ∨ v = 0 then 0 else F u v := by
+  by_cases hu : u = 0
+  · subst u
+    simpa using C.cdf_eq_zero_of_coord_eq_zero ![0, v] 0 rfl
+  by_cases hv : v = 0
+  · subst v
+    simpa [hu] using C.cdf_eq_zero_of_coord_eq_zero ![u, 0] 1 rfl
+  simpa [hu, hv] using h u v hu hv
+
+/-- Table 1's Nelsen 2 CDF on the closed square. -/
+theorem nelsen2_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (u v : I) :
+    (nelsen2 θ hθ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        max 0 (1 - (((1 - (u : ℝ)) ^ θ + (1 - (v : ℝ)) ^ θ) ^ θ⁻¹)) := by
+  apply closedSquareCDF_of_positive
+  intro a b ha hb
+  have hp : ∀ i : Fin 2, (![a, b] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using ha
+    · simpa using hb
+  simpa using cdf_nelsen2 θ hθ ![a, b] hp
+
+/-- Table 1's Genest–Ghoudi (Nelsen 15) CDF on the closed square. -/
+theorem genestGhoudi_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (u v : I) :
+    (genestGhoudi θ hθ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        (max 0 (1 - (((1 - (u : ℝ) ^ θ⁻¹) ^ θ +
+          (1 - (v : ℝ) ^ θ⁻¹) ^ θ) ^ θ⁻¹))) ^ θ := by
+  apply closedSquareCDF_of_positive
+  intro a b ha hb
+  have hp : ∀ i : Fin 2, (![a, b] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using ha
+    · simpa using hb
+  simpa using cdf_genestGhoudi θ hθ ![a, b] hp
+
+/-- Table 1's Nelsen 12 CDF on the closed square. -/
+theorem nelsen12_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (u v : I) :
+    (nelsen12 θ hθ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        (1 + (((u : ℝ)⁻¹ - 1) ^ θ + ((v : ℝ)⁻¹ - 1) ^ θ) ^ θ⁻¹)⁻¹ := by
+  apply closedSquareCDF_of_positive
+  intro a b ha hb
+  have hp : ∀ i : Fin 2, (![a, b] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using ha
+    · simpa using hb
+  simpa using cdf_nelsen12 θ hθ ![a, b] hp
+
+/-- Table 1's Nelsen 14 CDF on the closed square. -/
+theorem nelsen14_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (u v : I) :
+    (nelsen14 θ hθ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        (1 + (((u : ℝ) ^ (-θ⁻¹) - 1) ^ θ +
+          ((v : ℝ) ^ (-θ⁻¹) - 1) ^ θ) ^ θ⁻¹) ^ (-θ) := by
+  apply closedSquareCDF_of_positive
+  intro a b ha hb
+  have hp : ∀ i : Fin 2, (![a, b] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using ha
+    · simpa using hb
+  simpa using cdf_nelsen14 θ hθ ![a, b] hp
+
+
 end ProbabilityTheory.Copula

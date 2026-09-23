@@ -42,20 +42,20 @@ observations and unresolved source discrepancies must not become axioms.
 | ID | Family | Parameters | Interior CDF | Lean |
 | --- | --- | --- | --- | --- |
 | A01 | Clayton | θ ≥ −1 | `(u^(−θ)+v^(−θ)−1)₊^(−1/θ)` for θ ≠ 0; Π at 0 | `clayton` for θ > 0; `claytonNegative` for −1≤θ<0; `independence 2` at 0 |
-| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2` |
+| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full` |
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank` for θ > 0 |
-| A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe` |
+| A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full` |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
 | A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | Pending |
 | A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | Pending |
 | A10 | Nelsen 10 | 0 ≤ θ ≤ 1 | `P/(1+(1−u^θ)(1−v^θ))^(1/θ)`; Π at 0 | Pending |
 | A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | Pending |
-| A12 | Nelsen 12 | θ ≥ 1 | `(1+((u^(−1)−1)^θ+(v^(−1)−1)^θ)^(1/θ))^(−1)` | `nelsen12` |
+| A12 | Nelsen 12 | θ ≥ 1 | `(1+((u^(−1)−1)^θ+(v^(−1)−1)^θ)^(1/θ))^(−1)` | `nelsen12`; `nelsen12_cdf_full` |
 | A13 | Nelsen 13 | θ ≥ 0 | `exp(1−((1−log u)^θ+(1−log v)^θ−1)^(1/θ))`; Gumbel–Barnett at parameter 1 when θ=0 | Pending |
-| A14 | Nelsen 14 | θ ≥ 1 | `(1+((u^(−1/θ)−1)^θ+(v^(−1/θ)−1)^θ)^(1/θ))^(−θ)` | `nelsen14` |
-| A15 | Genest–Ghoudi (Nelsen 15) | θ ≥ 1 | `(1−((1−u^(1/θ))^θ+(1−v^(1/θ))^θ)^(1/θ))₊^θ` | `genestGhoudi` |
+| A14 | Nelsen 14 | θ ≥ 1 | `(1+((u^(−1/θ)−1)^θ+(v^(−1/θ)−1)^θ)^(1/θ))^(−θ)` | `nelsen14`; `nelsen14_cdf_full` |
+| A15 | Genest–Ghoudi (Nelsen 15) | θ ≥ 1 | `(1−((1−u^(1/θ))^θ+(1−v^(1/θ))^θ)^(1/θ))₊^θ` | `genestGhoudi`; `genestGhoudi_cdf_full` |
 | A16 | Nelsen 16 | θ ≥ 0 | `(s+sqrt(s²+4θ))/2`, `s=S−1−θ(1/u+1/v−1)` | Pending |
 | A17 | Nelsen 17 | θ ∈ ℝ, θ ≠ 0 | `(1+((1+u)^(−θ)−1)((1+v)^(−θ)−1)/(2^(−θ)−1))^(−1/θ)−1` | Pending |
 | A18 | Nelsen 18 | θ ≥ 2 | `(1+θ/log(exp(θ/(u−1))+exp(θ/(v−1))))₊` | Pending |
