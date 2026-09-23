@@ -7,3 +7,4 @@ import Copula.Dependence.Frechet
 import Copula.Dependence.Clayton
 import Copula.Dependence.ClaytonNegative
 import Copula.Dependence.ClaytonClassification
+import Copula.Dependence.ClaytonTotalPositivity

@@ -86,4 +86,16 @@ theorem not_isCI_clayton_negative (θ : ℝ) (hθ : -1 ≤ θ) (hn : θ < 0) :
     ¬(claytonNegative θ hθ hn).IsCI := by
   intro hCI
   exact (not_le_of_gt (negative_clayton_mid_strict θ hθ hn)) (hCI.isPQD midI midI)
+/-- Positive Clayton parameters are not negative-quadrant dependent. -/
+theorem not_isNQD_clayton_positive (θ : ℝ) (hθ : 0 < θ) :
+    ¬(clayton 2 θ hθ).IsNQD := by
+  intro hNQD
+  exact (not_le_of_gt (positive_clayton_mid_strict θ hθ)) (hNQD midI midI)
+
+/-- Negative Clayton parameters are not positive-quadrant dependent. -/
+theorem not_isPQD_clayton_negative (θ : ℝ) (hθ : -1 ≤ θ) (hn : θ < 0) :
+    ¬(claytonNegative θ hθ hn).IsPQD := by
+  intro hPQD
+  exact (not_le_of_gt (negative_clayton_mid_strict θ hθ hn)) (hPQD midI midI)
+
 end ProbabilityTheory.Copula
