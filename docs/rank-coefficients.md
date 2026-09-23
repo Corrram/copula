@@ -306,6 +306,13 @@ affine reciprocal integral.
 
 {{ lean:nelsen7-rho }}
 
+The exact Kendall tau formula follows from the conditional-CDF product identity,
+without assuming a density. It equals
+`2 - 2/theta - 2(theta-1)² log(1-theta)/theta²` for `0 < theta < 1`,
+with values `-1` and `0` at `theta=0` and `theta=1`.
+
+{{ lean:nelsen7-tau }}
+
 Over the full Frechet weight simplex, xi plus footrule is at least -1/16,
 with equality exactly at a=0, b=1/4. Thus the unique minimizer is
 three quarters independence plus one quarter W. This is a family-restricted

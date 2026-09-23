@@ -365,7 +365,7 @@ and proves A07's Table 6 formula xi=1-theta on the entire closed interval.
 [Order/Nelsen7.lean](../Copula/Order/Nelsen7.lean) proves the exact Schur order
 in both directions: C_theta precedes C_eta iff eta<=theta. The family is
 CI exactly at independence (theta=1), while CD holds throughout.
-The full Nelsen 7 rho expression is proved in [Rank/Nelsen7Rho.lean](../Copula/Rank/Nelsen7Rho.lean), including its two endpoint values. Nelsen 7's tau and density-TP2 entries remain separate obligations.
+The full Nelsen 7 rho and tau expressions are proved in [Rank/Nelsen7Rho.lean](../Copula/Rank/Nelsen7Rho.lean) and [Rank/Nelsen7Tau.lean](../Copula/Rank/Nelsen7Tau.lean), including both endpoint values. The density-TP2 entry remains a separate obligation.
 
 Outstanding proof work includes the other named constructors, full signed
 Frank, generator criteria for CI/CD and density TP2, Pickands representation
