@@ -99,6 +99,11 @@
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_cdf_full"
   },
+  "nelsen8-orthant-order": {
+    "title": "Nelsen 8 increases in lower-orthant order",
+    "module": "Copula.Families.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.lowerOrthantLE_nelsen8"
+  },
   "nelsen8-lower-tail": {
     "title": "Nelsen 8 lower-tail coefficient for every parameter",
     "module": "Copula.TailDependence.Nelsen8",
