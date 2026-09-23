@@ -26,6 +26,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1 |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
+| Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives an exact reflected logarithmic CDF on the closed square |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | `bb1_cdf_full` on the closed square; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | `bb6_cdf_full` on the closed square; `δ = 1` recovers Joe |
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | `nelsen2_cdf_full` on the closed square; lower bound at 1 |
@@ -49,7 +50,7 @@ zeros. All bivariate Archimedean copulas are proved exchangeable by
 
 Modules: `Copula.Archimedean.Basic`, `Copula.Archimedean.Exponential`,
 `Copula.Archimedean.Power`, `Copula.Archimedean.Clayton`,
-`Copula.Families.Gumbel`, `Copula.Families.Joe`, `Copula.Families.Frank`.
+`Copula.Families.Gumbel`, `Copula.Families.Joe`, `Copula.Families.Frank`, and `Copula.Families.FrankNegative`.
 
 ## Extreme-value families
 

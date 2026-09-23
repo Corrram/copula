@@ -109,6 +109,11 @@
     "module": "Copula.Families.Frank",
     "declaration": "ProbabilityTheory.Copula.frank_cdf_full"
   },
+  "frank-negative-full": {
+    "title": "The negative-parameter Frank CDF on the closed square",
+    "module": "Copula.Families.FrankNegative",
+    "declaration": "ProbabilityTheory.Copula.frankNegative_cdf_full"
+  },
   "bb1-full": {
     "title": "The BB1 CDF on the closed square",
     "module": "Copula.Archimedean.Clayton",
