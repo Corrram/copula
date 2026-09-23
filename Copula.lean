@@ -50,6 +50,7 @@ import Copula.Diagonal
 import Copula.Reflection.Bivariate
 import Copula.Symmetry
 import Copula.TailDependence
+import Copula.TailDependence.Nelsen12
 import Copula.Families.Nelsen
 import Copula.Families.Nelsen2Limits
 import Copula.Families.Nelsen7

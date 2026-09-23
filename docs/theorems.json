@@ -203,6 +203,16 @@
     "module": "Copula.TailDependence.Nelsen2",
     "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen2"
   },
+  "nelsen12-lower-tail": {
+    "title": "Nelsen 12 lower-tail dependence coefficient",
+    "module": "Copula.TailDependence.Nelsen12",
+    "declaration": "ProbabilityTheory.Copula.hasLowerTailDependence_nelsen12"
+  },
+  "nelsen12-upper-tail": {
+    "title": "Nelsen 12 upper-tail dependence coefficient",
+    "module": "Copula.TailDependence.Nelsen12",
+    "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen12"
+  },
   "nelsen12-orthant-order": {
     "title": "Nelsen 12 increases in lower-orthant order",
     "module": "Copula.Dependence.Nelsen12",
