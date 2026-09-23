@@ -144,7 +144,11 @@
     "module": "Copula.TailDependence.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen8"
   },
-  "nelsen8-endpoint": {
+  "nelsen8-infinite-endpoint": {
+    "title": "Nelsen 8 tends pointwise to Clayton at one",
+    "module": "Copula.Families.Nelsen8Limits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_nelsen8_atTop"
+  },  "nelsen8-endpoint": {
     "title": "Nelsen 8 lower-Fréchet endpoint",
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_one"

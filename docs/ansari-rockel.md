@@ -48,7 +48,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
 | A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full`; both tail limits |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
-| A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | `nelsen8`; `nelsen8_cdf_full`; `nelsen8_one`; both tail limits; exact CD classification |
+| A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | `nelsen8`; `nelsen8_cdf_full`; `nelsen8_one`; pointwise Clayton-at-one limit; both tail limits; exact CD classification |
 | A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | Pending |
 | A10 | Nelsen 10 | 0 ≤ θ ≤ 1 | `P/(1+(1−u^θ)(1−v^θ))^(1/θ)`; Π at 0 | Pending |
 | A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | Pending |
@@ -303,7 +303,7 @@ two, including singular distributions, without density assumptions.
 
 [TailDependence/Joe.lean](../Copula/TailDependence/Joe.lean) proves A06's exact tail pair `(0,2−2^(1/θ))` for every θ≥1.
 [TailDependence/Nelsen2.lean](../Copula/TailDependence/Nelsen2.lean) proves A02's exact tail pair `(0,2−2^(1/θ))` for every θ≥1, including θ=1.
-[Nelsen8.lean](../Copula/Families/Nelsen8.lean) proves A08's rational generator, printed CDF on the full closed square, and θ=1 lower-Fréchet endpoint. The [tail proofs](../Copula/TailDependence/Nelsen8.lean) establish the exact pair (0,0). The family module proves increasing lower-orthant parameter order. The [dependence proofs](../Copula/Dependence/Nelsen8.lean) show non-PQD and non-CI for every θ≥1, exclude CDF-level TP2 and an MTP2 density, and prove CD at θ=1. CD for θ>1, Schur order, and association-coefficient cells remain separate obligations.
+[Nelsen8.lean](../Copula/Families/Nelsen8.lean) proves A08's rational generator, printed CDF on the full closed square, and θ=1 lower-Fréchet endpoint. The [tail proofs](../Copula/TailDependence/Nelsen8.lean) establish the exact pair (0,0). The family module proves increasing lower-orthant parameter order; [Nelsen8Limits.lean](../Copula/Families/Nelsen8Limits.lean) proves the full-square Clayton-at-one limit as θ→∞. The [dependence proofs](../Copula/Dependence/Nelsen8.lean) show non-PQD and non-CI for every θ≥1, exclude CDF-level TP2 and an MTP2 density, and prove CD exactly at θ=1. Schur order and association-coefficient cells remain separate obligations.
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
 entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
