@@ -236,6 +236,16 @@
     "module": "Copula.TailDependence.Nelsen14",
     "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen14"
   },
+  "nelsen14-infinite-endpoint": {
+    "title": "Nelsen 14 tends pointwise to comonotonicity",
+    "module": "Copula.Families.PowerFamilyLimits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_nelsen14_atTop"
+  },
+  "genest-ghoudi-infinite-endpoint": {
+    "title": "Genest–Ghoudi tends pointwise to comonotonicity",
+    "module": "Copula.Families.PowerFamilyLimits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_genestGhoudi_atTop"
+  },
   "nelsen14-full": {
     "title": "The Nelsen 14 CDF on the closed square",
     "module": "Copula.Families.Nelsen",
