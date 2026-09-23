@@ -11,3 +11,4 @@ import Copula.Dependence.ClaytonTotalPositivity
 import Copula.Dependence.ClaytonDensityFormula
 import Copula.Dependence.ClaytonDensityMeasure
 import Copula.Dependence.DensityTotalPositivity
+import Copula.Dependence.Nelsen8
