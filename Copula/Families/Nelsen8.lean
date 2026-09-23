@@ -148,7 +148,7 @@ private theorem n8_rational_identity (θ u v : ℝ) (hθ : 1 ≤ θ)
   rw [hn, hd]
   field_simp [hD, ne_of_gt hdu, ne_of_gt hdv]
 
-private theorem n8_source_den_pos (θ u v : ℝ) (hθ : 1 ≤ θ)
+theorem n8_source_den_pos (θ u v : ℝ) (hθ : 1 ≤ θ)
     (hu : 0 ≤ u) (_hu1 : u ≤ 1) (hv : 0 ≤ v) (hv1 : v ≤ 1) :
     0 < θ^2 - (θ-1)^2*(1-u)*(1-v) := by
   have hk : 0 ≤ θ-1 := by linarith
