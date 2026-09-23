@@ -76,7 +76,13 @@ The reusable `maxProduct C D a` construction has CDF
 `C(uᵢ^aᵢ) D(uᵢ^(1-aᵢ))`. It uses independent samples, transformed power
 marginals, and coordinatewise maxima. Zero weights use a constant zero sample.
 It preserves extreme-value stability when both inputs have it. Tawn uses
-Gumbel and independence as its two inputs; `cdf_maxProduct` gives its CDF.
+Gumbel and independence as its two inputs. `gumbel_cdf_full` and
+`tawn_cdf_full` state the named CDF formulas on the whole closed square,
+with explicit grounded values on the zero axes; `tawn_cdf_positive` records
+the analytic expression where both logarithms are defined.
+The exact reductions `tawn_zero_left`, `tawn_zero_right`, and `tawn_shape_one`
+give independence on both weight axes and at shape one; `tawn_one_one`
+recovers Gumbel at unit weights. These include zero-coordinate endpoints.
 The construction is also useful with inputs that are not extreme-value copulas.
 
 `ExtremeValue.Diagonal` derives the power diagonal `t^κ`, with `1≤κ≤2`,

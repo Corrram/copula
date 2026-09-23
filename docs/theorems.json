@@ -114,6 +114,16 @@
     "module": "Copula.Families.Gumbel",
     "declaration": "ProbabilityTheory.Copula.cdf_gumbel"
   },
+  "gumbel-full": {
+    "title": "The Gumbel–Hougaard CDF on the closed square",
+    "module": "Copula.Families.Gumbel",
+    "declaration": "ProbabilityTheory.Copula.gumbel_cdf_full"
+  },
+  "tawn-full": {
+    "title": "The Tawn CDF on the closed square",
+    "module": "Copula.Families.Gumbel",
+    "declaration": "ProbabilityTheory.Copula.tawn_cdf_full"
+  },
   "gumbel-ev": {
     "title": "Gumbel is an extreme-value copula",
     "module": "Copula.Families.Gumbel",
