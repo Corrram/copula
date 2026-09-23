@@ -8,3 +8,4 @@ import Copula.Dependence.Clayton
 import Copula.Dependence.ClaytonNegative
 import Copula.Dependence.ClaytonClassification
 import Copula.Dependence.ClaytonTotalPositivity
+import Copula.Dependence.ClaytonDensityFormula
