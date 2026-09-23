@@ -7,7 +7,8 @@ import Copula.Dependence.ClaytonTotalPositivity
 
 /-! # MTP2 of the positive-Clayton density formula
 
-The measure equality needed for `HasMTP2Density` remains a separate theorem.
+The measure equality needed for `HasMTP2Density` is proved in
+`Copula.Dependence.ClaytonDensityMeasure`.
 -/
 
 open Real
@@ -69,12 +70,12 @@ private theorem claytonKernelTP2 (θ q : ℝ) (hθ : 0 < θ) (hq : q ≤ 0) :
     using hpow
 
 
-/-- The standard positive-Clayton density formula, set to zero on coordinate axes. Its identification as a density of the copula measure is a separate obligation. -/
+/-- The standard positive-Clayton density formula, set to zero on coordinate axes. Its identification as a density of the copula measure is proved in `ClaytonDensityMeasure`. -/
 noncomputable def claytonDensityFormula (θ : ℝ) (x : Fin 2 → I) : ℝ :=
   (1 + θ) * (x 0 : ℝ) ^ (-θ - 1) * (x 1 : ℝ) ^ (-θ - 1) *
     claytonKernel θ (-2 - 1 / θ) (x 0) (x 1)
 
-/-- The explicit positive-Clayton density formula is MTP2 as a function. This alone does not prove `HasMTP2Density` for the copula. -/
+/-- The explicit positive-Clayton density formula is MTP2 as a function. The corresponding copula-level theorem is in `ClaytonDensityMeasure`. -/
 theorem isMTP2_claytonDensityFormula_positive (θ : ℝ) (hθ : 0 < θ) :
     IsMTP2 (claytonDensityFormula θ) := by
   rw [isMTP2_fin_two_iff]

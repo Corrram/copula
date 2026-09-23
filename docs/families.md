@@ -21,7 +21,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Family | Constructor | Parameters | Dimension | Proved formula or identity |
 | --- | --- | --- | --- | --- |
 | Independence | `independence d` | None | Any finite `d` | Product CDF; exponential generator in dimension two |
-| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI and CDF TP2; tail pair `(2^(−1/θ),0)` |
+| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI, CDF TP2 and actual MTP2 density; tail pair `(2^(−1/θ),0)` |
 | Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2; no MTP2 density at θ=−1; tail pair `(0,0)` |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `1-(1-(1-(1-u)^θ)(1-(1-v)^θ))^(1/θ)`; independence at 1 |
