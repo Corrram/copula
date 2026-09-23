@@ -299,13 +299,13 @@ generator power transformations. These are genuine validity proofs in dimension
 two, including singular distributions, without density assumptions.
 
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
-entire square, CD, increasing LO order and both endpoints. The
+entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
 −1≤θ<0 and identifies −1 with W. The library now has constructors for 18 of
 the paper's 38 families; Frank still has only its positive branch. A constructor
 count is not a count of fully proved property tables.
 
-[Dependence/Clayton.lean](../Copula/Dependence/Clayton.lean) proves CI (in both directions) and positive quadrant dependence for every positive Clayton parameter, and negative quadrant dependence throughout −1≤θ<0. The positive-parameter CI proof uses concavity of every first-coordinate CDF section and Archimedean symmetry. The negative-parameter CD entry is proved in [Dependence/ClaytonNegative.lean](../Copula/Dependence/ClaytonNegative.lean) by a convex-section argument across the truncated support. [Dependence/ClaytonClassification.lean](../Copula/Dependence/ClaytonClassification.lean) proves the reverse exclusions by strict midpoint quadrant comparisons, completing the signed CI/CD parameter split. [TailDependence/Clayton.lean](../Copula/TailDependence/Clayton.lean) proves both exact tail coefficients for each signed branch: `(2^(−1/θ),0)` for θ>0 and `(0,0)` for −1≤θ<0. The exact CDF-level TP2 region is now checked separately in [Dependence/ClaytonTotalPositivity.lean](../Copula/Dependence/ClaytonTotalPositivity.lean): every θ>0 has a TP2 CDF, θ=0 is independence and has a TP2 CDF, while every −1≤θ<0 fails CDF TP2. The θ=−1 endpoint is W and has no Lebesgue MTP2 density. [Dependence/ClaytonDensityFormula.lean](../Copula/Dependence/ClaytonDensityFormula.lean) also checks MTP2 of the standard positive-parameter density formula as a function. Its equality with the Clayton copula measure is not yet proved, so the rest of Table 3 density TP2 remains open.
+[Dependence/Clayton.lean](../Copula/Dependence/Clayton.lean) proves CI (in both directions) and positive quadrant dependence for every positive Clayton parameter, and negative quadrant dependence throughout −1≤θ<0. The positive-parameter CI proof uses concavity of every first-coordinate CDF section and Archimedean symmetry. The negative-parameter CD entry is proved in [Dependence/ClaytonNegative.lean](../Copula/Dependence/ClaytonNegative.lean) by a convex-section argument across the truncated support. [Dependence/ClaytonClassification.lean](../Copula/Dependence/ClaytonClassification.lean) proves the reverse exclusions by strict midpoint quadrant comparisons, completing the signed CI/CD parameter split. [TailDependence/Clayton.lean](../Copula/TailDependence/Clayton.lean) proves both exact tail coefficients for each signed branch: `(2^(−1/θ),0)` for θ>0 and `(0,0)` for −1≤θ<0. The exact CDF-level TP2 region is now checked separately in [Dependence/ClaytonTotalPositivity.lean](../Copula/Dependence/ClaytonTotalPositivity.lean): every θ>0 has a TP2 CDF, θ=0 is independence and has a TP2 CDF, while every −1≤θ<0 fails CDF TP2. The θ=−1 endpoint is W and has no Lebesgue MTP2 density. [Dependence/ClaytonDensityFormula.lean](../Copula/Dependence/ClaytonDensityFormula.lean) also checks MTP2 of the standard positive-parameter density formula as a function. [Dependence/ClaytonDensityMeasure.lean](../Copula/Dependence/ClaytonDensityMeasure.lean) identifies that formula with the actual Clayton measure on the full square. Consequently every θ>0 has an actual MTP2 density and is absolutely continuous. [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) proves that any copula with an MTP2 density is PQD, then uses strict non-PQD of negative Clayton to exclude all −1≤θ<0. Thus the signed Clayton density-TP2 range is exactly θ≥0, including the independence parameter.
 
 [ConditionalMonotonicity.lean](../Copula/Dependence/ConditionalMonotonicity.lean)
 defines CI/CD, proves reflection duality and exact FGM CI/CD regions.
@@ -322,8 +322,10 @@ either or both directions exactly when the absolute parameters are ordered.
 Previously proved family results are indexed in [families](families.md),
 [positive dependence](positive-dependence.md), [orders](orders.md),
 [rank coefficients](rank-coefficients.md), and [tail dependence](nelsen.md).
-In particular FGM has exact parameter classification, LO order, density,
-rho/footrule/gamma/beta formulas and both zero tails. Fréchet and Mardia have
+In particular FGM has exact parameter classification, LO order, an actual
+MTP2 density exactly for nonnegative parameters, rho/footrule/gamma/beta
+formulas and both zero tails. The negative exclusion covers every possible
+density version via the general CD-plus-MTP2 independence theorem. Fréchet and Mardia have
 both tail formulas. These facts do not establish the remaining table cells.
 
 [ExtremeValue/Diagonal.lean](../Copula/ExtremeValue/Diagonal.lean) proves
