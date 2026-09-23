@@ -149,6 +149,11 @@
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_one"
   },
+  "nelsen2-infinite-endpoint": {
+    "title": "Nelsen 2 tends pointwise to comonotonicity",
+    "module": "Copula.Families.Nelsen2Limits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_nelsen2_atTop"
+  },
   "nelsen2-orthant-order": {
     "title": "Nelsen 2 increases in lower-orthant order",
     "module": "Copula.Dependence.Nelsen2",
