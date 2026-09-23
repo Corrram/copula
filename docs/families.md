@@ -29,7 +29,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives the reflected CDF and `frankNegative_cdf_source` proves the printed logarithmic CDF on the closed square |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | `bb1_cdf_full` on the closed square; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | `bb6_cdf_full` on the closed square; `δ = 1` recovers Joe |
-| Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | `nelsen2_cdf_full` on the closed square; lower bound at 1; exact tail pair `(0,2−2^(1/θ))` |
+| Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | `nelsen2_cdf_full` on the closed square; lower bound at 1; exact tail pair `(0,2−2^(1/θ))`; non-PQD/non-CI and no CDF TP2 or MTP2 density; CD exactly at θ=1 |
 | Nelsen 8 | `nelsen8 θ hθ` | `θ ≥ 1` | 2 | `nelsen8_cdf_full` proves the printed rational CDF on the closed square; `θ = 1` is W; exact tail pair (0,0); increasing lower-orthant order; non-PQD/non-CI and no CDF TP2 or MTP2 density; CD exactly at θ=1 |
 | Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; exact xi, rho and tau; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
 | Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | `nelsen12_cdf_full` on the closed square; Clayton at one |

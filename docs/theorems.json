@@ -149,6 +149,31 @@
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_one"
   },
+  "nelsen2-cd-exact": {
+    "title": "Nelsen 2 is conditionally decreasing exactly at one",
+    "module": "Copula.Dependence.Nelsen2",
+    "declaration": "ProbabilityTheory.Copula.isCD_nelsen2_iff"
+  },
+  "nelsen2-not-pqd": {
+    "title": "Nelsen 2 is never positive quadrant dependent",
+    "module": "Copula.Dependence.Nelsen2",
+    "declaration": "ProbabilityTheory.Copula.not_isPQD_nelsen2"
+  },
+  "nelsen2-not-ci": {
+    "title": "Nelsen 2 is never conditionally increasing",
+    "module": "Copula.Dependence.Nelsen2",
+    "declaration": "ProbabilityTheory.Copula.not_isCI_nelsen2"
+  },
+  "nelsen2-not-tp2-cdf": {
+    "title": "Nelsen 2 never has a TP2 CDF",
+    "module": "Copula.Dependence.Nelsen2",
+    "declaration": "ProbabilityTheory.Copula.not_isTP2CDF_nelsen2"
+  },
+  "nelsen2-not-mtp2-density": {
+    "title": "Nelsen 2 never has an MTP2 density",
+    "module": "Copula.Dependence.Nelsen2",
+    "declaration": "ProbabilityTheory.Copula.not_hasMTP2Density_nelsen2"
+  },
   "nelsen2-full": {
     "title": "The Nelsen 2 CDF on the closed square",
     "module": "Copula.Families.Nelsen",

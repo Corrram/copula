@@ -42,7 +42,7 @@ observations and unresolved source discrepancies must not become axioms.
 | ID | Family | Parameters | Interior CDF | Lean |
 | --- | --- | --- | --- | --- |
 | A01 | Clayton | θ ≥ −1 | `(u^(−θ)+v^(−θ)−1)₊^(−1/θ)` for θ ≠ 0; Π at 0 | `clayton` for θ > 0; `claytonNegative` for −1≤θ<0; `independence 2` at 0 |
-| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full`; both tail limits |
+| A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full`; both tail limits; exact CI/CD and TP2 exclusions |
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
