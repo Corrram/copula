@@ -241,6 +241,16 @@
     "module": "Copula.Families.Nelsen",
     "declaration": "ProbabilityTheory.Copula.nelsen14_cdf_full"
   },
+  "genest-ghoudi-lower-tail": {
+    "title": "Genest–Ghoudi lower-tail dependence coefficient",
+    "module": "Copula.TailDependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.hasLowerTailDependence_genestGhoudi"
+  },
+  "genest-ghoudi-upper-tail": {
+    "title": "Genest–Ghoudi upper-tail dependence coefficient",
+    "module": "Copula.TailDependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_genestGhoudi"
+  },
   "genest-ghoudi-full": {
     "title": "The Genest–Ghoudi CDF on the closed square",
     "module": "Copula.Families.Nelsen",
