@@ -117,8 +117,9 @@ exponents require limits. `Φ` is the standard normal CDF and `Tν` the Student-
 Special/limiting cases to retain: BB5 at θ=1 is Galambos and as δ→0 is
 Gumbel; Galambos and Hüsler–Reiss range from Π to M; Joe EV at α=β=1 is
 Galambos and as δ→∞ tends to Marshall–Olkin; Tawn at α=β=1 is Gumbel
-and as θ→∞ tends to Marshall–Olkin. The finite-parameter identities
-`tawn_one_one`, `tawn_zero_left`, `tawn_zero_right`, and `tawn_shape_one`
+and as θ→∞ tends to Marshall–Olkin. The named `gumbel_cdf_full`, `tawn_cdf_positive`, and `tawn_cdf_full`
+formulas are checked, including the grounded zero axes. The finite-parameter
+identities `tawn_one_one`, `tawn_zero_left`, `tawn_zero_right`, and `tawn_shape_one`
 are proved, including every endpoint. The infinite-parameter limit still
 requires proof; it is not evaluation at an infinite real parameter. The t-EV limiting-case column
 of Table 4 requires independent checking (see source audit below).
