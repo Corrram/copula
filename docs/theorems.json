@@ -94,6 +94,16 @@
     "module": "Copula.TailDependence.Joe",
     "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_joe"
   },
+  "nelsen8-full": {
+    "title": "The Nelsen 8 CDF on the closed square",
+    "module": "Copula.Families.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.nelsen8_cdf_full"
+  },
+  "nelsen8-endpoint": {
+    "title": "Nelsen 8 lower-Fréchet endpoint",
+    "module": "Copula.Families.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.nelsen8_one"
+  },
   "nelsen2-full": {
     "title": "The Nelsen 2 CDF on the closed square",
     "module": "Copula.Families.Nelsen",
