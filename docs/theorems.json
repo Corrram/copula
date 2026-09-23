@@ -119,6 +119,11 @@
     "module": "Copula.Dependence.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.not_hasMTP2Density_nelsen8"
   },
+  "nelsen8-cd-exact": {
+    "title": "Nelsen 8 is conditionally decreasing exactly at one",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.isCD_nelsen8_iff"
+  },
   "nelsen8-cd-endpoint": {
     "title": "Nelsen 8 at one is conditionally decreasing",
     "module": "Copula.Dependence.Nelsen8",
