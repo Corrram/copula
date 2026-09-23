@@ -84,6 +84,11 @@
     "module": "Copula.Families.Clayton.CDF",
     "declaration": "ProbabilityTheory.Copula.cdf_clayton"
   },
+  "joe-full": {
+    "title": "The Joe CDF on the closed square",
+    "module": "Copula.Families.Joe",
+    "declaration": "ProbabilityTheory.Copula.joe_cdf_full"
+  },
   "gumbel": {
     "title": "The Gumbel–Hougaard CDF",
     "module": "Copula.Families.Gumbel",
