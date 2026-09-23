@@ -23,7 +23,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Independence | `independence d` | None | Any finite `d` | Product CDF; exponential generator in dimension two |
 | Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI, CDF TP2 and actual MTP2 density; tail pair `(2^(−1/θ),0)` |
 | Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2 and of MTP2 density for all negative parameters; tail pair `(0,0)` |
-| Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; pointwise comonotonicity as θ→∞; increasing lower-orthant order; max-stability |
+| Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; pointwise comonotonicity as θ→∞; increasing lower-orthant order; max-stability; CDF TP2 for all θ≥1 |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1; pointwise comonotonicity as θ→∞; exact tail pair `(0,2−2^(1/θ))` |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
 | Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives the reflected CDF and `frankNegative_cdf_source` proves the printed logarithmic CDF on the closed square |
@@ -32,8 +32,8 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | `nelsen2_cdf_full` on the closed square; lower bound at 1 and pointwise upper bound at θ→∞; increasing lower-orthant order; exact tail pair `(0,2−2^(1/θ))`; non-PQD/non-CI and no CDF TP2 or MTP2 density; CD exactly at θ=1 |
 | Nelsen 8 | `nelsen8 θ hθ` | `θ ≥ 1` | 2 | `nelsen8_cdf_full` proves the printed rational CDF on the closed square; `θ = 1` is W and θ→∞ tends pointwise to Clayton at one; exact tail pair (0,0); increasing lower-orthant order; non-PQD/non-CI and no CDF TP2 or MTP2 density; CD exactly at θ=1 |
 | Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; exact xi, rho and tau; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
-| Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | `nelsen12_cdf_full` on the closed square; Clayton at one and pointwise comonotonicity as θ→∞; increasing lower-orthant order; exact lower/upper tail coefficients; CI, CDF TP2 and MTP2 density at θ=1; PQD and non-CD for all θ≥1 |
-| Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | `nelsen14_cdf_full` on the closed square; Clayton at one; pointwise comonotonicity as θ→∞; exact lower/upper tail coefficients 1/2 and 2−2^(1/θ); CI, CDF TP2 and MTP2 density at θ=1; PQD and non-CD for all θ≥1 |
+| Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | `nelsen12_cdf_full` on the closed square; Clayton at one and pointwise comonotonicity as θ→∞; increasing lower-orthant order; exact lower/upper tail coefficients; CI and MTP2 density at θ=1; CDF TP2, PQD and non-CD for all θ≥1 |
+| Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | `nelsen14_cdf_full` on the closed square; Clayton at one; pointwise comonotonicity as θ→∞; exact lower/upper tail coefficients 1/2 and 2−2^(1/θ); CI and MTP2 density at θ=1; CDF TP2, PQD and non-CD for all θ≥1 |
 | Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | `genestGhoudi_cdf_full` on the closed square; lower bound at 1; pointwise comonotonicity as θ→∞; exact lower/upper tail coefficients 0 and 2−2^(1/θ); never CI or TP2; CD iff θ=1 |
 
 
@@ -73,6 +73,8 @@ The identity is proved for every family in this table.
 `min(u^α,v^β) u^(1-α) v^(1-β)`, including all coordinate and parameter
 boundaries. Cuadras–Augé is the equal-weight subfamily. The all-zero and all-one
 Marshall–Olkin parameters give independence and comonotonicity respectively. `Rank.MarshallOlkin` proves the full-parameter Spearman rho formula `3αβ/(2α+2β−αβ)`. `Rank.MarshallOlkinConditional` identifies the conditional CDF almost everywhere, and `Rank.MarshallOlkinXi` proves directional Chatterjee xi `2α²β/(3α+β−2αβ)`. Both coefficient formulas include the independence axes and singular positive-weight laws.
+
+CDF TP2 is preserved by `maxProduct` in dimension two. Consequently the Gumbel–Hougaard, Tawn, Marshall–Olkin and Cuadras–Augé CDFs are TP2 for all admissible parameters, including singular common-shock laws. This is distinct from MTP2 of a Lebesgue density.
 
 The reusable `maxProduct C D a` construction has CDF
 `C(uᵢ^aᵢ) D(uᵢ^(1-aᵢ))`. It uses independent samples, transformed power
