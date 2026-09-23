@@ -51,6 +51,7 @@ import Copula.Reflection.Bivariate
 import Copula.Symmetry
 import Copula.TailDependence
 import Copula.Families.Nelsen
+import Copula.Families.Nelsen2Limits
 import Copula.Families.Nelsen7
 import Copula.Families.Nelsen8
 import Copula.Families.Clayton.Negative
