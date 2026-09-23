@@ -5,6 +5,8 @@ Authors: Marcus Rockel
 -/
 import Copula.Dependence.AMH
 import Copula.Dependence.TotalPositivity
+import Copula.Dependence.DensityTotalPositivity
+import Copula.Dependence.ClaytonDensityMeasure
 
 /-! # CDF-level total positivity of Ali–Mikhail–Haq copulas
 
@@ -79,5 +81,25 @@ theorem isTP2CDF_amh_iff (θ : ℝ) (hmin : -1 ≤ θ) (hmax : θ ≤ 1) :
   · intro h
     exact (isPQD_amh_iff θ hmin hmax).mp h.isPQD
   · exact isTP2CDF_amh θ hmin hmax
+
+
+/-- No negative AMH parameter has an MTP2 Lebesgue density. -/
+theorem not_hasMTP2Density_amh_of_neg (θ : ℝ) (hmin : -1 ≤ θ)
+    (hmax : θ ≤ 1) (hθ : θ < 0) :
+    ¬(amh θ hmin hmax).HasMTP2Density := by
+  intro h
+  have hp := hasMTP2Density_isPQD _ h
+  have hnonneg := (isPQD_amh_iff θ hmin hmax).mp hp
+  linarith
+
+/-- At θ=0, AMH has the constant independence MTP2 density. -/
+theorem hasMTP2Density_amh_zero :
+    (amh 0 (by norm_num) (by norm_num)).HasMTP2Density := by
+  simpa using hasMTP2Density_independence 2
+
+/-- At θ=1, AMH has the actual Clayton(1) MTP2 density. -/
+theorem hasMTP2Density_amh_one :
+    (amh 1 (by norm_num) le_rfl).HasMTP2Density := by
+  simpa [amh] using clayton_positive_density_tp2 1 zero_lt_one
 
 end ProbabilityTheory.Copula

@@ -239,4 +239,13 @@ theorem isArchimedean_amh (θ : ℝ) (hmin : -1 ≤ θ) (hmax : θ ≤ 1) :
   · subst θ
     simpa [amh] using isArchimedean_clayton 2 1 zero_lt_one
 
+
+/-- The zero-parameter AMH copula is independence, including all boundaries. -/
+@[simp] theorem amh_zero : amh 0 (by norm_num) (by norm_num) = independence 2 := by
+  apply ext_cdf
+  intro u
+  have hu : u = ![u 0, u 1] := by funext i; fin_cases i <;> rfl
+  rw [hu, cdf_amh, cdf_independence, Fin.prod_univ_two]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, zero_mul, sub_zero, div_one]
+
 end ProbabilityTheory.Copula
