@@ -299,7 +299,7 @@ generator power transformations. These are genuine validity proofs in dimension
 two, including singular distributions, without density assumptions.
 
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
-entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives its exact density-TP2 range: only θ=1 (independence) admits an MTP2 density. The
+entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
 −1≤θ<0 and identifies −1 with W. The library now has constructors for 18 of
 the paper's 38 families; Frank still has only its positive branch. A constructor
