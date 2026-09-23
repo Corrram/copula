@@ -65,6 +65,12 @@ import Copula.Families.JoeLimits
 import Copula.Dependence.Nelsen12
 
 import Copula.Dependence.NelsenEndpoints
+
+import Copula.Dependence.BB1TotalPositivity
+
+import Copula.Dependence.GumbelTotalPositivity
+
+import Copula.Dependence.MaxProductTotalPositivity
 import Copula.Dependence.GenestGhoudi
 import Copula.Dependence.Gumbel
 import Copula.Families.Clayton.Negative

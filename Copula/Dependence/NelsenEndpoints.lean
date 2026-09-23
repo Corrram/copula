@@ -12,6 +12,7 @@ import Copula.TailDependence.Nelsen12
 import Copula.TailDependence.Nelsen14
 import Copula.TailDependence.Quadrant
 import Copula.Dependence.Nelsen12
+import Copula.Dependence.BB1TotalPositivity
 
 /-! # Dependence properties at the Nelsen 12 and 14 lower endpoints
 
@@ -61,6 +62,17 @@ theorem isPQD_nelsen12 (θ : ℝ) (hθ : 1 ≤ θ) :
   have hbase := (isCI_nelsen12_one.isPQD) u v
   have horder := lowerOrthantLE_nelsen12 le_rfl hθ hθ
   exact hbase.trans (horder ![u, v])
+
+/-- Nelsen 12 has a TP2 CDF for every finite admissible parameter. -/
+theorem isTP2CDF_nelsen12 (θ : ℝ) (hθ : 1 ≤ θ) :
+    (nelsen12 θ hθ).IsTP2CDF := by
+  simpa only [nelsen12] using isTP2CDF_bb1 1 (by norm_num) θ hθ
+
+/-- Nelsen 14 has a TP2 CDF for every finite admissible parameter. -/
+theorem isTP2CDF_nelsen14 (θ : ℝ) (hθ : 1 ≤ θ) :
+    (nelsen14 θ hθ).IsTP2CDF := by
+  simpa only [nelsen14] using
+    isTP2CDF_bb1 θ⁻¹ (inv_pos.mpr (by linarith : 0 < θ)) θ hθ
 
 /-- Every finite Nelsen 14 copula is positively quadrant dependent. -/
 theorem isPQD_nelsen14 (θ : ℝ) (hθ : 1 ≤ θ) :

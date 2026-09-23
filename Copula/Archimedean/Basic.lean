@@ -36,7 +36,7 @@ structure BivariateGenerator where
 
 namespace BivariateGenerator
 
-private theorem convex_increment {f : ℝ → ℝ} (hf : ConvexOn ℝ (Ici 0) f)
+theorem convex_increment {f : ℝ → ℝ} (hf : ConvexOn ℝ (Ici 0) f)
     {a b c e : ℝ} (ha : 0 ≤ a) (hc : 0 ≤ c) (hab : a ≤ b) (hce : c ≤ e) :
     0 ≤ f (b + e) - f (a + e) - f (b + c) + f (a + c) := by
   by_cases hz : b - a + (e - c) = 0
