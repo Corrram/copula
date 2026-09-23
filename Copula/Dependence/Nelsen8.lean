@@ -67,4 +67,3 @@ theorem isCD_nelsen8_one : (nelsen8 1 le_rfl).IsCD := by
   simpa only [nelsen8_one] using isCD_countermonotonic
 
 end ProbabilityTheory.Copula
-
