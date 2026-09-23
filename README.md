@@ -86,7 +86,7 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Bernstein` | Positive-degree tensor Bernstein copulas, copula validity, benchmark identities, quantitative error bounds and uniform convergence |
 | `Copula.Families.FGM`, `Frechet` | FGM on the full parameter interval, Fréchet mixtures and Mardia endpoint identities |
 | `Copula.Families.Nelsen`, `Nelsen7`, `Clayton.Negative` | Nelsen 2, 7, 12, 14, Genest–Ghoudi and negative bivariate Clayton; CDFs and endpoint identities |
-| `Copula.Dependence.NelsenEndpoints` | At θ=1, Nelsen 12 and 14 are CI, CDF TP2, MTP2-density and not CD, by their Clayton(1) identity |
+| `Copula.Dependence.NelsenEndpoints` | At θ=1, Nelsen 12 and 14 are CI, CDF TP2, MTP2-density by their Clayton(1) identity; both are non-CD for all θ≥1, and Nelsen 12 is PQD for all θ≥1 |
 | `Copula.Dependence.ConditionalMonotonicity` | Two-direction CI/CD, directional SD, reflection duality, benchmarks and FGM classification |
 | `Copula.Rank.FGMKendall`, `FGMChatterjee`, `Frechet` | FGM conditional CDF, Kendall tau and Chatterjee xi; Fréchet/Mardia Spearman rho |
 | `Copula.Rank.Concordance`, `ConcordanceProbability`, `KendallMixture` | Concordance probabilities, the cross function Q, and finite-mixture tau formulas |
