@@ -45,7 +45,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full` |
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
-| A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`; `frank_cdf_full` for θ > 0 |
+| A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
 | A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full` |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
 | A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | Pending |
@@ -305,7 +305,7 @@ two, including singular distributions, without density assumptions.
 entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
 −1≤θ<0 and identifies −1 with W. The library now has constructors for 18 of
-the paper's 38 families; Frank still has only its positive branch. A constructor
+the paper's 38 families; both signed Frank branches have exact closed-square CDFs. A constructor
 count is not a count of fully proved property tables.
 
 [Dependence/Clayton.lean](../Copula/Dependence/Clayton.lean) proves CI (in both directions) and positive quadrant dependence for every positive Clayton parameter, and negative quadrant dependence throughout −1≤θ<0. The positive-parameter CI proof uses concavity of every first-coordinate CDF section and Archimedean symmetry. The negative-parameter CD entry is proved in [Dependence/ClaytonNegative.lean](../Copula/Dependence/ClaytonNegative.lean) by a convex-section argument across the truncated support. [Dependence/ClaytonClassification.lean](../Copula/Dependence/ClaytonClassification.lean) proves the reverse exclusions by strict midpoint quadrant comparisons, completing the signed CI/CD parameter split. [TailDependence/Clayton.lean](../Copula/TailDependence/Clayton.lean) proves both exact tail coefficients for each signed branch: `(2^(−1/θ),0)` for θ>0 and `(0,0)` for −1≤θ<0. The exact CDF-level TP2 region is now checked separately in [Dependence/ClaytonTotalPositivity.lean](../Copula/Dependence/ClaytonTotalPositivity.lean): every θ>0 has a TP2 CDF, θ=0 is independence and has a TP2 CDF, while every −1≤θ<0 fails CDF TP2. The θ=−1 endpoint is W and has no Lebesgue MTP2 density. [Dependence/ClaytonDensityFormula.lean](../Copula/Dependence/ClaytonDensityFormula.lean) also checks MTP2 of the standard positive-parameter density formula as a function. [Dependence/ClaytonDensityMeasure.lean](../Copula/Dependence/ClaytonDensityMeasure.lean) identifies that formula with the actual Clayton measure on the full square. Consequently every θ>0 has an actual MTP2 density and is absolutely continuous. [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) proves that any copula with an MTP2 density is PQD, then uses strict non-PQD of negative Clayton to exclude all −1≤θ<0. Thus the signed Clayton density-TP2 range is exactly θ≥0, including the independence parameter.
@@ -372,8 +372,7 @@ in both directions: C_theta precedes C_eta iff eta<=theta. The family is
 CI exactly at independence (theta=1), while CD holds throughout.
 The full Nelsen 7 rho and tau expressions are proved in [Rank/Nelsen7Rho.lean](../Copula/Rank/Nelsen7Rho.lean) and [Rank/Nelsen7Tau.lean](../Copula/Rank/Nelsen7Tau.lean), including both endpoint values. The density-TP2 entry remains a separate obligation.
 
-Outstanding proof work includes the other named constructors, full signed
-Frank, generator criteria for CI/CD and density TP2, Pickands representation
+Outstanding proof work includes the other named constructors, generator criteria for CI/CD and density TP2, Pickands representation
 and admissibility, the CI/CD equivalences between LO and Schur order,
 family parameter orders, analytic tail limits, and the unproved coefficient
 formulas above. A family is complete only after its domain, boundary cases,
