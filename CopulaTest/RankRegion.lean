@@ -70,6 +70,28 @@ example : ¬ ∃ C : Copula 2, C.chatterjeeXi = 0 ∧ C.spearmanRho = 1 / 2 := b
   rw [attainable_xi_rho_iff]
   norm_num [XiRho.upperRhoAtXi]
 
+-- The xi–Blest top fibre is complete and bounded.
+example : ∃ C : Copula 2, C.chatterjeeXi = 1 ∧ XiBlest.blestNu C = 0 := by
+  rw [attainable_xi_blest_iff]
+  norm_num
+
+example : ¬ ∃ C : Copula 2, C.chatterjeeXi = 1 ∧ XiBlest.blestNu C = 2 := by
+  rintro ⟨C, _, h⟩
+  have hle := (XiBlest.blest_mem_Icc C).2
+  rw [h] at hle
+  norm_num at hle
+
+-- Pairwise admissibility is strengthened to an exact triple region.
+example : ∃ C : Copula 2, C.kendallTau = 0 ∧ C.spearmanFootrule = 0 ∧
+    C.blomqvistBeta = 0 := by
+  rw [attainable_tau_footrule_beta_iff]
+  norm_num
+
+example : ¬ ∃ C : Copula 2, C.kendallTau = 1 ∧ C.spearmanFootrule = 0 ∧
+    C.blomqvistBeta = 0 := by
+  rw [attainable_tau_footrule_beta_iff]
+  norm_num
+
 -- Coordinate order is explicit and reversible.
 example : (13 / 16, 0) ∈ attainable .rho .beta := by
   rw [mem_attainable_swap, attainable_beta_rho_iff]; norm_num
@@ -98,6 +120,9 @@ example : (RhoTau.arcCopula 1 unitHalf).kendallTau = -1 / 4 ∧
 #print axioms attainable_beta_gamma_iff
 #print axioms attainable_xi_beta_iff
 #print axioms attainable_xi_rho_iff
+#print axioms attainable_xi_blest_iff
+#print axioms attainable_tau_footrule_beta_iff
+#print axioms attainable_mean_distance_variance_iff
 #print axioms RhoFootrule.contactCopula_maximizes_rho
 #print axioms RhoGamma.supporting_maximum
 #print axioms RhoGamma.halfShift_optimal
