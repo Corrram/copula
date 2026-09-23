@@ -99,6 +99,31 @@
     "module": "Copula.Families.Nelsen8",
     "declaration": "ProbabilityTheory.Copula.nelsen8_cdf_full"
   },
+  "nelsen8-not-pqd": {
+    "title": "Nelsen 8 is never positive quadrant dependent",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.not_isPQD_nelsen8"
+  },
+  "nelsen8-not-ci": {
+    "title": "Nelsen 8 is never conditionally increasing",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.not_isCI_nelsen8"
+  },
+  "nelsen8-not-tp2-cdf": {
+    "title": "Nelsen 8 never has a TP2 CDF",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.not_isTP2CDF_nelsen8"
+  },
+  "nelsen8-not-mtp2-density": {
+    "title": "Nelsen 8 never has an MTP2 density",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.not_hasMTP2Density_nelsen8"
+  },
+  "nelsen8-cd-endpoint": {
+    "title": "Nelsen 8 at one is conditionally decreasing",
+    "module": "Copula.Dependence.Nelsen8",
+    "declaration": "ProbabilityTheory.Copula.isCD_nelsen8_one"
+  },
   "nelsen8-orthant-order": {
     "title": "Nelsen 8 increases in lower-orthant order",
     "module": "Copula.Families.Nelsen8",

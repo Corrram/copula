@@ -303,7 +303,7 @@ two, including singular distributions, without density assumptions.
 
 [TailDependence/Joe.lean](../Copula/TailDependence/Joe.lean) proves A06's exact tail pair `(0,2−2^(1/θ))` for every θ≥1.
 [TailDependence/Nelsen2.lean](../Copula/TailDependence/Nelsen2.lean) proves A02's exact tail pair `(0,2−2^(1/θ))` for every θ≥1, including θ=1.
-[Nelsen8.lean](../Copula/Families/Nelsen8.lean) proves A08's rational generator, printed CDF on the full closed square, and θ=1 lower-Fréchet endpoint. The [tail proofs](../Copula/TailDependence/Nelsen8.lean) establish the exact pair (0,0). The family module proves increasing lower-orthant parameter order; conditional monotonicity, Schur order, and association-coefficient cells remain separate obligations.
+[Nelsen8.lean](../Copula/Families/Nelsen8.lean) proves A08's rational generator, printed CDF on the full closed square, and θ=1 lower-Fréchet endpoint. The [tail proofs](../Copula/TailDependence/Nelsen8.lean) establish the exact pair (0,0). The family module proves increasing lower-orthant parameter order. The [dependence proofs](../Copula/Dependence/Nelsen8.lean) show non-PQD and non-CI for every θ≥1, exclude CDF-level TP2 and an MTP2 density, and prove CD at θ=1. CD for θ>1, Schur order, and association-coefficient cells remain separate obligations.
 [Nelsen7.lean](../Copula/Families/Nelsen7.lean) adds A07 with its CDF on the
 entire square, CD, increasing LO order and both endpoints. The general density-PQD bridge in [Dependence/DensityTotalPositivity.lean](../Copula/Dependence/DensityTotalPositivity.lean) also gives both exact total-positivity ranges: only θ=1 (independence) has a TP2 CDF or admits an MTP2 density. The
 [negative Clayton branch](../Copula/Families/Clayton/Negative.lean) covers
