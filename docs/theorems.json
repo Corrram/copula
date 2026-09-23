@@ -109,6 +109,16 @@
     "module": "Copula.Families.Frank",
     "declaration": "ProbabilityTheory.Copula.frank_cdf_full"
   },
+  "bb1-full": {
+    "title": "The BB1 CDF on the closed square",
+    "module": "Copula.Archimedean.Clayton",
+    "declaration": "ProbabilityTheory.Copula.bb1_cdf_full"
+  },
+  "bb6-full": {
+    "title": "The BB6 CDF on the closed square",
+    "module": "Copula.Families.Joe",
+    "declaration": "ProbabilityTheory.Copula.bb6_cdf_full"
+  },
   "joe-full": {
     "title": "The Joe CDF on the closed square",
     "module": "Copula.Families.Joe",

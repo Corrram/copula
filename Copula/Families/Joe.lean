@@ -139,4 +139,24 @@ theorem cdf_bb6 (θ : ℝ) (hθ : 1 ≤ θ) (δ : ℝ) (hδ : 1 ≤ δ)
     ite_eq_right (not_or.mpr ⟨hu 0, hu 1⟩)]
   rfl
 
+/-- The BB6 CDF on the closed square for both parameters at least one.
+The analytic Joe–Gumbel formula is used only away from the zero axes. -/
+theorem bb6_cdf_full (θ : ℝ) (hθ : 1 ≤ θ) (δ : ℝ) (hδ : 1 ≤ δ) (u v : I) :
+    (bb6 θ hθ δ hδ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        1 - (1 - Real.exp (-(((-Real.log (1 - (1 - (u : ℝ)) ^ θ)) ^ δ +
+          (-Real.log (1 - (1 - (v : ℝ)) ^ θ)) ^ δ) ^ δ⁻¹))) ^ θ⁻¹ := by
+  by_cases hu : u = 0
+  · subst u
+    simpa using (bb6 θ hθ δ hδ).cdf_eq_zero_of_coord_eq_zero ![0, v] 0 rfl
+  by_cases hv : v = 0
+  · subst v
+    simpa [hu] using (bb6 θ hθ δ hδ).cdf_eq_zero_of_coord_eq_zero ![u, 0] 1 rfl
+  have hp : ∀ i : Fin 2, (![u, v] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using hu
+    · simpa using hv
+  simpa [hu, hv] using cdf_bb6 θ hθ δ hδ ![u, v] hp
+
 end ProbabilityTheory.Copula
