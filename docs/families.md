@@ -34,7 +34,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; exact xi, rho and tau; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
 | Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | `nelsen12_cdf_full` on the closed square; Clayton at one and pointwise comonotonicity as θ→∞; increasing lower-orthant order; exact lower/upper tail coefficients |
 | Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | `nelsen14_cdf_full` on the closed square; Clayton at one; exact lower/upper tail coefficients 1/2 and 2−2^(1/θ) |
-| Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | `genestGhoudi_cdf_full` on the closed square; lower bound at 1 |
+| Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | `genestGhoudi_cdf_full` on the closed square; lower bound at 1; exact lower/upper tail coefficients 0 and 2−2^(1/θ) |
 
 
 The shared transformation `g.outerPower θ hθ` sends `ψ(t)` to
