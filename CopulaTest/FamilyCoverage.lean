@@ -57,3 +57,4 @@ example (β : I) : (Copula.marshallOlkin 0 β).chatterjeeXi = 0 := by
 #print axioms ProbabilityTheory.Copula.not_isTP2CDF_clayton_negative
 #print axioms ProbabilityTheory.Copula.not_isNQD_clayton_positive
 #print axioms ProbabilityTheory.Copula.not_isPQD_clayton_negative
+#print axioms ProbabilityTheory.Copula.not_hasMTP2Density_clayton_negative_one

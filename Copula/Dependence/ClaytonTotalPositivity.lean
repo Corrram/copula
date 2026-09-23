@@ -5,10 +5,11 @@ Authors: Marcus Rockel
 -/
 import Copula.Dependence.ClaytonClassification
 import Copula.Dependence.TotalPositivity
+import Copula.Dependence.Frechet
 
-/-! # CDF total positivity for signed Clayton copulas
+/-! # CDF total positivity and a singular density endpoint for Clayton copulas
 
-This classifies `IsTP2CDF`, a property distinct from MTP2 of a density.
+This classifies `IsTP2CDF`, a property distinct from MTP2 of a density. The W endpoint also has no Lebesgue MTP2 density.
 -/
 
 open Real
@@ -70,5 +71,13 @@ theorem not_isTP2CDF_clayton_negative (θ : ℝ) (hθ : -1 ≤ θ) (hn : θ < 0)
     ¬(claytonNegative θ hθ hn).IsTP2CDF := by
   intro h
   exact not_isPQD_clayton_negative θ hθ hn h.isPQD
+
+/-- The negative endpoint is W and therefore has no Lebesgue MTP2 density. -/
+theorem not_hasMTP2Density_clayton_negative_one :
+    ¬(claytonNegative (-1) le_rfl (by norm_num)).HasMTP2Density := by
+  rw [claytonNegative_neg_one, ← mardia_neg_one]
+  intro h
+  have hz := (mardia_density_tp2_iff (-1) (by norm_num)).mp h
+  norm_num at hz
 
 end ProbabilityTheory.Copula
