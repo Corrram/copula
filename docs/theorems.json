@@ -203,7 +203,11 @@
     "module": "Copula.TailDependence.Nelsen2",
     "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen2"
   },
-  "nelsen12-full": {
+  "nelsen12-infinite-endpoint": {
+    "title": "Nelsen 12 tends pointwise to comonotonicity",
+    "module": "Copula.Families.Nelsen12Limits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_nelsen12_atTop"
+  },  "nelsen12-full": {
     "title": "The Nelsen 12 CDF on the closed square",
     "module": "Copula.Families.Nelsen",
     "declaration": "ProbabilityTheory.Copula.nelsen12_cdf_full"
