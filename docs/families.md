@@ -133,7 +133,9 @@ Modules: `Copula.Elliptical.ScaleMixture`, `Copula.Families.StudentT`,
 | Countermonotonic / lower Fréchet bound | `countermonotonic` | `max(0,u+v-1)` | 2 |
 
 FGM's rectangle increment is factored and proved nonnegative for the full
-parameter interval. Mardia's endpoints `-1,0,1` are respectively the lower
+parameter interval. Its actual copula measure has an MTP2 density exactly when
+the parameter is nonnegative; the negative exclusion rules out all density
+versions, not just the displayed polynomial. Mardia's endpoints `-1,0,1` are respectively the lower
 Fréchet bound, independence, and the upper Fréchet bound.
 
 `finiteMixture C w hw hsum` accepts any finite list of copulas and nonnegative

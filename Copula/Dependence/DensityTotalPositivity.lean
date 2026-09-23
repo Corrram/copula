@@ -6,6 +6,7 @@ Authors: Marcus Rockel
 import Copula.Dependence.Density
 import Copula.Dependence.ClaytonTotalPositivity
 import Copula.Dependence.Singular
+import Copula.Dependence.FGMDensity
 import Copula.Families.Nelsen7
 import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 
@@ -283,5 +284,21 @@ theorem nelsen7_density_tp2_iff (θ : I) :
     subst θ
     rw [nelsen7_one]
     exact hasMTP2Density_independence 2
+
+/-- For FGM, the actual copula has an MTP2 density exactly for
+nonnegative parameters. The negative exclusion applies to every possible
+density version, not just the displayed polynomial formula. -/
+theorem fgm_hasMTP2Density_iff (θ : ℝ) (hθ : |θ| ≤ 1) :
+    (fgm θ hθ).HasMTP2Density ↔ 0 ≤ θ := by
+  constructor
+  · intro h
+    by_contra hn
+    have hneg : θ < 0 := lt_of_not_ge hn
+    have hCD : (fgm θ hθ).IsCD :=
+      (isCD_fgm_iff θ hθ).mpr hneg.le
+    have he := isCD_eq_independence_of_hasMTP2Density _ hCD h
+    have hCI : (fgm θ hθ).IsCI := he ▸ isCI_independence
+    exact hn ((isCI_fgm_iff θ hθ).mp hCI)
+  · exact hasMTP2Density_fgm θ hθ
 
 end ProbabilityTheory.Copula

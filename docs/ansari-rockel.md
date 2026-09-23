@@ -322,8 +322,10 @@ either or both directions exactly when the absolute parameters are ordered.
 Previously proved family results are indexed in [families](families.md),
 [positive dependence](positive-dependence.md), [orders](orders.md),
 [rank coefficients](rank-coefficients.md), and [tail dependence](nelsen.md).
-In particular FGM has exact parameter classification, LO order, density,
-rho/footrule/gamma/beta formulas and both zero tails. Fréchet and Mardia have
+In particular FGM has exact parameter classification, LO order, an actual
+MTP2 density exactly for nonnegative parameters, rho/footrule/gamma/beta
+formulas and both zero tails. The negative exclusion covers every possible
+density version via the general CD-plus-MTP2 independence theorem. Fréchet and Mardia have
 both tail formulas. These facts do not establish the remaining table cells.
 
 [ExtremeValue/Diagonal.lean](../Copula/ExtremeValue/Diagonal.lean) proves
