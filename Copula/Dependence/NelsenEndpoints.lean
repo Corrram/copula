@@ -62,6 +62,64 @@ theorem isPQD_nelsen12 (θ : ℝ) (hθ : 1 ≤ θ) :
   have horder := lowerOrthantLE_nelsen12 le_rfl hθ hθ
   exact hbase.trans (horder ![u, v])
 
+/-- Every finite Nelsen 14 copula is positively quadrant dependent. -/
+theorem isPQD_nelsen14 (θ : ℝ) (hθ : 1 ≤ θ) :
+    (nelsen14 θ hθ).IsPQD := by
+  intro u v
+  have hθpos : 0 < θ := by linarith
+  have hq : -θ⁻¹ ≤ 0 := neg_nonpos.mpr (inv_nonneg.mpr hθpos.le)
+  by_cases hu0 : u = 0
+  · subst u
+    simp
+  by_cases hv0 : v = 0
+  · subst v
+    simpa using (nelsen14 θ hθ).cdf_nonneg ![u, 0]
+  have hu : 0 < (u : ℝ) := lt_of_le_of_ne u.property.1
+    (Ne.symm (fun h => hu0 (Subtype.ext h)))
+  have hv : 0 < (v : ℝ) := lt_of_le_of_ne v.property.1
+    (Ne.symm (fun h => hv0 (Subtype.ext h)))
+  let a : ℝ := (u : ℝ) ^ (-θ⁻¹)
+  let b : ℝ := (v : ℝ) ^ (-θ⁻¹)
+  let x : ℝ := a - 1
+  let y : ℝ := b - 1
+  have ha : 1 ≤ a := by
+    dsimp [a]
+    simpa using Real.rpow_le_rpow_of_nonpos hu u.property.2 hq
+  have hb : 1 ≤ b := by
+    dsimp [b]
+    simpa using Real.rpow_le_rpow_of_nonpos hv v.property.2 hq
+  have hx : 0 ≤ x := sub_nonneg.mpr ha
+  have hy : 0 ≤ y := sub_nonneg.mpr hb
+  have hn := Real.rpow_add_rpow_le hx hy (by norm_num : (0 : ℝ) < 1) hθ
+  have hnorm : (x ^ θ + y ^ θ) ^ θ⁻¹ ≤ x + y := by
+    simpa only [one_div, Real.rpow_one, div_one] using hn
+  have hbase : 0 < 1 + (x ^ θ + y ^ θ) ^ θ⁻¹ := by
+    have hp : 0 ≤ (x ^ θ + y ^ θ) ^ θ⁻¹ :=
+      Real.rpow_nonneg (add_nonneg (Real.rpow_nonneg hx _) (Real.rpow_nonneg hy _)) _
+    linarith
+  have hprod : 1 + (x ^ θ + y ^ θ) ^ θ⁻¹ ≤ a * b := by
+    have hxy := mul_nonneg hx hy
+    dsimp [x, y] at hnorm hxy
+    nlinarith
+  have hp := Real.rpow_le_rpow_of_nonpos hbase hprod
+    (by linarith : -θ ≤ 0)
+  have hu_id : a ^ (-θ) = (u : ℝ) := by
+    dsimp [a]
+    rw [← Real.rpow_mul hu.le]
+    have he : (-θ⁻¹) * (-θ) = 1 := by field_simp [hθpos.ne']
+    rw [he, Real.rpow_one]
+  have hv_id : b ^ (-θ) = (v : ℝ) := by
+    dsimp [b]
+    rw [← Real.rpow_mul hv.le]
+    have he : (-θ⁻¹) * (-θ) = 1 := by field_simp [hθpos.ne']
+    rw [he, Real.rpow_one]
+  have hab : (a * b) ^ (-θ) = (u : ℝ) * (v : ℝ) := by
+    rw [Real.mul_rpow (by positivity : 0 ≤ a) (by positivity : 0 ≤ b),
+      hu_id, hv_id]
+  rw [← hab]
+  rw [nelsen14_cdf_full]
+  simpa only [hu0, hv0, or_self, ite_false, x, y, a, b] using hp
+
 /-- Nelsen 12 cannot be conditionally decreasing at any finite admissible parameter:
 its lower-tail coefficient is strictly positive. -/
 theorem not_isCD_nelsen12 (θ : ℝ) (hθ : 1 ≤ θ) :
