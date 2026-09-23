@@ -47,6 +47,7 @@ import Copula.Families.Frechet
 import Copula.Rank
 import Copula.Dependence
 import Copula.Order
+import Copula.Order.AMH
 import Copula.Diagonal
 import Copula.Reflection.Bivariate
 import Copula.Symmetry
