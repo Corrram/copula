@@ -257,7 +257,11 @@
     "module": "Copula.Families.Gumbel",
     "declaration": "ProbabilityTheory.Copula.cdf_gumbel"
   },
-  "gumbel-full": {
+  "gumbel-infinite-endpoint": {
+    "title": "Gumbel–Hougaard tends pointwise to comonotonicity",
+    "module": "Copula.Families.GumbelLimits",
+    "declaration": "ProbabilityTheory.Copula.tendsto_gumbel_atTop"
+  },  "gumbel-full": {
     "title": "The Gumbel–Hougaard CDF on the closed square",
     "module": "Copula.Families.Gumbel",
     "declaration": "ProbabilityTheory.Copula.gumbel_cdf_full"

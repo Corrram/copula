@@ -27,7 +27,7 @@ private theorem twoTermPowerNorm_ge (p a b : ℝ) (hp : 0 < p)
   rw [Real.rpow_rpow_inv hb hp.ne'] at hib
   exact max_le hia hib
 
-private theorem tendsto_twoTermPowerNorm {α : Type*} {l : Filter α}
+theorem tendsto_twoTermPowerNorm {α : Type*} {l : Filter α}
     (θ : α → ℝ) (hθ : ∀ z, 1 ≤ θ z) (hlim : Tendsto θ l atTop)
     (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) :
     Tendsto (fun z => (a ^ θ z + b ^ θ z) ^ (θ z)⁻¹) l (𝓝 (max a b)) := by
