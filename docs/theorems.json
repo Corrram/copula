@@ -241,6 +241,31 @@
     "module": "Copula.Families.Nelsen",
     "declaration": "ProbabilityTheory.Copula.nelsen14_cdf_full"
   },
+  "genest-ghoudi-not-pqd": {
+    "title": "Genest–Ghoudi is never positively quadrant dependent",
+    "module": "Copula.Dependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.not_isPQD_genestGhoudi"
+  },
+  "genest-ghoudi-not-ci": {
+    "title": "Genest–Ghoudi is never conditionally increasing",
+    "module": "Copula.Dependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.not_isCI_genestGhoudi"
+  },
+  "genest-ghoudi-not-tp2": {
+    "title": "Genest–Ghoudi CDF is never TP2",
+    "module": "Copula.Dependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.not_isTP2CDF_genestGhoudi"
+  },
+  "genest-ghoudi-not-density-tp2": {
+    "title": "Genest–Ghoudi never has an MTP2 Lebesgue density",
+    "module": "Copula.Dependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.not_hasMTP2Density_genestGhoudi"
+  },
+  "genest-ghoudi-cd": {
+    "title": "Genest–Ghoudi is CD exactly at parameter one",
+    "module": "Copula.Dependence.GenestGhoudi",
+    "declaration": "ProbabilityTheory.Copula.isCD_genestGhoudi_iff"
+  },
   "genest-ghoudi-lower-tail": {
     "title": "Genest–Ghoudi lower-tail dependence coefficient",
     "module": "Copula.TailDependence.GenestGhoudi",
