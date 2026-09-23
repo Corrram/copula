@@ -82,8 +82,8 @@ theorem clayton_cdf_formula_hasDerivAt_second
   field_simp [hθ.ne']
   ring_nf
 
-/-- The analytic mixed derivative is exactly the pinned copula package's
-candidate density at every strictly positive coordinate. -/
+/-- The analytic mixed derivative is exactly the explicit Clayton
+density formula at every strictly positive coordinate. -/
 theorem clayton_mixed_derivative_eq_densityFormula
     (θ : ℝ) (hθ : 0 < θ) (u v : I)
     (hu : 0 < (u : ℝ)) (hv : 0 < (v : ℝ)) :
@@ -536,7 +536,7 @@ theorem clayton_densityFormula_positive_rectangle_eq_measure
     _ = _ := clayton_density_formula_positive_rectangle_eq_measure
       θ hθ a b c d ha hab hc hcd
 
-/-- The measure built from the pinned candidate density agrees with the
+/-- The measure built from the explicit density formula agrees with the
 Clayton copula measure on each positive half-open rectangle. -/
 theorem clayton_withDensity_positive_rectangle_eq_measure
     (θ : ℝ) (hθ : 0 < θ) (a b c d : I)
