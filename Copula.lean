@@ -74,6 +74,7 @@ import Copula.Dependence.GumbelTotalPositivity
 import Copula.Dependence.MaxProductTotalPositivity
 import Copula.Dependence.GenestGhoudi
 import Copula.Dependence.Gumbel
+import Copula.Dependence.AMH
 import Copula.Families.Clayton.Negative
 import Copula.Archimedean.Symmetry
 import Copula.OrdinalSum
