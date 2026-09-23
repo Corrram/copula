@@ -305,6 +305,8 @@ entire square, CD, increasing LO order and both endpoints. The
 the paper's 38 families; Frank still has only its positive branch. A constructor
 count is not a count of fully proved property tables.
 
+[Dependence/Clayton.lean](../Copula/Dependence/Clayton.lean) proves positive quadrant dependence for every positive Clayton parameter directly from its exact CDF. This is a proper subset of the CI and density-TP2 entries in Table 3, which remain open.
+
 [ConditionalMonotonicity.lean](../Copula/Dependence/ConditionalMonotonicity.lean)
 defines CI/CD, proves reflection duality and exact FGM CI/CD regions.
 [FGMKendall.lean](../Copula/Rank/FGMKendall.lean) proves τ=2θ/9;
