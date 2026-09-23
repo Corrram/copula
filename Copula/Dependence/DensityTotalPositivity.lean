@@ -5,6 +5,8 @@ Authors: Marcus Rockel
 -/
 import Copula.Dependence.Density
 import Copula.Dependence.ClaytonTotalPositivity
+import Copula.Dependence.Singular
+import Copula.Families.Nelsen7
 import Mathlib.MeasureTheory.Integral.Lebesgue.Add
 
 open ProbabilityTheory MeasureTheory Set
@@ -260,5 +262,26 @@ theorem clayton_negative_not_density_tp2 (θ : ℝ) (hθ : -1 ≤ θ) (hn : θ <
   intro h
   exact not_isPQD_clayton_negative θ hθ hn
     (hasMTP2Density_isPQD _ h)
+
+/-- A conditionally decreasing copula with an MTP2 density must be
+independence, since CD implies NQD whereas MTP2 density implies PQD. -/
+theorem isCD_eq_independence_of_hasMTP2Density (C : Copula 2)
+    (hCD : C.IsCD) (hM : C.HasMTP2Density) : C = independence 2 :=
+  (isPQD_and_isNQD_iff C).mp
+    ⟨hasMTP2Density_isPQD C hM, hCD.isNQD⟩
+
+/-- The Nelsen 7 family has an MTP2 density exactly at its independence
+endpoint; this includes the singular lower endpoint and all interior values. -/
+theorem nelsen7_density_tp2_iff (θ : I) :
+    (nelsen7 θ).HasMTP2Density ↔ θ = 1 := by
+  constructor
+  · intro h
+    have he := isCD_eq_independence_of_hasMTP2Density
+      (nelsen7 θ) (isCD_nelsen7 θ) h
+    exact (isCI_nelsen7_iff θ).mp (he ▸ isCI_independence)
+  · intro h
+    subst θ
+    rw [nelsen7_one]
+    exact hasMTP2Density_independence 2
 
 end ProbabilityTheory.Copula
