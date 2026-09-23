@@ -48,7 +48,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`, `frank_cdf_full` for θ > 0; `frankNegative`, `frankNegative_cdf_source` for θ < 0; `independence 2` at zero |
 | A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full`; both tail limits |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
-| A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | `nelsen8`; `nelsen8_cdf_full`; `nelsen8_one`; both tail limits |
+| A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | `nelsen8`; `nelsen8_cdf_full`; `nelsen8_one`; both tail limits; exact CD classification |
 | A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | Pending |
 | A10 | Nelsen 10 | 0 ≤ θ ≤ 1 | `P/(1+(1−u^θ)(1−v^θ))^(1/θ)`; Π at 0 | Pending |
 | A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | Pending |
