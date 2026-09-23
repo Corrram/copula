@@ -238,6 +238,7 @@ series is summable (`summable_cdf`); the uniform marginal identities and
 all copula axioms are proved. `countableOrdinalSumPi` gives independent
 blocks. `CountableIntervalPartition.dyadic` is a concrete partition with
 endpoints `1-(1/2)^k`, and countably many copies of M still give M.
+For any such partition, `countableOrdinalSumPi_diagonal_fixed` proves every endpoint is a diagonal fixed point and `countableOrdinalSumPi_isSI` proves the independent-block sum is stochastically increasing. The proof interpolates each CDF section between its two enclosing endpoint sections.
 
 {{ lean:countable-ordinal-cdf }}
 
@@ -271,3 +272,4 @@ beyond the midpoint results are also future work.
 | `OrdinalSum.TailDependence` | Tail-ratio identities and equivalence of tail limits |
 | `OrdinalSum.Finite` | Arbitrary finite partitions, independent components and binary compatibility |
 | `OrdinalSum.Countable` | Increasing countable partitions, summability, uniform margins and CDF series |
+| `OrdinalSum.CountableSI` | Fixed endpoints and stochastic increase of countable independent-block sums |
