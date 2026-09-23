@@ -45,7 +45,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A02 | Nelsen 2 | θ ≥ 1 | `(1−((1−u)^θ+(1−v)^θ)^(1/θ))₊` | `nelsen2`; `nelsen2_cdf_full` |
 | A03 | Ali–Mikhail–Haq | −1 ≤ θ ≤ 1 | `P/(1−θ(1−u)(1−v))` | Pending |
 | A04 | Gumbel–Hougaard | θ ≥ 1 | `exp(−((−log u)^θ+(−log v)^θ)^(1/θ))` | `gumbel` |
-| A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank` for θ > 0 |
+| A05 | Frank | θ ∈ ℝ | `−log(1+(exp(−θu)−1)(exp(−θv)−1)/(exp(−θ)−1))/θ`; Π at 0 | `frank`; `frank_cdf_full` for θ > 0 |
 | A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full` |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
 | A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | Pending |

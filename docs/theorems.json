@@ -104,6 +104,11 @@
     "module": "Copula.Families.Nelsen",
     "declaration": "ProbabilityTheory.Copula.genestGhoudi_cdf_full"
   },
+  "frank-full": {
+    "title": "The positive-parameter Frank CDF on the closed square",
+    "module": "Copula.Families.Frank",
+    "declaration": "ProbabilityTheory.Copula.frank_cdf_full"
+  },
   "joe-full": {
     "title": "The Joe CDF on the closed square",
     "module": "Copula.Families.Joe",

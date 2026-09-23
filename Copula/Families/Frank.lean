@@ -119,4 +119,24 @@ theorem cdf_frank (θ : ℝ) (hθ : 0 < θ) (u : Fin 2 → I) (hu : ∀ i, u i �
   congr 3
   field_simp
 
+/-- The positive-parameter Frank CDF on the entire closed unit square.
+The analytic logarithmic formula is used only away from the grounded zero axes. -/
+theorem frank_cdf_full (θ : ℝ) (hθ : 0 < θ) (u v : I) :
+    (frank θ hθ).cdf ![u, v] =
+      if u = 0 ∨ v = 0 then 0 else
+        -Real.log (1 - (1 - Real.exp (-θ * (u : ℝ))) *
+          (1 - Real.exp (-θ * (v : ℝ))) / (1 - Real.exp (-θ))) / θ := by
+  by_cases hu : u = 0
+  · subst u
+    simpa using (frank θ hθ).cdf_eq_zero_of_coord_eq_zero ![0, v] 0 rfl
+  by_cases hv : v = 0
+  · subst v
+    simpa [hu] using (frank θ hθ).cdf_eq_zero_of_coord_eq_zero ![u, 0] 1 rfl
+  have hp : ∀ i : Fin 2, (![u, v] i) ≠ 0 := by
+    intro i
+    fin_cases i
+    · simpa using hu
+    · simpa using hv
+  simpa [hu, hv] using cdf_frank θ hθ ![u, v] hp
+
 end ProbabilityTheory.Copula
