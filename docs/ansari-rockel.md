@@ -54,7 +54,7 @@ observations and unresolved source discrepancies must not become axioms.
 | A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | Pending |
 | A12 | Nelsen 12 | θ ≥ 1 | `(1+((u^(−1)−1)^θ+(v^(−1)−1)^θ)^(1/θ))^(−1)` | `nelsen12`; `nelsen12_cdf_full`; full-square pointwise comonotonic endpoint; increasing lower-orthant order |
 | A13 | Nelsen 13 | θ ≥ 0 | `exp(1−((1−log u)^θ+(1−log v)^θ−1)^(1/θ))`; Gumbel–Barnett at parameter 1 when θ=0 | Pending |
-| A14 | Nelsen 14 | θ ≥ 1 | `(1+((u^(−1/θ)−1)^θ+(v^(−1/θ)−1)^θ)^(1/θ))^(−θ)` | `nelsen14`; `nelsen14_cdf_full` |
+| A14 | Nelsen 14 | θ ≥ 1 | `(1+((u^(−1/θ)−1)^θ+(v^(−1/θ)−1)^θ)^(1/θ))^(−θ)` | `nelsen14`; `nelsen14_cdf_full`; exact lower/upper tail coefficients |
 | A15 | Genest–Ghoudi (Nelsen 15) | θ ≥ 1 | `(1−((1−u^(1/θ))^θ+(1−v^(1/θ))^θ)^(1/θ))₊^θ` | `genestGhoudi`; `genestGhoudi_cdf_full` |
 | A16 | Nelsen 16 | θ ≥ 0 | `(s+sqrt(s²+4θ))/2`, `s=S−1−θ(1/u+1/v−1)` | Pending |
 | A17 | Nelsen 17 | θ ∈ ℝ, θ ≠ 0 | `(1+((1+u)^(−θ)−1)((1+v)^(−θ)−1)/(2^(−θ)−1))^(−1/θ)−1` | Pending |

@@ -226,6 +226,16 @@
     "module": "Copula.Families.Nelsen",
     "declaration": "ProbabilityTheory.Copula.nelsen12_cdf_full"
   },
+  "nelsen14-lower-tail": {
+    "title": "Nelsen 14 lower-tail dependence coefficient",
+    "module": "Copula.TailDependence.Nelsen14",
+    "declaration": "ProbabilityTheory.Copula.hasLowerTailDependence_nelsen14"
+  },
+  "nelsen14-upper-tail": {
+    "title": "Nelsen 14 upper-tail dependence coefficient",
+    "module": "Copula.TailDependence.Nelsen14",
+    "declaration": "ProbabilityTheory.Copula.hasUpperTailDependence_nelsen14"
+  },
   "nelsen14-full": {
     "title": "The Nelsen 14 CDF on the closed square",
     "module": "Copula.Families.Nelsen",
