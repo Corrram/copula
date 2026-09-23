@@ -29,7 +29,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Joe |
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | Truncated outer-power linear generator; lower bound at 1 |
-| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; W and Π endpoints |
+| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; exact xi and rho; W and Π endpoints |
 | Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter 1; Clayton at one |
 | Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter `1/θ`; Clayton at one |
 | Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | Outer and inner powers of the truncated linear generator; lower bound at 1 |
