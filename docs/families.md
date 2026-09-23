@@ -21,15 +21,15 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Family | Constructor | Parameters | Dimension | Proved formula or identity |
 | --- | --- | --- | --- | --- |
 | Independence | `independence d` | None | Any finite `d` | Product CDF; exponential generator in dimension two |
-| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI and CDF TP2; tail pair `(2^(−1/θ),0)` |
-| Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2; no MTP2 density at θ=−1; tail pair `(0,0)` |
+| Clayton | `clayton d θ hθ` | `θ > 0` | Any finite `d` | `(1 + ∑ᵢ(uᵢ^(-θ)-1))^(-1/θ)`; Archimedean identification; parameter limits; bivariate PQD, CI, CDF TP2 and actual MTP2 density; tail pair `(2^(−1/θ),0)` |
+| Clayton, negative branch | `claytonNegative θ hθ hn` | `−1 ≤ θ < 0` | 2 | `max(0,u^(−θ)+v^(−θ)−1)^(−1/θ)`; lower bound at −1; NQD, CD and failure of CDF TP2 and of MTP2 density for all negative parameters; tail pair `(0,0)` |
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; max-stability |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `1-(1-(1-(1-u)^θ)(1-(1-v)^θ))^(1/θ)`; independence at 1 |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `-log(1-(1-exp(-θu))(1-exp(-θv))/(1-exp(-θ)))/θ` |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | Explicit CDF; `δ = 1` recovers Joe |
 | Nelsen 2 | `nelsen2 θ hθ` | `θ ≥ 1` | 2 | Truncated outer-power linear generator; lower bound at 1 |
-| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; W and Π endpoints |
+| Nelsen 7 | `nelsen7 θ` | `θ : I` | 2 | `max(0,θuv+(1−θ)(u+v−1))`; CD; increasing LO; CDF TP2 and MTP2 density iff θ=1; W and Π endpoints |
 | Nelsen 12 | `nelsen12 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter 1; Clayton at one |
 | Nelsen 14 | `nelsen14 θ hθ` | `θ ≥ 1` | 2 | BB1 with first parameter `1/θ`; Clayton at one |
 | Genest–Ghoudi / Nelsen 15 | `genestGhoudi θ hθ` | `θ ≥ 1` | 2 | Outer and inner powers of the truncated linear generator; lower bound at 1 |
@@ -139,7 +139,9 @@ Modules: `Copula.Elliptical.ScaleMixture`, `Copula.Families.StudentT`,
 | Countermonotonic / lower Fréchet bound | `countermonotonic` | `max(0,u+v-1)` | 2 |
 
 FGM's rectangle increment is factored and proved nonnegative for the full
-parameter interval. Mardia's endpoints `-1,0,1` are respectively the lower
+parameter interval. Its actual copula measure has an MTP2 density exactly when
+the parameter is nonnegative; the negative exclusion rules out all density
+versions, not just the displayed polynomial. Mardia's endpoints `-1,0,1` are respectively the lower
 Fréchet bound, independence, and the upper Fréchet bound.
 
 `finiteMixture C w hw hsum` accepts any finite list of copulas and nonnegative
