@@ -26,6 +26,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; pointwise comonotonicity as θ→∞; increasing lower-orthant order; max-stability; CDF TP2 for all θ≥1 |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1; pointwise comonotonicity as θ→∞; exact tail pair `(0,2−2^(1/θ))` |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
+| Ali–Mikhail–Haq | `amh θ hmin hmax` | `−1 ≤ θ ≤ 1` | 2 | `cdf_amh` proves `uv/(1−θ(1−u)(1−v))` on the closed square; at θ=1 this is Clayton(1) |
 | Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives the reflected CDF and `frankNegative_cdf_source` proves the printed logarithmic CDF on the closed square |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | `bb1_cdf_full` on the closed square; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | `bb6_cdf_full` on the closed square; `δ = 1` recovers Joe |
@@ -51,7 +52,8 @@ zeros. All bivariate Archimedean copulas are proved exchangeable by
 
 Modules: `Copula.Archimedean.Basic`, `Copula.Archimedean.Exponential`,
 `Copula.Archimedean.Power`, `Copula.Archimedean.Clayton`,
-`Copula.Families.Gumbel`, `Copula.Families.Joe`, `Copula.Families.Frank`, and `Copula.Families.FrankNegative`.
+`Copula.Families.Gumbel`, `Copula.Families.Joe`, `Copula.Families.Frank`,
+`Copula.Families.FrankNegative`, and `Copula.Families.AMH`.
 
 ## Extreme-value families
 
@@ -197,9 +199,9 @@ Its only CI member is independence; every member is CD.
 
 ## Scope and next extensions
 
-This catalogue contains 28 named families/special cases; overlapping classes
+This catalogue contains 29 named families/special cases; overlapping classes
 are not counted twice. It distinguishes proved analytic CDFs from stochastic
-constructions. General multivariate Archimedean admissibility, Ali–Mikhail–Haq, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
+constructions. General multivariate Archimedean admissibility, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
 Pickands representations, and further family-specific dependence formulas remain future work.
 The [rank API](rank-coefficients.md) includes closed forms for all six
 coefficients of FGM, Fréchet and Mardia, on their full parameter domains.
