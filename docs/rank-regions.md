@@ -3,7 +3,7 @@
 Import `Copula.Rank.Region`, `Copula.Rank`, or `Copula`. The namespace
 `ProbabilityTheory.Copula.RankRegion` provides a common API for all ten
 pairs among Spearman's rho, Kendall's tau, Blomqvist's beta, Spearman's
-footrule, and Gini's gamma.
+footrule, and Gini's gamma. It also exposes the exact xi–beta, xi–rho and xi–Blest regions.
 
 **All ten pairs have complete exact-region theorems.** An exact-region theorem proves both that every copula
 satisfies the bounds and that every point satisfying them is attained by
@@ -23,6 +23,41 @@ an actual `Copula 2`. All statements include singular copulas.
 | Rho–tau | Exact | `attainable_rho_tau_iff` |
 | Rho–footrule | Exact | `attainable_footrule_rho_iff` |
 | Rho–gamma | Exact | `attainable_gamma_rho_iff` |
+| Xi–beta | Exact | `attainable_xi_beta_iff` |
+| Xi–rho | Exact | `attainable_xi_rho_iff` |
+| Xi–Blest | Exact | `attainable_xi_blest_iff` |
+| Tau–footrule–beta | Exact triple | `attainable_tau_footrule_beta_iff` |
+| Mean absolute distance–variance | Exact | `attainable_mean_distance_variance_iff` |
+
+For Chatterjee's directional coefficient \(x=\xi\) and Blomqvist's \(b=\beta\),
+`attainable_xi_beta_iff` proves the complete region
+\(0\le x\le1,\ -1\le b\le1,\ |b|^3\le2x\).
+The proof includes the sharp lower boundary, the upper fibre endpoint, and
+every point between them. Xi is directional: it is coordinate 1 given coordinate 0.
+
+For the directional xi–rho pair, `attainable_xi_rho_iff` states
+\(0\le x\le1\) and \(|r|\le M_x\). The function
+`XiRho.upperRhoAtXi` defines the sharp \(M_x\) by the paper's explicit
+trigonometric/radical inverse, with \(M_0=0\) and \(M_1=1\).
+
+For directional xi and Blest's weighted coefficient nu,
+`attainable_xi_blest_iff` gives the full parametric region. The fibre at
+\(x=1\) is \([-1,1]\); for the remaining fibres, an extremal parameter
+\(b\ge0\) gives \(x=\operatorname{xiFormula}(b)\) and
+\(|\nu|\le\operatorname{nuFormula}(b)\). Both boundary branches and all
+interior points have copula witnesses.
+
+The three-coordinate tau–footrule–beta theorem additionally characterizes
+all triples \((t,p,b)\): beta lies in \([-1,1]\), footrule lies between
+\(3(1+b)^2/16-1/2\) and \(1-3(1-b)^2/8\), and tau lies between
+\(4p/3-1/3\) and \(2p/3+1/3\). Every such triple is attained by a copula.
+
+The rho–footrule result also gives the full region of the mean absolute
+coordinate distance and its variance. The theorem
+`attainable_mean_distance_variance_iff` includes \(0\le m\le1/2\),
+the sharp lower variance `MeanVariance.minimumVariance m`, and the
+sharp upper variance `MeanVariance.maximumVariance m`, with witnesses
+for every intermediate value.
 
 The exact statements are collected in
 [`Copula.Rank.Region`](../Copula/Rank/Region.lean).

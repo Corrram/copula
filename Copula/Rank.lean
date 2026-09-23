@@ -17,5 +17,8 @@ import Copula.Rank.MedianExtrema
 import Copula.Rank.ChatterjeeCrossMixture
 import Copula.Rank.ConditionalDerivative
 import Copula.Rank.Nelsen7
+import Copula.Rank.MarshallOlkin
+import Copula.Rank.MarshallOlkinConditional
+import Copula.Rank.MarshallOlkinXi
 import Copula.Rank.FrechetOptimization
 import Copula.Rank.Region

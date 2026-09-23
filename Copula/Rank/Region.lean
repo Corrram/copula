@@ -11,11 +11,17 @@ import Copula.Rank.Region.RhoFootrule.Exact
 import Copula.Rank.Region.RhoGamma.SignAttainment
 import Copula.Rank.Region.RhoGamma.HalfShift
 import Copula.Rank.Region.RhoGamma.Exact
+import Copula.Rank.Region.XiBeta.Region
+import Copula.Rank.Region.XiRho.Paper.ExactRegion
+import Copula.Rank.Region.XiBlest.Paper.ExactRegion
+import Copula.Rank.Region.TauFootruleBeta.Paper.JointRegion
+import Copula.Rank.Region.MeanVariance.Paper.MeanVariance
 
 /-! # Pairwise attainable regions of five rank coefficients
 
-All ten pairs have exact membership theorems, including boundary attainment
-and every point in between. The coverage and mathematical references are in
+All ten pairs among the five classical coefficients, plus the xi–beta and
+xi–rho and xi–Blest pairs, have exact membership theorems, including boundary attainment and every point
+in between. The coverage and mathematical references are in
 `docs/rank-regions.md`.
 -/
 
@@ -97,5 +103,43 @@ theorem attainable_rho_tau_iff (r t : ℝ) :
         (∃ b : RhoTau.LowerParameter, b.tau = -t ∧ r ≤ -b.rho) := by
   rw [mem_attainable_iff]
   exact RhoTau.exists_copula_iff r t
+
+/-- Exact xi–beta region, including singular boundary witnesses and every interior point. -/
+theorem attainable_xi_beta_iff (x b : ℝ) :
+    (∃ C : Copula 2, C.chatterjeeXi = x ∧ C.blomqvistBeta = b) ↔
+      x ∈ Set.Icc 0 1 ∧ b ∈ Set.Icc (-1) 1 ∧ |b| ^ 3 ≤ 2 * x :=
+  XiBeta.exact_xi_beta_region x b
+
+/-- Exact xi–rho region with its trigonometric/radical upper boundary. -/
+theorem attainable_xi_rho_iff (x r : ℝ) :
+    (∃ C : Copula 2, C.chatterjeeXi = x ∧ C.spearmanRho = r) ↔
+      x ∈ Set.Icc (0 : ℝ) 1 ∧ |r| ≤ XiRho.upperRhoAtXi x :=
+  XiRho.exact_region x r
+
+/-- Exact xi–Blest region, with both boundary branches and every interior point. -/
+theorem attainable_xi_blest_iff (x n : ℝ) :
+    (∃ C : Copula 2, C.chatterjeeXi = x ∧ XiBlest.blestNu C = n) ↔
+      (x = 1 ∧ |n| ≤ 1) ∨
+        ∃ b : ℝ, 0 ≤ b ∧ x = XiBlest.xiFormula b ∧ |n| ≤ XiBlest.nuFormula b := by
+  simpa only [XiBlest.attainableRegion, XiBlest.Support.xiCoefficientRegion, Set.mem_ofPred_eq]
+    using XiBlest.exact_region x n
+
+/-- The exact three-coordinate Kendall tau, footrule, and Blomqvist beta region. -/
+theorem attainable_tau_footrule_beta_iff (t p b : ℝ) :
+    (∃ C : Copula 2, C.kendallTau = t ∧ C.spearmanFootrule = p ∧
+      C.blomqvistBeta = b) ↔
+      b ∈ Set.Icc (-1) 1 ∧ 3 / 16 * (1 + b) ^ 2 - 1 / 2 ≤ p ∧
+      p ≤ 1 - 3 / 8 * (1 - b) ^ 2 ∧
+      4 / 3 * p - 1 / 3 ≤ t ∧ t ≤ 2 / 3 * p + 1 / 3 :=
+  TauFootruleBeta.exact_joint_region t p b
+
+/-- Exact region of the absolute coordinate-distance mean and its variance. -/
+theorem attainable_mean_distance_variance_iff (m v : ℝ) :
+    (∃ C : Copula 2, MeanVariance.meanDistance C = m ∧
+      MeanVariance.distanceVariance C = v) ↔
+      m ∈ Set.Icc (0 : ℝ) (1 / 2) ∧
+      MeanVariance.minimumVariance m ≤ v ∧
+      v ≤ MeanVariance.maximumVariance m :=
+  MeanVariance.exact_mean_variance_region m v
 
 end ProbabilityTheory.Copula.RankRegion
