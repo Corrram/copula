@@ -8,6 +8,7 @@ import Copula.Dependence.DensityTotalPositivity
 import Copula.Families.Nelsen
 import Copula.TailDependence.Nelsen2
 import Copula.TailDependence.Quadrant
+import Mathlib.Analysis.MeanInequalitiesPow
 open scoped unitInterval
 namespace ProbabilityTheory.Copula
 /-- Positive upper-tail dependence excludes CD at every parameter above one. -/
@@ -99,4 +100,19 @@ theorem not_isTP2CDF_nelsen2 (θ : ℝ) (hθ : 1 ≤ θ) :
 theorem not_hasMTP2Density_nelsen2 (θ : ℝ) (hθ : 1 ≤ θ) :
     ¬(nelsen2 θ hθ).HasMTP2Density :=
   fun h => not_isPQD_nelsen2 θ hθ (hasMTP2Density_isPQD _ h)
+/-- Nelsen 2 increases in lower-orthant order throughout its parameter range. -/
+theorem lowerOrthantLE_nelsen2 {θ η : ℝ} (hθ : 1 ≤ θ) (hη : 1 ≤ η)
+    (hθη : θ ≤ η) : (nelsen2 θ hθ).LowerOrthantLE (nelsen2 η hη) := by
+  intro z
+  have hz : z = ![z 0, z 1] := by funext i; fin_cases i <;> rfl
+  rw [hz, nelsen2_cdf_full, nelsen2_cdf_full]
+  by_cases hzero : z 0 = 0 ∨ z 1 = 0
+  · simp [hzero]
+  simp only [hzero, ↓reduceIte]
+  apply max_le_max le_rfl
+  have hu : 0 ≤ 1 - (z 0 : ℝ) := by linarith [(z 0).property.2]
+  have hv : 0 ≤ 1 - (z 1 : ℝ) := by linarith [(z 1).property.2]
+  have hnorm := Real.rpow_add_rpow_le hu hv (by linarith : 0 < θ) hθη
+  simp only [one_div] at hnorm
+  linarith
 end ProbabilityTheory.Copula
