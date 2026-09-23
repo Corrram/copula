@@ -26,7 +26,7 @@ not extend a bivariate admissibility proof to higher dimensions.
 | Gumbel–Hougaard | `gumbel θ hθ` | `θ ≥ 1` | 2 | `exp(-((−log u)^θ+(−log v)^θ)^(1/θ))`; independence at 1; pointwise comonotonicity as θ→∞; increasing lower-orthant order; max-stability; CDF TP2 for all θ≥1 |
 | Joe | `joe θ hθ` | `θ ≥ 1` | 2 | `joe_cdf_full` gives the Table 1 CDF on the closed square; independence at 1; pointwise comonotonicity as θ→∞; exact tail pair `(0,2−2^(1/θ))` |
 | Frank | `frank θ hθ` | `θ > 0` | 2 | `frank_cdf_full` gives the logarithmic CDF on the closed square, including zero axes |
-| Ali–Mikhail–Haq | `amh θ hmin hmax` | `−1 ≤ θ ≤ 1` | 2 | `cdf_amh` proves `uv/(1−θ(1−u)(1−v))` on the closed square; at θ=1 this is Clayton(1); PQD iff θ≥0 and NQD iff θ≤0; lower-orthant order iff θ≤η; tail pair (0,0) below θ=1 and (1/2,0) at θ=1 |
+| Ali–Mikhail–Haq | `amh θ hmin hmax` | `−1 ≤ θ ≤ 1` | 2 | `cdf_amh` proves `uv/(1−θ(1−u)(1−v))` on the closed square; at θ=1 this is Clayton(1); CI/PQD iff θ≥0 and CD/NQD iff θ≤0; lower-orthant order iff θ≤η; tail pair (0,0) below θ=1 and (1/2,0) at θ=1 |
 | Frank, negative branch | `frankNegative θ hθ` | `θ < 0` | 2 | `frankNegative_cdf_full` gives the reflected CDF and `frankNegative_cdf_source` proves the printed logarithmic CDF on the closed square |
 | BB1 / Clayton–Gumbel | `bb1 θ hθ δ hδ` | `θ > 0`, `δ ≥ 1` | 2 | `bb1_cdf_full` on the closed square; `δ = 1` recovers Clayton |
 | BB6 / Joe–Gumbel | `bb6 θ hθ δ hδ` | `θ ≥ 1`, `δ ≥ 1` | 2 | `bb6_cdf_full` on the closed square; `δ = 1` recovers Joe |

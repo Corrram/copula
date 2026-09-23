@@ -230,4 +230,13 @@ theorem cdf_amh (θ : ℝ) (hmin : -1 ≤ θ) (hmax : θ ≤ 1) (a b : I) :
   · subst θ
     simpa using cdf_amh_one a b
 
+
+/-- Every bivariate AMH member is Archimedean, including the Clayton endpoint. -/
+theorem isArchimedean_amh (θ : ℝ) (hmin : -1 ≤ θ) (hmax : θ ≤ 1) :
+    IsArchimedean (amh θ hmin hmax) := by
+  rcases lt_or_eq_of_le hmax with hθ | hθ
+  · exact amh_isArchimedean_of_lt_one θ hmin hmax hθ
+  · subst θ
+    simpa [amh] using isArchimedean_clayton 2 1 zero_lt_one
+
 end ProbabilityTheory.Copula
