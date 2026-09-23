@@ -10,3 +10,4 @@ import Copula.Dependence.ClaytonClassification
 import Copula.Dependence.ClaytonTotalPositivity
 import Copula.Dependence.ClaytonDensityFormula
 import Copula.Dependence.ClaytonDensityMeasure
+import Copula.Dependence.DensityTotalPositivity
