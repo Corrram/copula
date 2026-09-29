@@ -49,20 +49,20 @@ observations and unresolved source discrepancies must not become axioms.
 | A06 | Joe | θ ≥ 1 | `1−((1−u)^θ+(1−v)^θ−(1−u)^θ(1−v)^θ)^(1/θ)` | `joe`; `joe_cdf_full`; full-square pointwise comonotonic endpoint; both tail limits |
 | A07 | Nelsen 7 | 0 ≤ θ ≤ 1 | `(θP+(1−θ)(S−1))₊` | `nelsen7` |
 | A08 | Nelsen 8 | θ ≥ 1 | `((θ²P−(1−u)(1−v))/(θ²−(θ−1)²(1−u)(1−v)))₊` | `nelsen8`; `nelsen8_cdf_full`; `nelsen8_one`; pointwise Clayton-at-one limit; both tail limits; exact CD classification |
-| A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | Pending |
-| A10 | Nelsen 10 | 0 ≤ θ ≤ 1 | `P/(1+(1−u^θ)(1−v^θ))^(1/θ)`; Π at 0 | Pending |
-| A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | Pending |
+| A09 | Gumbel–Barnett | 0 ≤ θ ≤ 1 | `P exp(−θ log u log v)` | `nelsen9` (θ > 0), `nelsen9_cdf_full` |
+| A10 | Nelsen 10 | 0 ≤ θ ≤ 1 | `P/(1+(1−u^θ)(1−v^θ))^(1/θ)`; Π at 0 | `nelsen10` (θ > 0), `nelsen10_cdf_full` |
+| A11 | Nelsen 11 | 0 ≤ θ ≤ 1/2 | `(u^θ v^θ−2(1−u^θ)(1−v^θ))₊^(1/θ)`; Π at 0 | `nelsen11` (0 < θ ≤ 1/2), `nelsen11_cdf_full`; `hasLowerTailDependence_nelsen11` |
 | A12 | Nelsen 12 | θ ≥ 1 | `(1+((u^(−1)−1)^θ+(v^(−1)−1)^θ)^(1/θ))^(−1)` | `nelsen12`; `nelsen12_cdf_full`; full-square pointwise comonotonic endpoint; increasing lower-orthant order; CI and MTP2 density at θ=1; CDF TP2, PQD and non-CD for all θ≥1 |
-| A13 | Nelsen 13 | θ ≥ 0 | `exp(1−((1−log u)^θ+(1−log v)^θ−1)^(1/θ))`; Gumbel–Barnett at parameter 1 when θ=0 | Pending |
+| A13 | Nelsen 13 | θ ≥ 0 | `exp(1−((1−log u)^θ+(1−log v)^θ−1)^(1/θ))`; Gumbel–Barnett at parameter 1 when θ=0 | `nelsen13` (θ > 0), `nelsen13_cdf_full`; `nelsen13_one` |
 | A14 | Nelsen 14 | θ ≥ 1 | `(1+((u^(−1/θ)−1)^θ+(v^(−1/θ)−1)^θ)^(1/θ))^(−θ)` | `nelsen14`; `nelsen14_cdf_full`; full-square pointwise comonotonic endpoint; exact lower/upper tail coefficients; CI and MTP2 density at θ=1; CDF TP2, PQD and non-CD for all θ≥1 |
 | A15 | Genest–Ghoudi (Nelsen 15) | θ ≥ 1 | `(1−((1−u^(1/θ))^θ+(1−v^(1/θ))^θ)^(1/θ))₊^θ` | `genestGhoudi`; `genestGhoudi_cdf_full`; full-square pointwise comonotonic endpoint; exact lower/upper tail coefficients; non-CI, CDF/density-TP2 exclusions; CD iff θ=1 |
-| A16 | Nelsen 16 | θ ≥ 0 | `(s+sqrt(s²+4θ))/2`, `s=S−1−θ(1/u+1/v−1)` | Pending |
-| A17 | Nelsen 17 | θ ∈ ℝ, θ ≠ 0 | `(1+((1+u)^(−θ)−1)((1+v)^(−θ)−1)/(2^(−θ)−1))^(−1/θ)−1` | Pending |
-| A18 | Nelsen 18 | θ ≥ 2 | `(1+θ/log(exp(θ/(u−1))+exp(θ/(v−1))))₊` | Pending |
-| A19 | Nelsen 19 | θ ≥ 0 | `θ/log(exp(θ/u)+exp(θ/v)−exp θ)`; H at 0 | Pending |
-| A20 | Nelsen 20 | θ ≥ 0 | `log(exp(u^(−θ))+exp(v^(−θ))−exp 1)^(−1/θ)`; Π at 0 | Pending |
-| A21 | Nelsen 21 | θ ≥ 1 | `1−(1−((1−(1−u)^θ)^(1/θ)+(1−(1−v)^θ)^(1/θ)−1)₊^θ)^(1/θ)` | Pending |
-| A22 | Nelsen 22 | 0 ≤ θ ≤ 1 | `(1+sin(asin(u^θ−1)+asin(v^θ−1)))^(1/θ)` when the sum of arcsines ≥ −π/2; otherwise 0; Π at θ=0 | Pending |
+| A16 | Nelsen 16 | θ ≥ 0 | `(s+sqrt(s²+4θ))/2`, `s=S−1−θ(1/u+1/v−1)` | `nelsen16`, `nelsen16_cdf_full`; `nelsen16_zero` (W at 0); `tendsto_nelsen16_atTop` (Clayton(1) at ∞); `hasLowerTailDependence_nelsen16` (λL = 1/2 for θ > 0) |
+| A17 | Nelsen 17 | θ ∈ ℝ, θ ≠ 0 | `(1+((1+u)^(−θ)−1)((1+v)^(−θ)−1)/(2^(−θ)−1))^(−1/θ)−1` | `nelsen17`, `nelsen17_cdf_full`; `nelsen17_neg_one` (Π at −1) |
+| A18 | Nelsen 18 | θ ≥ 2 | `(1+θ/log(exp(θ/(u−1))+exp(θ/(v−1))))₊` | `nelsen18`, `cdf_nelsen18`; `tendsto_nelsen18_atTop` (M at ∞); `hasLowerTailDependence_nelsen18`, `hasUpperTailDependence_nelsen18` |
+| A19 | Nelsen 19 | θ ≥ 0 | `θ/log(exp(θ/u)+exp(θ/v)−exp θ)`; H at 0 | `nelsen19` (θ > 0), `nelsen19_cdf_full` |
+| A20 | Nelsen 20 | θ ≥ 0 | `log(exp(u^(−θ))+exp(v^(−θ))−exp 1)^(−1/θ)`; Π at 0 | `nelsen20` (θ > 0), `nelsen20_cdf_full` |
+| A21 | Nelsen 21 | θ ≥ 1 | `1−(1−((1−(1−u)^θ)^(1/θ)+(1−(1−v)^θ)^(1/θ)−1)₊^θ)^(1/θ)` | `nelsen21`, `nelsen21_cdf_full`; `nelsen21_one` (W at 1); `hasLowerTailDependence_nelsen21` |
+| A22 | Nelsen 22 | 0 ≤ θ ≤ 1 | `(1+sin(asin(u^θ−1)+asin(v^θ−1)))^(1/θ)` when the sum of arcsines ≥ −π/2; otherwise 0; Π at θ=0 | `nelsen22` (0 < θ ≤ 1), `nelsen22_cdf_full`; `hasLowerTailDependence_nelsen22` |
 
 Generator pairs `(φ,ψ)`, with `C=ψ(φ(u)+φ(v))`. A multiplicative rescaling of
 φ and reciprocal rescaling of ψ represent the same copula. These analytic

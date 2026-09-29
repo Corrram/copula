@@ -22,6 +22,16 @@ probability-measure representation.
 | §5.1, concordance function and Kendall's tau | `Copula.Rank.Concordance`, `ConcordanceProbability`, `KendallMixture` | Q, independent-pair probabilities, benchmark links, and quadratic mixture formulas |
 | §5.1, Fréchet and Mardia coefficient examples | `Copula.Rank.FrechetKendall` | Tau, footrule, gamma and beta on the full parameter domains |
 | §5.4, including the CDF formulas of Theorem 5.4.2 | `Copula.TailDependence` | Limits, range, uniqueness, reflection duality, order and mixture results, benchmark/family values |
+| §4.1, Theorem 4.1.5 | `Copula.Archimedean.Associativity` | Commutativity, associativity `C(C(u,v),w) = C(u,C(v,w))` (strict and non-strict generators), invariance under `φ ↦ cφ` |
+| §4.1 and §4.3, level curves, zero set, Theorem 4.3.2 | `Copula.Archimedean.LevelCurves` | Level curves `φ(u)+φ(v) = φ(t)`, convexity of `φ`, of the level curves and of the sets `{C ≥ t}`; zero set, strict generators iff `C > 0` on `(0,1]²`, zero threshold `φ(0)` of non-strict generators |
+| §4.3, Theorems 4.3.3 and 4.3.4 (Kendall distribution function) | `Copula.Archimedean.Derivative`, `KendallDistribution`, `KendallCDF` | For generators with `C¹` inverse generator (strict or not): `K_C(t) = t − φ(t)/φ'(t)` on `(0,1]`, mass `K_C(0) = −φ(0)/φ'(0⁺)` of the zero set (`0` for strict, `1` for `W`, `1/θ` for family 2); conditional CDFs equal `∂₁C` a.e. simultaneously in `v` |
+| §5.1, Corollary 5.1.4 and its examples | `Copula.Archimedean.KendallTau`, `KendallTauFamilies`, `KendallTauAMH`, `KendallTauFrank` | `τ = 1 + 4∫₀¹ φ(t)/φ'(t) dt` for `C¹` generators (strict or not), `τ_{φ^δ} = 1 + (τ_φ − 1)/δ`; Clayton `θ/(θ+2)`, Gumbel `1 − 1/θ`, AMH `1 − 2(θ + (1−θ)² log(1−θ))/(3θ²)`, BB1 `1 − 2/(δ(θ+2))`, families 2 (`1 − 2/θ`), 12 and 14; Frank as `1 + (4/θ)∫₀¹ (e^{θt} − 1) log((1 − e^{−θt})/(1 − e^{−θ})) dt` (Debye form not derived) |
+| §5.4, Corollary 5.4.3 | `Copula.Archimedean.TailDependence`, `TailFamilies` | `λ_L = lim ψ(2x)/ψ(x)` (strict), `λ_L = 0` (non-strict), `δ'(1⁻) = lim (1−ψ(2x))/(1−ψ(x))` and `λ_U = 2 − δ'(1⁻)`; `λ_U = 0` when `ψ'(0⁺)` is finite and nonzero |
+| §4.2, Table 4.1 (all 22 one-parameter Archimedean families) | `Copula.Families.NelsenTable`, `Copula.Archimedean.Clamp`, see [nelsen-table-4-1.md](nelsen-table-4-1.md) | Generators, CDFs on the full parameter ranges, special and limiting cases, `λ_L = 0` for non-strict families; corrected CDF of family 22 |
+| §5.3.1, measures of dependence based on distances to `Π` | `Copula.Measures.Bounds`, `Measures.Uniform`, `Measures.CDFDistanceBenchmarks` | `σ ≤ 1`, `Φ² ≤ 1`, `Φ²(M) = Φ²(W) = 1`, and `σ = 1 ↔ Φ² = 1 ↔ C ∈ {M, W}`; the `L∞` version `κ` with `\|β\| ≤ κ ≤ 1` and `κ = 1 ↔ \|β\| = 1`, `σ ≤ 3κ`, `Φ² ≤ (45/8) κ²` |
+| §2.5, Theorem 2.5.4 (both directions) | `Copula.RandomVariable.Monotone`, `Copula.Distribution.RealQuantile` | With continuous marginals, `C = M` (resp. `W`) iff `Y = f(X)` a.s. with `f` nondecreasing (resp. nonincreasing) on a set carrying `X`; `f = G_Y ∘ F_X` (resp. `G_Y ∘ (1 − F_X)`) |
+| §3.2, Theorem 3.2.3 | `Copula.QuasiCopula.PrescribedValue`, `PrescribedValueBest` | Bounds for copulas and quasi-copulas with `C(a,b) = θ`; both bounds are copulas (shuffles of `M`), hence best possible |
+| §6.2, quasi-copulas | `Copula.QuasiCopula.Basic`, `Bivariate` | Definition (functional form), copulas are quasi-copulas, `W ≤ Q ≤ M`, sup/inf of copulas, characterization by boundary rectangles, a proper quasi-copula |
 
 These are the precise formalized portions, not claims that every theorem in
 the cited sections is implemented. The general random-variable versions of
@@ -99,6 +109,9 @@ order, and affine behavior under two-component mixtures.
 | Marshall–Olkin | 1 if `α=β=1`, otherwise 0 | `min(α,β)` |
 | Cuadras–Augé | 1 if `α=1`, otherwise 0 | `α` |
 | Tawn, finite `θ ≥ 1` | 0 | `α+β−(α^θ+β^θ)^(1/θ)` |
+| Frank, `θ > 0` | 0 | 0 |
+| Gumbel–Barnett (Nelsen 4.2.9) | 0 | 0 |
+| Nelsen 4.2.19 and 4.2.20, `θ > 0` | 1 | 0 |
 
 `TailDependence.Derivative` proves the endpoint derivative rules: the right
 derivative of the diagonal at zero gives the lower tail, and two minus its
@@ -123,7 +136,7 @@ is formalized in `Copula.OrdinalSum.Decomposition`. Arbitrary disjoint
 interval sums with a residual comonotonic part remain open.
 
 Further book topics include prescribed-diagonal constructions,
-shuffle density, general residual-interval ordinal sums, generator formulas for tail dependence,
+shuffle density, general residual-interval ordinal sums,
 and tail coefficients for the remaining analytic and elliptical families.
 Those results are not asserted here.
 

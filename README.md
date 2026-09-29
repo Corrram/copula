@@ -82,8 +82,10 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Diagonal.Construction` | Every diagonal function is the diagonal of a copula (Nelsen §3.2.6) |
 | `Copula.Archimedean.Theory`, `TheoryConvex`, `Diagonal` | Strict Archimedean copulas lie below `M`; generator diagonals `δ(t) = ψ(2φ(t)) < t` |
 | `Copula.Families.NelsenTable.N9`, `N10`, `N13`, `N19`, `N20` | Gumbel–Barnett and Nelsen families #10, #13, #19, #20: generators, CDFs and boundary formulas |
+| `Copula.Archimedean.Clamp`, `Copula.Families.NelsenTable.N11`, `N16`, `N17`, `N18`, `N21`, `N22`, `Limits`; `Copula.TailDependence.NelsenTable` | Non-strict generators by clamping; Nelsen families #11, #16, #17, #18, #21, #22 on their full ranges (with #13 now for all θ > 0): generators, CDFs (corrected #22 formula), special cases `C_0 = W` (#16), `C_{-1} = Π` (#17), `C_1 = W` (#21), limits `C_∞ = Π/(Σ−Π)` (#16) and `C_∞ = M` (#18), `λ_L = 0` for the non-strict families |
 | `Copula.Measures.Deviation`, `SchweizerWolff`, `Hoeffding` | Integrals of `φ(C − Π)`; Schweizer–Wolff's σ and Hoeffding's Φ² with invariances, zero characterizations and FGM values |
 | `Copula.RandomVariable.Invariance`, `Independence`, `Monotone`, `Symmetry`, `Ext` | Sklar copulas under strictly monotone transformations, independence, functional dependence (`M`/`W`) and symmetry of random vectors |
+| `Copula.QuasiCopula.Basic`, `Bivariate`, `PrescribedValue`, `PrescribedValueBest`; `Copula.Distribution.RealQuantile` | Quasi-copulas (Nelsen §6.2): Fréchet bounds, closure under sup/inf/mixtures, boundary-rectangle characterization (Genest et al.), a proper quasi-copula; best-possible bounds for a prescribed value `C(a,b) = θ` (Nelsen Thm 3.2.3); real quantiles used for the converse of Nelsen Thm 2.5.4 in `RandomVariable.Monotone` |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Vine` | C-, D-, and regular vines with measurable conditional pair families, including non-simplified and singular inputs; proved proximity, conditional gluing and marginal preservation; direct simplified C-vine CDFs |
 | `Copula.OrdinalSum` | Binary, finite and increasing countable ordinal sums; binary converse decomposition, probability laws, rank formulas, ordering, PQD and tails |
@@ -108,6 +110,17 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Reflection.Bivariate`, `Copula.Symmetry` | Reflection/survival CDF formulas, exchangeability, radial symmetry and symmetrization |
 | `Copula.Rank.Symmetry` | Transpose and survival invariance of five coefficients; single-reflection sign identities |
 | `Copula.TailDependence` | Explicit tail-limit predicates, bounds, uniqueness, order/mixture results and six benchmark/family formulas |
+| `Copula.Measures.CDFDistance`, `CDFDistanceSymmetry`, `CDFDistanceMixture`, `CDFDistanceBenchmarks`, `HoeffdingBounds` | Hoeffding's D, Blum–Kiefer–Rosenblatt R, Bergsma–Dassios τ*, distance correlation; symmetries, dilution by independence, `Φ²(M) = Φ²(W) = 1`, `0 ≤ 30 D ≤ 1` |
+| `Copula.Measures.Uniform`, `Copula.Topology.UniformDistance` | Uniform CDF distance of copulas; Schweizer–Wolff's κ = 4 sup \|C − Π\| with attainment, `\|β\| ≤ κ ≤ 1`, `σ ≤ 3κ`, invariances |
+| `Copula.Measures.Bounds` | Sharp bounds `σ ≤ 1`, `Φ² ≤ 1` with equality iff `C ∈ {M, W}`, and `κ = 1 ↔ \|β\| = 1` (Nelsen §5.3.1), via the SI rearrangement |
+| `Copula.Rearrangement`, `Rearrangement.Decreasing`, `Primitive`, `LevelSet`, `PrimitiveIntegral`, `SI` | Graph copulas, complete dependence and generalized shuffles; decreasing rearrangements, primitive comparison lemma, SI rearrangement of Strothmann–Dette–Siburg |
+| `Copula.MarkovProduct`, `MarkovProduct.Laws` | Darsow–Nguyen–Olsen Markov product: associativity, `M`/`Π`/`W` laws, `(A * B)ᵀ = Bᵀ * Aᵀ`, CDF formula, `Cᵀ * C = M ↔ ξ(C) = 1`, `ξ(A * B) ≤ ξ(B)` |
+| `Copula.Transform.Gluing` | Siburg–Stoimenov gluing of copulas along an interval partition; strip formula and section derivatives |
+| `Copula.Rank.Blest`, `BlestBounds`, `CorrelationRatio`, `Sobolev`, `MixtureMeasure`; `Copula.Information`, `Copula.KendallDistribution` | Blest's ν and its symmetrization, copula correlation ratio, Sobolev dependence, mixtures; copula information (KL divergence to Π); Kendall distribution function |
+| `Copula.Families.ProductPerturbation` | Copulas `uv + φ(u) ψ(v)` for Lipschitz boundary profiles |
+| `Copula.Archimedean.Associativity`, `LevelCurves` | Commutativity, associativity and generator scaling `cφ` (Nelsen Thm 4.1.5); level curves and zero set, convexity of the generator and of level curves (Thm 4.3.2), strictness iff positivity on `(0,1]²` |
+| `Copula.Archimedean.TailDependence`, `TailFamilies` | Tail coefficients via generators (Nelsen Cor 5.4.3), `δ'(1⁻)`, `λ_L = 0` for non-strict and `λ_U = 0` for `ψ'(0) ≠ 0`; Frank and Gumbel–Barnett (0, 0), families #19 and #20 (`λ_L = 1`, `λ_U = 0`) |
+| `Copula.Archimedean.Derivative`, `KendallDistribution`, `KendallCDF`, `KendallTau`, `KendallTauFamilies`, `KendallTauAMH`, `KendallTauFrank` | C¹ generators (strict or not): conditional CDFs as partial derivatives; Kendall distribution `K_C(t) = t − φ(t)/φ'(t)` (Nelsen Thm 4.3.4) and zero-set mass `−φ(0)/φ'(0⁺)` (Thm 4.3.3); `τ = 1 + 4∫₀¹ φ/φ'` (Cor 5.1.4) and `τ_{φ^δ} = 1 + (τ_φ − 1)/δ`; τ of Clayton, Gumbel, Ali–Mikhail–Haq, BB1, Nelsen #2, #12 and #14; Frank's τ as an elementary integral |
 
 Import `Copula` for the full library or a specific module such as
 `Copula.Basic`. Declarations live in `ProbabilityTheory.Copula`; the structure

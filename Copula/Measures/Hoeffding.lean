@@ -13,7 +13,7 @@ Hoeffding's measure is `Φ²(C) = 90 ∫∫ (C(u,v) - u v)² du dv`
 We prove `Φ² ≥ 0`, `Φ²(Π) = 0`, invariance under transposition and survival copulas,
 `Φ²(C) = 0` if and only if `C = Π`, and `Φ²(FGM θ) = θ² / 10`.
 
-The upper bound `Φ² ≤ 1` and the value `Φ²(M) = 1` are not proved here.
+The sharp upper bound `Φ² ≤ 1`, with equality exactly at `M` and `W`, is in `Copula.Measures.Bounds`.
 -/
 
 open MeasureTheory

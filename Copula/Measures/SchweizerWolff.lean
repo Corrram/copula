@@ -17,7 +17,7 @@ transposition and survival copulas, `σ = |ρ|` for quadrant dependent copulas
 (Nelsen Section 5.3), `σ(C) = 0` if and only if `C = Π`, and the
 value `|θ| / 3` on the Farlie–Gumbel–Morgenstern family.
 
-The upper bound `σ ≤ 1` for all copulas is not proved here.
+The sharp upper bound `σ ≤ 1`, with equality exactly at `M` and `W`, is in `Copula.Measures.Bounds`.
 -/
 
 open MeasureTheory
