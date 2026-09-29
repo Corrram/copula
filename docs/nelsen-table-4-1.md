@@ -66,8 +66,8 @@ lemmas for the new families are in `Copula.Archimedean.TheoryConvex`.
 Kendall's tau is proved from Nelsen's Corollary 5.1.4 (`tau = 1 + 4 int_0^1 phi/phi'`),
 using `BivariateGenerator.kendallTau_eq_of_hasDerivAt` (`Copula.Archimedean.KendallTauGenerator`)
 for an explicit differentiable generator. Tail coefficients use Corollary 5.4.3; quadrant
-dependence uses Theorem 4.4.2 with `Pi` (`Copula.Archimedean.Concordance`). Entries not listed
-are not formalized.
+dependence uses Theorem 4.4.2 with `Pi` (`Copula.Archimedean.Concordance`). The first table lists
+the results from the earlier round; the complete matrix is at the end of this page.
 
 | # | Kendall's tau | Tails `(lambda_L, lambda_U)` and quadrant dependence | Lean |
 | --- | --- | --- | --- |
@@ -93,3 +93,46 @@ Limit of family 17 at `theta -> -infinity`. With `r = (1 + u)(1 + v)/2` the CDF 
 `max(1, r) - 1 = max(0, (uv + u + v - 1)/2)`, which is the member `theta = 1/2` of family 7 and
 not `W` (for example, at `u = v = 0.8` the limit is `0.62`, while `W(0.8, 0.8) = 0.6`); this is
 proved by the two-sided bound `nelsen17_bounds_neg`.
+
+## Complete property matrix
+
+Every family of Table 4.1 (plus the named Gumbel, Frank, Joe, AMH members) is classified for quadrant
+dependence over its full parameter range (`Copula.Archimedean.QuadrantClassification`, one `*_quadrant`
+theorem per family; negative statements are proved from tail coefficients, non-strictness of the
+generator, or explicit witnesses). Kendall's tau is proved for all families (closed form where one
+exists, otherwise the explicit integral of Corollary 5.1.4). Blomqvist's beta is proved in closed form
+for all 22 families (`Copula.Archimedean.BlomqvistTable`, `BlomqvistTableN`; generic
+`BivariateGenerator.blomqvistBeta_copula`). Spearman's rho is proved wherever a closed or one-dimensional
+form exists; for the other families only the generic formula
+`BivariateGenerator.spearmanRho_copula` (`rho = 12 int int C - 3`) is available and no elementary closed
+form is known.
+
+| # | PQD | NQD | Kendall's tau (new in this round) | Spearman's rho |
+| --- | --- | --- | --- | --- |
+| 1 Clayton | `theta > 0` | `-1 <= theta < 0` | `kendallTau_clayton[Negative]` | generic |
+| 2 | never | iff `theta = 1` | `kendallTau_nelsen2` | `4 Gamma(1/theta+1)^2/Gamma(2/theta+1) - 3` (`spearmanRho_nelsen2`) |
+| 3 AMH | iff `theta >= 0` | iff `theta <= 0` | `kendallTau_amh` | series, dilogarithm form for `abs theta < 1`, `4 pi^2 - 39` at `1`, `33 - 48 log 2` at `-1` (`SpearmanRhoAMH*`) |
+| 4 Gumbel | yes | iff `theta = 1` | `kendallTau_gumbel` | generic |
+| 5 Frank | `theta > 0` | `theta < 0` | `kendallTau_frank_debye` | `1 - (12/theta)(D_1 - D_2)` (`spearmanRho_frank_debye`, `spearmanRho_frankNegative_debye`) |
+| 6 Joe | yes | iff `theta = 1` | `kendallTau_joe` | generic |
+| 7 | iff `theta = 1` | yes | `kendallTau_nelsen7` | `nelsen7_rho` |
+| 8 | never | iff `theta <= 2` | `kendallTau_nelsen8` | generic |
+| 9 | never | yes | `kendallTau_nelsen9` | one-dimensional integral (`spearmanRho_nelsen9`) |
+| 10 | never | yes | `kendallTau_nelsen10` | generic |
+| 11 | never | yes | `kendallTau_nelsen11` | generic |
+| 12 | yes | never | `kendallTau_nelsen12` | generic |
+| 13 | iff `theta >= 1` | iff `theta <= 1` | `kendallTau_nelsen13` | generic |
+| 14 | yes | never | `kendallTau_nelsen14` | generic |
+| 15 | never | iff `theta = 1` | `kendallTau_genestGhoudi` | generic |
+| 16 | iff `theta >= 1` | iff `theta = 0` | `kendallTau_nelsen16` | generic |
+| 17 | iff `theta >= -1` | iff `theta <= -1` | `kendallTau_nelsen17` | generic |
+| 18 | never | never | `kendallTau_nelsen18` | generic |
+| 19 | yes | never | `kendallTau_nelsen19` | generic |
+| 20 | yes | never | `kendallTau_nelsen20` | generic |
+| 21 | never | iff `theta = 1` | `kendallTau_nelsen21` | generic |
+| 22 | never | yes | `kendallTau_nelsen22` | generic |
+
+Several families are neither PQD nor NQD on part of their range (#2 and #15 and #21 for `theta > 1`,
+#8 for `theta > 2`, #16 for `0 < theta < 1`, and #18 throughout). Family #17 changes sign at
+`theta = -1`, not at `0`. "Generic" means Spearman's rho is available only as the double integral of the
+CDF; Spearman's rho of the other families has no known elementary closed form.
