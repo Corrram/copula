@@ -78,6 +78,12 @@ is one, and groundedness is only asserted when a coordinate exists.
 | `Copula.Families.MarshallOlkin` | Marshall–Olkin, Cuadras–Augé and finite-dimensional common-shock copulas |
 | `Copula.Elliptical.ScaleMixture` | Positive Gaussian scale mixtures with atomless marginals and Sklar factorization |
 | `Copula.Families.StudentT`, `ScaleMixtures` | Student-t, Cauchy, variance-gamma, Laplace, slash and normal–lognormal copulas |
+| `Copula.Topology.Uniform`, `Topology.Closed` | Equicontinuity of copula CDFs, pointwise-implies-uniform convergence, closedness and compactness of the copula set (Nelsen §2.10) |
+| `Copula.Diagonal.Construction` | Every diagonal function is the diagonal of a copula (Nelsen §3.2.6) |
+| `Copula.Archimedean.Theory`, `TheoryConvex`, `Diagonal` | Strict Archimedean copulas lie below `M`; generator diagonals `δ(t) = ψ(2φ(t)) < t` |
+| `Copula.Families.NelsenTable.N9`, `N10`, `N13`, `N19`, `N20` | Gumbel–Barnett and Nelsen families #10, #13, #19, #20: generators, CDFs and boundary formulas |
+| `Copula.Measures.Deviation`, `SchweizerWolff`, `Hoeffding` | Integrals of `φ(C − Π)`; Schweizer–Wolff's σ and Hoeffding's Φ² with invariances, zero characterizations and FGM values |
+| `Copula.RandomVariable.Invariance`, `Independence`, `Monotone`, `Symmetry`, `Ext` | Sklar copulas under strictly monotone transformations, independence, functional dependence (`M`/`W`) and symmetry of random vectors |
 | `Copula.Mixture` | Finite convex mixtures of copulas and their CDF formulas |
 | `Copula.Vine` | C-, D-, and regular vines with measurable conditional pair families, including non-simplified and singular inputs; proved proximity, conditional gluing and marginal preservation; direct simplified C-vine CDFs |
 | `Copula.OrdinalSum` | Binary, finite and increasing countable ordinal sums; binary converse decomposition, probability laws, rank formulas, ordering, PQD and tails |
