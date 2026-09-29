@@ -9,3 +9,4 @@ __pycache__/
 *.trace
 .DS_Store
 Thumbs.db
+build-draft.log
