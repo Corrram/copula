@@ -1,25 +1,24 @@
+/-
+Copyright (c) 2026 Marcus Rockel. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Marcus Rockel
+-/
 import Copula.Rank.Region.XiBlest.Support.CenteredProperties
 import Copula.Rank.Region.XiBlest.Support.Mixture
+import Copula.Rank.Region.Common.DeterministicRho
 
-/-! # Every rho is attained at xi=1 by a radially symmetric copula -/
+/-! # Every rho is attained at xi=1 by a radially symmetric copula (re-export)
 
-open ProbabilityTheory Set
-open scoped unitInterval
+Compatibility module. The development lives in
+`Copula.Rank.Region.Common.DeterministicRho`, namespace
+`ProbabilityTheory.Copula.RankRegion.Common`. The `export` below makes its public
+declarations available under
+`ProbabilityTheory.Copula.RankRegion.XiBlest.Support`
+as the very same constants.
+-/
 
 namespace ProbabilityTheory.Copula.RankRegion.XiBlest.Support
 
-theorem centralW_rho (α : I) : (centralW α).spearmanRho = 1 - 2 * (α : ℝ) ^ 3 := by
-  rw [centralW, centeredOrdinal_rho, Copula.spearmanRho_countermonotonic]
-  ring
-
-theorem deterministic_rho_attained (r : ℝ) (hr : r ∈ Icc (-1) 1) :
-    ∃ C : Copula 2, C.IsRadiallySymmetric ∧ C.chatterjeeXi = 1 ∧ C.spearmanRho = r := by
-  have hc : Continuous (fun a : I => -(centralW a).spearmanRho) := by
-    simp_rw [centralW_rho]
-    fun_prop
-  obtain ⟨a, ha⟩ := exists_unitInterval_eq (z := -r) hc
-    (by rw [centralW_rho]; norm_num; linarith [hr.2])
-    (by rw [centralW_rho]; norm_num; linarith [hr.1])
-  exact ⟨centralW a, centralW_radiallySymmetric a, centralW_xi a, by linarith⟩
+export ProbabilityTheory.Copula.RankRegion.Common (centralW_rho deterministic_rho_attained)
 
 end ProbabilityTheory.Copula.RankRegion.XiBlest.Support

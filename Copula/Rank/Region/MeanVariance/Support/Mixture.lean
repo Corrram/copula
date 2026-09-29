@@ -1,35 +1,23 @@
-import Copula.Rank.ChatterjeeMixture
-import Copula.Rank.KendallMixture
-import Mathlib.Topology.Order.IntermediateValue
-
-/-! # Continuous coefficient paths along copula mixtures
-
-The quadratic identities make continuity explicit without imposing a density
-or continuity assumption on the conditional distributions of a copula.
+/-
+Copyright (c) 2026 Marcus Rockel. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Marcus Rockel
 -/
+import Copula.Rank.Region.Common.Mixture
 
-open ProbabilityTheory
-open scoped unitInterval
+/-! # Continuous coefficient paths along copula mixtures (re-export)
+
+Compatibility module. The development lives in
+`Copula.Rank.Region.Common.Mixture`, namespace
+`ProbabilityTheory.Copula.RankRegion.Common`. The `export` below makes its public
+declarations available under
+`ProbabilityTheory.Copula.RankRegion.MeanVariance.Support`
+as the very same constants.
+-/
 
 namespace ProbabilityTheory.Copula.RankRegion.MeanVariance.Support
 
-theorem continuous_xi_mix (C D : Copula 2) :
-    Continuous (fun a : I => (C.mix D a).chatterjeeXi) := by
-  simp_rw [Copula.chatterjeeXi_mix]
-  fun_prop
-
-theorem continuous_tau_mix (C D : Copula 2) :
-    Continuous (fun a : I => (C.mix D a).kendallTau) := by
-  simp_rw [Copula.kendallTau_mix]
-  fun_prop
-
-/-- A continuous real-valued function on the closed unit interval attains
-every value between its endpoint values. -/
-theorem exists_unitInterval_eq {f : I → ℝ} (hf : Continuous f) {z : ℝ}
-    (hz0 : f 0 ≤ z) (hz1 : z ≤ f 1) : ∃ a : I, f a = z := by
-  have h := intermediate_value_Icc (show (0 : I) ≤ 1 from zero_le_one)
-    hf.continuousOn ⟨hz0, hz1⟩
-  obtain ⟨a, _, ha⟩ := h
-  exact ⟨a, ha⟩
+export ProbabilityTheory.Copula.RankRegion.Common (continuous_xi_mix continuous_tau_mix
+  exists_unitInterval_eq)
 
 end ProbabilityTheory.Copula.RankRegion.MeanVariance.Support

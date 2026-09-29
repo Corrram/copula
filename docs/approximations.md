@@ -9,16 +9,17 @@ increments are proved, with no extra copula-validity assumption on callers.
 
 | Construction | Formalized scope and guarantees |
 | --- | --- |
-| Ordinal sums | Existing binary API, arbitrary finite partitions, and countably many adjacent blocks exhausting `[0,1]`; see [ordinal sums](ordinal-sums.md) |
+| Ordinal sums | Existing binary API, arbitrary finite partitions, countably many adjacent blocks exhausting `[0,1]`, and general families of disjoint intervals with `M` on the gaps; see [ordinal sums](ordinal-sums.md) |
 | Ordinal sums of Π | `ordinalSumPi` and `countableOrdinalSumPi`, with explicit CDF formulas |
 | Shuffles of min | Arbitrary finite positive strip widths, a length-matching permutation, and an independent reflection choice for each segment |
+| Weight shuffles and shuffle density | Straight shuffles from weight vectors with zero entries; grid shuffles interpolating any copula; density of shuffles of `M` in the uniform metric |
 | Checkerboard | Rectangular, nonuniform grids; arbitrary nonnegative cell probabilities with the specified row and column sums |
 | Check-min | Same grids and matrices, using comonotonic local coordinates |
 | Bernstein | Arbitrary positive degrees in each coordinate, the tensor polynomial formula, copula validity, independence preservation and uniform convergence |
 
 These are bivariate constructions. Closed-form rank-coefficient formulas
-for these new families, shuffle density, and higher-dimensional grid and
-Bernstein constructors are not asserted here. The binary ordinal-sum rank
+for these new families and higher-dimensional grid and Bernstein
+constructors are not asserted here. The binary ordinal-sum rank
 results remain available in their existing modules.
 
 ## Partitions and cell probabilities
@@ -95,6 +96,44 @@ selects decreasing (`true`) or increasing (`false`) orientation.
 straight equal-width case. `shuffleOfMin_refl` identifies the straight
 identity shuffle with `M`.
 
+## Shuffle density
+
+`Shuffle.Weights` describes a straight shuffle by a weight vector
+`w : Fin M → ℝ` (nonnegative, summing to one, zero entries allowed) listing
+the source intervals from left to right, and a permutation `π` giving the
+target order. Piece `k` is the diagonal of
+`[s_k, s_k + w_k] × [t_k, t_k + w_k]` with `s_k = Σ_{j<k} w_j` and
+`t_k = Σ_{π j < π k} w_j`. `weightShuffle w hw0 hw1 π` discards the zero
+pieces, enumerates the positive ones in increasing order and is by
+definition a `shuffleOfMin`. `cdf_weightShuffle` gives
+
+```text
+S(u,v) = Σ_k min(clip(u − s_k, w_k), clip(v − t_k, w_k)),   clip(x,w) = min(max(x,0),w).
+```
+
+`IsShuffleOfMin` and `IsStraightShuffleOfMin` name the classes of shuffles
+of `M` (with and without reflected segments).
+
+`Shuffle.Density` proves Nelsen's Theorem 3.2.2 (Mikusiński, Sherwood and
+Taylor). For a partition `P` and a matrix of cell masses `A : CellMass P P`,
+`A.shuffle` splits the vertical strip `i` into pieces of lengths
+`A.mass i 0, A.mass i 1, …` and the horizontal strip `j` into pieces of
+lengths `A.mass 0 j, A.mass 1 j, …`, and matches piece `(i,j)` of both.
+For `C.gridShuffle P = (C.cellMass P P).shuffle` this gives exact agreement
+with `C` at every grid vertex:
+
+{{ lean:shuffle-grid }}
+
+`abs_cdf_sub_le_of_eq_on_grid` turns grid agreement into the error bound
+`dx + dy`, so `uniformCDFDistance_gridShuffle_le` gives `d∞ ≤ 2/n` on the
+uniform `n`-grid. Consequently `tendstoUniformly_gridShuffle`,
+`exists_isStraightShuffleOfMin_uniformCDFDistance_lt` and the density
+statements for the metric `uniformMetricSpace 2` hold:
+
+{{ lean:shuffle-density }}
+
+`dense_isShuffleOfMin` is the same statement for all shuffles of `M`.
+
 ## Bernstein copulas
 
 For positive `m,n`, `C.bernstein m n hm hn` has the CDF
@@ -134,6 +173,8 @@ uniform convergence along degrees `(k+1,k+1)`.
 | `OrdinalSum.Finite` | Finite sums, Π specialization and binary compatibility |
 | `OrdinalSum.Countable` | Increasing countable partitions, summability and CDF series |
 | `Shuffle` | Unequal-width signed shuffles and straight uniform shuffles |
+| `Shuffle.Weights` | Shuffle classes, weight vectors with zero entries and their CDF formula |
+| `Shuffle.Density` | Grid shuffles, exact grid interpolation, `2/n` error bound and density (Nelsen Thm 3.2.2) |
 | `Bernstein.Basis` | Bernstein derivative and shape-preservation lemmas |
 | `Bernstein.Basic` | Tensor formula, validity and benchmark identities |
 | `Bernstein.Approximation` | Error bounds and uniform convergence |

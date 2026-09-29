@@ -246,13 +246,57 @@ See [grid constructions](approximations.md) for the common finite
 patchwork machinery, checkerboard and check-min copulas, shuffles and
 Bernstein copulas.
 
+## General ordinal sums
+
+`Copula.OrdinalSum.General` implements Nelsen's Definition 3.2.1 in full
+generality. `OrdinalIntervals ι` is a family of open intervals
+`(left k, right k)` of `[0,1]`, indexed by an arbitrary type, with
+`left k < right k` and pairwise disjoint (`right k ≤ left l` or
+`right l ≤ left k` for `k ≠ l`). The intervals need not be adjacent,
+ordered, finite or exhaust `[0,1]`. For copulas `C k`,
+`generalOrdinalSum J C` satisfies, with `w_k = b_k − a_k`,
+
+```text
+O(u,v) = a_k + w_k C_k((u−a_k)/w_k, (v−a_k)/w_k)   on [a_k,b_k]²
+O(u,v) = min(u,v)                                  off the open squares.
+```
+
+The construction writes `O(u,v) = min(g(u),g(v)) + Σ' w_k C_k(c_k(u),c_k(v))`,
+where `g(u)` is the Lebesgue measure of `[0,u]` outside the intervals.
+Disjointness gives summability of the widths through a finite
+Lebesgue-measure estimate; no countability assumption is needed.
+`cdf_generalOrdinalSum_eq_min_sub` gives the equivalent form
+`O = M − Σ' w_k (M − C_k)(c_k u, c_k v)`.
+
+{{ lean:general-ordinal-square }}
+
+`GeneralProperties` proves component recovery (`cdf_component_eq`,
+`generalOrdinalSum_injective`), `δ(t) = t` outside the open intervals and
+at every endpoint, transposition componentwise with exchangeability iff all
+components are exchangeable, lower orthant comparison iff componentwise
+comparison, and PQD closure. Copies of M, or an empty family, give M.
+`generalOrdinalSum_ofPartition`, `generalOrdinalSum_ofCountable` and
+`ordinalSum_eq_generalOrdinalSum` show that the finite, increasing countable
+and binary constructors are special cases.
+
+`GeneralDecomposition` generalizes the converse theorem: for any family `J`,
+a copula is an ordinal sum with respect to `J` if and only if its diagonal is
+the identity at every point outside the open intervals, and then the
+components are unique. They are the rescaled restrictions
+`OrdinalIntervals.component`, which are copulas whenever both endpoints of
+the square are diagonal fixed points.
+
+{{ lean:general-ordinal-decomposition }}
+
 ## Scope and module map
 
 The full decomposition, rank and dependence API concerns binary bivariate
 sums. Finite sums and increasing countable partitions have proved
 constructors and CDF formulas. Arbitrary disjoint interval families with a
-residual comonotonic part, and canonical decomposition into indecomposable
-components, are not yet formalized. General ordinal-sum formulas for gamma, xi, and beta
+residual comonotonic part have the construction, component recovery,
+diagonal characterization, order, symmetry and PQD results above; rank
+formulas for them and canonical decomposition into indecomposable
+components are not yet formalized. General ordinal-sum formulas for gamma, xi, and beta
 beyond the midpoint results are also future work.
 
 | Module | Content |
@@ -273,3 +317,6 @@ beyond the midpoint results are also future work.
 | `OrdinalSum.Finite` | Arbitrary finite partitions, independent components and binary compatibility |
 | `OrdinalSum.Countable` | Increasing countable partitions, summability, uniform margins and CDF series |
 | `OrdinalSum.CountableSI` | Fixed endpoints and stochastic increase of countable independent-block sums |
+| `OrdinalSum.General` | Disjoint interval families, residual diagonal mass, construction and CDF formulas |
+| `OrdinalSum.GeneralProperties` | Square and off-square formulas, recovery, fixed points, symmetry, order, PQD and special cases |
+| `OrdinalSum.GeneralDecomposition` | Square components and the diagonal fixed-point characterization |

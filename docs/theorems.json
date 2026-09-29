@@ -612,5 +612,25 @@
     "title": "Countable ordinal sums have summable weighted CDF series",
     "module": "Copula.OrdinalSum.Countable",
     "declaration": "ProbabilityTheory.Copula.cdf_countableOrdinalSum"
+  },
+  "shuffle-density": {
+    "title": "Straight shuffles of M are dense for the uniform metric",
+    "module": "Copula.Shuffle.Density",
+    "declaration": "ProbabilityTheory.Copula.dense_isStraightShuffleOfMin"
+  },
+  "shuffle-grid": {
+    "title": "Grid shuffles agree with the copula at every grid vertex",
+    "module": "Copula.Shuffle.Density",
+    "declaration": "ProbabilityTheory.Copula.cdf_gridShuffle_point"
+  },
+  "general-ordinal-square": {
+    "title": "General ordinal sums on the component squares",
+    "module": "Copula.OrdinalSum.GeneralProperties",
+    "declaration": "ProbabilityTheory.Copula.cdf_generalOrdinalSum_of_mem"
+  },
+  "general-ordinal-decomposition": {
+    "title": "Ordinal sums are characterized by diagonal fixed points",
+    "module": "Copula.OrdinalSum.GeneralDecomposition",
+    "declaration": "ProbabilityTheory.Copula.exists_generalOrdinalSum_iff"
   }
 }

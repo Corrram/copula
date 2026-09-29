@@ -14,6 +14,8 @@ probability-measure representation.
 | Theorem 3.2.1 and the subsequent probability criteria | `Copula.OrdinalSum.Cut`, `Components`, `Decomposition` | Explicit component extraction, reconstruction and uniqueness at an interior cut; equivalent threshold and max/min events |
 | §3.2.2 and §5.1, ordinal-sum rank calculations | `Copula.OrdinalSum.Rank`, `RankExamples` | Exact rho, tau, footrule and common-split Q formulas; sharp bounds and benchmark specializations |
 | §3.2.6, order-statistic interpretation | `Copula.Diagonal` | Distribution functions of the coordinate maximum and minimum |
+| §3.2.6, copulas with prescribed diagonal sections | `Copula.Diagonal.Construction`, `Bertino`, `Extremal`, `UpperBound` | Sufficiency of the diagonal conditions (`K_δ`); Bertino copula `B_δ` as the smallest copula with diagonal `δ`; `K_δ` as the largest exchangeable one; the quasi-copula bound `A_δ` (best possible for quasi-copulas, not for copulas); `δ` determines `C` iff `δ = id` |
+| §3.2.5, copulas with quadratic sections | `Copula.Families.QuadraticSections` | `uv + ψ(v)u(1−u)` is a copula iff `ψ(0) = ψ(1) = 0` and `ψ` is 1-Lipschitz; quadratic vertical sections force this form; quadratic sections in both variables iff FGM |
 | §2.6 | `Copula.Reflection.Bivariate` | Single-coordinate reflection formulas, survival copula, transpose and composition identities |
 | §2.7 | `Copula.Symmetry` | Copula-level exchangeability and radial symmetry, CDF characterizations, mixtures and symmetrization |
 | §5.1, symmetry properties of concordance | `Copula.Rank.Symmetry` | Transpose and survival invariance; single-reflection sign changes |
@@ -25,13 +27,19 @@ probability-measure representation.
 | §4.1, Theorem 4.1.5 | `Copula.Archimedean.Associativity` | Commutativity, associativity `C(C(u,v),w) = C(u,C(v,w))` (strict and non-strict generators), invariance under `φ ↦ cφ` |
 | §4.1 and §4.3, level curves, zero set, Theorem 4.3.2 | `Copula.Archimedean.LevelCurves` | Level curves `φ(u)+φ(v) = φ(t)`, convexity of `φ`, of the level curves and of the sets `{C ≥ t}`; zero set, strict generators iff `C > 0` on `(0,1]²`, zero threshold `φ(0)` of non-strict generators |
 | §4.3, Theorems 4.3.3 and 4.3.4 (Kendall distribution function) | `Copula.Archimedean.Derivative`, `KendallDistribution`, `KendallCDF` | For generators with `C¹` inverse generator (strict or not): `K_C(t) = t − φ(t)/φ'(t)` on `(0,1]`, mass `K_C(0) = −φ(0)/φ'(0⁺)` of the zero set (`0` for strict, `1` for `W`, `1/θ` for family 2); conditional CDFs equal `∂₁C` a.e. simultaneously in `v` |
-| §5.1, Corollary 5.1.4 and its examples | `Copula.Archimedean.KendallTau`, `KendallTauFamilies`, `KendallTauAMH`, `KendallTauFrank` | `τ = 1 + 4∫₀¹ φ(t)/φ'(t) dt` for `C¹` generators (strict or not), `τ_{φ^δ} = 1 + (τ_φ − 1)/δ`; Clayton `θ/(θ+2)`, Gumbel `1 − 1/θ`, AMH `1 − 2(θ + (1−θ)² log(1−θ))/(3θ²)`, BB1 `1 − 2/(δ(θ+2))`, families 2 (`1 − 2/θ`), 12 and 14; Frank as `1 + (4/θ)∫₀¹ (e^{θt} − 1) log((1 − e^{−θt})/(1 − e^{−θ})) dt` (Debye form not derived) |
+| §5.1, Corollary 5.1.4 and its examples | `Copula.Archimedean.KendallTau`, `KendallTauFamilies`, `KendallTauAMH`, `KendallTauFrank` | `τ = 1 + 4∫₀¹ φ(t)/φ'(t) dt` for `C¹` generators (strict or not), `τ_{φ^δ} = 1 + (τ_φ − 1)/δ`; Clayton `θ/(θ+2)`, Gumbel `1 − 1/θ`, AMH `1 − 2(θ + (1−θ)² log(1−θ))/(3θ²)`, BB1 `1 − 2/(δ(θ+2))`, families 2 (`1 − 2/θ`), 12 and 14; Frank as `1 + (4/θ)∫₀¹ (e^{θt} − 1) log((1 − e^{−θt})/(1 − e^{−θ})) dt` and in Debye form `1 − (4/θ)(1 − D₁(θ))` for `θ > 0` and `θ < 0` (`KendallTauFrankDebye`); from a differentiable generator `φ` (`KendallTauGenerator`): negative Clayton `θ/(θ+2)`, families 7, 8, 15, 16, 18 in closed form, Joe and families 9, 13, 19, 20 as explicit integrals (`KendallTauTable`, `KendallTauIntegral`) |
 | §5.4, Corollary 5.4.3 | `Copula.Archimedean.TailDependence`, `TailFamilies` | `λ_L = lim ψ(2x)/ψ(x)` (strict), `λ_L = 0` (non-strict), `δ'(1⁻) = lim (1−ψ(2x))/(1−ψ(x))` and `λ_U = 2 − δ'(1⁻)`; `λ_U = 0` when `ψ'(0⁺)` is finite and nonzero |
 | §4.2, Table 4.1 (all 22 one-parameter Archimedean families) | `Copula.Families.NelsenTable`, `Copula.Archimedean.Clamp`, see [nelsen-table-4-1.md](nelsen-table-4-1.md) | Generators, CDFs on the full parameter ranges, special and limiting cases, `λ_L = 0` for non-strict families; corrected CDF of family 22 |
 | §5.3.1, measures of dependence based on distances to `Π` | `Copula.Measures.Bounds`, `Measures.Uniform`, `Measures.CDFDistanceBenchmarks` | `σ ≤ 1`, `Φ² ≤ 1`, `Φ²(M) = Φ²(W) = 1`, and `σ = 1 ↔ Φ² = 1 ↔ C ∈ {M, W}`; the `L∞` version `κ` with `\|β\| ≤ κ ≤ 1` and `κ = 1 ↔ \|β\| = 1`, `σ ≤ 3κ`, `Φ² ≤ (45/8) κ²` |
 | §2.5, Theorem 2.5.4 (both directions) | `Copula.RandomVariable.Monotone`, `Copula.Distribution.RealQuantile` | With continuous marginals, `C = M` (resp. `W`) iff `Y = f(X)` a.s. with `f` nondecreasing (resp. nonincreasing) on a set carrying `X`; `f = G_Y ∘ F_X` (resp. `G_Y ∘ (1 − F_X)`) |
 | §3.2, Theorem 3.2.3 | `Copula.QuasiCopula.PrescribedValue`, `PrescribedValueBest` | Bounds for copulas and quasi-copulas with `C(a,b) = θ`; both bounds are copulas (shuffles of `M`), hence best possible |
 | §6.2, quasi-copulas | `Copula.QuasiCopula.Basic`, `Bivariate` | Definition (functional form), copulas are quasi-copulas, `W ≤ Q ≤ M`, sup/inf of copulas, characterization by boundary rectangles, a proper quasi-copula |
+| §3.2.2, Definition 3.2.1 and Theorem 3.2.1 (general ordinal sums) | `Copula.OrdinalSum.General`, `GeneralProperties`, `GeneralDecomposition` | Ordinal sums over any family of pairwise disjoint open intervals (finite, countable, with gaps), `M` off the squares; CDF on the squares and off them, component recovery and uniqueness, `δ(t) = t` off the intervals, transpose/exchangeability, orthant order, PQD; finite, countable and binary constructors as instances; `C` is an ordinal sum w.r.t. the family iff `δ_C(t) = t` off the open intervals |
+| §3.2.3, Theorem 3.2.2 (shuffles of `M` are dense) | `Copula.Shuffle.Weights`, `Shuffle.Density` | For every `C` and every grid, a straight shuffle of `M` with the same cell masses (hence equal to `C` at the grid vertices); `d∞(S_n, C) ≤ 2/n` on the uniform `n`-grid; straight shuffles (and all shuffles) of `M` are dense for the uniform metric |
+| §4.1, Theorem 4.1.4 ("only if") and uniqueness of generators | `Copula.Archimedean.Converse`, `Copula.Archimedean.Uniqueness` | An Archimedean formula `ψ(φ(u)+φ(v))` (with `ψ` strictly decreasing where positive) is a copula iff `ψ` is convex (`ArchimedeanPregenerator.exists_copula_iff`), proved without continuity via nondecreasing increments; two generators give the same copula iff `φ₂ = cφ₁`, `c > 0` (Genest–MacKay; `BivariateGenerator.copula_eq_iff`) |
+| §4.4, Theorem 4.4.2 and Corollary 4.4.3 (ordering via generators) | `Copula.Archimedean.Concordance`, `ConcordanceFamilies` | `C₁ ≤ C₂` iff `φ₁ ∘ ψ₂` is subadditive (strict `ψ₂`; `lowerOrthantLE_iff_subadditive`), concave suffices; PQD iff `ψ(x)ψ(y) ≤ ψ(x+y)` (strict), non-strict generators are never PQD, NQD iff `φ(uv) ≤ φ(u)+φ(v)`; Clayton increasing in `θ`; Table 4.1 families 9, 10 NQD, 13 PQD/NQD, 19, 20 PQD |
+| §5.4, Corollary 5.4.3 applied to Table 4.1 | `Copula.TailDependence.NelsenTableUpper`, `NelsenTableLower` | `λ_U = 0` for families 7, 10, 11, 13, 16, 17, 22; `λ_L = 0` for 10, 13, 17; `λ_U = 2 − 2^{1/θ}` for 21 |
+| §4.2, Table 4.1 limiting cases | `Copula.Families.NelsenTable.LimitsZero`, `LimitsInfinity` | `C₀ = Π` for families 11 and 22, `C_∞ = M` for 17 and 21; for family 17 the limit at `−∞` is `max(0, (uv+u+v−1)/2)` (family 7 at `θ = 1/2`), not `W` |
 
 These are the precise formalized portions, not claims that every theorem in
 the cited sections is implemented. The general random-variable versions of
@@ -39,10 +47,37 @@ the symmetry characterizations are not part of this addition.
 
 ## Diagonals and transformations
 
-`C.diagonal t` is `C.cdf ![t,t]`. The API proves the necessary conditions on
-diagonal sections, but does not yet construct a copula from an arbitrary
-admissible diagonal. Only the identity diagonal is proved to determine its
-copula uniquely; there is no such general uniqueness claim.
+`C.diagonal t` is `C.cdf ![t,t]`. The necessary conditions on diagonal
+sections (`IsDiagonalFunction`: `δ(1) = 1`, `0 ≤ δ(t) ≤ t`, `δ` nondecreasing
+and `δ(t') − δ(t) ≤ 2(t' − t)`) are also sufficient:
+`Diagonal.Construction` builds the Fredricks–Nelsen copula
+`K_δ(u,v) = min(u, v, (δ(u)+δ(v))/2)` with diagonal `δ`
+(`isDiagonalFunction_iff_exists_copula`). For a diagonal function `δ` with
+gap `δ̂(t) = t − δ(t)`:
+
+- `Diagonal.Bertino`: the Bertino copula
+  `B_δ(u,v) = min(u,v) − min_{t ∈ [u∧v, u∨v]} δ̂(t)` is an exchangeable copula
+  with diagonal `δ` and lies below every copula with diagonal `δ`
+  (`bertinoCopula_cdf_le`), so it is the smallest one (Fredricks–Nelsen 2002);
+  `B_δ = W` for the diagonal of `W`. A general lemma
+  (`symmetric_twoIncreasing`) reduces 2-increasingness of a symmetric function
+  to rectangles above the diagonal and diagonal squares.
+- `Diagonal.Extremal`: `C(u,v) + C(v,u) ≤ δ(u) + δ(v)`; `K_δ` is the largest
+  exchangeable copula with diagonal `δ` (Fredricks–Nelsen 1997), so every
+  exchangeable `C` with diagonal `δ` satisfies `B_δ ≤ C ≤ K_δ`. If `δ ≠ id`
+  then `B_δ ≠ K_δ`; hence a diagonal determines its copula if and only if it
+  is the identity (`diagonal_determines_copula_iff`). In particular the
+  diagonal of `W` does not determine `W`.
+- `Diagonal.UpperBound`: every copula and every quasi-copula with diagonal `δ`
+  lies below `A_δ(u,v) = min(u, v, max(u,v) − max_{t ∈ [u∧v, u∨v]} δ̂(t))`
+  (Nelsen, Quesada-Molina, Rodríguez-Lallena and Úbeda-Flores 2004). `A_δ` is
+  itself a quasi-copula with diagonal `δ`, hence the largest quasi-copula with
+  that diagonal (`diagonalUpperBound_isGreatest`). For copulas it is not best
+  possible in general: copulas also satisfy `C(u,v) ≤ δ(u) + δ(v) − B_δ(u,v)`,
+  and for the explicit diagonal `dipDiagonal` every copula has
+  `C(3/10, 7/10) ≤ 1/5 < 3/10 = A_δ(3/10, 7/10)` (`dipDiagonal_gap`). The
+  best-possible upper bound for copulas with an arbitrary diagonal is not
+  formalized.
 
 `C.transpose` abbreviates coordinate exchange, and `C.survivalCopula` reflects
 all coordinates. The existing `C.reflect {0}` and `C.reflect {1}` give the two
@@ -132,11 +167,13 @@ both endpoint cases. It proves component recovery and exact lower orthant
 comparison at a fixed interior split, exchangeability, PQD closure and
 inheritance of lower and upper tail limits from their respective end blocks.
 The converse decomposition theorem from an interior diagonal fixed point
-is formalized in `Copula.OrdinalSum.Decomposition`. Arbitrary disjoint
-interval sums with a residual comonotonic part remain open.
+is formalized in `Copula.OrdinalSum.Decomposition`. Ordinal sums over
+arbitrary families of disjoint open intervals with a residual comonotonic
+part, and their characterization by diagonal fixed points, are in
+`Copula.OrdinalSum.General`, `GeneralProperties` and `GeneralDecomposition`.
+Shuffle density (Theorem 3.2.2) is `Copula.Shuffle.Density`.
 
-Further book topics include prescribed-diagonal constructions,
-shuffle density, general residual-interval ordinal sums,
+Further book topics include cubic sections
 and tail coefficients for the remaining analytic and elliptical families.
 Those results are not asserted here.
 
