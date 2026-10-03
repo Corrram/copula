@@ -182,10 +182,13 @@ interior threshold, so they admit no nontrivial binary ordinal-sum
 decomposition. This includes independence and countermonotonicity; import
 `Copula.OrdinalSum` or `Copula` for the decomposition theorem.
 
-The generic implications from density MTP2 to kernel/CDF TP2, association and
-FKG inequalities, a monotone-kernel converse for SI, and further family
-classifications remain future work. They are not hidden assumptions of any
-current theorem.
+The implications from an MTP2 density to CDF TP2, SI (in both directions), LCSD
+and RCSI are proved in `Copula.Dependence.HierarchyDensity` via total positivity
+of the measure (`HasMTP2Density.isTP2Measure`, `HasMTP2Density.isTP2CDF`,
+`HasMTP2Density.isSI`, `HasMTP2Density.isLCSD`, `HasMTP2Density.isRCSI`). The
+implication from density MTP2 to kernel TP2, association and FKG inequalities,
+a monotone-kernel converse for SI, and further family classifications remain
+future work. They are not hidden assumptions of any current theorem.
 
 ## Exact Frechet and Mardia classifications
 
@@ -213,3 +216,26 @@ measure or its CDF.
 - `Dependence.Density`, `FGM`, `FGMDensity`: density identification and exact FGM results.
 
 - `Dependence.Frechet`: full CI/CD and density classifications, measure identity and Mardia incomparability.
+
+## Corner sets, total positivity of the measure, and strictness
+
+Import `Copula.Dependence.HierarchyDensity`, `Copula.Dependence.HierarchyExamples` or `Copula`.
+`C.IsLCSD` and `C.IsRCSI` are the cross-multiplied corner set conditions of Harris.
+`isLCSD_iff_isTP2CDF` and `isRCSI_iff_isTP2_survival` identify them with total positivity of
+the CDF and of the joint survival function, and both are symmetric in the coordinates.
+LCSD gives LTD and RCSI gives RTI, in both directions.
+
+`C.IsTP2Measure` asks `C(S₁×T₂) C(S₂×T₁) ≤ C(S₁×T₁) C(S₂×T₂)` for measurable sets
+`S₁ ≤ S₂`, `T₁ ≤ T₂`. An MTP2 density implies it (`HasMTP2Density.isTP2Measure`), and it implies
+SI in both directions (`IsTP2Measure.isCI`), LCSD and RCSI. `M` satisfies it without a density.
+
+```text
+HasMTP2Density ──→ IsTP2Measure ──→ IsCI ──→ IsSI ──→ IsLTD, IsRTI ──→ IsPQD
+                        ├──→ IsLCSD (= IsTP2CDF) ──→ IsLTD (both directions)
+                        └──→ IsRCSI ──→ IsRTI (both directions)
+```
+
+Product perturbations `uv + φ(u)ψ(v)` with piecewise linear profiles show strictness:
+PQD ⇏ LTD, RTI ⇏ LTD, LTD ⇏ RTI, LTD ∧ RTI ⇏ SI and SI(V|U) ⇏ SI(U|V).
+Under LTD and RTI the Capéraà–Genest inequality `τ ≤ ρ` holds
+(`IsLTD.kendallTau_le_spearmanRho`), so with `ρ ≤ 3τ` from PQD one gets `τ ≤ ρ ≤ 3τ`.

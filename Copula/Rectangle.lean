@@ -87,22 +87,21 @@ theorem rectangleIncrement_two (F : (Fin 2 → I) → ℝ) (a b : Fin 2 → I) :
   rw [h01, h0, h1]
   ring
 
-private def partialRectangle (a b : Fin d → I) (s : Finset (Fin d)) : Set (Fin d → I) :=
-  {x | x ≤ b ∧ ∀ i ∈ s, a i < x i}
-
-private theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I)
-    (s : Finset (Fin d)) (hab : a ≤ b) :
-    partialIncrement C.cdf a b s = C.toMeasure.real (partialRectangle a b s) := by
+/-- Partial finite differences of a copula CDF are probabilities of partially open boxes:
+`Δ_s C (a, b) = P(U ≤ b, Uᵢ > aᵢ for i ∈ s)`. -/
+theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I) (s : Finset (Fin d))
+    (hab : a ≤ b) :
+    partialIncrement C.cdf a b s = C.toMeasure.real {x | x ≤ b ∧ ∀ i ∈ s, a i < x i} := by
   induction s using Finset.induction_on generalizing b with
-  | empty => simp [partialIncrement, partialRectangle, cdf, Iic]
+  | empty => simp [partialIncrement, cdf, Iic]
   | @insert i s hi ih =>
     have hab' : a ≤ Function.update b i (a i) := by
       intro j
       by_cases hji : j = i
       · subst j; simp
       · simpa [Function.update_of_ne hji] using hab j
-    have hinter : partialRectangle a b s ∩ {x | x i ≤ a i} =
-        partialRectangle a (Function.update b i (a i)) s := by
+    have hinter : {x | x ≤ b ∧ ∀ j ∈ s, a j < x j} ∩ {x | x i ≤ a i} =
+        {x | x ≤ Function.update b i (a i) ∧ ∀ j ∈ s, a j < x j} := by
       ext x
       constructor
       · rintro ⟨⟨hxb, hx⟩, hxi⟩
@@ -119,15 +118,14 @@ private theorem partialIncrement_cdf (C : Copula d) (a b : Fin d → I)
             exact (by simpa using hxb i : x i ≤ a i).trans (hab i)
           · simpa [Function.update_of_ne hji] using hxb j
         · simpa using hxb i
-    have hdiff : partialRectangle a b s \ {x | x i ≤ a i} =
-        partialRectangle a b (insert i s) := by
+    have hdiff : {x | x ≤ b ∧ ∀ j ∈ s, a j < x j} \ {x | x i ≤ a i} =
+        {x | x ≤ b ∧ ∀ j ∈ insert i s, a j < x j} := by
       ext x
-      simp only [partialRectangle, mem_ofPred_eq, mem_sdiff, Finset.mem_insert,
-        forall_eq_or_imp, not_le]
+      simp only [mem_ofPred_eq, mem_sdiff, Finset.mem_insert, forall_eq_or_imp, not_le]
       tauto
     rw [partialIncrement_insert _ _ _ _ _ hi, ih b hab, ih _ hab']
     have h := measureReal_inter_add_sdiff (μ := C.toMeasure)
-      (s := partialRectangle a b s) (t := {x | x i ≤ a i})
+      (s := {x | x ≤ b ∧ ∀ j ∈ s, a j < x j}) (t := {x | x i ≤ a i})
       (measurableSet_le (measurable_pi_apply i) measurable_const)
     rw [hinter, hdiff] at h
     linarith
@@ -138,8 +136,7 @@ theorem rectangleIncrement_cdf (C : Copula d) (a b : Fin d → I) (hab : a ≤ b
   rw [rectangleIncrement, partialIncrement_cdf C a b _ hab]
   congr 1
   ext x
-  simp only [partialRectangle, mem_ofPred_eq, Finset.mem_univ, forall_const,
-    mem_univ_pi, mem_Ioc, Pi.le_def]
+  simp only [mem_ofPred_eq, Finset.mem_univ, forall_const, mem_univ_pi, mem_Ioc, Pi.le_def]
   exact ⟨fun h i => ⟨h.2 i, h.1 i⟩, fun h => ⟨fun i => (h i).2, fun i => (h i).1⟩⟩
 
 /-- Nonnegative rectangle increments: the classical `d`-increasing property. -/

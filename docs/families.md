@@ -201,7 +201,7 @@ Its only CI member is independence; every member is CD.
 
 This catalogue contains 29 named families/special cases; overlapping classes
 are not counted twice. It distinguishes proved analytic CDFs from stochastic
-constructions. General multivariate Archimedean admissibility, BB7/BB8, Galambos, Hüsler–Reiss, Plackett,
+constructions. General multivariate Archimedean admissibility, BB7/BB8, Galambos, Hüsler–Reiss,
 Pickands representations, and further family-specific dependence formulas remain future work.
 The [rank API](rank-coefficients.md) includes closed forms for all six
 coefficients of FGM, Fréchet and Mardia, on their full parameter domains.
@@ -221,6 +221,29 @@ in higher dimensions, even for ranges known to be valid mathematically.
 The complete [Ansari–Rockel index](ansari-rockel.md) tracks all 38 paper
 families, including those not yet implemented. Its property and formula tables
 are reference targets, not additional proved constructors or theorems.
+
+## Plackett, Raftery and asymmetrized families
+
+| Family | Constructor | Range / formula | Dimension |
+| --- | --- | --- | --- |
+| Plackett | `plackett θ hθ` | `θ > 0`; `(S − √(S² − 4uvθ(θ−1)))/(2(θ−1))`, `S = 1 + (θ−1)(u+v)`, `Π` at `θ = 1` | 2 |
+| Raftery | `raftery θ h0 h1` | `0 ≤ θ < 1`; `M + (1−θ)/(1+θ)(uv)^{1/(1−θ)}(1 − max(u,v)^{−(1+θ)/(1−θ)})` | 2 |
+| Khoudraji asymmetrization | `khoudraji C a b` | `a, b : I`; `u^{1−a}v^{1−b}C(u^a, v^b)` | 2 |
+
+Plackett and Raftery are proved to be copulas through the derivative criterion
+`rectangle_nonneg_of_hasDerivAt` (vertical sections differentiable on `(0,1)` with a partial
+derivative nondecreasing in the other variable); neither has a singular component. Plackett:
+constant cross-product ratio, positive ordering in `θ` with limits `W` and `M`, exchangeability,
+radial symmetry, `β = (√θ−1)/(√θ+1)`, `ρ = (θ+1)/(θ−1) − 2θ log θ/(θ−1)²` and tail
+independence. Raftery:
+Nelsen's closed form, `C_0 = Π`, `C_θ → M`, PQD, `λ_L = 2θ/(1+θ)`, `λ_U = 0`, Blomqvist's beta,
+`ρ = θ(4−3θ)/(2−θ)²`.
+Khoudraji's construction is `maxProduct C Π ![a, b]`; Marshall–Olkin and Tawn are its instances
+for `M` and Gumbel, it preserves max-stability, order, PQD and NQD, and `K_{a,b}(M)` is
+exchangeable iff `a = b` or `ab = 0`.
+
+Modules: `Copula.Families.Plackett` (`Basic`, `Order`, `Spearman`, `Tail`), `Copula.Families.Raftery`,
+`Copula.Families.RafterySpearman`, `Copula.Families.Khoudraji`.
 
 ## Mathematical references
 
