@@ -23,11 +23,12 @@ For copulas we state both conditions division-free, cross-multiplying the condit
 probabilities (`IsLCSD`, `IsRCSI`); boundary cases with vanishing conditioning probabilities
 are then automatically included. We prove
 
-* LCSD is equivalent to total positivity of the copula CDF (`isLCSD_iff_isTP2CDF`,
-  Nelsen §5.2.3);
+* LCSD is equivalent to total positivity of the copula CDF (`isLCSD_iff_isTP2CDF`);
 * RCSI is equivalent to total positivity of the joint survival function
-  `(u, v) ↦ 1 - u - v + C(u, v)` (`isRCSI_iff_isTP2_survival`, Nelsen §5.2.3), and to
+  `(u, v) ↦ 1 - u - v + C(u, v)` (`isRCSI_iff_isTP2_survival`), and to
   LCSD of the survival copula (`isRCSI_iff_survivalCopula_isLCSD`);
+  these two characterizations are covered by Nelsen's Theorem 5.2.15 and Corollary 5.2.17
+  (TP2 of `C̄` is equivalent to TP2 of the survival copula `Ĉ(u, v) = C̄(1 - u, 1 - v)`);
 * both notions are symmetric in the coordinates;
 * LCSD implies LTD in both directions, RCSI implies RTI in both directions
   (Nelsen §5.2.3), hence both imply PQD;
@@ -97,7 +98,8 @@ private theorem tp2_corner {F : I → I → ℝ} (htp : IsTP2 F) (hn : ∀ a b, 
 
 /-! ## LCSD -/
 
-/-- LCSD is equivalent to total positivity of the copula CDF (Nelsen, §5.2.3). -/
+/-- LCSD is equivalent to total positivity of the copula CDF (Nelsen, §5.2.3; cf. Theorem 5.2.15
+and Corollary 5.2.17). -/
 theorem isLCSD_iff_isTP2CDF (C : Copula 2) : C.IsLCSD ↔ C.IsTP2CDF := by
   constructor
   · intro h a b c d hab hcd
@@ -164,7 +166,7 @@ theorem isRCSI_iff_survivalCopula_isLCSD (C : Copula 2) :
     exact h _ _ _ _ _ _ (unitInterval.symm_le_symm.mpr haa) (unitInterval.symm_le_symm.mpr hbb)
 
 /-- RCSI is equivalent to total positivity of the joint survival function
-(Nelsen, §5.2.3). -/
+(Nelsen, §5.2.3; cf. Theorem 5.2.15 and Corollary 5.2.17). -/
 theorem isRCSI_iff_isTP2_survival (C : Copula 2) :
     C.IsRCSI ↔ IsTP2 (fun u v : I => C.survival ![u, v]) := by
   rw [isRCSI_iff_survivalCopula_isLCSD, isLCSD_iff_isTP2CDF]

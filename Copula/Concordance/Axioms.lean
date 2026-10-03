@@ -33,7 +33,7 @@ property 7 in uniform form.
 
 We prove that Spearman's rho, Kendall's tau, Blomqvist's beta and Gini's gamma are measures
 of concordance (Nelsen, §5.1), derive the standard consequences
-(Nelsen, Theorem 5.1.9: perfect positive/negative dependence gives `±1`; invariance under the
+(Nelsen, §5.1: perfect positive/negative dependence gives `±1`; invariance under the
 survival transformation; vanishing for copulas invariant under one reflection; signs under
 quadrant dependence), and show that Chatterjee's xi, the Schweizer–Wolff sigma, Hoeffding's
 `Φ²` and Spearman's footrule are *not* measures of concordance: the first three take the value
@@ -100,13 +100,13 @@ theorem eq_zero_of_reflect_second_eq (h : IsMeasureOfConcordance κ) {C : Copula
   rw [hC] at this
   linarith
 
-/-- Nelsen, Theorem 5.1.9(1): if `Y` is almost surely an increasing function of `X`
+/-- Nelsen, §5.1: if `Y` is almost surely an increasing function of `X`
 (the copula is `M`), the concordance is `1`. -/
 theorem eq_one_of_ae_eq (h : IsMeasureOfConcordance κ) {C : Copula 2}
     (hC : ∀ᵐ x ∂C.toMeasure, x 0 = x 1) : κ C = 1 := by
   rw [(eq_comonotonic_iff_ae_eval_eq C).mpr hC, h.comonotonic]
 
-/-- Nelsen, Theorem 5.1.9(2): if `Y` is almost surely a decreasing function of `X`
+/-- Nelsen, §5.1: if `Y` is almost surely a decreasing function of `X`
 (the copula is `W`), the concordance is `-1`. -/
 theorem eq_neg_one_of_ae_eq_symm (h : IsMeasureOfConcordance κ) {C : Copula 2}
     (hC : ∀ᵐ x ∂C.toMeasure, x 1 = unitInterval.symm (x 0)) : κ C = -1 := by

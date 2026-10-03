@@ -32,9 +32,11 @@ Main results:
   is not the infimum (`not_isGLB_lowerBound`). For `d = 3`: `ρ₃(C) ≥ 8e^{-3} - 1 ≈ -0.6017 > -2/3`
   (`multivariateSpearmanRho_three_ge`).
 
-The exact infimum is not determined here. Numerically (rearrangement algorithm on a grid) the
-infimum of `ρ₃` is at most about `-0.5616`; the bound `8e^{-3} - 1 ≈ -0.6017` is not attained
-either, since `-log(1 - Uᵢ)` are exponential and cannot have a constant sum.
+The exact infimum is not determined here. The bound `8e^{-3} - 1 ≈ -0.6017` is not attained,
+since `-log(1 - Uᵢ)` are exponential and cannot have a constant sum. The sharp dual bound
+(`Copula.Multivariate.SpearmanInfimumDual`) gives `ρ₃ ≥ -0.56158`
+(`Copula.Multivariate.SpearmanInfimumThree`), and an explicit copula has `ρ₃ = -631/1125`
+(`Copula.Multivariate.SpearmanInfimumWitness`); numerically the infimum is `≈ -0.5615741`.
 
 References: R. B. Nelsen, *Nonparametric measures of multivariate association* (1996);
 F. Schmid and R. Schmidt, *Multivariate extensions of Spearman's rho and related statistics*,

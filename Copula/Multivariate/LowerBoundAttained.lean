@@ -11,7 +11,7 @@ import Copula.Order.Orthant
 /-!
 # The lower Fréchet–Hoeffding bound is pointwise best possible
 
-**Nelsen 2006, Theorem 2.10.13.** For every `d` and every point `u ∈ [0,1]^d` there is a
+**Nelsen 2006, §2.10.** For every `d` and every point `u ∈ [0,1]^d` there is a
 `d`-copula `C` with `C(u) = W_d(u) = max(0, ∑ uᵢ - d + 1)`. Consequently `W_d` is the pointwise
 infimum of all `d`-copulas (`lowerFrechetBound_eq_iInf`), although for `d ≥ 3` it is not itself a
 copula (`Copula.Multivariate.LowerBound`), and for `d ≥ 3` there is no smallest `d`-copula
@@ -241,7 +241,7 @@ noncomputable def lowerBoundWitness (u : Fin d → I) : Copula d :=
     (Measurable.of_eval fun _ => measurable_cyclicShift _)
     (fun _ => map_cyclicShift _)
 
-/-- **Nelsen 2006, Theorem 2.10.13**: the witness copula attains the lower bound at `u`. -/
+/-- **Nelsen 2006, §2.10**: the witness copula attains the lower bound at `u`. -/
 theorem cdf_lowerBoundWitness (u : Fin d → I) :
     (lowerBoundWitness u).cdf u = lowerFrechetBound d u := by
   set ℓ : Fin d → ℝ := fun j => 1 - (u j : ℝ) with hℓ
@@ -304,7 +304,7 @@ theorem cdf_lowerBoundWitness (u : Fin d → I) :
     Fintype.card_fin, nsmul_eq_mul, mul_one]
   ring
 
-/-- **Nelsen 2006, Theorem 2.10.13**: for every `u` some `d`-copula attains `W_d(u)`. -/
+/-- **Nelsen 2006, §2.10**: for every `u` some `d`-copula attains `W_d(u)`. -/
 theorem exists_cdf_eq_lowerFrechetBound (u : Fin d → I) :
     ∃ C : Copula d, C.cdf u = lowerFrechetBound d u :=
   ⟨lowerBoundWitness u, cdf_lowerBoundWitness u⟩

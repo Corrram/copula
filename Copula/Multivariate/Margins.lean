@@ -27,7 +27,7 @@ remaining arguments equal to `1`). This module proves
   particular with survival copulas (`reindex_survivalCopula`);
 * the characterization of the independence copula: `C = Π_d` iff the coordinates are mutually
   independent under `C` (`eq_independence_iff_iIndepFun`) iff `C(u) = ∏ uᵢ`
-  (`eq_independence_iff_cdf`) (Nelsen 2006, Theorem 2.10.14 in copula form).
+  (`eq_independence_iff_cdf`) (Nelsen 2006, §2.10, in copula form).
 -/
 
 open MeasureTheory Set

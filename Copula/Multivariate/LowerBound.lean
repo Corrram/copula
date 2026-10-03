@@ -11,7 +11,7 @@ import Copula.Rank.Basic
 
 The function `W_d(u) = max(0, u₁ + ⋯ + u_d - d + 1)` bounds every `d`-copula from below
 (`frechet_lower_le_cdf`). This module records the standard facts about `W_d` itself
-(Nelsen 2006, §2.10, the example following Theorem 2.10.12; Durante–Sempi 2016, §1.7):
+(Nelsen 2006, §2.10; Durante–Sempi 2016, §1.7):
 
 * `lowerFrechetBound d` is a `d`-quasi-copula for every `d`
   (`isQuasiCopula_lowerFrechetBound`), and for `d = 2` it is the CDF of `W`
@@ -21,7 +21,7 @@ The function `W_d(u) = max(0, u₁ + ⋯ + u_d - d + 1)` bounds every `d`-copula
   not `d`-increasing (`not_isClassical_lowerFrechetBound`) and no `d`-copula has CDF `W_d`
   (`cdf_ne_lowerFrechetBound`).
 
-That `W_d` is nevertheless pointwise best possible is Nelsen's Theorem 2.10.13, proved in
+That `W_d` is nevertheless pointwise best possible (Nelsen 2006, §2.10) is proved in
 `Copula.Multivariate.LowerBoundAttained`.
 -/
 

@@ -10,7 +10,7 @@ import Copula.Multivariate.Margins
 /-!
 # Multivariate Archimedean copulas
 
-**McNeil–Nešlehová (2009), Theorem 2.2 ("if" part); Nelsen (2006), Theorem 4.6.2 and
+**McNeil–Nešlehová (2009), Theorem 2.2 ("if" part); Nelsen (2006), §4.6, and
 Kimberling (1974).** Let `ψ` be a continuous, nonincreasing inverse generator on `[0, ∞)` with
 `ψ(0) = 1`, generalized inverse `φ`, and let `ψ` be `d`-monotone on `(0, ∞)`. Then
 `C(u) = ψ(φ(u₁) + ⋯ + φ(u_d))` (and `C(u) = 0` when some `uᵢ = 0`) is a `d`-copula.

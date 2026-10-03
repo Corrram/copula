@@ -252,3 +252,12 @@ import Copula.Elliptical.StudentTTail.MixtureTail
 import Copula.Elliptical.StudentTTail.TailDependence
 import Copula.Elliptical.StudentTTail
 import Copula.Families.StudentT.Normalization
+import Copula.Families.StudentT.TailMonotone
+import Copula.Families.StudentT.Marginal
+import Copula.Order.StrictKendall
+import Copula.Families.Plackett.Kendall
+import Copula.Families.Plackett.KendallOrder
+import Copula.Families.Plackett.KendallArctan
+import Copula.Multivariate.SpearmanInfimumDual
+import Copula.Multivariate.SpearmanInfimumThree
+import Copula.Multivariate.SpearmanInfimumWitness

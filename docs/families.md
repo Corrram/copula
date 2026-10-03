@@ -141,6 +141,13 @@ correlation `r ∈ (−1, 1]` and any real `ν > 0`, `Copula.Elliptical.StudentT
 proves `λ_L = λ_U = 2 t_{ν+1}(−√((ν+1)(1−r)/(1+r)))` (equivalently the angular
 form `∫_{arccos(r)/2}^{π/2} cos^ν / ∫_0^{π/2} cos^ν`), with the Student-t
 distribution function of `Copula.Families.StudentT.Distribution`.
+`Copula.Families.StudentT.TailMonotone` shows that this coefficient is strictly
+increasing in `r ∈ [−1, 1]`, strictly decreasing in `ν > 0` for `r ∈ (−1, 1)`,
+tends to `0` as `ν → ∞` (the Gaussian limit) and to `1 − arccos(r)/π` as `ν → 0⁺`;
+`Copula.Families.StudentT.Marginal` proves that every margin of `studentTLaw R ν`
+(unit diagonal) is the Student-t law with density `studentTPDF ν`, so the
+Student-t copula is the copula of the multivariate t distribution with `t_ν`
+margins: `C(T_ν(x₁), …, T_ν(x_d)) = P(X ≤ x)`.
 
 ## Polynomial and mixture families
 
@@ -241,14 +248,20 @@ Plackett and Raftery are proved to be copulas through the derivative criterion
 derivative nondecreasing in the other variable); neither has a singular component. Plackett:
 constant cross-product ratio, positive ordering in `θ` with limits `W` and `M`, exchangeability,
 radial symmetry, `β = (√θ−1)/(√θ+1)`, `ρ = (θ+1)/(θ−1) − 2θ log θ/(θ−1)²` and tail
-independence. Raftery:
+independence. Kendall's tau has no elementary closed form; it is proved to equal
+`(θ+1)/(θ−1) − 2θρ/(θ−1)² + 4(θ+1)√θ/(θ−1)² ∫₀¹ √(v(1−v)) arctan((1−(θ+1)v)/(2√θ√(v(1−v)))) dv`
+(`kendallTau_plackett_eq_spearmanRho_arctan`, via the double-integral forms
+`kendallTau_plackett_eq_integral` and `kendallTau_plackett_eq_rational`); since `C_θ` has full
+support, `τ` and `ρ` are strictly increasing in `θ`, vanish exactly at `θ = 1`, and tend to `±1`
+as `θ → ∞`, `0⁺`. Raftery:
 Nelsen's closed form, `C_0 = Π`, `C_θ → M`, PQD, `λ_L = 2θ/(1+θ)`, `λ_U = 0`, Blomqvist's beta,
 `ρ = θ(4−3θ)/(2−θ)²`, `τ = 2θ/(3−θ)`.
 Khoudraji's construction is `maxProduct C Π ![a, b]`; Marshall–Olkin and Tawn are its instances
 for `M` and Gumbel, it preserves max-stability, order, PQD and NQD, and `K_{a,b}(M)` is
 exchangeable iff `a = b` or `ab = 0`.
 
-Modules: `Copula.Families.Plackett` (`Basic`, `Order`, `Spearman`, `Tail`), `Copula.Families.Raftery`,
+Modules: `Copula.Families.Plackett` (`Basic`, `Order`, `Spearman`, `Tail`, `Kendall`, `KendallOrder`,
+`KendallArctan`), `Copula.Order.StrictKendall`, `Copula.Families.Raftery`,
 `Copula.Families.RafterySpearman`, `Copula.Families.RafteryKendall`, `Copula.Families.Khoudraji`.
 
 ## Mathematical references

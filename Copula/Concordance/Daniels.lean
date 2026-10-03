@@ -9,7 +9,7 @@ import Copula.Rank.Region.RhoTau.Exact
 # Daniels' inequality between Kendall's tau and Spearman's rho
 
 Daniels (1950) proved `-1 ≤ 3τ - 2ρ ≤ 1` for every continuous bivariate distribution
-(Nelsen, *An Introduction to Copulas*, 2nd ed., Theorem 5.1.10). We derive it from the exact
+(Nelsen, *An Introduction to Copulas*, 2nd ed., §5.1.3). We derive it from the exact
 `(τ, ρ)` region of Schreyer, Paulin and Trutschnig (2017), formalized in
 `Copula.Rank.Region.RhoTau`: every copula lies above a point of the lower boundary with the
 same `τ` and below the reflection of a boundary point with opposite `τ`, and along each
@@ -68,7 +68,7 @@ theorem LowerParameter.three_mul_tau_sub_two_mul_rho_le (p : LowerParameter) :
 end RankRegion.RhoTau
 
 open RankRegion.RhoTau in
-/-- Daniels' inequality, upper half: `3 τ - 2 ρ ≤ 1` (Nelsen, Theorem 5.1.10). -/
+/-- Daniels' inequality, upper half: `3 τ - 2 ρ ≤ 1` (Nelsen, §5.1.3). -/
 theorem three_mul_kendallTau_sub_two_mul_spearmanRho_le (C : Copula 2) :
     3 * C.kendallTau - 2 * C.spearmanRho ≤ 1 := by
   obtain ⟨p, ht, hr⟩ := universal_lower C
@@ -77,7 +77,7 @@ theorem three_mul_kendallTau_sub_two_mul_spearmanRho_le (C : Copula 2) :
   linarith
 
 open RankRegion.RhoTau in
-/-- Daniels' inequality, lower half: `-1 ≤ 3 τ - 2 ρ` (Nelsen, Theorem 5.1.10). -/
+/-- Daniels' inequality, lower half: `-1 ≤ 3 τ - 2 ρ` (Nelsen, §5.1.3). -/
 theorem neg_one_le_three_mul_kendallTau_sub_two_mul_spearmanRho (C : Copula 2) :
     -1 ≤ 3 * C.kendallTau - 2 * C.spearmanRho := by
   obtain ⟨p, ht, hr⟩ := universal_upper C
@@ -85,7 +85,7 @@ theorem neg_one_le_three_mul_kendallTau_sub_two_mul_spearmanRho (C : Copula 2) :
   rw [ht] at this
   linarith
 
-/-- Daniels' inequality `|3 τ - 2 ρ| ≤ 1` (Daniels 1950; Nelsen, Theorem 5.1.10). -/
+/-- Daniels' inequality `|3 τ - 2 ρ| ≤ 1` (Daniels 1950; Nelsen, §5.1.3). -/
 theorem abs_three_mul_kendallTau_sub_two_mul_spearmanRho_le (C : Copula 2) :
     |3 * C.kendallTau - 2 * C.spearmanRho| ≤ 1 :=
   abs_le.mpr ⟨C.neg_one_le_three_mul_kendallTau_sub_two_mul_spearmanRho,
