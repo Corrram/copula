@@ -242,3 +242,13 @@ import Copula.MarkovProduct.Algebra
 import Copula.MarkovProduct.Checkerboard
 import Copula.MarkovProduct.Invertible
 import Copula.Families.RafterySpearman
+import Copula.Families.RafteryKendall
+import Copula.ExtremeValue.ArchimaxTail
+import Copula.Multivariate.SpearmanLowerBoundStrict
+import Copula.Families.StudentT.GammaSmallBall
+import Copula.Families.StudentT.Distribution
+import Copula.Elliptical.StudentTTail.Polar
+import Copula.Elliptical.StudentTTail.MixtureTail
+import Copula.Elliptical.StudentTTail.TailDependence
+import Copula.Elliptical.StudentTTail
+import Copula.Families.StudentT.Normalization

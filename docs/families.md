@@ -136,6 +136,12 @@ copula when coordinates share a random scale.
 Modules: `Copula.Elliptical.ScaleMixture`, `Copula.Families.StudentT`,
 `Copula.Families.ScaleMixtures`, and the existing Gaussian modules.
 
+Exception for tail coefficients: for the bivariate Student-t copula with
+correlation `r ∈ (−1, 1]` and any real `ν > 0`, `Copula.Elliptical.StudentTTail`
+proves `λ_L = λ_U = 2 t_{ν+1}(−√((ν+1)(1−r)/(1+r)))` (equivalently the angular
+form `∫_{arccos(r)/2}^{π/2} cos^ν / ∫_0^{π/2} cos^ν`), with the Student-t
+distribution function of `Copula.Families.StudentT.Distribution`.
+
 ## Polynomial and mixture families
 
 | Family | Constructor | Range / formula | Dimension |
@@ -237,13 +243,13 @@ constant cross-product ratio, positive ordering in `θ` with limits `W` and `M`,
 radial symmetry, `β = (√θ−1)/(√θ+1)`, `ρ = (θ+1)/(θ−1) − 2θ log θ/(θ−1)²` and tail
 independence. Raftery:
 Nelsen's closed form, `C_0 = Π`, `C_θ → M`, PQD, `λ_L = 2θ/(1+θ)`, `λ_U = 0`, Blomqvist's beta,
-`ρ = θ(4−3θ)/(2−θ)²`.
+`ρ = θ(4−3θ)/(2−θ)²`, `τ = 2θ/(3−θ)`.
 Khoudraji's construction is `maxProduct C Π ![a, b]`; Marshall–Olkin and Tawn are its instances
 for `M` and Gumbel, it preserves max-stability, order, PQD and NQD, and `K_{a,b}(M)` is
 exchangeable iff `a = b` or `ab = 0`.
 
 Modules: `Copula.Families.Plackett` (`Basic`, `Order`, `Spearman`, `Tail`), `Copula.Families.Raftery`,
-`Copula.Families.RafterySpearman`, `Copula.Families.Khoudraji`.
+`Copula.Families.RafterySpearman`, `Copula.Families.RafteryKendall`, `Copula.Families.Khoudraji`.
 
 ## Mathematical references
 
